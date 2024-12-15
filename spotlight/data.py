@@ -25,8 +25,7 @@ class PG19(Dataset):
     """
 
     def __init__(self, split, max_length=None):
-        access_token = "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"
-        self.data = load_dataset("pg19", split=split, token=access_token, trust_remote_code=True)
+        self.data = load_dataset("pg19", split=split, trust_remote_code=True)
         
         if max_length == '1m':
             self.maximum = 1024 * 1024
@@ -57,7 +56,9 @@ class ProofPile(Dataset):
     """
 
     def __init__(self, max_length=None):
-        with open("/path/to/proof-pile.json", "r") as f:
+        import os
+        assert os.path.exists(os.environ['SPOTLIGHT_PROOFPILE_PATH']), f"Please download proof-pile.json first."
+        with open(os.environ['SPOTLIGHT_PROOFPILE_PATH'], "r") as f:
             self.data = [json.loads(line) for line in f.readlines()]
 
         if max_length == '1m':
@@ -87,7 +88,9 @@ class CodeParrot(Dataset):
     """
 
     def __init__(self, max_length=None):
-        with open("/path/to/codeparrot.json", "r") as f:
+        import os
+        assert os.path.exists(os.environ['SPOTLIGHT_CODEPARROT_PATH']), f"Please download codeparrot.json first."
+        with open(os.environ['SPOTLIGHT_CODEPARROT_PATH'], "r") as f:
             self.data = [json.loads(line) for line in f.readlines()]
 
         if max_length == '1m':

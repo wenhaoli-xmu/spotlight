@@ -9,8 +9,6 @@ mmlu/data
 mmlu/data.tar
 mmlu/output
 **/__pycache__
-LongBench
-raw_data
 data
 buffer
 
