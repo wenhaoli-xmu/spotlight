@@ -109,32 +109,32 @@ bash scripts/test_lmeval.sh
     **LLaMA2-7B**
     | Method      | Config      | Eval Log                                                                                                           |
     |-------------|-------------|--------------------------------------------------------------------------------------------------------------------|
-    | Original    | N/A         | [llama2-7b](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b.json)                           |
-    | +Quest      | 1024 Budget | [llama2-7b-quest-1024](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-quest-1024.json)     |
-    | +Quest      | 128 Budget  | [llama2-7b-quest-128](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-quest-128.json)       |
-    | +MagicPIG   | Default     | [llama2-7b-magicpig](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-magicpig.json)         |
-    | +Spotlight  | 90% Pruned  | [llama2-7b-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-spotlight-90.json) |
-    | +Spotilght  | 98% Pruned  | [llama2-7b-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-spotlight-98.json) |
+    | Original    | N/A         | [llama2-7b](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b.json)                           |
+    | +Quest      | 1024 Budget | [llama2-7b-quest-1024](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b-quest-1024.json)     |
+    | +Quest      | 128 Budget  | [llama2-7b-quest-128](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b-quest-128.json)       |
+    | +MagicPIG   | Default     | [llama2-7b-magicpig](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b-magicpig.json)         |
+    | +Spotlight  | 90% Pruned  | [llama2-7b-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b-spotlight-90.json) |
+    | +Spotilght  | 98% Pruned  | [llama2-7b-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b-spotlight-98.json) |
 
     **LLaMA2-7B-Chat**
     | Method      | Config      | Eval Log                                                                                                                     |
     |-------------|-------------|------------------------------------------------------------------------------------------------------------------------------|
-    | Original    | N/A         | [llama2-7b-chat](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat.json)                           |
-    | +Quest      | 1024 Budget | [llama2-7b-chat-quest-1024](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat-quest-1024.json)     |
-    | +Quest      | 128 Budget  | [llama2-7b-chat-quest-128](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat-quest-128.json)       |
-    | +MagicPIG   | Default     | [llama2-7b-chat-magicpig](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat-magicpig.json)         |
-    | +Spotlight  | 90% Pruned  | [llama2-7b-chat-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat-spotlight-90.json) |
-    | +Spotilght  | 98% Pruned  | [llama2-7b-chat-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat-spotlight-98.json) |
+    | Original    | N/A         | [llama2-7b-chat](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b-chat.json)                           |
+    | +Quest      | 1024 Budget | [llama2-7b-chat-quest-1024](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b-chat-quest-1024.json)     |
+    | +Quest      | 128 Budget  | [llama2-7b-chat-quest-128](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b-chat-quest-128.json)       |
+    | +MagicPIG   | Default     | [llama2-7b-chat-magicpig](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b-chat-magicpig.json)         |
+    | +Spotlight  | 90% Pruned  | [llama2-7b-chat-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b-chat-spotlight-90.json) |
+    | +Spotilght  | 98% Pruned  | [llama2-7b-chat-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama2-7b-chat-spotlight-98.json) |
 
     **LLaMA3-8B**
     | Method      | Config      | Eval Log                                                                                                           |
     |-------------|-------------|--------------------------------------------------------------------------------------------------------------------|
-    | Original    | N/A         | [llama3-8b](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b.json)                           |
-    | +Quest      | 1024 Budget | [llama3-8b-quest-1024](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b-quest-1024.json)     |
-    | +Quest      | 256 Budget  | [llama3-8b-quest-256](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b-quest-256.json)       |
-    | +MagicPIG   | Default     | [llama3-8b-magicpig](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b-magicpig.json)         |
-    | +Spotlight  | 90% Pruned  | [llama3-8b-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b-spotlight-90.json) |
-    | +Spotilght  | 98% Pruned  | [llama3-8b-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b-spotlight-98.json) |
+    | Original    | N/A         | [llama3-8b](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama3-8b.json)                           |
+    | +Quest      | 1024 Budget | [llama3-8b-quest-1024](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama3-8b-quest-1024.json)     |
+    | +Quest      | 256 Budget  | [llama3-8b-quest-256](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama3-8b-quest-256.json)       |
+    | +MagicPIG   | Default     | [llama3-8b-magicpig](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama3-8b-magicpig.json)         |
+    | +Spotlight  | 90% Pruned  | [llama3-8b-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama3-8b-spotlight-90.json) |
+    | +Spotilght  | 98% Pruned  | [llama3-8b-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/tree/main/test_longbench/log/llama3-8b-spotlight-98.json) |
 
 
 ## <span id="eval-fidelity"> Output Fidelity </span>
