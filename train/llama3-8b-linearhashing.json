@@ -1,0 +1,35 @@
+{
+    "model": {
+        "model_name": "unsloth/llama-3-8b",
+        "model_dtype": "bf16",
+        "model_method": "linearhashing-train",
+        "model_structure": null,
+        "save_ckp": "ckp/llama3-8b-linearhashing.pth",
+        "load_ckp": null,
+        "config": "config/llama3-8b-linearhashing-train.json",
+        "device_map": null
+    },
+
+    "train": {
+        "train_iters": 8192,
+        "max_lr": 0.001,
+        "warmup": 0.01,
+        "beta1": 0.9,
+        "beta2": 0.98,
+        "weight_decay": 0.1,
+        "corpus": [
+            {
+                "data": "data/slimpajama/arxiv.json",
+                "conf": "config/slimpajama-trunc8k.json",
+                "partition": 0.5
+            },
+            {
+                "data": "data/slimpajama/book.json",
+                "conf": "config/slimpajama-trunc8k.json",
+                "partition": 0.5
+            }
+        ],
+        "accum_grad": 1,
+        "clip_grad": 1.0
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "model": {
+        "model_name": "meta-llama/Llama-2-7b-hf",
+        "model_dtype": "fp16",
+        "model_method": "origin",
+        "model_structure": null,
+        "save_ckp": "ckp/llama2-7b.pth",
+        "load_ckp": null,
+        "config": null,
+        "device_map": null
+    },
+
+    "train": {
+        "train_iters": 10000,
+        "max_lr": 1e-4,
+        "warmup": 0.01,
+        "beta1": 0.9,
+        "beta2": 0.999,
+        "weight_decay": 0,
+        "corpus": [
+            {
+                "name": "beacons sampled.4096",
+                "partition": 1,
+                "truncation": 4096
+            }
+        ],
+        "accum_grad": 1,
+        "clip_grad": 1.0,
+
+        "save": 1000,
+        "eval": 1000,
+        "tasks": [
+            {
+                "task_type": "perplexity",
+                "task_name": "pg19.test.128k",
+                "num_instance": 1,
+                "truncation": 1024
+            },
+            {
+                "task_type": "perplexity",
+                "task_name": "pg19.test.128k",
+                "num_instance": 1,
+                "truncation": 2048 
+            }
+        ]
+    }
+}

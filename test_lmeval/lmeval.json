@@ -1,0 +1,25 @@
+[
+    "cola",
+    "mnli",
+    "mnli_mismatched",
+    "mrpc",
+    "rte",
+    "qnli",
+    "qqp",
+
+    "boolq",
+    "cb",
+    "copa",
+    "multirc",
+    "record",
+    "wic",
+    "wsc",
+
+    "openbookqa",
+    "hellaswag",
+    "piqa",
+    "winogrande",
+    "arc_easy",
+    "arc_challenge",
+    "mathqa"
+]

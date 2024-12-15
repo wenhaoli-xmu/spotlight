@@ -1,0 +1,8 @@
+[
+    {
+        "task_type": "perplexity",
+        "task_name": "pg19.test.128k",
+        "num_instance": 1,
+        "truncation": 4096
+    }
+]

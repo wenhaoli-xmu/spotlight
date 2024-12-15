@@ -1,0 +1,12 @@
+{
+    "model": {
+        "model_name": "meta-llama/Llama-2-7b-chat-hf",
+        "model_dtype": "fp16",
+        "model_method": "upperbound-evaluation",
+        "model_structure": null,
+        "save_ckp": null,
+        "load_ckp": null,
+        "config": "config/llama2-7b-upperbound-evaluation.json",
+        "device_map": null
+    }
+}

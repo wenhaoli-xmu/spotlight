@@ -1,0 +1,12 @@
+{
+    "model": {
+        "model_name": "meta-llama/Llama-2-7b-hf",
+        "model_dtype": "fp16",
+        "model_method": "origin",
+        "model_structure": null,
+        "save_ckp": "null",
+        "load_ckp": null,
+        "config": null,
+        "device_map": null
+    }
+}

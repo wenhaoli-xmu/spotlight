@@ -1,0 +1,12 @@
+{
+    "model": {
+        "model_name": "unsloth/llama-3-8b",
+        "model_dtype": "fp16",
+        "model_method": "spotlight-evaluation",
+        "model_structure": null,
+        "save_ckp": null,
+        "load_ckp": "ckp/llama3-8b-spotlight.pth",
+        "config": "config/llama3-8b-spotlight-evaluation.json",
+        "device_map": null
+    }
+}

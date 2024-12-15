@@ -1,0 +1,31 @@
+# logs
+log/
+wandb/
+
+# checkpoints & model files
+ckp/*
+train_results/*
+!train_results/convert.py
+models
+
+# datasets
+mmlu/data
+mmlu/data.tar
+mmlu/output
+**/__pycache__
+LongBench
+raw_data
+data
+buffer
+
+# outputs
+pred
+pred_e
+pred2
+
+# misc
+*.egg-info
+*.pyc
+lm-corpus
+lm-profiler
+lsh_kernel

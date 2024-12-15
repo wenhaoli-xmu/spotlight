@@ -1,0 +1,10 @@
+transformers==4.37.2
+torch>=2.0.0
+datasets==2.16.1
+lm_eval==0.3.0
+pygments
+accelerate
+peft
+anthropic
+seaborn
+deepspeed
