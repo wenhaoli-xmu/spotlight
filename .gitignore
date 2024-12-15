@@ -1,7 +1,3 @@
-# logs
-log/
-wandb/
-
 # checkpoints & model files
 ckp/*
 train_results/*

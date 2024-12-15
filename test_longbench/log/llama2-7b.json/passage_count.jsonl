@@ -1,0 +1,200 @@
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a more complex task.\n\nParagraph 1: The following is a", "answers": ["8"], "all_classes": null, "length": 11221}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["11"], "all_classes": null, "length": 9921}
+{"pred": "1\n\nComment:\n\nI am trying to use the following code to extract the paragraphs from the text.\n\n\\begin{code}\n", "answers": ["13"], "all_classes": null, "length": 6578}
+{"pred": "10\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output from the first part and", "answers": ["44"], "all_classes": null, "length": 16346}
+{"pred": "39\n\n### Example 2\n\nThis is an example of a paragraph that contains duplicate text.\n\nParagraph 1: In October", "answers": ["2"], "all_classes": null, "length": 22099}
+{"pred": "3\n\n## See also\n\n* List of Latin American television networks\n* List of Colombian television networks\n* List of Colombian television stations\n", "answers": ["7"], "all_classes": null, "length": 8383}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["7"], "all_classes": null, "length": 4974}
+{"pred": "1\n\n### Example 2\n\nThe following is a sample of the output from the second example.\n\nParagraph 1: The first", "answers": ["45"], "all_classes": null, "length": 13970}
+{"pred": "40\n\n### Example 2\n\nThe following is an example of a paragraph count that is not unique.\n\nParagraph 1:", "answers": ["4"], "all_classes": null, "length": 14086}
+{"pred": "42\n\n### 2019\n\nThe 2019 edition of the competition was held on 15–16", "answers": ["31"], "all_classes": null, "length": 12357}
+{"pred": "1\n\n### Example 2\n\nThis example is a more complex example, with a few more rules.\n\nParagraph 1: The", "answers": ["4"], "all_classes": null, "length": 15623}
+{"pred": "3\n\n### 2019\n\nThe 2019 edition of the competition was held on 29 June 20", "answers": ["16"], "all_classes": null, "length": 11059}
+{"pred": "17\n\n### Part 2\n\nThe second part of the challenge is to find the number of unique paragraphs in the input file.\n", "answers": ["5"], "all_classes": null, "length": 3991}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["44"], "all_classes": null, "length": 17077}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a second-round challenge.\n\nParagraph 1: The 1", "answers": ["19"], "all_classes": null, "length": 11340}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["36"], "all_classes": null, "length": 10543}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["24"], "all_classes": null, "length": 8141}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["12"], "all_classes": null, "length": 8534}
+{"pred": "1\n\n### Example 2\n\nThis example is a more complex example, with a larger number of paragraphs.\n\nParagraph 1", "answers": ["23"], "all_classes": null, "length": 13749}
+{"pred": "22\n\n### 2019\n\nThe 2019 edition of the competition was held on 15 June 2", "answers": ["14"], "all_classes": null, "length": 5649}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["18"], "all_classes": null, "length": 13512}
+{"pred": "1\n\n### Example 2\n\nThe following is a sample of the input file.\n\nParagraph 1: The first paragraph is the", "answers": ["29"], "all_classes": null, "length": 14584}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["22"], "all_classes": null, "length": 12667}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a second-round question.\n\nParagraph 1: The six qual", "answers": ["6"], "all_classes": null, "length": 6510}
+{"pred": "21\n\n### 2019\n\nThe 2019 edition of the competition was held on 15–16", "answers": ["8"], "all_classes": null, "length": 6283}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a paragraph count that is not unique.\n\nParagraph 1: The", "answers": ["9"], "all_classes": null, "length": 13036}
+{"pred": "27\n\n### Example 2\n\nThe following is an example of a paragraph count that is not unique.\n\nParagraph 1:", "answers": ["26"], "all_classes": null, "length": 5249}
+{"pred": "1\n\n### Example 2\n\nParagraph 1: The 2010 FIFA World Cup was the 19th FIFA World", "answers": ["26"], "all_classes": null, "length": 17369}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["28"], "all_classes": null, "length": 10898}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["43"], "all_classes": null, "length": 13330}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["34"], "all_classes": null, "length": 13153}
+{"pred": "3\n\n### Example 2\n\nThis example is a more complex example, with a larger number of paragraphs and a more complex algorithm.\n", "answers": ["19"], "all_classes": null, "length": 9732}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["9"], "all_classes": null, "length": 9246}
+{"pred": "40\n\n### 2021\n\nParagraph 1: The 2021–22 season was the 1", "answers": ["40"], "all_classes": null, "length": 11663}
+{"pred": "1\n\n### Example 2\n\nParagraph 1: The first dendrimer was synthesized in 1985 by", "answers": ["14"], "all_classes": null, "length": 17590}
+{"pred": "1\n\n### Example 2\n\nParagraph 1: The 2008–09 season was the 109th", "answers": ["26"], "all_classes": null, "length": 9718}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["25"], "all_classes": null, "length": 13084}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a paragraph with duplicate content.\n\nParagraph 1: \tThe", "answers": ["13"], "all_classes": null, "length": 18601}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["35"], "all_classes": null, "length": 12177}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["20"], "all_classes": null, "length": 11563}
+{"pred": "100\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output of the first part", "answers": ["39"], "all_classes": null, "length": 16004}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a paragraph that contains duplicate paragraphs.\n\nParagraph 1: The", "answers": ["7"], "all_classes": null, "length": 13534}
+{"pred": "100\n\n### Example 2\n\nParagraph 1: The 2019–20 season was the 14", "answers": ["12"], "all_classes": null, "length": 10580}
+{"pred": "35\n\n### Example 2\n\nThis example is a more complex example, with a larger number of paragraphs and a more complex algorithm.", "answers": ["16"], "all_classes": null, "length": 10333}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["30"], "all_classes": null, "length": 14264}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a paragraph with duplicate text.\n\nParagraph 1: The Mars Gra", "answers": ["4"], "all_classes": null, "length": 11680}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["21"], "all_classes": null, "length": 7461}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["5"], "all_classes": null, "length": 12151}
+{"pred": "19\n\n### Example 2\n\nThis is a sample of the second example.\n\nParagraph 1: The following is a list", "answers": ["10"], "all_classes": null, "length": 6481}
+{"pred": "34\n\n### Example 2\n\nThe following is an example of a paragraph that is not unique.\n\nParagraph 1: The", "answers": ["6"], "all_classes": null, "length": 9456}
+{"pred": "33\n\n### Example 2\n\nThe following is a sample of the input file.\n\n```\n1\n2\n3\n4", "answers": ["31"], "all_classes": null, "length": 8395}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["13"], "all_classes": null, "length": 4822}
+{"pred": "44\n\n### Example 2\n\nThe following is an example of a more complex task.\n\nThe first team to solve two puzzles", "answers": ["9"], "all_classes": null, "length": 11201}
+{"pred": "1\n\n### Example 2\n\nThis example is a simple example of the task.\n\nParagraph 1: The 202", "answers": ["11"], "all_classes": null, "length": 11740}
+{"pred": "3\n\n### 2019\n\nThe 2019 edition of the competition was held on 15 June 20", "answers": ["18"], "all_classes": null, "length": 9707}
+{"pred": "21\n\n### Part 2\n\nThe second part of the challenge is to find the number of unique paragraphs in the text.\n\n", "answers": ["7"], "all_classes": null, "length": 7447}
+{"pred": "24\n\n### Example 2\n\nThis example is a simple example of the problem.\n\nParagraph 1: The Fobos", "answers": ["5"], "all_classes": null, "length": 6927}
+{"pred": "1\n\nThe final answer is: 1\n\nThe final answer is: 1\n\nThe final answer is: 1\n\nThe final", "answers": ["5"], "all_classes": null, "length": 13709}
+{"pred": "1\n\n### Example 2\n\nThis example is a simple example of a text-based game.\n\nParagraph 1: The game", "answers": ["14"], "all_classes": null, "length": 16551}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["40"], "all_classes": null, "length": 15237}
+{"pred": "10\n\n### Example 2\n\nThis example is a more complex example, and is a good example of how to use the library.\n", "answers": ["18"], "all_classes": null, "length": 13155}
+{"pred": "40\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output from the first part and", "answers": ["2"], "all_classes": null, "length": 13433}
+{"pred": "1\n\n### 2019\n\nThe following is a list of the 2019 Paragraph Challenge.\n\nParagraph", "answers": ["20"], "all_classes": null, "length": 13372}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a paragraph count problem.\n\nParagraph 1: The 20", "answers": ["30"], "all_classes": null, "length": 12589}
+{"pred": "1\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output from the first part and output", "answers": ["12"], "all_classes": null, "length": 6751}
+{"pred": "10\n\n### Example 2\n\n```\nInput:\n\nParagraph 1: The first paragraph.\n\nParagraph 2", "answers": ["43"], "all_classes": null, "length": 15519}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a paragraph with duplicate text.\n\nParagraph 1: The Dutch trad", "answers": ["10"], "all_classes": null, "length": 10373}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a paragraph count with duplicate paragraphs.\n\nParagraph 1: The", "answers": ["11"], "all_classes": null, "length": 6690}
+{"pred": "1\n\n### Example 2\n\nThis example is a more complex example of the task.\n\nParagraph 1: The 19", "answers": ["20"], "all_classes": null, "length": 8138}
+{"pred": "42\n\n### 2019\n\nThe 2019 edition of the competition was held on 29 September 2", "answers": ["37"], "all_classes": null, "length": 9910}
+{"pred": "33\n\n### Example 2\n\nThis example is a simple example of a recursive function.\n\n```\ndef count_paragraphs(", "answers": ["15"], "all_classes": null, "length": 9802}
+{"pred": "33\n\n### Example 2\n\nThe following is an example of a paragraph that contains 33 unique paragraphs.\n\nParagraph", "answers": ["17"], "all_classes": null, "length": 10817}
+{"pred": "3\n\n### Example 2\n\nThis example is a more complex example. It is a paragraph with 10 unique paragraphs.\n\n", "answers": ["5"], "all_classes": null, "length": 10977}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["9"], "all_classes": null, "length": 8150}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["21"], "all_classes": null, "length": 7300}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a paragraph that contains duplicate text.\n\nParagraph 1: The Andrew", "answers": ["26"], "all_classes": null, "length": 14083}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["19"], "all_classes": null, "length": 18136}
+{"pred": "18\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output from the first part and", "answers": ["9"], "all_classes": null, "length": 5562}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a more complex task.\n\nParagraph 1: The architectural composition", "answers": ["10"], "all_classes": null, "length": 5442}
+{"pred": "42\n\n### Example 2\n\nThe following is an example of a more complex problem.\n\nParagraph 1: The following is", "answers": ["17"], "all_classes": null, "length": 12213}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["5"], "all_classes": null, "length": 13084}
+{"pred": "42\n\n### 2019\n\nThe 2019 edition of the competition was held on 15 September 2", "answers": ["13"], "all_classes": null, "length": 12754}
+{"pred": "3\n\n### Example 2\n\nThe following is an example of a paragraph with a long tail.\n\nParagraph 1: In business", "answers": ["5"], "all_classes": null, "length": 7079}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["19"], "all_classes": null, "length": 8018}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a paragraph that contains a duplicate.\n\nParagraph 1: The first", "answers": ["13"], "all_classes": null, "length": 9086}
+{"pred": "34\n\n### 2019\n\nThe 2019 edition of the contest was held on 15 June 2", "answers": ["19"], "all_classes": null, "length": 11301}
+{"pred": "1\n\n### Example 2\n\nThis is an example of a paragraph that contains duplicate text.\n\nParagraph 1: The 1", "answers": ["12"], "all_classes": null, "length": 8771}
+{"pred": "1\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take a list of paragraphs and output the", "answers": ["15"], "all_classes": null, "length": 6573}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["7"], "all_classes": null, "length": 5522}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["16"], "all_classes": null, "length": 10898}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["5"], "all_classes": null, "length": 8866}
+{"pred": "3\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output of the first part and output", "answers": ["7"], "all_classes": null, "length": 11143}
+{"pred": "1\n\nThe final answer is: 1\n\nThe final answer is: 1\n\nThe final answer is: 1\n\nThe final", "answers": ["3"], "all_classes": null, "length": 11516}
+{"pred": "3\n\n### Part 2\n\nThe second part of the challenge is to write a program that takes the output of the first part and outputs the", "answers": ["27"], "all_classes": null, "length": 11744}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["21"], "all_classes": null, "length": 14392}
+{"pred": "39\n\n### Example 2\n\nThe following is an example of a more complex problem.\n\nParagraph 1: The following is", "answers": ["8"], "all_classes": null, "length": 13321}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["26"], "all_classes": null, "length": 11086}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["14"], "all_classes": null, "length": 9267}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["14"], "all_classes": null, "length": 6650}
+{"pred": "19\n\n### Example 2\n\nThe following is an example of a more complex task.\n\nParagraph 1: The following is", "answers": ["13"], "all_classes": null, "length": 3554}
+{"pred": "43\n\n### 2019\n\nParagraph 1: The 2019–2020 coronavirus", "answers": ["10"], "all_classes": null, "length": 13846}
+{"pred": "1\n\n### Example 2\n\nThis example is a simple example of the problem.\n\nParagraph 1: The Royal Scots Navy", "answers": ["11"], "all_classes": null, "length": 7488}
+{"pred": "100\n\n### Example 2\n\nThe following is an example of a paragraph count problem.\n\nParagraph 1: The first", "answers": ["38"], "all_classes": null, "length": 13904}
+{"pred": "22\n\n### Example 2\n\nThe following is a paragraph from the Wikipedia article on the Battle of the River Plate.\n\nThe", "answers": ["11"], "all_classes": null, "length": 6245}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["19"], "all_classes": null, "length": 10261}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a paragraph with a single unique paragraph.\n\nParagraph 1: The", "answers": ["5"], "all_classes": null, "length": 18130}
+{"pred": "1\n\n### Example 2\n\nThis example is a simple example of a text classification task. The task is to classify the text into one", "answers": ["23"], "all_classes": null, "length": 12919}
+{"pred": "1\n\n### 2\n\nParagraph 1: The 1960s were a decade of great change in the United States", "answers": ["21"], "all_classes": null, "length": 16375}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["31"], "all_classes": null, "length": 14767}
+{"pred": "1\n\n### Example 2\n\nThe following is an example of a paragraph that contains a duplicate.\n\nParagraph 1: The album", "answers": ["4"], "all_classes": null, "length": 9363}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["24"], "all_classes": null, "length": 9779}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["46"], "all_classes": null, "length": 14598}
+{"pred": "1\n\n### Example 2\n\nThis example is a simple example of a paragraph count.\n\nParagraph 1: The first paragraph is", "answers": ["21"], "all_classes": null, "length": 14280}
+{"pred": "1\n\n### Example 2\n\nParagraph 1: The 2010 FIFA World Cup was the 19th FIFA World", "answers": ["20"], "all_classes": null, "length": 10288}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["11"], "all_classes": null, "length": 5651}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["30"], "all_classes": null, "length": 11494}
+{"pred": "21\n\n### Part 2\n\nThe following is a list of the 21 unique paragraphs in the input file.\n\nPar", "answers": ["2"], "all_classes": null, "length": 3967}
+{"pred": "27\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output from the first part and", "answers": ["7"], "all_classes": null, "length": 8047}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["14"], "all_classes": null, "length": 12816}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["29"], "all_classes": null, "length": 12602}
+{"pred": "26\n\n### 2019\n\nThe 2019 competition was held on 15 June 2019", "answers": ["9"], "all_classes": null, "length": 6561}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["41"], "all_classes": null, "length": 13506}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["25"], "all_classes": null, "length": 14899}
+{"pred": "41\n\n### Example 2\n\nThe following is an example of a second type of problem.\n\nParagraph 1: The following", "answers": ["39"], "all_classes": null, "length": 12547}
+{"pred": "41\n\n### Example 2\n\nThis example is a simple example of a paragraph count.\n\nParagraph 1: The 1", "answers": ["18"], "all_classes": null, "length": 10765}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["7"], "all_classes": null, "length": 6447}
+{"pred": "1\n\n### Example 2\n\nParagraph 1: The 2018 FIFA World Cup was the 21st FIFA World", "answers": ["30"], "all_classes": null, "length": 18934}
+{"pred": "20\n\n### Example 2\n\nThe following is an example of a paragraph that contains 20 unique paragraphs.\n\nParagraph", "answers": ["9"], "all_classes": null, "length": 6231}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["28"], "all_classes": null, "length": 10433}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["37"], "all_classes": null, "length": 12074}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["5"], "all_classes": null, "length": 12913}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["33"], "all_classes": null, "length": 11704}
+{"pred": "25\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output from the first part and", "answers": ["14"], "all_classes": null, "length": 6751}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["21"], "all_classes": null, "length": 12119}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["16"], "all_classes": null, "length": 12140}
+{"pred": "50\n", "answers": ["31"], "all_classes": null, "length": 16806}
+{"pred": "1\n\n### Example 2\n\nThis example is a simple example of a paragraph count.\n\nParagraph 1: This is the first", "answers": ["19"], "all_classes": null, "length": 12672}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["12"], "all_classes": null, "length": 4960}
+{"pred": "34\n\n### 2012\n\nParagraph 1: Chex Quest is a non-violent first-person", "answers": ["3"], "all_classes": null, "length": 6404}
+{"pred": "46\n\n### 2019\n\nParagraph 1: The 2019 edition of the competition was held in the", "answers": ["32"], "all_classes": null, "length": 14244}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["44"], "all_classes": null, "length": 12279}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["23"], "all_classes": null, "length": 13851}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["17"], "all_classes": null, "length": 9334}
+{"pred": "44\n\n### Example 2\n\nThe following is an example of a paragraph count with a single paragraph.\n\nParagraph 1:", "answers": ["39"], "all_classes": null, "length": 14435}
+{"pred": "1\n\n### 2021\n\nParagraph 1: The 2021–22 Premier League season was the ", "answers": ["23"], "all_classes": null, "length": 12927}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["11"], "all_classes": null, "length": 10543}
+{"pred": "47\n\n### Part 2\n\nThe following is a list of the 100 most common words in the English language. The list", "answers": ["4"], "all_classes": null, "length": 17186}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["26"], "all_classes": null, "length": 15302}
+{"pred": "18\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output of the first part and", "answers": ["16"], "all_classes": null, "length": 6374}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["16"], "all_classes": null, "length": 10190}
+{"pred": "21\n\nComment:\n\nComment:\n\nComment:\n\nComment:\n\nComment:\n\nComment:\n\nComment:\n\n", "answers": ["17"], "all_classes": null, "length": 5700}
+{"pred": "1\n\n### Example 2\n\nThis example is a more complex example of the task.\n\nParagraph 1:  In the shared", "answers": ["27"], "all_classes": null, "length": 15210}
+{"pred": "20\n\n### 2019\n\nThe 2019 edition of the competition was held on 15 March 2", "answers": ["7"], "all_classes": null, "length": 4858}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["14"], "all_classes": null, "length": 9469}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["31"], "all_classes": null, "length": 15454}
+{"pred": "42\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output of the first part and", "answers": ["3"], "all_classes": null, "length": 13841}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["3"], "all_classes": null, "length": 9325}
+{"pred": "43\n\n### 2014\n\nThe 2014 contest was held on April 12, 201", "answers": ["3"], "all_classes": null, "length": 6771}
+{"pred": "1\n\n### Example 2\n\nThis example is a more complex example, with a larger number of paragraphs.\n\nParagraph 1", "answers": ["9"], "all_classes": null, "length": 11684}
+{"pred": "1\n\n### Example 2\n\nThe following is a paragraph from the Wikipedia article on the 2019–2020 Australian", "answers": ["3"], "all_classes": null, "length": 13730}
+{"pred": "26\n\n### Example 2\n\nThe following is an example of a more complex task.\n\nParagraph 1: The Royal R", "answers": ["17"], "all_classes": null, "length": 8501}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["22"], "all_classes": null, "length": 13035}
+{"pred": "1\n\n### Example 2\n\nThis example is a simple example of a paragraph count.\n\nParagraph 1: The Conwy Valley", "answers": ["16"], "all_classes": null, "length": 9281}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["17"], "all_classes": null, "length": 7400}
+{"pred": "34\n\n### 2019\n\nParagraph 1: The treasury was one of the pillars of the functioning", "answers": ["4"], "all_classes": null, "length": 14283}
+{"pred": "33\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output from the first part and", "answers": ["7"], "all_classes": null, "length": 12616}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["38"], "all_classes": null, "length": 12285}
+{"pred": "10\n\n### Example 2\n\nThis example is a simple example of a text classification task. The task is to classify the text into", "answers": ["17"], "all_classes": null, "length": 14999}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["15"], "all_classes": null, "length": 13557}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["34"], "all_classes": null, "length": 15684}
+{"pred": "1\n\n### Example 2\n\nThis example is a more complex example, with a larger number of paragraphs and a more complex structure.\n", "answers": ["5"], "all_classes": null, "length": 12236}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["22"], "all_classes": null, "length": 16104}
+{"pred": "34\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output from the first part and", "answers": ["30"], "all_classes": null, "length": 9118}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["9"], "all_classes": null, "length": 17635}
+{"pred": "34\n\n### Example 2\n\nThe following is an example of a paragraph with 34 unique paragraphs.\n\nParagraph ", "answers": ["6"], "all_classes": null, "length": 8470}
+{"pred": "19\n\n### Example 2\n\nThe following is an example of a paragraph that contains duplicate text.\n\nParagraph 1: The", "answers": ["7"], "all_classes": null, "length": 5326}
+{"pred": "1\n\n### Example 2\n\nParagraph 1: The first recorded use of the term \"soccer\" was in 186", "answers": ["31"], "all_classes": null, "length": 12687}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["5"], "all_classes": null, "length": 5518}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["35"], "all_classes": null, "length": 15203}
+{"pred": "34\n\n### Example 2\n\nThe following is an example of a task that can be solved by a computer program.\n\nParagraph", "answers": ["24"], "all_classes": null, "length": 7955}
+{"pred": "1\n\n### 2013\n\nPlease enter the final count of unique paragraphs after removing duplicates. The output format should only contain the", "answers": ["37"], "all_classes": null, "length": 12718}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["11"], "all_classes": null, "length": 12939}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["28"], "all_classes": null, "length": 12397}
+{"pred": "34\n\n### Example 2\n\nThe following is a sample of the output of the second example.\n\nParagraph 1: The", "answers": ["5"], "all_classes": null, "length": 11938}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["4"], "all_classes": null, "length": 8543}
+{"pred": "1\n\n### Example 2\n\nThis is a sample of the output of the second example.\n\nParagraph 1: The film was", "answers": ["11"], "all_classes": null, "length": 8590}
+{"pred": "34\n\n### Example 2\n\nThe following is an example of a paragraph that contains 34 unique paragraphs.\n\nParagraph", "answers": ["16"], "all_classes": null, "length": 9543}
+{"pred": "100\n\n### Example 2\n\nThe following is an example of a more complex task.\n\nParagraph 1: The ", "answers": ["26"], "all_classes": null, "length": 13429}
+{"pred": "43\n\n### 2019\n\nThe 2019 edition of the competition was held on 15 June 2", "answers": ["10"], "all_classes": null, "length": 9585}
+{"pred": "17\n\n### Example 2\n\nThe following is an example of a paragraph that is not unique.\n\nParagraph 1: The", "answers": ["42"], "all_classes": null, "length": 15870}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["26"], "all_classes": null, "length": 12313}
+{"pred": "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1", "answers": ["21"], "all_classes": null, "length": 6986}
+{"pred": "1\n\n### Example 2\n\nThis is a second example of the task.\n\nParagraph 1: The 2014", "answers": ["19"], "all_classes": null, "length": 9484}
+{"pred": "100\n\n### Example 2\n\nThis example is a more complex example, with a larger number of paragraphs.\n\nParagraph", "answers": ["26"], "all_classes": null, "length": 15479}
+{"pred": "1\n\n### Part 2\n\nThe second part of the challenge is to find the number of unique paragraphs in the second file.\n\n", "answers": ["5"], "all_classes": null, "length": 9960}
+{"pred": "50\n\n### Part 2\n\nThe second part of the challenge is to write a program that will take the output from the first part and", "answers": ["20"], "all_classes": null, "length": 14973}
+{"pred": "100\n\n## External links\n\n* Official website\n* The Christadelphian magazine\n* The Christadelphian magazine (UK)", "answers": ["15"], "all_classes": null, "length": 13734}
+{"pred": "120\n\n### 2014\n\nParagraph 1: In 2014, he won his third World P", "answers": ["10"], "all_classes": null, "length": 6073}
+{"pred": "10\n\n### Example 2\n\n```\nExample 2:\nInput: [\"Alice\", \"Bob\", \"Eve\"], [\"", "answers": ["17"], "all_classes": null, "length": 15984}
+{"pred": "30\n\n### Example 2\n\nThis example is a more complex example, with a larger number of paragraphs and a more complex task.", "answers": ["28"], "all_classes": null, "length": 6972}
