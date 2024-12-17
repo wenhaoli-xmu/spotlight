@@ -54,7 +54,7 @@ pip install -e .
 | LongBench         | bash scripts/test_longbench.sh | YES                    |
 
 
-**Evaluate across all base models and methods.**  Each dir start with `test_` corresponding to a benchmark. By default, these shell scripts will run evaluation across all base models (including LLaMA2-7B, LLaMA2-7B-Chat and LLaMA3-8B), and all methods (including Spotlight, Linear Hashing, Upper Bound, Quest and MagicPIG). Thus it will take a long time to finish these evaluations.
+**Evaluate across all base models and methods.**  Each dir starts with `test_` corresponding to a benchmark, and the launch scripts can be found in `scripts/`. By default, these scripts will run evaluation across all base models (including LLaMA2-7B, LLaMA2-7B-Chat and LLaMA3-8B), and all methods (including Spotlight, Linear Hashing, Upper Bound, Quest and MagicPIG). Thus it will take a long time to finish these evaluations.
 
 **Evaluate single model with single method.**  If you want to just evaluate a single base model with a single modifying method, for example LLaMA3-8B with Spotlight Attention, you can edit the `test_scripts` variable in the shell script to the one you want, in this case, `llama3-8b-spotlight.json`. Here, the json file is located in the benchmark's dir, defining which checkpoint should be loaded as well as some configurations.
 
