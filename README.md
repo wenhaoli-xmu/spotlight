@@ -13,16 +13,13 @@
     * [Few-Shot Learning](#eval-nlu)
     * [LongBench](#eval-longbench)
     * [Output Fidelity](#eval-fidelity)
-    * [Needle In A Haystack](#eval-needle)
     * [Latency](#eval-latency)
 
-4. [Training](#train)
-5. [Acknowledgement](#acknowledge)
+4. [Train](#train)
 
 
 # <span id="quickstart"> Quick Start </span>
 
-**Step1** Clone the following repositories.
 ```
 git clone https://github.com/wenhaoli-xmu/spotlight    # training & evaluation
 git clone https://github.com/wenhaoli-xmu/lsh-attn     # efficient kernels
@@ -47,10 +44,6 @@ pip install -e .
 # <span id="modelweights"> Model Weights </span>
 
 
-
-
-
-
 # <span id="eval"> Evaluation </span>
 
 | Task              | Eval Command                   | Download Data Manually |
@@ -59,28 +52,34 @@ pip install -e .
 | Perplexity        | bash scripts/test_ppl.sh       | YES                    |
 | Few-Shot Learning | bash scripts/test_lmeval.sh    | NO                     |
 | LongBench         | bash scripts/test_longbench.sh | YES                    |
-| Needle            | bash scripts/test_needle.sh    | YES                    |
 
 
-**一次评测所有模型** 所有以 `test_` 开头的文件夹都对应着一种benchmark。且每个benchmark的bash脚本可以在 `scripts` 目录下找到，默认情况下，这些脚本会在所有base model（包括LLaMA2-7B, LLaMA2-7B-Chat, LLaMA3-8B）上评测所有的方法（包含Spotlight, Linear Hashing, Upper Bound, Quest, MagicPIG），时间较为漫长。
+**Evaluate across all base models and methods**  all dirs start with `test_` corresponding to a benchmark. By default, these shell scripts will run evaluation across all base models (including LLaMA2-7B, LLaMA2-7B-Chat and LLaMA3-8B), and all methods (including Spotlight, Linear Hashing, Upper Bound, Quest and MagicPIG). Thus it will take a long time to finish these evaluations.
 
-**仅仅评测某个模型** 如果想要仅仅运行某个base model的某种方法，例如只测试 LLaMA3-8B / w. Spotlight 在LongBench上的性能，则可以将 bash 脚本 `scripts/test_longbench.sh` 中的 `test_scripts` 变量修改为 `llama3-8b-spotlight.json` 。这里 `llama3-8b-spotlight.json` 的具体目录位于 `test_longbench/llama3-8b-spotlight.json`，里面定义了应该应该加载哪个checkpoint, 以及多少剪枝率等关键信息。
+**Evaluate single model with single method.**  If you want to just evaluate a single base model with a single modifying method, for example LLaMA3-8B with Spotlight Attention, you can edit the `test_scripts` variable in the shell script to the one you want, in this case, `llama3-8b-spotlight.json`. Here, the json file is located in the benchmark's dir, defining which checkpoint should be loaded as well as some configurations.
 
 ## <span id="eval-iou"> IoU </span>
+
+1. Run test script
+    ```bash
+    bash scripts/test_iou.sh
+    ```
+
+2. For linear hashing, the shell script evaluate the training-free versionn. If you want to evaluate after training version, you can change the `load_ckp` keyword in the json file. For LLaMA2-7B as an example, you can change the `load_ckp` keyworkd in `test_iou/llama2-7b-linearhashing.json` to `ckp/llama2-7b-linearhashing.pth`. All related pth files can be found in [Model weights](#modelweights).
 
 
 ## <span id="eval-ppl"> Perplexity </span>
 
-1. 准备数据集.
+1. Prepare data.
 
-    需要下载 [proof-pile.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/proof-pile.json) 和 [codeparrot.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/codeparrot.json) 两个文件，下载好之后，需要将两个文件的路径添加为环境变量:
+    Download [proof-pile.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/proof-pile.json) and [codeparrot.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/codeparrot.json). After download, run the following command to set environment variables:
     
     ```bash
     export SPOTLIGHT_PROOFPILE_PATH=/path/to/proof-pile.json
     export SPOTLIGHT_CODEPARROT_PATH=/path/to/code-parrot.json
     ```
 
-2. 运行测试脚本.
+2. Run test scrtipt.
     ```bash
     bash scripts/test_ppl.sh 
     ```
@@ -88,23 +87,23 @@ pip install -e .
 
 ## <span id="eval-nlu"> Few-Shot Learning </span>
 
-所有必要的数据集都会在脚本运行的时候自动下载：
+All data required can be automatically downloaded on the fly when running this test script.
 
 ```bash
 bash scripts/test_lmeval.sh
 ```
 
-注意，lm-eval-harness必须是0.3.0版本。
+NOTE: the version of `lm-eval-harness` must be 0.3.0.
 
 ## <span id="eval-longbench"> LongBench </span>
 
-1. 下载 [data.zip](https://huggingface.co/datasets/THUDM/LongBench/blob/main/data.zip)，完成之后将其拷贝到 `LongBench/data.zip` 
+1. Download [data.zip](https://huggingface.co/datasets/THUDM/LongBench/blob/main/data.zip), then copy it to `LongBench/data.zip`.
 
-2. 测试在LongBench上的绝对分数
+2. Test absolute score on LongBench
     ```bash
     bash scripts/test_longbench.sh
     ```
-    我们自己的运行结果如下
+    Our evaluation results are provided:
 
     **LLaMA2-7B**
     | Method      | Config      | Eval Log                                                                                                           |
@@ -139,7 +138,70 @@ bash scripts/test_lmeval.sh
 
 ## <span id="eval-fidelity"> Output Fidelity </span>
 
-1. 
+1. The LongBench output files are required to test output fidelity. You can either get these output files by runing the test scripts in yourself, or use our provided ones. For example, if you want to evaluate the output similarity between LLaMA3-8B model with and without Spotlight Attention, you can run the following command:
+
+    ```bash
+    python test_longbench/test_sim.py test_longbench/log/llama3-8b.json test_longbench/log/llaam3-8b-spotlight.json
+    ```
 
 
-## <span id="eval-needle"> Needle In A Haystack </span>
+## <span id="eval-latency"> Latency </span>
+
+1. Entry `lsh-attn` directorty
+    
+    There are some python files in this directory, which are used to test the lantecy of several efficient attention kernel as well as some component.
+    ```
+    ├── benchmark_flashattn.py
+    ├── benchmark_flashinfer.py
+    ├── benchmark_pack.py
+    ├── benchmark_quest.py
+    ├── benchmark_sdpa.py
+    ├── benchmark_spotlight.py
+    ```
+
+2. Install [triton](https://triton-lang.org)，[flash attention 2.5.8](https://github.com/Dao-AILab/flash-attention/releases)，and [flash infer 0.1.6](https://docs.flashinfer.ai)
+
+3. Run the following command to test latency.
+    ```bash
+    python benchmark_flashattn.py
+    python benchmark_flashinfer.py
+    python benchmark_pack.py
+    python benchmark_quest.py
+    python benchmark_sdpa.py
+    python benchmark_spotlight.py
+    ```
+
+    The batch size are set to 1 by default, you can change it by providing additional arguments `--batch_size 4`.
+    
+
+# <span id="train"> Train </span>
+
+1. Create directories
+    ```bash
+    cd spotlight
+    mkdir -p data/slimpajama
+    mkdir ckp
+    ```
+
+2. Download [arxiv.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/slimpajama/arxiv.json) and [book.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/slimpajama/book.json), then put them under `data/slimpajama`.
+
+3. Training can be executed in two ways.
+    * **When the disk has enough room left**，you can storage the activations every layer only once before training.
+        
+        Specifically, edit the `train.sh` script with addtiional argument `--prepare_data`, then run it. After completing, change `--prepare_data` to `--use_prepared_data` and run it again.
+
+    * **When the disk has little space**, you can generate these activations and use them on the fly.
+
+        This is our defualt traininng method, you can just run the training script without modifying anything.
+
+    
+    After training, the checkpoint file can be found under `ckp`, and can be used in the `load_ckp` keyword in all test scripts.
+
+4. Memory reuduction tricks.
+
+    In the training process, the calculation of ranking loss cost tons of memory, because the size of tensor $Z$ is extra large: 
+    $$
+    n_{heads}\times n_{query}\times n_{top} \times (n_{query} - n_{top})
+    $$
+
+    To this end, we use some tricks to mitigate this issue. The most effective one is to restrict the number of tokens involved, controled by three arguments: `--max_que`, `--max_top` and `--max_oth`. By default, they are set to 1024 and we recommand you to shrink `--max_que` and `--max_oth` first when you encounter OOM issue.
