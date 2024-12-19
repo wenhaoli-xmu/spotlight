@@ -8,7 +8,6 @@ models
 mmlu/data
 mmlu/data.tar
 mmlu/output
-**/__pycache__
 data
 buffer
 
@@ -23,3 +22,6 @@ pred2
 lm-corpus
 lm-profiler
 lsh_kernel
+.vscode
+.DS_Store
+**/__pycache__
