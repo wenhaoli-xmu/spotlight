@@ -5,7 +5,7 @@
 
 # Shortcut
 
-1. [Quick start](#quickstart)
+1. [Installation](#install)
 2. [Model weights](#modelweights)
 3. [Evaluation](#eval)
     
@@ -18,7 +18,7 @@
 4. [Train](#train)
 
 
-# <span id="quickstart"> Quick Start </span>
+# <span id="install"> Installation </span>
 
 ```
 git clone https://github.com/wenhaoli-xmu/spotlight    # training & evaluation
@@ -54,32 +54,34 @@ pip install -e .
 | LongBench         | bash scripts/test_longbench.sh | YES                    |
 
 
-**Evaluate across all base models and methods.**  Each dir starts with `test_` corresponding to a benchmark, and the launch scripts can be found in `scripts/`. By default, these scripts will run evaluation across all base models (including LLaMA2-7B, LLaMA2-7B-Chat and LLaMA3-8B), and all methods (including Spotlight, Linear Hashing, Upper Bound, Quest and MagicPIG). Thus it will take a long time to finish these evaluations.
+**Parallel Execution**  Each directory prefixed with `test_` corresponds to a specific benchmark, and the associated launch scripts are located within the `scripts/` directory. By default, these scripts are designed to execute evaluations across all base models (including LLaMA2-7B, LLaMA2-7B-Chat, and LLaMA3-8B) and all methods (such as Spotlight, Linear Hashing, Upper Bound, Quest, and MagicPIG). Completing these evaluations may require a significant amount of time.
 
-**Evaluate single model with single method.**  If you want to just evaluate a single base model with a single modifying method, for example LLaMA3-8B with Spotlight Attention, you can edit the `test_scripts` variable in the shell script to the one you want, in this case, `llama3-8b-spotlight.json`. Here, the json file is located in the benchmark's dir, defining which checkpoint should be loaded as well as some configurations.
+**Selective Evaluation**  To streamline the process and focus on evaluating a specific base model with a particular modification method—for instance, LLaMA3-8B using Spotlight Attention—you can modify the `test_scripts` variable within the shell script. Specifically, set it to the desired configuration file, such as `llama3-8b-spotlight.json`. This JSON file, located in the benchmark's directory, specifies the checkpoint to be loaded and includes various configuration settings tailored to the evaluation.
 
 ## <span id="eval-iou"> IoU </span>
 
-1. Run test script
+1. Execute the following command to run the test script:
     ```bash
     bash scripts/test_iou.sh
     ```
 
-2. For linear hashing, the shell script evaluate the training-free versionn. If you want to evaluate after training version, you can change the `load_ckp` keyword in the json file. For LLaMA2-7B as an example, you can change the `load_ckp` keyworkd in `test_iou/llama2-7b-linearhashing.json` to `ckp/llama2-7b-linearhashing.pth`. All related pth files can be found in [Model weights](#modelweights).
+2. By default, the shell script evaluates the training-free version of linear hashing. If you wish to evaluate the trained version instead, modify the `load_ckp` keyword in the corresponding JSON file. For example, to evaluate the trained version for LLaMA2-7B, update the `load_ckp` key in `test_iou/llama2-7b-linearhashing.json` to point to the trained checkpoint file, such as `ckp/llama2-7b-linearhashing.pth`. All relevant `.pth` files are available in the [Model weights](#modelweights) section.
 
 
 ## <span id="eval-ppl"> Perplexity </span>
 
 1. Prepare data.
 
-    Download [proof-pile.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/proof-pile.json) and [codeparrot.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/codeparrot.json). After download, run the following command to set environment variables:
+    Download the required datasets: [proof-pile.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/proof-pile.json) and [codeparrot.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/codeparrot.json). After downloading, set the environment variables by running the following commands:
     
     ```bash
     export SPOTLIGHT_PROOFPILE_PATH=/path/to/proof-pile.json
     export SPOTLIGHT_CODEPARROT_PATH=/path/to/code-parrot.json
     ```
 
-2. Run test scrtipt.
+    Replace `/path/to/` with the actual paths to the downloaded files.
+
+2. Execute the test script with the following command:
     ```bash
     bash scripts/test_ppl.sh 
     ```
@@ -87,23 +89,23 @@ pip install -e .
 
 ## <span id="eval-nlu"> Few-Shot Learning </span>
 
-All data required can be automatically downloaded on the fly when running this test script.
+All necessary data will be automatically downloaded during the execution of the test script. Simply run the following command:
 
 ```bash
 bash scripts/test_lmeval.sh
 ```
 
-NOTE: the version of `lm-eval-harness` must be 0.3.0.
+NOTE: Ensure that the version of `lm-eval-harness` is 0.3.0.
 
 ## <span id="eval-longbench"> LongBench </span>
 
-1. Download [data.zip](https://huggingface.co/datasets/THUDM/LongBench/blob/main/data.zip), then copy it to `LongBench/data.zip`.
+1. Download [data.zip](https://huggingface.co/datasets/THUDM/LongBench/blob/main/data.zip) and place it in the `LongBench/` directory, ensuring it is named `LongBench/data.zip`.
 
-2. Test absolute score on LongBench
+2. Run the following command to test the absolute scores:
     ```bash
     bash scripts/test_longbench.sh
     ```
-    Our evaluation results are provided:
+    Our evaluation results are provided below:
 
     **LLaMA2-7B**
     | Method      | Config      | Eval Log                                                                                                           |
@@ -138,7 +140,13 @@ NOTE: the version of `lm-eval-harness` must be 0.3.0.
 
 ## <span id="eval-fidelity"> Output Fidelity </span>
 
-1. The LongBench output files are required to test output fidelity. You can either get these output files by runing the test scripts in yourself, or use our provided ones. For example, if you want to evaluate the output similarity between LLaMA3-8B model with and without Spotlight Attention, you can run the following command:
+1. Prerequisites:
+    To evaluate output fidelity, you need the LongBench output files. These files can be obtained in one of two ways:
+   
+    * Run the test scripts yourself to generate the output files.
+    * Use the output files we provide.
+  
+   For example, to evaluate the output similarity between the LLaMA3-8B model with and without Spotlight Attention, execute the following command:
 
     ```bash
     python test_longbench/test_sim.py test_longbench/log/llama3-8b.json test_longbench/log/llaam3-8b-spotlight.json
@@ -147,9 +155,9 @@ NOTE: the version of `lm-eval-harness` must be 0.3.0.
 
 ## <span id="eval-latency"> Latency </span>
 
-1. Entry `lsh-attn` directorty
+1. Navigate to the `lsh-attn` Directory
     
-    There are some python files in this directory, which are used to test the lantecy of several efficient attention kernel as well as some component.
+    This directory contains Python scripts for testing the latency of various efficient attention kernels and components:
     ```
     ├── benchmark_flashattn.py
     ├── benchmark_flashinfer.py
@@ -159,9 +167,15 @@ NOTE: the version of `lm-eval-harness` must be 0.3.0.
     ├── benchmark_spotlight.py
     ```
 
-2. Install [triton](https://triton-lang.org)，[flash attention 2.5.8](https://github.com/Dao-AILab/flash-attention/releases)，and [flash infer 0.1.6](https://docs.flashinfer.ai)
+2. Install Dependencies
+   Ensure the following dependencies are installed:
 
-3. Run the following command to test latency.
+    * [triton](https://triton-lang.org)
+    * [flash attention 2.5.8](https://github.com/Dao-AILab/flash-attention/releases)
+    * [flash infer 0.1.6](https://docs.flashinfer.ai)
+
+4. Run Latency Tests
+   Execute the following commands to test the latency of each component:
     ```bash
     python benchmark_flashattn.py
     python benchmark_flashinfer.py
@@ -171,37 +185,54 @@ NOTE: the version of `lm-eval-harness` must be 0.3.0.
     python benchmark_spotlight.py
     ```
 
-    The batch size are set to 1 by default, you can change it by providing additional arguments `--batch_size 4`.
+    By default, the batch size is set to 1. You can modify it by adding the `--batch_size` argument, for example:
+
+    ```python
+    python benchmark_spotlight.py --batch_size 4
+    ```
     
 
 # <span id="train"> Train </span>
 
-1. Create directories
+1. Create Directories
     ```bash
     cd spotlight
     mkdir -p data/slimpajama
     mkdir ckp
     ```
 
-2. Download [arxiv.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/slimpajama/arxiv.json) and [book.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/slimpajama/book.json), then put them under `data/slimpajama`.
+2. Download Datasets
+   Download the required datasets:
+   
+   * [arxiv.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/slimpajama/arxiv.json)
+   * [book.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/slimpajama/book.json)
+   
+   Place these files under the `data/slimpajama` directory.
 
-3. Training can be executed in two ways.
-    * **When the disk has enough room left**，you can storage the activations every layer only once before training.
-        
-        Specifically, edit the `train.sh` script with addtiional argument `--prepare_data`, then run it. After completing, change `--prepare_data` to `--use_prepared_data` and run it again.
+3. Training Execution
+   Training can be performed in two ways, depending on available disk space:
 
-    * **When the disk has little space**, you can generate these activations and use them on the fly.
+   * When disk space is sufficient. Store the activations for each layer once before training.
 
-        This is our defualt traininng method, you can just run the training script without modifying anything.
-
+       1. Edit the `train.sh` script by adding the `--prepare_data` argument and run it.
+       2. After completion, replacing `--prepare_data` with `--use_prepared_data` and run the script again.
     
-    After training, the checkpoint file can be found under `ckp`, and can be used in the `load_ckp` keyword in all test scripts.
+   * When disk space is limited. Generate and use activations on the fly. This is the default training method. Simply run the training script without any modifications.
+  
+   After training, the checkpoint file will be saved under the `ckp` directory. This checkpoint can be referenced using the `load_ckp` keyword in all test scripts.
 
-4. Memory reuduction tricks.
+5. Memory Reduction Techniques.
 
-    In the training process, the calculation of ranking loss cost tons of memory, because the size of tensor $Z$ is extra large: 
+   During training, calculating the ranking loss consumes significant memory due to the large size of tensor $Z$:
+   
     $$
     n_{heads}\times n_{query}\times n_{top} \times (n_{query} - n_{top})
     $$
 
-    To this end, we use some tricks to mitigate this issue. The most effective one is to restrict the number of tokens involved, controled by three arguments: `--max_que`, `--max_top` and `--max_oth`. By default, they are set to 1024 and we recommand you to shrink `--max_que` and `--max_oth` first when you encounter OOM issue.
+   To address this, we employ several memory-saving techniques. The most effictive approach is to limit the number of tokens involved, controlled by the following arguments:
+
+   * `--max_que`
+   * `--max_top`
+   * `--max_oth`
+  
+   By default, these are set to 1024. If you encounter out-of-memory (OOM) issues, we recommand reducing `--max_que` and `--max_oth` first.
