@@ -22,7 +22,7 @@
 
 ```
 git clone https://github.com/wenhaoli-xmu/spotlight    # training & evaluation
-git clone https://github.com/wenhaoli-xmu/lsh-attn     # efficient kernels
+git clone https://github.com/wenhaoli-xmu/lsh_attn     # efficient kernels
 git clone https://github.com/wenhaoli-xmu/lm-corpus    # training corpus
 git clone https://github.com/wenhaoli-xmu/lm-profiler  # a tool for latency test
 
