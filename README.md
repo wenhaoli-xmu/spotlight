@@ -3,7 +3,7 @@
 ![img](spotlight.png)
 
 
-[Download Paper](https://github.com/wenhaoli-xmu/seco/raw/main/paper.pdf)
+[Download Paper](https://github.com/wenhaoli-xmu/spotlight/raw/main/paper.pdf)
 
 
 # Shortcut
