@@ -1,7 +1,7 @@
 train_script=train/llama2-7b-chat-spotlight.json
 
 deepspeed \
-    --include localhost:6,7 \
+    --include localhost:0,1,2,3,4,5,6,7 \
     train.py \
     --num_layers 32 \
     --max_tokens 4096 \

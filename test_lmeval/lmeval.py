@@ -1,6 +1,6 @@
 from lm_eval.base import BaseLM
 from lm_eval import evaluator
-from tokenmix2.misc import get_model_and_tokenizer, get_env_conf
+from spotlight.misc import get_model_and_tokenizer, get_env_conf
 import argparse
 import torch
 import os

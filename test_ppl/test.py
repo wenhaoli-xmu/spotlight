@@ -1,6 +1,6 @@
-from tokenmix2.misc import get_model_and_tokenizer
-from tokenmix2.misc import get_env_conf
-from tokenmix2.misc import Evaluator, RMTEvaluator, QuestEvaluator
+from spotlight.misc import get_model_and_tokenizer
+from spotlight.misc import get_env_conf
+from spotlight.misc import Evaluator, RMTEvaluator, QuestEvaluator
 import argparse, os
 
 

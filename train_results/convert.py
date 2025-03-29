@@ -1,6 +1,6 @@
 import torch, os, json
 import argparse
-from tokenmix2.misc import get_env_conf
+from spotlight.misc import get_env_conf
 
 
 parser = argparse.ArgumentParser()

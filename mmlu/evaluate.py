@@ -9,7 +9,7 @@ import torch
 from crop import crop
 import sys
 sys.path.append("/home/lwh/token-mix-2")
-from tokenmix2.misc import get_model_and_tokenizer, get_env_conf
+from spotlight.misc import get_model_and_tokenizer, get_env_conf
 
 openai.api_key = "INSERTYOURKEYHERE"
 choices = ["A", "B", "C", "D"]

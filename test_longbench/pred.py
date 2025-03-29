@@ -6,8 +6,8 @@ from tqdm import tqdm
 import numpy as np
 import random
 import argparse
-from tokenmix2.misc import get_model_and_tokenizer, get_tokenizer
-from tokenmix2.modifiers.greedy_generation import Greedy
+from spotlight.misc import get_model_and_tokenizer, get_tokenizer
+from spotlight.modifiers.greedy_generation import Greedy
 
 from corpus.processor.conversations import get_conv_template
 
@@ -176,7 +176,7 @@ if __name__ == '__main__':
 
     # load model
     if args.magicpig:
-        from tokenmix2.magicpig import get_magicpig, MagicpigConfig
+        from spotlight.magicpig import get_magicpig, MagicpigConfig
         tokenizer = get_tokenizer(env_conf['model']['model_name'])
         magicpig_config = MagicpigConfig(
             model_name_or_path=env_conf['model']['model_name'],

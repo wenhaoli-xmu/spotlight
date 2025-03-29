@@ -1,5 +1,5 @@
 import torch
-from tokenmix2.misc import get_model_and_tokenizer, get_env_conf, adjust_lr
+from spotlight.misc import get_model_and_tokenizer, get_env_conf, adjust_lr
 import gc, time
 import os
 
