@@ -37,7 +37,6 @@ import sys
 import importlib
 import time
 from tqdm import tqdm
-from nemo.collections.asr.parts.utils.manifest_utils import read_manifest
 from typing import Optional
 
 SERVER_TYPES = (

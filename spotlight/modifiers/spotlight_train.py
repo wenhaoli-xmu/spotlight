@@ -228,7 +228,10 @@ def self_attn_forward(
 
     len1 = self.config.max_position_embeddings if hasattr(self.config, "max_position_embeddings") else 0
     len2 = max(ques.shape[-2], keys.shape[-2])
-    cos, sin = self.rotary_emb(keys, seq_len=max(len1, len2))
+
+    pos_ids = torch.arange(max(len1, len2), dtype=torch.int64, device='cuda').unsqueeze_(0)
+    cos, sin = self.rotary_emb(keys, position_ids=pos_ids)
+    cos, sin = cos.squeeze(0), sin.squeeze(0)
 
     cond1 = not self.is_fix_layer
     cond2 = not return_inputs
@@ -264,11 +267,11 @@ def get_rot_mat(info):
 
 
 class MLPLayer(torch.nn.Module):
-    def __init__(self, info, random_init, silu, dropout):
+    def __init__(self, info, num_heads, random_init, silu, dropout):
         super().__init__()
-        get_init_value = lambda: torch.randn((1,32,128,128), **info) * 0.001 if random_init else get_rot_mat(info)
+        get_init_value = lambda: torch.randn((1,num_heads,128,128), **info) * 0.001 if random_init else get_rot_mat(info)
         self.proj = torch.nn.Parameter(get_init_value(), requires_grad=True)
-        self.bias = torch.nn.Parameter(torch.zeros((1,32,1,128), **info), requires_grad=True)
+        self.bias = torch.nn.Parameter(torch.zeros((1,num_heads,1,128), **info), requires_grad=True)
         self.drop = torch.nn.Dropout(dropout)
         self.silu = torch.nn.SiLU() if silu else torch.nn.Identity()
 
@@ -278,11 +281,11 @@ class MLPLayer(torch.nn.Module):
 
 
 class MLPHashingFunction(torch.nn.Module):
-    def __init__(self, info, num_mlp_layers, mlp_random_init, dropout):
+    def __init__(self, info, num_heads, num_mlp_layers, mlp_random_init, dropout):
         super().__init__()
         mlp = torch.nn.ModuleList()
         for i in range(num_mlp_layers):
-            mlp.append(MLPLayer(info, mlp_random_init, i < num_mlp_layers - 1, dropout))
+            mlp.append(MLPLayer(info, num_heads, mlp_random_init, i < num_mlp_layers - 1, dropout))
         self.mlp = mlp
         
 
@@ -373,7 +376,7 @@ class Decoder(torch.nn.Module):
             layer.self_attn.forward = types.MethodType(self_attn_forward, layer.self_attn)
 
             if not layer.self_attn.is_fix_layer:
-                layer.self_attn.hash_fn = MLPHashingFunction(info, num_mlp_layers, mlp_random_init, dropout=dropout)
+                layer.self_attn.hash_fn = MLPHashingFunction(info, self.model.config.num_attention_heads, num_mlp_layers, mlp_random_init, dropout=dropout)
 
 
     def is_benchmark_mode(self):

@@ -47,6 +47,7 @@ class SimCache(Cache):
         
         self.select_head = [[] for _ in range(self.num_layers)]
         self.sparse = 0.0
+        self.history_sparse = []
         self.decode_tokens = 0
     def __getitem__(self, layer_idx: int) -> List[Tuple[torch.Tensor]]:
         """
@@ -135,6 +136,7 @@ class SimCache(Cache):
                     
                     mask = mask.unsqueeze(-2)
                     self.sparse  += mask.float().mean().item()
+                    self.history_sparse.append(mask.float().mean().item())
                     
                     unselected_key_cache = repeat_kv(self.unselected_key_cache[layer_idx], self.num_qh // self.num_kh)
                     
@@ -151,7 +153,7 @@ class SimCache(Cache):
                     
                     key_norm = unselected_key_cache.norm(p=2, dim=-1, keepdim=True).squeeze(-1).unsqueeze(-2)
                     cos_similarity = (attn_unselected / (key_norm * query_states.norm(p=2, dim=-1, keepdim=True).float())).to(torch.float32)
-                    
+
                     theta = torch.arccos(cos_similarity)
                     
                     weight = 1 - theta / torch.pi
@@ -163,6 +165,7 @@ class SimCache(Cache):
                     attn_unselected = attn_unselected - torch.log(weight + 1e-4)
                     attn_unselected = attn_unselected.masked_fill(~mask, -torch.inf)
                     attn_weights = torch.cat([attn_selected, attn_unselected], dim=-1)
+
                     attn_weights = F.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
                     return_value = repeat_kv(return_value, self.num_qh //  self.num_kh)
                     
@@ -215,6 +218,7 @@ class SimCache(Cache):
         return cache
 
     def select_kv_cache(self, num_activate_tokens:int, layer_idx: int, window_size: int):
+        window_size=0
         
         k_cache = self.key_cache[layer_idx]
         v_cache = self.value_cache[layer_idx]
@@ -226,7 +230,7 @@ class SimCache(Cache):
         select_k_cache = torch.cat([select_k_cache, k_cache[...,-window_size:,:]], dim = -2)
         select_v_cache = torch.cat([select_v_cache, v_cache[...,-window_size:,:]], dim = -2)
 
-          
+
         
         unselect_k_cache = k_cache[...,num_activate_tokens:-window_size,:]
         unselect_v_cache = v_cache[...,num_activate_tokens:-window_size,:]

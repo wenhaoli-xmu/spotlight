@@ -19,7 +19,6 @@
 # limitations under the License.
 import math
 from typing import List, Optional, Tuple, Union
-from torch.nn.attention import SDPBackend, sdpa_kernel
 import torch
 import torch.nn.functional as F
 import torch.utils.checkpoint
@@ -161,10 +160,7 @@ class LlamaAttention(nn.Module):
             key_states = repeat_kv(key_states, self.num_key_value_groups)
             value_states = repeat_kv(value_states, self.num_key_value_groups)
             
-
-           
-            with sdpa_kernel(SDPBackend.EFFICIENT_ATTENTION):
-                attn_output = F.scaled_dot_product_attention(
+            attn_output = F.scaled_dot_product_attention(
                 query_states,
                 key_states,
                 value_states,
@@ -845,7 +841,7 @@ class LlamaModel(LlamaPreTrainedModel):
             target_length = (
                 attention_mask.shape[-1]
                 if isinstance(attention_mask, torch.Tensor)
-                else past_seen_tokens + sequence_length + 1
+                else past_seen_tokens + sequence_length
             )
 
         if attention_mask is not None and attention_mask.dim() == 4:

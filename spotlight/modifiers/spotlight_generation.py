@@ -134,7 +134,11 @@ def self_attn_forward(
 
     kv_cache = (keys.data, vals.data)
 
-    cos, sin = self.rotary_emb(vals, seq_len=8192)
+    assert hidden_states.shape[0] == 1
+    pos_ids = torch.arange(8192, dtype=torch.int64, device='cuda').unsqueeze_(0)
+    cos, sin = self.rotary_emb(vals, position_ids=pos_ids)
+    cos, sin = cos.squeeze(0), sin.squeeze(0)
+
     cond1 = self.draft_kwargs['enable'] is True
     cond2 = not self.is_fix_layer
     cond3 = not is_prefill  # pre-filling阶段不使用draft attention
@@ -222,11 +226,11 @@ def self_attn_forward(
 
 
 class MLPLayer(torch.nn.Module):
-    def __init__(self, info, in_features, out_features, silu=False, residue=True):
+    def __init__(self, info, num_heads, in_features, out_features, silu=False, residue=True):
         super().__init__()
-        get_init_value = lambda: torch.randn((1,32,in_features,out_features), **info) * 0.001
+        get_init_value = lambda: torch.randn((1,num_heads,in_features,out_features), **info) * 0.001
         self.proj = torch.nn.Parameter(get_init_value(), requires_grad=True)
-        self.bias = torch.nn.Parameter(torch.zeros((1,32,1,out_features), **info), requires_grad=True)
+        self.bias = torch.nn.Parameter(torch.zeros((1,num_heads,1,out_features), **info), requires_grad=True)
         self.silu = torch.nn.SiLU() if silu else torch.nn.Identity()
         self.resi = residue
 
@@ -236,11 +240,11 @@ class MLPLayer(torch.nn.Module):
 
 
 class MLPHashingFunction(torch.nn.Module):
-    def __init__(self, info, num_mlp_layers, mlp_dims, mlp_residue):
+    def __init__(self, info, num_heads, num_mlp_layers, mlp_dims, mlp_residue):
         super().__init__()
         mlp = torch.nn.ModuleList()
         for i in range(num_mlp_layers):
-            mlp.append(MLPLayer(info, mlp_dims[i], mlp_dims[i+1], i < num_mlp_layers - 1, mlp_residue))
+            mlp.append(MLPLayer(info, num_heads, mlp_dims[i], mlp_dims[i+1], i < num_mlp_layers - 1, mlp_residue))
         self.mlp = mlp
         
 
@@ -322,7 +326,7 @@ class Decoder(torch.nn.Module):
             layer.self_attn.draft_kwargs = draft_kwargs
             layer.forward = types.MethodType(layer_forward, layer)
             layer.self_attn.forward = types.MethodType(self_attn_forward, layer.self_attn)
-            layer.self_attn.hash_fn = MLPHashingFunction(info, num_mlp_layers, mlp_dims, mlp_residue)
+            layer.self_attn.hash_fn = MLPHashingFunction(info, self.model.config.num_attention_heads, num_mlp_layers, mlp_dims, mlp_residue)
 
 
     def is_benchmark_mode(self):

@@ -257,7 +257,11 @@ def self_attn_forward(
     kv_cache = (keys.data, vals.data)
     ret_attn = (None, None)
 
-    cos, sin = self.rotary_emb(vals, seq_len=8192)
+    assert hidden_states.shape[0] == 1
+    pos_ids = torch.arange(8192, dtype=torch.int64, device='cuda').unsqueeze_(0)
+    cos, sin = self.rotary_emb(vals, position_ids=pos_ids)
+    cos, sin = cos.squeeze(0), sin.squeeze(0)
+
     cond1 = self.draft_kwargs['enable'] is True
     cond2 = not self.is_fix_layer
 
@@ -321,6 +325,33 @@ def self_attn_forward(
             device=draft_score.device)
         mask = mask.scatter_(dim=-1, index=draft_indices, value=0)
 
+        if False:
+            # visualization
+            mask_visual = mask[0,0]
+            true_score = get_attn_score(ques, keys, cos, sin)[0,0]
+
+            causal_mask = torch.full_like(mask_visual, fill_value=torch.finfo(true_score.dtype).min).triu(1)
+            indices = torch.topk(true_score + causal_mask, k=num_remain, dim=-1).indices
+            causal_mask = torch.zeros_like(causal_mask)
+            causal_mask.scatter_(dim=-1, index=indices, value=torch.finfo(true_score.dtype).min)
+            causal_mask.tril_(0)
+            causal_mask = -causal_mask
+
+            mask_visual = mask_visual.cpu().float().numpy()
+            causal_mask = causal_mask.cpu().float().numpy()
+
+            import os
+            os.makedirs("mask_visualize", exist_ok=True)
+
+            import matplotlib.pyplot as plt
+            plt.figure()
+            plt.subplot(121)
+            plt.imshow(mask_visual)
+            plt.title(f"layer-id {self.layer_idx} LSH")
+            plt.subplot(122)
+            plt.imshow(causal_mask)
+            plt.title(f"oracle")
+            plt.savefig(f"mask_visualize/{self.layer_idx}.jpg", dpi=960)
 
         attn_output = do_sdpa_attn(
             query=ques,
@@ -351,11 +382,11 @@ def get_rot_mat(info):
 
 
 class MLPLayer(torch.nn.Module):
-    def __init__(self, info, random_init, silu, dropout):
+    def __init__(self, info, num_heads, random_init, silu, dropout):
         super().__init__()
-        get_init_value = lambda: torch.randn((1,32,128,128), **info) * 0.001 if random_init else get_rot_mat(info)
+        get_init_value = lambda: torch.randn((1,num_heads,128,128), **info) * 0.001 if random_init else get_rot_mat(info)
         self.proj = torch.nn.Parameter(get_init_value(), requires_grad=True)
-        self.bias = torch.nn.Parameter(torch.zeros((1,32,1,128), **info), requires_grad=True)
+        self.bias = torch.nn.Parameter(torch.zeros((1,num_heads,1,128), **info), requires_grad=True)
         self.drop = torch.nn.Dropout(dropout)
         self.silu = torch.nn.SiLU() if silu else torch.nn.Identity()
 
@@ -374,11 +405,11 @@ class LinearHashingFunction(torch.nn.Module):
 
 
 class MLPHashingFunction(torch.nn.Module):
-    def __init__(self, info, num_mlp_layers, mlp_random_init, dropout):
+    def __init__(self, info, num_heads, num_mlp_layers, mlp_random_init, dropout):
         super().__init__()
         mlp = torch.nn.ModuleList()
         for i in range(num_mlp_layers):
-            mlp.append(MLPLayer(info, mlp_random_init, i < num_mlp_layers - 1, dropout))
+            mlp.append(MLPLayer(info, num_heads, mlp_random_init, i < num_mlp_layers - 1, dropout))
         self.mlp = mlp
         
 
@@ -460,7 +491,7 @@ class Decoder(torch.nn.Module):
             layer.self_attn.draft_kwargs = draft_kwargs
             layer.forward = types.MethodType(layer_forward, layer)
             layer.self_attn.forward = types.MethodType(self_attn_forward, layer.self_attn)
-            layer.self_attn.hash_fn = MLPHashingFunction(info, num_mlp_layers, mlp_dims, mlp_residue)
+            layer.self_attn.hash_fn = MLPHashingFunction(info, self.model.config.num_attention_heads, num_mlp_layers, mlp_dims, mlp_residue)
 
 
     def is_benchmark_mode(self):

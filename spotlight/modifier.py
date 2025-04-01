@@ -62,7 +62,11 @@ class Modifier(torch.nn.Module):
     def load_checkpoint(self, ckp: str = None):
         ckp = ckp if ckp is not None else self.load_ckp
         checkpoint = torch.load(ckp, map_location="cpu")
-        assert len(checkpoint) == len(self.ft_params()), f"number of parameters in checkpoint and model are different"
+        try:
+            assert len(checkpoint) == len(self.ft_params()), f"number of parameters in checkpoint and model are different"
+        except:
+            import IPython
+            IPython.embed(header='debug')
         for param1, param2 in zip(self.ft_params(), checkpoint):
             param1.data = param2.data.to(device=param1.data.device, dtype=param1.data.dtype)
 

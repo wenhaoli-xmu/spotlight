@@ -1,16 +1,16 @@
-import torch, os, json
+import torch, os
 import argparse
-from spotlight.misc import get_env_conf
 
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--env_conf", type=str, default=None)
+parser.add_argument("--num_layers", type=int, default=32)
 args = parser.parse_args()
 
 json_name = args.env_conf.split('/')[-1]
 pth_name = json_name.replace("json", "pth")
 
-results = [None for _ in range(32)]
+results = [None for _ in range(args.num_layers)]
 
 base_dir = os.path.join("train_results", json_name)
 for file in os.listdir(base_dir):

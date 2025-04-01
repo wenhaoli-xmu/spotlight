@@ -25,7 +25,10 @@ class PG19(Dataset):
     """
 
     def __init__(self, split, max_length=None):
-        self.data = load_dataset("pg19", split=split, trust_remote_code=True)
+        import os
+        assert os.path.exists(os.environ['SPOTLIGHT_PG19_PATH']), f"Please download pg19.json first."
+        with open(os.environ['SPOTLIGHT_PG19_PATH'], "r") as f:
+            self.data = [json.loads(line) for line in f.readlines()]
         
         if max_length == '1m':
             self.maximum = 1024 * 1024
