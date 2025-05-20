@@ -24,7 +24,7 @@ Clone the necessary repositories and install dependencies:
 
 ```bash
 # Clone repositories
-git clone https://anonymous.4open.science/r/spotlight-new       # Training and evaluation
+git clone https://anonymous.4open.science/r/spotlight       # Training and evaluation
 git clone https://anonymous.4open.science/r/lm-corpus-FAB7     # Training corpus
 git clone https://anonymous.4open.science/r/lm-profiler-A550   # Latency testing tool
 
@@ -59,13 +59,13 @@ Pre-trained model checkpoints are available for download:
 
 | Model           | Checkpoint                                                                 |
 |-----------------|---------------------------------------------------------------------------|
-| LLaMA3-8B       | [llama3-8b-spotlight.pth](https://anonymous.4open.science/r/spotlight-new/ckp/llama3-8b-spotlight.pth)       |
-| LLaMA3-8B (C4)  | [llama3-8b-spotlight-c4.pth](https://anonymous.4open.science/r/spotlight-new/ckp/llama3-8b-spotlight-c4.pth) |
-| LLaMA3-8B (Code)| [llama3-8b-spotlight-code.pth](https://anonymous.4open.science/r/spotlight-new/ckp/llama3-8b-spotlight-code.pth) |
-| Qwen2.5-1.5B    | [qwen2.5-1.5b-spotlight.pth](https://anonymous.4open.science/r/spotlight-new/ckp/qwen2.5-1.5b-spotlight.pth) |
-| Qwen2.5-3B      | [qwen2.5-3b-spotlight.pth](https://anonymous.4open.science/r/spotlight-new/ckp/qwen2.5-3b-spotlight.pth)     |
-| Qwen2.5-7B      | [qwen2.5-7b-spotlight.pth](https://anonymous.4open.science/r/spotlight-new/ckp/qwen2.5-7b-spotlight.pth)     |
-| Qwen2.5-14B     | [qwen2.5-14b-spotlight.pth](https://anonymous.4open.science/r/spotlight-new/ckp/qwen2.5-14b-spotlight.pth)   |
+| LLaMA3-8B       | [llama3-8b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/llama3-8b-spotlight.pth)       |
+| LLaMA3-8B (C4)  | [llama3-8b-spotlight-c4.pth](https://anonymous.4open.science/r/spotlight/ckp/llama3-8b-spotlight-c4.pth) |
+| LLaMA3-8B (Code)| [llama3-8b-spotlight-code.pth](https://anonymous.4open.science/r/spotlight/ckp/llama3-8b-spotlight-code.pth) |
+| Qwen2.5-1.5B    | [qwen2.5-1.5b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/qwen2.5-1.5b-spotlight.pth) |
+| Qwen2.5-3B      | [qwen2.5-3b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/qwen2.5-3b-spotlight.pth)     |
+| Qwen2.5-7B      | [qwen2.5-7b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/qwen2.5-7b-spotlight.pth)     |
+| Qwen2.5-14B     | [qwen2.5-14b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/qwen2.5-14b-spotlight.pth)   |
 
 ---
 
@@ -134,34 +134,34 @@ bash scripts/test_lmeval.sh
 
    | Method        | Config       | Eval Log                                                                                                           |
    |---------------|--------------|--------------------------------------------------------------------------------------------------------------------|
-   | Original      | N/A          | [llama2-7b](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b.json)                     |
-   | +Quest        | 1024 Budget  | [llama2-7b-quest-1024](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-quest-1024.json) |
-   | +Quest        | 128 Budget   | [llama2-7b-quest-128](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-quest-128.json)   |
-   | +MagicPIG     | Default      | [llama2-7b-magicpig](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-magicpig.json)     |
-   | +Spotlight    | 90% Pruned   | [llama2-7b-spotlight-90](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-spotlight-90.json) |
-   | +Spotlight    | 98% Pruned   | [llama2-7b-spotlight-98](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-spotlight-98.json) |
+   | Original      | N/A          | [llama2-7b](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b.json)                     |
+   | +Quest        | 1024 Budget  | [llama2-7b-quest-1024](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b-quest-1024.json) |
+   | +Quest        | 128 Budget   | [llama2-7b-quest-128](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b-quest-128.json)   |
+   | +MagicPIG     | Default      | [llama2-7b-magicpig](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b-magicpig.json)     |
+   | +Spotlight    | 90% Pruned   | [llama2-7b-spotlight-90](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b-spotlight-90.json) |
+   | +Spotlight    | 98% Pruned   | [llama2-7b-spotlight-98](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b-spotlight-98.json) |
 
    **LLaMA2-7B-Chat**
 
    | Method        | Config       | Eval Log                                                                                                                     |
    |---------------|--------------|------------------------------------------------------------------------------------------------------------------------------|
-   | Original      | N/A          | [llama2-7b-chat](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat.json)                     |
-   | +Quest        | 1024 Budget  | [llama2-7b-chat-quest-1024](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-quest-1024.json) |
-   | +Quest        | 128 Budget   | [llama2-7b-chat-quest-128](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-quest-128.json)   |
-   | +MagicPIG     | Default      | [llama2-7b-chat-magicpig](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-magicpig.json)     |
-   | +Spotlight    | 90% Pruned   | [llama2-7b-chat-spotlight-90](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-spotlight-90.json) |
-   | +Spotlight    | 98% Pruned   | [llama2-7b-chat-spotlight-98](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-spotlight-98.json) |
+   | Original      | N/A          | [llama2-7b-chat](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b-chat.json)                     |
+   | +Quest        | 1024 Budget  | [llama2-7b-chat-quest-1024](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b-chat-quest-1024.json) |
+   | +Quest        | 128 Budget   | [llama2-7b-chat-quest-128](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b-chat-quest-128.json)   |
+   | +MagicPIG     | Default      | [llama2-7b-chat-magicpig](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b-chat-magicpig.json)     |
+   | +Spotlight    | 90% Pruned   | [llama2-7b-chat-spotlight-90](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b-chat-spotlight-90.json) |
+   | +Spotlight    | 98% Pruned   | [llama2-7b-chat-spotlight-98](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama2-7b-chat-spotlight-98.json) |
 
    **LLaMA3-8B**
 
    | Method        | Config       | Eval Log                                                                                                           |
    |---------------|--------------|--------------------------------------------------------------------------------------------------------------------|
-   | Original      | N/A          | [llama3-8b](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b.json)                     |
-   | +Quest        | 1024 Budget  | [llama3-8b-quest-1024](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-quest-1024.json) |
-   | +Quest        | 256 Budget   | [llama3-8b-quest-256](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-quest-256.json)   |
-   | +MagicPIG     | Default      | [llama3-8b-magicpig](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-magicpig.json)     |
-   | +Spotlight    | 90% Pruned   | [llama3-8b-spotlight-90](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-spotlight-90.json) |
-   | +Spotlight    | 98% Pruned   | [llama3-8b-spotlight-98](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-spotlight-98.json) |
+   | Original      | N/A          | [llama3-8b](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama3-8b.json)                     |
+   | +Quest        | 1024 Budget  | [llama3-8b-quest-1024](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama3-8b-quest-1024.json) |
+   | +Quest        | 256 Budget   | [llama3-8b-quest-256](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama3-8b-quest-256.json)   |
+   | +MagicPIG     | Default      | [llama3-8b-magicpig](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama3-8b-magicpig.json)     |
+   | +Spotlight    | 90% Pruned   | [llama3-8b-spotlight-90](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama3-8b-spotlight-90.json) |
+   | +Spotlight    | 98% Pruned   | [llama3-8b-spotlight-98](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama3-8b-spotlight-98.json) |
 
 ### <span id="eval-fidelity"> QA Response Fidelity </span>
 
