@@ -163,6 +163,8 @@ bash scripts/test_lmeval.sh
    | +Spotlight    | 90% Pruned   | [llama3-8b-spotlight-90](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama3-8b-spotlight-90/result.json) |
    | +Spotlight    | 98% Pruned   | [llama3-8b-spotlight-98](https://anonymous.4open.science/r/spotlight/test_longbench/log/llama3-8b-spotlight-98/result.json) |
 
+   <span style="color:red; font-weight:bold">**Kindly reminder**: If you're viewing these files on anonymous GitHub, you need to click the link first and then click the `view raw` button in the top-right corner to display them properly.</span>
+
 ### <span id="eval-fidelity"> QA Response Fidelity </span>
 
 To evaluate response fidelity, obtain LongBench output files by either:
