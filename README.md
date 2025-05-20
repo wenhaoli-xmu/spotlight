@@ -67,6 +67,8 @@ Pre-trained model checkpoints are available for download:
 | Qwen2.5-7B      | [qwen2.5-7b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/qwen2.5-7b-spotlight.pth)     |
 | Qwen2.5-14B     | [qwen2.5-14b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/qwen2.5-14b-spotlight.pth)   |
 
+<span style="color:red; font-weight:bold">**Kindly reminder**: If you’re unable to download these files on anonymous GitHub, you can clone the repository locally and use Git LFS to fetch them. Each file is small in size, with the largest being only a few dozen megabytes.</span>
+
 ---
 
 ## <span id="evaluation"> 📊 Evaluation </span>
