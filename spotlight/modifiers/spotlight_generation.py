@@ -7,6 +7,7 @@ from peft import get_peft_model, LoraConfig, TaskType
 
 from typing import List, Tuple
 import json
+from profiler import WallTime
 
 
 def get_attn_score_using_angle_lsh(query, key, hash_fn, cos, sin):
@@ -485,6 +486,8 @@ class Spotlight(Modifier):
         # generation
         new_tok = input_ids[:, -1:]
         new_ids = []
+
+        
         while len(new_ids) < max_new_tokens:
             output = self.model(input_ids=new_tok, kv_cache=kv_cache)
             logits, kv_cache = output.logits, output.past_key_values

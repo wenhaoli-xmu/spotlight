@@ -1,0 +1,12 @@
+{
+    "model": {
+        "model_name": "Qwen/Qwen2.5-7B",
+        "model_dtype": "bf16",
+        "model_method": "linearhashing-evaluation",
+        "model_structure": null,
+        "save_ckp": null,
+        "load_ckp": null,
+        "config": "config/llama3-8b-linearhashing-evaluation.json",
+        "device_map": null
+    }
+}

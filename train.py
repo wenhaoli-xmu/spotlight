@@ -11,6 +11,7 @@ import torch.distributed as dist
 
 from functools import partial
 import tqdm
+import json
 import argparse
 
 from concurrent.futures import ThreadPoolExecutor
@@ -121,11 +122,11 @@ def collate_fn(batch, pad_token_id, max_tokens):
     return {"input_ids": input_ids, "input_len": input_len}
 
 
-def reset_buffer_dir(disable):
+def reset_buffer_dir(buffer, disable):
     if not disable:
         if dist.get_rank() == 0:
-            for file in os.listdir("buffer"):
-                os.remove(os.path.join("buffer", file))
+            for file in os.listdir(buffer):
+                os.remove(os.path.join(buffer, file))
         dist.barrier()
 
 
@@ -134,10 +135,8 @@ def train(args):
 
     env_conf = get_env_conf(args.env_conf)
     num_gpus = dist.get_world_size()
-    if not os.path.exists("buffer"):
-        os.mkdir("buffer")
-    else:
-        reset_buffer_dir(disable=args.use_prepared_data)
+    os.makedirs(args.buffer, exist_ok=True)
+    reset_buffer_dir(args.buffer, args.use_prepared_data)
 
     assert env_conf['train']['train_iters'] % args.instance_per_cycle == 0
     assert args.num_layers % num_gpus == 0
@@ -147,17 +146,30 @@ def train(args):
 
     num_inn_cycle = env_conf['train']['train_iters'] // args.instance_per_cycle
     num_out_cycle = args.num_layers // num_gpus
+    gen_range = [args.out_cycle] if args.out_cycle is not None else range(num_out_cycle)
     executor = ThreadPoolExecutor(max_workers=args.max_prepare_workers)
 
     # start training
-    for out_cycle_idx in range(num_out_cycle):
+    for out_cycle_idx in gen_range:
+
         torch.manual_seed(42)
+
+        # skip layers that were already been trained
+        pth_template = "train_results/{}/{}.pth"
+        pth_exist = lambda layer_idx: os.path.exists(
+            pth_template.format(
+                args.env_conf.split('/')[-1], 
+                out_cycle_idx * num_gpus + layer_idx))
+
+        if all([pth_exist(layer_idx) for layer_idx in range(num_gpus)]):
+            continue
 
         # load model and tokenizer
         layer_idx = out_cycle_idx * num_gpus + args.local_rank
         layer_indices = [out_cycle_idx * num_gpus + i for i in range(num_gpus)]
         env_conf["model"]["device_map"] = {"": args.local_rank}
         tokenizer, model = get_model_and_tokenizer(**env_conf['model'])
+            
 
         # delete other layers except the current training one
         model.train()
@@ -201,6 +213,9 @@ def train(args):
         history_loss = []
         history_diff = []
 
+        loss_record = []
+        diff_record = []
+
         compute_loss = partial(
             compute_attn_supervise_loss,
             max_top=args.max_top, 
@@ -227,7 +242,8 @@ def train(args):
                     inputs.update({"return_inputs": True})
 
                     # forward pass
-                    outputs = model(**inputs)
+                    with torch.no_grad():
+                        outputs = model(**inputs)
                     inputs = [outputs.hidden_states[i].cuda(args.local_rank) for i in layer_indices]
                     inputs = torch.stack(inputs, dim=0)
 
@@ -243,9 +259,9 @@ def train(args):
                     dist.all_gather(length_gather, length)
                     length_gather = torch.cat(length_gather)
 
-                    # save datga
+                    # save data
                     buffer = (inputs_gather, length_gather)
-                    buffer_file = f"buffer/inputs_buffer_rank_{args.local_rank}_{idx:05d}.pt"
+                    buffer_file = f"{args.buffer}/inputs_buffer_rank_{args.local_rank}_{idx:05d}.pt"
 
                     future = executor.submit(torch.save, buffer, buffer_file)
                     futures.append(future)
@@ -263,20 +279,20 @@ def train(args):
                     return
 
             # sort the buffer files according to their IDs
-            buffer_files = os.listdir("buffer")
+            buffer_files = os.listdir(args.buffer)
             buffer_files = sorted(filter(
                 lambda x: x.startswith(f"inputs_buffer_rank_{args.local_rank}"), 
                 buffer_files))
 
             # read the first buffer file
-            inputs_gather, length_gather = torch.load(os.path.join("buffer", buffer_files[0]))
+            inputs_gather, length_gather = torch.load(os.path.join(args.buffer, buffer_files[0]))
             buffer_files = [*buffer_files[1:], buffer_files[0]]
 
             # traverse remaining buffer files
             for buffer_file in buffer_files:
 
                 # prefetch next file
-                future = executor.submit(torch.load, os.path.join("buffer", buffer_file))
+                future = executor.submit(torch.load, os.path.join(args.buffer, buffer_file))
 
                 for hidden_states, length in zip(inputs_gather, length_gather):
                     hidden_states = hidden_states[:length, ...].unsqueeze(0)
@@ -324,6 +340,8 @@ def train(args):
                         diff, loss = compute_loss(draft_attn, true_attn, random_query_index)
                         history_loss.append(loss.item())
                         history_diff.append(diff.item())
+                        loss_record.append(loss.item())
+                        diff_record.append(diff.item())
                         loss /= accum_grad
                         loss.backward()
 
@@ -352,16 +370,16 @@ def train(args):
             
             clear_cache(args.local_rank)
             dist.barrier()
-            reset_buffer_dir(disable=args.use_prepared_data)
+            reset_buffer_dir(args.buffer, args.use_prepared_data)
 
         # create directories
         save_path = args.env_conf.split('/')[-1]
-        if dist.get_rank() == 0:
-            if not os.path.exists(f"train_results/{save_path}"):
-                os.mkdir(f"train_results/{save_path}")
-        dist.barrier()
+        os.makedirs(f"train_results/{save_path}", exist_ok=True)
+        os.makedirs(f"train_curves/{save_path}", exist_ok=True)
 
         # save layerwise weight files
+        info = {"loss": loss_record, "diff": diff_record}
+        torch.save(info, f"train_curves/{save_path}/{layer_idx}.log")
         torch.save(list(params), f"train_results/{save_path}/{layer_idx}.pth")
         print(f"RANK-{args.local_rank} training done !")
         dist.barrier()
@@ -388,6 +406,8 @@ if __name__ == '__main__':
     parser.add_argument("--local_rank", type=int, default=-1)
     parser.add_argument("--prepare_data", action='store_true')
     parser.add_argument("--use_prepared_data", action='store_true')
+    parser.add_argument("--buffer", type=str, default='train_buffer')
+    parser.add_argument("--out_cycle", type=int, default=None)
 
     # resource controling related parameters
     parser.add_argument("--instance_per_cycle", type=int, default=1000)

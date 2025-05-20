@@ -1,7 +1,7 @@
 {
     "model": {
         "model_name": "unsloth/llama-3-8b",
-        "model_dtype": "fp16",
+        "model_dtype": "bf16",
         "model_method": "magicpig",
         "model_structure": null,
         "save_ckp": "null",

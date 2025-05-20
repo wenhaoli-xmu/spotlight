@@ -1,0 +1,35 @@
+{
+    "model": {
+        "model_name": "internlm/internlm2_5-7b",
+        "model_dtype": "bf16",
+        "model_method": "spotlight-train",
+        "model_structure": null,
+        "save_ckp": "ckp/internlm2.5-7b-spotlight.pth",
+        "load_ckp": null,
+        "config": "config/llama3-8b-spotlight-train.json",
+        "device_map": null
+    },
+
+    "train": {
+        "train_iters": 7168,
+        "max_lr": 0.001,
+        "warmup": 0.01,
+        "beta1": 0.9,
+        "beta2": 0.98,
+        "weight_decay": 0.1,
+        "corpus": [
+            {
+                "data": "data/slimpajama/arxiv.json",
+                "conf": "config/slimpajama-trunc8k.json",
+                "partition": 0.5
+            },
+            {
+                "data": "data/slimpajama/book.json",
+                "conf": "config/slimpajama-trunc8k.json",
+                "partition": 0.5
+            }
+        ],
+        "accum_grad": 1,
+        "clip_grad": 1.0
+    }
+}

@@ -88,7 +88,7 @@ def get_pred(
         # NOTE: 新增加
         if magicpig:
             prompt = tokenizer.decode(input.input_ids.ravel().tolist())
-            pred = model(prompt)['text'][0]
+            pred = model(prompt, max_new_tokens=max_gen)['text'][0]
         else:
             output = model.generate(
                 input_ids=input.input_ids,
@@ -137,7 +137,6 @@ if __name__ == '__main__':
 
     # MagicPIG related arguments (https://arxiv.org/abs/2410.16179)
     parser.add_argument('--magicpig', action='store_true')
-    parser.add_argument('--device_budget', type=int, default=68)
     args = parser.parse_args()
 
     import json, os

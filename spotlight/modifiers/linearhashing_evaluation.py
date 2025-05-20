@@ -257,7 +257,11 @@ def self_attn_forward(
     kv_cache = (keys.data, vals.data)
     ret_attn = (None, None)
 
-    cos, sin = self.rotary_emb(vals, seq_len=8192)
+    assert hidden_states.shape[0] == 1
+    pos_ids = torch.arange(8192, dtype=torch.int64, device='cuda').unsqueeze_(0)
+    cos, sin = self.rotary_emb(vals, position_ids=pos_ids)
+    cos, sin = cos.squeeze(0), sin.squeeze(0)
+
     cond1 = self.draft_kwargs['enable'] is True
     cond2 = not self.is_fix_layer
 
@@ -321,6 +325,12 @@ def self_attn_forward(
             device=draft_score.device)
         mask = mask.scatter_(dim=-1, index=draft_indices, value=0)
 
+        query_idx = torch.arange(mask.shape[2], device=mask.device)
+        key_idx = torch.arange(mask.shape[3], device=mask.device)
+        causal_cond = query_idx[:, None] < key_idx[None, :]
+        causal_cond = causal_cond[None, None, :, :].expand_as(mask).to(mask.device)
+        mask = torch.where(causal_cond, torch.finfo(mask.dtype).min, mask)
+
 
         attn_output = do_sdpa_attn(
             query=ques,
@@ -343,17 +353,17 @@ def self_attn_forward(
     return attn_output, kv_cache, *ret_attn
 
 
-def get_rot_mat(info):
+def get_rot_mat(num_heads, head_dim, info):
     rot_mats = []
-    for _ in range(32):
-        rot_mats.append(random_rotation_matrix(dim=128, **info))
+    for _ in range(num_heads):
+        rot_mats.append(random_rotation_matrix(dim=head_dim, **info))
     return torch.stack(rot_mats, dim=0).unsqueeze(0)
     
 
 class LinearHashingFunction(torch.nn.Module):
-    def __init__(self, info):
+    def __init__(self, num_heads, head_dim, info):
         super().__init__()
-        linear = torch.nn.Parameter(get_rot_mat(info))
+        linear = torch.nn.Parameter(get_rot_mat(num_heads, head_dim, info))
         self.linear = linear
 
     def forward(self ,x):
@@ -432,7 +442,14 @@ class Decoder(torch.nn.Module):
             layer.self_attn.draft_kwargs = draft_kwargs
             layer.forward = types.MethodType(layer_forward, layer)
             layer.self_attn.forward = types.MethodType(self_attn_forward, layer.self_attn)
-            layer.self_attn.hash_fn = LinearHashingFunction(info)
+
+            if not layer.self_attn.is_fix_layer:
+                n_heads = self.model.config.num_attention_heads
+                head_dim = self.model.config.hidden_size // n_heads
+                layer.self_attn.hash_fn = LinearHashingFunction(
+                    num_heads=n_heads, 
+                    head_dim=head_dim,
+                    info=info)
 
 
     def is_benchmark_mode(self):

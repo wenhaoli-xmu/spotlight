@@ -25,3 +25,5 @@ lsh_kernel
 .vscode/
 **/.DS_Store
 **/__pycache__
+**/build
+*.so

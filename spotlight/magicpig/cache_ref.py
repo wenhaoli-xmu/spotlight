@@ -30,6 +30,11 @@ class SimCache(Cache):
         self.K = K
         self.L = L
         self.recall = None
+
+        # =======================================
+        self.selected_no_avg_keys: List[torch.Tensor] = []
+        self.unselected_no_avg_keys: List[torch.Tensor] = []
+        # =======================================
         
         self.mode = mode
         self.key_hashcode: List[torch.Tensor] = []
@@ -117,9 +122,15 @@ class SimCache(Cache):
             
             self.key_cache[layer_idx] = torch.cat([self.key_cache[layer_idx], key_states], dim=-2)
             self.value_cache[layer_idx] = torch.cat([self.value_cache[layer_idx], value_states], dim=-2)
+
+            # ==========================================================================================================
+            self.selected_no_avg_keys[layer_idx] = torch.cat([self.selected_no_avg_keys[layer_idx], key_states], dim=-2)
+            # ==========================================================================================================
+
             key_states = key_states - self.avg_key[layer_idx]
             self.selected_key_cache[layer_idx] = torch.cat([self.selected_key_cache[layer_idx], key_states], dim=-2)
             self.selected_value_cache[layer_idx] = torch.cat([self.selected_value_cache[layer_idx], value_states], dim=-2)
+
             if (layer_idx !=0) and (layer_idx != 16) and (layer_idx != 32) and (layer_idx != 48):
                     self.decode_tokens += 1
                     return_value = torch.cat([self.selected_value_cache[layer_idx], self.unselected_value_cache[layer_idx]], dim=-2)
@@ -138,28 +149,27 @@ class SimCache(Cache):
                     self.sparse  += mask.float().mean().item()
                     self.history_sparse.append(mask.float().mean().item())
                     
-                    unselected_key_cache = repeat_kv(self.unselected_key_cache[layer_idx], self.num_qh // self.num_kh)
-                    
-                    
-                    selected_key_cache = repeat_kv(self.selected_key_cache[layer_idx], self.num_qh // self.num_kh)
-                    
-                    
-                    
-                    attn_unselected = torch.matmul(query_states, unselected_key_cache.transpose(2,3))
+                    # unselected_key_cache = repeat_kv(self.unselected_key_cache[layer_idx], self.num_qh // self.num_kh)
+                    # selected_key_cache = repeat_kv(self.selected_key_cache[layer_idx], self.num_qh // self.num_kh)
+
+                    # ==========================================================================
+                    unselected_no_avg_keys = repeat_kv(self.unselected_no_avg_keys[layer_idx], self.num_qh // self.num_kh)
+                    selected_no_avg_keys = repeat_kv(self.selected_no_avg_keys[layer_idx], self.num_qh // self.num_kh)
+                    # ==========================================================================
+
+                    attn_unselected = torch.matmul(query_states, unselected_no_avg_keys.transpose(2,3))
                     
                     attn_unselected = attn_unselected.to(torch.float32)
-                    attn_selected = torch.matmul(query_states, selected_key_cache.transpose(2,3)) / math.sqrt(self.head_dim)
+                    attn_selected = torch.matmul(query_states, selected_no_avg_keys.transpose(2,3)) / math.sqrt(self.head_dim)
                     attn_selected = attn_selected.to(torch.float32)
                     
-                    key_norm = unselected_key_cache.norm(p=2, dim=-1, keepdim=True).squeeze(-1).unsqueeze(-2)
+                    key_norm = unselected_no_avg_keys.norm(p=2, dim=-1, keepdim=True).squeeze(-1).unsqueeze(-2)
                     cos_similarity = (attn_unselected / (key_norm * query_states.norm(p=2, dim=-1, keepdim=True).float())).to(torch.float32)
 
                     theta = torch.arccos(cos_similarity)
                     
                     weight = 1 - theta / torch.pi
                     weight = 1 - (1 - weight**self.K)**self.L - self.L * ((1 - weight**self.K)**(self.L - 1)) * (weight**self.K)
-                    
-                    
                     
                     attn_unselected = attn_unselected / math.sqrt(self.head_dim)
                     attn_unselected = attn_unselected - torch.log(weight + 1e-4)
@@ -218,19 +228,14 @@ class SimCache(Cache):
         return cache
 
     def select_kv_cache(self, num_activate_tokens:int, layer_idx: int, window_size: int):
-        window_size=0
-        
         k_cache = self.key_cache[layer_idx]
         v_cache = self.value_cache[layer_idx]
         
         select_k_cache = k_cache[...,:num_activate_tokens,:]
         select_v_cache = v_cache[...,:num_activate_tokens,:]
 
-
         select_k_cache = torch.cat([select_k_cache, k_cache[...,-window_size:,:]], dim = -2)
         select_v_cache = torch.cat([select_v_cache, v_cache[...,-window_size:,:]], dim = -2)
-
-
         
         unselect_k_cache = k_cache[...,num_activate_tokens:-window_size,:]
         unselect_v_cache = v_cache[...,num_activate_tokens:-window_size,:]
@@ -240,12 +245,17 @@ class SimCache(Cache):
         
         self.unselected_key_cache.append(unselect_k_cache)
         self.unselected_value_cache.append(unselect_v_cache)
+
+        # ==================================================
+        self.selected_no_avg_keys.append(select_k_cache)
+        self.unselected_no_avg_keys.append(unselect_k_cache)
+        # ==================================================
         
         self.avg_key.append(unselect_k_cache.mean(dim=-2, keepdim=True))
 
         self.selected_key_cache[layer_idx] = self.selected_key_cache[layer_idx] - self.avg_key[layer_idx]
         self.unselected_key_cache[layer_idx] = self.unselected_key_cache[layer_idx] - self.avg_key[layer_idx]
-        
+
          
         hash_code = torch.matmul(self.unselected_key_cache[layer_idx], self.hash_matrix[layer_idx // 16].to(self.unselected_key_cache[layer_idx].device)).reshape(1, self.num_kh, self.unselected_key_cache[layer_idx].shape[2], self.L, self.K)
 

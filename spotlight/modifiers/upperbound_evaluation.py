@@ -250,7 +250,11 @@ def self_attn_forward(
     kv_cache = (keys.data, vals.data)
     ret_attn = (None, None)
 
-    cos, sin = self.rotary_emb(vals, seq_len=8192)
+    assert hidden_states.shape[0] == 1
+    pos_ids = torch.arange(8192, dtype=torch.int64, device='cuda').unsqueeze_(0)
+    cos, sin = self.rotary_emb(vals, position_ids=pos_ids)
+    cos, sin = cos.squeeze(0), sin.squeeze(0)
+
     cond1 = self.draft_kwargs['enable'] is True
     cond2 = not self.is_fix_layer
 
@@ -309,6 +313,11 @@ def self_attn_forward(
             device=draft_score.device)
         mask = mask.scatter_(dim=-1, index=draft_indices, value=0)
 
+        query_idx = torch.arange(mask.shape[2], device=mask.device)
+        key_idx = torch.arange(mask.shape[3], device=mask.device)
+        causal_cond = query_idx[:, None] < key_idx[None, :]
+        causal_cond = causal_cond[None, None, :, :].expand_as(mask).to(mask.device)
+        mask = torch.where(causal_cond, torch.finfo(mask.dtype).min, mask)
 
         attn_output = do_sdpa_attn(
             query=ques,

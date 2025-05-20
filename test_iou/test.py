@@ -9,11 +9,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--env_conf", type=str, default=None)
     parser.add_argument("--use_env_conf_tasks", action="store_true", default=False)
-    parser.add_argument("--parameter", type=str, default=None)
+    # parser.add_argument("--parameter", type=str, default=None)
     args = parser.parse_args()
 
     env_conf = get_env_conf(args.env_conf)
-    test_conf = get_env_conf("test_draft/eval.json")
+    test_conf = get_env_conf("test_iou/test.json")
 
     tokenizer, model = get_model_and_tokenizer(**env_conf["model"])
     model.eval()
@@ -32,7 +32,7 @@ if __name__ == '__main__':
             return
 
         ratios = model.model.decoder.get_ratios(reset=True)
-        num_heads = 32
+        num_heads = max([len(x) if x is not None else 0 for x in ratios])
 
         print("      ", end='')
         for head_id in range(num_heads):
@@ -57,21 +57,21 @@ if __name__ == '__main__':
             head_ratio = sum(head_ratio) // len(head_ratio)
             print(get_color(head_ratio), end=' ')
 
-    if args.parameter is not None:
-        for file in os.listdir(args.parameter):
-            layer_idx = int(file.split('.')[0])
-            params_container = model.model.decoder.layer_ft_params(layer_idx)
-            info = {
-                "device": params_container[0].device,
-                "dtype": params_container[0].dtype}
+    # if args.parameter is not None:
+    #     for file in os.listdir(args.parameter):
+    #         layer_idx = int(file.split('.')[0])
+    #         params_container = model.model.decoder.layer_ft_params(layer_idx)
+    #         info = {
+    #             "device": params_container[0].device,
+    #             "dtype": params_container[0].dtype}
             
-            path = os.path.join(args.parameter, file)
-            params_data = torch.load(path, map_location='cpu')
-            params_data = [x.to(**info) for x in params_data]
-            for container, data in zip(params_container, params_data):
-                container.data = data
+    #         path = os.path.join(args.parameter, file)
+    #         params_data = torch.load(path, map_location='cpu')
+    #         params_data = [x.to(**info) for x in params_data]
+    #         for container, data in zip(params_container, params_data):
+    #             container.data = data
 
-            print(f"layer-{layer_idx} loaded.")
+    #         print(f"layer-{layer_idx} loaded.")
 
     evaluator_class = Evaluator
 

@@ -1,4 +1,9 @@
-test_scripts=("llama3-8b-spotlight.json")
+test_scripts=(
+    "llama3-8b-upperbound.json"
+    "llama2-7b-upperbound.json"
+    "llama2-7b-chat-upperbound.json"
+    "qwen2.5-7b-upperbound.json"
+    "qwen2.5-7b-spotlight.json")
 
 for test_script in "${test_scripts[@]}"
 do

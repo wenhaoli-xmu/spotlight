@@ -1,0 +1,30 @@
+{
+    "model": {
+        "model_name": "unsloth/llama-3-8b",
+        "model_dtype": "bf16",
+        "model_method": "spotlight-train",
+        "model_structure": null,
+        "save_ckp": "ckp/llama3-8b-spotlight.pth",
+        "load_ckp": null,
+        "config": "config/llama3-8b-spotlight-train.json",
+        "device_map": null
+    },
+
+    "train": {
+        "train_iters": 8192,
+        "max_lr": 0.001,
+        "warmup": 0.01,
+        "beta1": 0.9,
+        "beta2": 0.98,
+        "weight_decay": 0.1,
+        "corpus": [
+            {
+                "data": "data/slimpajama/github.json",
+                "conf": "config/slimpajama-trunc8k.json",
+                "partition": 1.0
+            }
+        ],
+        "accum_grad": 1,
+        "clip_grad": 1.0
+    }
+}

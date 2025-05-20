@@ -37,7 +37,6 @@ class HuggingFaceModel:
         else: 
             model_kwargs = {"attn_implementation": "flash_attention_2"}
         
-        
         self.pipeline = None
         self.model :LlamaForCausalLM = LlamaForCausalLM.from_pretrained(name_or_path, trust_remote_code=True, device_map="auto", torch_dtype=torch.bfloat16, **model_kwargs)
         self.model.config.K = K

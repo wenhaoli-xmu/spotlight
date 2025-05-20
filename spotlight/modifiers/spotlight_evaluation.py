@@ -323,9 +323,29 @@ def self_attn_forward(
             fill_value=torch.finfo(draft_score.dtype).min, 
             dtype=draft_score.dtype, 
             device=draft_score.device)
-        mask = mask.scatter_(dim=-1, index=draft_indices, value=0)
 
-        if False:
+
+        SINK_WINDOW = True
+        RETRIEVE = True
+        VISUALIZE = False
+
+        if RETRIEVE:
+            mask = mask.scatter_(dim=-1, index=draft_indices, value=0)
+
+        query_idx = torch.arange(mask.shape[2], device=mask.device)
+        key_idx = torch.arange(mask.shape[3], device=mask.device)
+        causal_cond = query_idx[:, None] < key_idx[None, :]
+        causal_cond = causal_cond[None, None, :, :].expand_as(mask).to(mask.device)
+        mask = torch.where(causal_cond, torch.finfo(mask.dtype).min, mask)
+
+        if SINK_WINDOW:
+            # local window & sink tokens
+            for q_idx in range(mask.shape[2]):
+                bound = q_idx + 1
+                mask[..., q_idx, :min(4, bound)] = 0
+                mask[..., q_idx, max(0, bound-64):bound] = 0
+
+        if VISUALIZE:
             # visualization
             mask_visual = mask[0,0]
             true_score = get_attn_score(ques, keys, cos, sin)[0,0]

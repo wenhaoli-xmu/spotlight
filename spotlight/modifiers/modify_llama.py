@@ -99,9 +99,6 @@ def check_and_apply_rope(query, key, value, cos, sin):
     batch_size, num_heads, num_query, head_dim = query.shape
     num_kv = key.shape[-2]
 
-    assert key.shape == (batch_size, num_heads, num_kv, head_dim)
-    assert value.shape == (batch_size, num_heads, num_kv, head_dim)
-
     new_posid_spec = partial(new_posid, device=query.device, dtype=query.dtype, bsz=batch_size)
 
     Q = apply_rotary_pos_emb(query, cos, sin, new_posid_spec(num_kv)[:,-num_query:])

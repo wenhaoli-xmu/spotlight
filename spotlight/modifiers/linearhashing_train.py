@@ -256,17 +256,17 @@ def self_attn_forward(
     return attn_output, kv_cache, *ret_attn
 
 
-def get_rot_mat(info):
+def get_rot_mat(num_heads, head_dim, info):
     rot_mats = []
-    for _ in range(32):
-        rot_mats.append(random_rotation_matrix(dim=128, **info))
+    for _ in range(num_heads):
+        rot_mats.append(random_rotation_matrix(dim=head_dim, **info))
     return torch.stack(rot_mats, dim=0).unsqueeze(0)
 
 
 class LinearHashingFunction(torch.nn.Module):
-    def __init__(self, info):
+    def __init__(self, num_heads, head_dim, info):
         super().__init__()
-        linear = torch.nn.Parameter(get_rot_mat(info))
+        linear = torch.nn.Parameter(get_rot_mat(num_heads, head_dim, info))
         self.linear = linear
 
     def forward(self ,x):
@@ -354,7 +354,12 @@ class Decoder(torch.nn.Module):
             layer.self_attn.forward = types.MethodType(self_attn_forward, layer.self_attn)
 
             if not layer.self_attn.is_fix_layer:
-                layer.self_attn.hash_fn = LinearHashingFunction(info)
+                n_heads = self.model.config.num_attention_heads
+                head_dim = self.model.config.hidden_size // n_heads
+                layer.self_attn.hash_fn = LinearHashingFunction(
+                    num_heads=n_heads, 
+                    head_dim=head_dim,
+                    info=info)
 
 
     def is_benchmark_mode(self):

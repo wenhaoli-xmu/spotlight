@@ -1,5 +1,6 @@
 from ..modifier import Modifier
 import torch
+from profiler import WallTime
 
 
 class Greedy(Modifier):
@@ -31,9 +32,18 @@ class Greedy(Modifier):
         device = next(iter(self.model.parameters())).device
         input_ids = input_ids.to(device)
 
-        # prefilling
-        output = self.model(input_ids=input_ids)
+        # fake prefilling
+        output = self.model(input_ids=input_ids[:, :128])
         logits, past_key_values = output.logits, output.past_key_values
+
+        for layer_idx in range(len(past_key_values)):
+            past_key_values = list(past_key_values)
+            for kv in range(len(past_key_values[layer_idx])):
+                past_key_values[layer_idx] = list(past_key_values[layer_idx])
+                while past_key_values[layer_idx][kv].shape[-2] <= input_ids.shape[-1]:
+                    past_key_values[layer_idx][kv] = past_key_values[layer_idx][kv].repeat(1,1,2,1)
+                past_key_values[layer_idx][kv] = past_key_values[layer_idx][kv][..., :input_ids.shape[-1], :]
+
         new_tok = logits.argmax(dim=-1)
         new_ids = [new_tok]
 
@@ -42,13 +52,13 @@ class Greedy(Modifier):
         new_ids = []
 
         while len(new_ids) < max_new_tokens:
-            output = self.model(input_ids=new_tok, past_key_values=past_key_values)
+            with WallTime.get("decoding throughput"):
+                output = self.model(input_ids=new_tok, past_key_values=past_key_values)
             logits, past_key_values = output.logits, output.past_key_values
 
             new_tok = logits.argmax(dim=-1)
-            if new_tok.ravel().item() in eos_token_id: break
-            new_ids.append(new_tok.ravel().item())
+            # if new_tok.ravel().item() in eos_token_id: break
+            new_ids.append(new_tok.to(input_ids.device))
 
-        new_ids = torch.tensor(new_ids, dtype=input_ids.dtype, device=input_ids.device)[None, :]
-        return torch.cat([input_ids, new_ids], dim=-1)
+        return torch.cat([input_ids, *new_ids], dim=-1)
 
