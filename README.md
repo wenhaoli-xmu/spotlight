@@ -22,15 +22,11 @@
 
 ```
 git clone https://anonymous.4open.science/r/spotlight-new    # training & evaluation
-git clone https://anonymous.4open.science/r/lsh_attn-E5DB     # efficient kernels
 git clone https://anonymous.4open.science/r/lm-corpus-FAB7    # training corpus
 git clone https://anonymous.4open.science/r/lm-profiler-A550  # a tool for latency test
 
 cd spotlight 
 pip install -r requirement.txt
-pip install -e .
-
-cd ../lsh-attn
 pip install -e .
 
 cd ../corpus
@@ -40,8 +36,18 @@ cd ../profiler
 pip install -e .
 ```
 
+CUDA kernel installation (optional)
+```
+cd spotlight/spotlight/kernel
+bash install.sh
+
+# After successful compilation, two more `*.so` files will be added to the kernel directory.
+```
+
 
 # <span id="modelweights"> Model Weights </span>
+
+
 
 
 # <span id="eval"> Evaluation </span>
