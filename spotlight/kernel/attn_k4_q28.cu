@@ -98,7 +98,6 @@ __global__ void attn_k4_q28_kernel(
 }
 
 torch::Tensor attn_k4_q28(torch::Tensor q_hash, torch::Tensor k_hash) {
-    // 检查输入张量是否为 CUDA 张量并具有正确的数据类型和维度
     TORCH_CHECK(q_hash.is_cuda() && k_hash.is_cuda(), "Inputs must be CUDA tensors");
     TORCH_CHECK(q_hash.dtype() == torch::kUInt32 && k_hash.dtype() == torch::kUInt32, "Inputs must be uint32");
     TORCH_CHECK(q_hash.dim() == 4 && k_hash.dim() == 4, "Inputs must be 4D tensors");
@@ -111,14 +110,11 @@ torch::Tensor attn_k4_q28(torch::Tensor q_hash, torch::Tensor k_hash) {
     TORCH_CHECK(q_hash.size(2) == QH && k_hash.size(2) == KH, "Head dimension mismatch");
     TORCH_CHECK(q_hash.size(3) == D && k_hash.size(3) == D, "Feature dimension mismatch");
 
-    // 获取张量的设备并检查一致性
     torch::Device device = q_hash.device();
     TORCH_CHECK(k_hash.device() == device, "k_hash must be on the same device as q_hash");
 
-    // 设置当前设备为张量所在设备
     torch::DeviceGuard device_guard(device);
 
-    // 创建输出张量，确保与输入张量在同一设备上
     torch::Tensor output = torch::zeros({B, KN, KH}, q_hash.options().dtype(torch::kInt16));
 
     dim3 blockDim(BLOCK_N, KH);
@@ -133,7 +129,6 @@ torch::Tensor attn_k4_q28(torch::Tensor q_hash, torch::Tensor k_hash) {
         B, KN
     );
 
-    // 检查 CUDA 错误
     cudaError_t err = cudaGetLastError();
     if (err != cudaSuccess) {
         throw std::runtime_error(std::string("CUDA error: ") + cudaGetErrorString(err));

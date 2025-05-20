@@ -30,10 +30,8 @@ torch::Tensor packbits(torch::Tensor input) {
     TORCH_CHECK(input.scalar_type() == torch::kBFloat16, "Input must be bfloat16");
     TORCH_CHECK(input.size(-1) % 32 == 0, "Last dimension must be divisible by 32");
 
-    // Get the device of the input tensor
     torch::Device device = input.device();
 
-    // Set the current device to match the input tensor's device
     torch::DeviceGuard device_guard(device);
 
     auto input_contig = input.contiguous();
@@ -41,15 +39,12 @@ torch::Tensor packbits(torch::Tensor input) {
     int last_dim = in_sizes.back();
     int num_packs = last_dim / 32;
 
-    // Calculate the reshaped output dimensions
     std::vector<int64_t> out_shape(in_sizes.begin(), in_sizes.end());
     out_shape.back() = num_packs;
 
-    // Create output tensor on the same device as input
     int total_packs = input.numel() / 32;
     torch::Tensor output = torch::empty({total_packs}, torch::dtype(torch::kUInt32).device(device));
 
-    // Launch the kernel
     int threads = 512;
     int blocks = (total_packs + threads - 1) / threads;
 
@@ -59,7 +54,6 @@ torch::Tensor packbits(torch::Tensor input) {
         total_packs
     );
 
-    // Check for CUDA errors
     cudaError_t err = cudaGetLastError();
     if (err != cudaSuccess) {
         throw std::runtime_error(std::string("CUDA launch failed: ") + cudaGetErrorString(err));
