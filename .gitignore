@@ -1,5 +1,4 @@
 # checkpoints & model files
-ckp/*
 train_results/*
 !train_results/convert.py
 models

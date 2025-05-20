@@ -1,244 +1,226 @@
-# Spotlight Attention: Exetreme KV Cache Pruning For LLM Generation
+# Spotlight Attention: Extreme KV Cache Pruning for LLM Generation
 
-![img](spotlight.png)
+![Spotlight Attention](spotlight.png)
 
+---
 
-# Shortcut
+## Table of Contents
 
-1. [Installation](#install)
-2. [Model weights](#modelweights)
-3. [Evaluation](#eval)
-    
-    * [Perplexity](#eval-ppl)
-    * [Few-Shot Learning](#eval-nlu)
-    * [LongBench](#eval-longbench)
-    * [Output Fidelity](#eval-fidelity)
-    * [Latency](#eval-latency)
+1. [Installation](#installation)
+2. [Model Weights](#model-weights)
+3. [Evaluation](#evaluation)
+   - [IoU](#eval-iou)
+   - [Perplexity](#eval-perplexity)
+   - [Few-Shot Learning](#eval-few-shot)
+   - [LongBench](#eval-longbench)
+   - [QA Response Fidelity](#eval-fidelity)
+4. [Training](#training)
 
-4. [Train](#train)
+---
 
+## <span id="installation"> 🚀 Installation </span>
 
-# <span id="install"> Installation </span>
+Clone the necessary repositories and install dependencies:
 
-```
-git clone https://anonymous.4open.science/r/spotlight-new    # training & evaluation
-git clone https://anonymous.4open.science/r/lm-corpus-FAB7    # training corpus
-git clone https://anonymous.4open.science/r/lm-profiler-A550  # a tool for latency test
+```bash
+# Clone repositories
+git clone https://anonymous.4open.science/r/spotlight-new       # Training and evaluation
+git clone https://anonymous.4open.science/r/lm-corpus-FAB7     # Training corpus
+git clone https://anonymous.4open.science/r/lm-profiler-A550   # Latency testing tool
 
-cd spotlight 
-pip install -r requirement.txt
+# Install dependencies
+cd spotlight
+pip install -r requirements.txt
 pip install -e .
 
-cd ../corpus
+cd ../lm-corpus-FAB7
 pip install -e .
 
-cd ../profiler
+cd ../lm-profiler-A550
 pip install -e .
 ```
 
-CUDA kernel installation (optional)
-```
+### Optional: CUDA Kernel Installation
+
+For enhanced performance, install the CUDA kernel:
+
+```bash
 cd spotlight/spotlight/kernel
 bash install.sh
-
-# After successful compilation, two more `*.so` files will be added to the kernel directory.
 ```
 
+Upon successful compilation, two `.so` files will be added to the `kernel` directory.
 
-# <span id="modelweights"> Model Weights </span>
+---
 
+## <span id="model-weights"> 💾 Model Weights </span>
 
+Pre-trained model checkpoints are available for download:
 
+| Model           | Checkpoint                                                                 |
+|-----------------|---------------------------------------------------------------------------|
+| LLaMA3-8B       | [llama3-8b-spotlight.pth](https://anonymous.4open.science/r/spotlight-new/ckp/llama3-8b-spotlight.pth)       |
+| LLaMA3-8B (C4)  | [llama3-8b-spotlight-c4.pth](https://anonymous.4open.science/r/spotlight-new/ckp/llama3-8b-spotlight-c4.pth) |
+| LLaMA3-8B (Code)| [llama3-8b-spotlight-code.pth](https://anonymous.4open.science/r/spotlight-new/ckp/llama3-8b-spotlight-code.pth) |
+| Qwen2.5-1.5B    | [qwen2.5-1.5b-spotlight.pth](https://anonymous.4open.science/r/spotlight-new/ckp/qwen2.5-1.5b-spotlight.pth) |
+| Qwen2.5-3B      | [qwen2.5-3b-spotlight.pth](https://anonymous.4open.science/r/spotlight-new/ckp/qwen2.5-3b-spotlight.pth)     |
+| Qwen2.5-7B      | [qwen2.5-7b-spotlight.pth](https://anonymous.4open.science/r/spotlight-new/ckp/qwen2.5-7b-spotlight.pth)     |
+| Qwen2.5-14B     | [qwen2.5-14b-spotlight.pth](https://anonymous.4open.science/r/spotlight-new/ckp/qwen2.5-14b-spotlight.pth)   |
 
-# <span id="eval"> Evaluation </span>
+---
 
-| Task              | Eval Command                   | Download Data Manually |
-|-------------------|--------------------------------|------------------------|
-| IoU               | bash scripts/test_iou.sh       | NO                     |
-| Perplexity        | bash scripts/test_ppl.sh       | YES                    |
-| Few-Shot Learning | bash scripts/test_lmeval.sh    | NO                     |
-| LongBench         | bash scripts/test_longbench.sh | YES                    |
+## <span id="evaluation"> 📊 Evaluation </span>
 
+### <span id="eval-iou"> IoU </span>
 
-**Parallel Execution**  Each directory prefixed with `test_` corresponds to a specific benchmark, and the associated launch scripts are located within the `scripts/` directory. By default, these scripts are designed to execute evaluations across all base models (including LLaMA2-7B, LLaMA2-7B-Chat, and LLaMA3-8B) and all methods (such as Spotlight, Linear Hashing, Upper Bound, Quest, and MagicPIG). Completing these evaluations may require a significant amount of time.
+Evaluate the Intersection over Union (IoU) metric:
 
-**Selective Evaluation**  To streamline the process and focus on evaluating a specific base model with a particular modification method—for instance, LLaMA3-8B using Spotlight Attention—you can modify the `test_scripts` variable within the shell script. Specifically, set it to the desired configuration file, such as `llama3-8b-spotlight.json`. This JSON file, located in the benchmark's directory, specifies the checkpoint to be loaded and includes various configuration settings tailored to the evaluation.
+1. Run the test script:
 
-## <span id="eval-iou"> IoU </span>
+   ```bash
+   bash scripts/test_iou.sh
+   ```
 
-1. Execute the following command to run the test script:
-    ```bash
-    bash scripts/test_iou.sh
-    ```
+2. By default, the script evaluates the training-free linear hashing version. To evaluate a trained model, update the `load_ckp` key in the relevant JSON configuration file (e.g., `test_iou/llama2-7b-linearhashing.json`) to point to the desired checkpoint from the [Model Weights](#model-weights) section.
 
-2. By default, the shell script evaluates the training-free version of linear hashing. If you wish to evaluate the trained version instead, modify the `load_ckp` keyword in the corresponding JSON file. For example, to evaluate the trained version for LLaMA2-7B, update the `load_ckp` key in `test_iou/llama2-7b-linearhashing.json` to point to the trained checkpoint file, such as `ckp/llama2-7b-linearhashing.pth`. All relevant `.pth` files are available in the [Model weights](#modelweights) section.
+### <span id="eval-perplexity"> Perplexity </span>
 
+1. **Prepare Datasets**:
 
-## <span id="eval-ppl"> Perplexity </span>
+   Download the required datasets:
+   - [proof-pile.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/proof-pile.json)
+   - [codeparrot.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/codeparrot.json)
 
-1. Prepare data.
+   Set environment variables:
 
-    Download the required datasets: [proof-pile.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/proof-pile.json) and [codeparrot.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/lm/codeparrot.json). After downloading, set the environment variables by running the following commands:
-    
-    ```bash
-    export SPOTLIGHT_PROOFPILE_PATH=/path/to/proof-pile.json
-    export SPOTLIGHT_CODEPARROT_PATH=/path/to/code-parrot.json
-    ```
+   ```bash
+   export SPOTLIGHT_PROOFPILE_PATH=/path/to/proof-pile.json
+   export SPOTLIGHT_CODEPARROT_PATH=/path/to/codeparrot.json
+   ```
 
-    Replace `/path/to/` with the actual paths to the downloaded files.
+   Replace `/path/to/` with the actual file paths.
 
-2. Execute the test script with the following command:
-    ```bash
-    bash scripts/test_ppl.sh 
-    ```
+2. **Run Evaluation**:
 
+   ```bash
+   bash scripts/test_ppl.sh
+   ```
 
-## <span id="eval-nlu"> Few-Shot Learning </span>
+### <span id="eval-few-shot"> Few-Shot Learning </span>
 
-All necessary data will be automatically downloaded during the execution of the test script. Simply run the following command:
+All required datasets are automatically downloaded during evaluation. Ensure `lm-eval-harness` version 0.3.0 is installed, then run:
 
 ```bash
 bash scripts/test_lmeval.sh
 ```
 
-NOTE: Ensure that the version of `lm-eval-harness` is 0.3.0.
+### <span id="eval-longbench"> LongBench </span>
 
-## <span id="eval-longbench"> LongBench </span>
+1. **Prepare Datasets**:
 
-1. Download [data.zip](https://huggingface.co/datasets/THUDM/LongBench/blob/main/data.zip) and place it in the `LongBench/` directory, ensuring it is named `LongBench/data.zip`.
+   Download [data.zip](https://huggingface.co/datasets/THUDM/LongBench/blob/main/data.zip) and place it in the `LongBench/` directory as `LongBench/data.zip`.
 
-2. Run the following command to test the absolute scores:
-    ```bash
-    bash scripts/test_longbench.sh
-    ```
-    Our evaluation results are provided below:
+2. **Run Evaluation**:
 
-    **LLaMA2-7B**
-    | Method      | Config      | Eval Log                                                                                                           |
-    |-------------|-------------|--------------------------------------------------------------------------------------------------------------------|
-    | Original    | N/A         | [llama2-7b](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b.json)                           |
-    | +Quest      | 1024 Budget | [llama2-7b-quest-1024](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-quest-1024.json)     |
-    | +Quest      | 128 Budget  | [llama2-7b-quest-128](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-quest-128.json)       |
-    | +MagicPIG   | Default     | [llama2-7b-magicpig](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-magicpig.json)         |
-    | +Spotlight  | 90% Pruned  | [llama2-7b-spotlight-90](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-spotlight-90.json) |
-    | +Spotilght  | 98% Pruned  | [llama2-7b-spotlight-98](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-spotlight-98.json) |
+   ```bash
+   bash scripts/test_longbench.sh
+   ```
 
-    **LLaMA2-7B-Chat**
-    | Method      | Config      | Eval Log                                                                                                                     |
-    |-------------|-------------|------------------------------------------------------------------------------------------------------------------------------|
-    | Original    | N/A         | [llama2-7b-chat](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat.json)                           |
-    | +Quest      | 1024 Budget | [llama2-7b-chat-quest-1024](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-quest-1024.json)     |
-    | +Quest      | 128 Budget  | [llama2-7b-chat-quest-128](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-quest-128.json)       |
-    | +MagicPIG   | Default     | [llama2-7b-chat-magicpig](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-magicpig.json)         |
-    | +Spotlight  | 90% Pruned  | [llama2-7b-chat-spotlight-90](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-spotlight-90.json) |
-    | +Spotilght  | 98% Pruned  | [llama2-7b-chat-spotlight-98](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-spotlight-98.json) |
+3. **Evaluation Results**:
 
-    **LLaMA3-8B**
-    | Method      | Config      | Eval Log                                                                                                           |
-    |-------------|-------------|--------------------------------------------------------------------------------------------------------------------|
-    | Original    | N/A         | [llama3-8b](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b.json)                           |
-    | +Quest      | 1024 Budget | [llama3-8b-quest-1024](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-quest-1024.json)     |
-    | +Quest      | 256 Budget  | [llama3-8b-quest-256](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-quest-256.json)       |
-    | +MagicPIG   | Default     | [llama3-8b-magicpig](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-magicpig.json)         |
-    | +Spotlight  | 90% Pruned  | [llama3-8b-spotlight-90](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-spotlight-90.json) |
-    | +Spotilght  | 98% Pruned  | [llama3-8b-spotlight-98](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-spotlight-98.json) |
+   Below are the evaluation logs for various models and configurations:
 
+   **LLaMA2-7B**
 
-## <span id="eval-fidelity"> Output Fidelity </span>
+   | Method        | Config       | Eval Log                                                                                                           |
+   |---------------|--------------|--------------------------------------------------------------------------------------------------------------------|
+   | Original      | N/A          | [llama2-7b](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b.json)                     |
+   | +Quest        | 1024 Budget  | [llama2-7b-quest-1024](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-quest-1024.json) |
+   | +Quest        | 128 Budget   | [llama2-7b-quest-128](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-quest-128.json)   |
+   | +MagicPIG     | Default      | [llama2-7b-magicpig](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-magicpig.json)     |
+   | +Spotlight    | 90% Pruned   | [llama2-7b-spotlight-90](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-spotlight-90.json) |
+   | +Spotlight    | 98% Pruned   | [llama2-7b-spotlight-98](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-spotlight-98.json) |
 
-1. Prerequisites:
-    To evaluate output fidelity, you need the LongBench output files. These files can be obtained in one of two ways:
-   
-    * Run the test scripts yourself to generate the output files.
-    * Use the output files we provide.
-  
-   For example, to evaluate the output similarity between the LLaMA3-8B model with and without Spotlight Attention, execute the following command:
+   **LLaMA2-7B-Chat**
 
-    ```bash
-    python test_longbench/test_sim.py test_longbench/log/llama3-8b.json test_longbench/log/llaam3-8b-spotlight.json
-    ```
+   | Method        | Config       | Eval Log                                                                                                                     |
+   |---------------|--------------|------------------------------------------------------------------------------------------------------------------------------|
+   | Original      | N/A          | [llama2-7b-chat](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat.json)                     |
+   | +Quest        | 1024 Budget  | [llama2-7b-chat-quest-1024](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-quest-1024.json) |
+   | +Quest        | 128 Budget   | [llama2-7b-chat-quest-128](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-quest-128.json)   |
+   | +MagicPIG     | Default      | [llama2-7b-chat-magicpig](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-magicpig.json)     |
+   | +Spotlight    | 90% Pruned   | [llama2-7b-chat-spotlight-90](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-spotlight-90.json) |
+   | +Spotlight    | 98% Pruned   | [llama2-7b-chat-spotlight-98](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama2-7b-chat-spotlight-98.json) |
 
+   **LLaMA3-8B**
 
-## <span id="eval-latency"> Latency </span>
+   | Method        | Config       | Eval Log                                                                                                           |
+   |---------------|--------------|--------------------------------------------------------------------------------------------------------------------|
+   | Original      | N/A          | [llama3-8b](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b.json)                     |
+   | +Quest        | 1024 Budget  | [llama3-8b-quest-1024](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-quest-1024.json) |
+   | +Quest        | 256 Budget   | [llama3-8b-quest-256](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-quest-256.json)   |
+   | +MagicPIG     | Default      | [llama3-8b-magicpig](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-magicpig.json)     |
+   | +Spotlight    | 90% Pruned   | [llama3-8b-spotlight-90](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-spotlight-90.json) |
+   | +Spotlight    | 98% Pruned   | [llama3-8b-spotlight-98](https://anonymous.4open.science/r/spotlight-new/test_longbench/log/llama3-8b-spotlight-98.json) |
 
-1. Navigate to the `lsh-attn` Directory
-    
-    This directory contains Python scripts for testing the latency of various efficient attention kernels and components:
-    ```
-    ├── benchmark_flashattn.py
-    ├── benchmark_flashinfer.py
-    ├── benchmark_pack.py
-    ├── benchmark_quest.py
-    ├── benchmark_sdpa.py
-    ├── benchmark_spotlight.py
-    ```
+### <span id="eval-fidelity"> QA Response Fidelity </span>
 
-2. Install Dependencies
-   Ensure the following dependencies are installed:
+To evaluate response fidelity, obtain LongBench output files by either:
 
-    * [triton](https://triton-lang.org)
-    * [flash attention 2.5.8](https://github.com/Dao-AILab/flash-attention/releases)
-    * [flash infer 0.1.6](https://docs.flashinfer.ai)
+- Running the LongBench test scripts to generate output files.
+- Using provided output files from the [LongBench](#eval-longbench) section.
 
-4. Run Latency Tests
-   Execute the following commands to test the latency of each component:
-    ```bash
-    python benchmark_flashattn.py
-    python benchmark_flashinfer.py
-    python benchmark_pack.py
-    python benchmark_quest.py
-    python benchmark_sdpa.py
-    python benchmark_spotlight.py
-    ```
+For example, to compare output similarity between LLaMA3-8B with and without Spotlight Attention:
 
-    By default, the batch size is set to 1. You can modify it by adding the `--batch_size` argument, for example:
+```bash
+python test_longbench/test_sim.py test_longbench/log/llama3-8b.json test_longbench/log/llama3-8b-spotlight.json
+```
 
-    ```python
-    python benchmark_spotlight.py --batch_size 4
-    ```
-    
+---
 
-# <span id="train"> Train </span>
+## <span id="training"> 🔥 Training </span>
 
-1. Create Directories
-    ```bash
-    cd spotlight
-    mkdir -p data/slimpajama
-    mkdir ckp
-    ```
+### 1. Create Directories
 
-2. Download Datasets
-   Download the required datasets:
-   
-   * [arxiv.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/slimpajama/arxiv.json)
-   * [book.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/slimpajama/book.json)
-   
-   Place these files under the `data/slimpajama` directory.
+```bash
+cd spotlight
+mkdir -p data/slimpajama ckp
+```
 
-3. Training Execution
-   Training can be performed in two ways, depending on available disk space:
+### 2. Download Datasets
 
-   * When disk space is sufficient. Store the activations for each layer once before training.
+Download and place the following datasets in the `data/slimpajama` directory:
+- [arxiv.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/slimpajama/arxiv.json)
+- [book.json](https://huggingface.co/datasets/namespace-Pt/long-llm-data/blob/main/slimpajama/book.json)
 
-       1. Edit the `train.sh` script by adding the `--prepare_data` argument and run it.
-       2. After completion, replacing `--prepare_data` with `--use_prepared_data` and run the script again.
-    
-   * When disk space is limited. Generate and use activations on the fly. This is the default training method. Simply run the training script without any modifications.
-  
-   After training, the checkpoint file will be saved under the `ckp` directory. This checkpoint can be referenced using the `load_ckp` keyword in all test scripts.
+### 3. Training Execution
 
-5. Memory Reduction Techniques.
+Choose a training method based on available disk space:
 
-   During training, calculating the ranking loss consumes significant memory due to the large size of tensor $Z$:
-   
-    $$
-    n_{heads}\times n_{query}\times n_{top} \times (n_{query} - n_{top})
-    $$
+- **Sufficient Disk Space**:
+  1. Edit `train.sh` to include the `--prepare_data` argument and run the script.
+  2. After completion, replace `--prepare_data` with `--use_prepared_data` and rerun.
 
-   To address this, we employ several memory-saving techniques. The most effictive approach is to limit the number of tokens involved, controlled by the following arguments:
+- **Limited Disk Space** (Default):
+  Generate activations on-the-fly by running the `train.sh` script without modifications.
 
-   * `--max_que`
-   * `--max_top`
-   * `--max_oth`
-  
-   By default, these are set to 1024. If you encounter out-of-memory (OOM) issues, we recommand reducing `--max_que` and `--max_oth` first.
+The trained checkpoint will be saved in the `ckp` directory and can be referenced in test scripts using the `load_ckp` keyword.
+
+### 4. Memory Optimization
+
+Training involves computing a ranking loss, which can be memory-intensive due to the large tensor \( Z \):
+
+\[
+n_{\text{heads}} \times n_{\text{query}} \times n_{\text{top}} \times (n_{\text{query}} - n_{\text{top}})
+\]
+
+To mitigate memory issues, adjust the following parameters (default: 1024):
+- `--max_que`: Maximum query tokens.
+- `--max_top`: Maximum top-ranked tokens.
+- `--max_oth`: Maximum other tokens.
+
+If out-of-memory errors occur, reduce `--max_que` and `--max_oth` first.
+
+---
+
+This README provides a polished, professional guide to installing, evaluating, and training models with Spotlight Attention. For additional details or support, refer to the linked repositories or datasets.
