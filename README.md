@@ -33,10 +33,10 @@ cd spotlight
 pip install -r requirements.txt
 pip install -e .
 
-cd ../lm-corpus-FAB7
+cd ../lm-corpus
 pip install -e .
 
-cd ../lm-profiler-A550
+cd ../lm-profiler
 pip install -e .
 ```
 
