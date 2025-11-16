@@ -24,9 +24,9 @@ Clone the necessary repositories and install dependencies:
 
 ```bash
 # Clone repositories
-git clone https://anonymous.4open.science/r/spotlight       # Training and evaluation
-git clone https://anonymous.4open.science/r/lm-corpus-FAB7     # Training corpus
-git clone https://anonymous.4open.science/r/lm-profiler-A550   # Latency testing tool
+git clone https://wenhaoli-xmu/spotlight     # Training and evaluation
+git clone https://wenhaoli-xmu/lm-corpus     # Training corpus
+git clone https://wenhaoli-xmu/lm-profiler   # Latency testing tool
 
 # Install dependencies
 cd spotlight
