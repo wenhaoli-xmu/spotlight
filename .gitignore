@@ -26,3 +26,5 @@ lsh_kernel
 **/__pycache__
 **/build
 *.so
+attns
+train_results

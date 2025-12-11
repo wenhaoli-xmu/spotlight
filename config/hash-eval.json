@@ -1,0 +1,6 @@
+{
+    "num_hash_layers": 2,
+    "freeze_layers": [0,1],
+    "select_thresh": 0.5,
+    "ignore_missing_weights": true
+}

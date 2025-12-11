@@ -1,20 +1,8 @@
 [
     {
-        "task_type": "perplexity",
-        "task_name": "pg19.test.128k",
-        "num_instance": 100,
-        "truncation": 8192
-    },
-    {
-        "task_type": "perplexity",
+        "task_type": "ppl",
         "task_name": "proof-pile.256k",
-        "num_instance": 79,
-        "truncation": 8192
-    },
-    {
-        "task_type": "perplexity",
-        "task_name": "code-parrot.128k",
-        "num_instance": 100,
-        "truncation": 8192
+        "num_instance": 1,
+        "truncation": 40960
     }
 ]

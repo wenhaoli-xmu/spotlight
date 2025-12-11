@@ -1,19 +1,11 @@
 import math
-from typing import List
 import torch
-from torch.utils.data import DataLoader
-from transformers import AutoTokenizer, AutoModelForCausalLM
-from .modifiers import get_modifier
-from .data import get_corpus
+from transformers import AutoTokenizer
 from .eval import (
-    test_on_task, 
-    test_on_task_for_quest,
-    test_on_task_for_magicpig)
+    test_on_task)
 from functools import partial
 
-from torch.utils.data import DataLoader
 import json
-
 
 
 class Saver:
@@ -42,93 +34,23 @@ class Evaluator:
         else:
             self.callback = None
 
-
-    def evaluate(self):
+    def evaluate(self, return_raw=False):
         for task in self.tasks:
-            result = test_on_task(self.model, self.tokenizer, **task, callback=self.callback)
-            print(json.dumps(result, indent=4))
+            result = test_on_task(
+                self.model, 
+                self.tokenizer, 
+                **task, 
+                callback=self.callback, 
+                return_raw=return_raw)
+
+            if not return_raw:
+                print(json.dumps(result, indent=4))
 
 
     def step(self):
         self.iter += 1
         if self.iter % self.eval == 0:
             self.evaluate()
-
-
-class ENCEvaluator(Evaluator):
-    def evaluate(self):
-        for task in self.tasks:
-            result = test_on_task_for_enc(self.model, self.tokenzier, **task)
-            print(json.dumps(result, indent=4))
-
-
-class RMTEvaluator(Evaluator):
-    def evaluate(self):
-        for task in self.tasks:
-            result = test_on_task_for_rmt(self.model, self.tokenizer, **task)
-            print(json.dumps(result, indent=4))
-
-
-class QuestEvaluator(Evaluator):
-    def evaluate(self):
-        for task in self.tasks:
-            result = test_on_task_for_quest(self.model, self.tokenizer, **task)
-            print(json.dumps(result, indent=4))
-
-
-class MagicpigEvaluator(Evaluator):
-    def evaluate(self):
-        for task in self.tasks:
-            result = test_on_task_for_magicpig(self.model, self.tokenizer, **task)
-            print(json.dumps(result, indent=4))
-
-
-class OptimAnalyzer:
-    def __init__(
-            self, 
-            params: List[torch.Tensor], 
-            only_stats: bool = True
-        ):
-        self.grad_norm = []
-        self.avg_grad_norm = []
-        self.max_grad_norm = []
-
-        self.grad_norm_ratio = []
-        self.avg_grad_norm_ratio = []
-        self.max_grad_norm_ratio = []
-
-        self.params = params
-        self.only_stats = only_stats
-    
-    @torch.no_grad()
-    def step(self):
-        grad_norm = []
-        grad_norm_ratio = []
-        for param in self.params:
-            if param.grad is not None:
-                grad_norm.append(torch.norm(param.grad.data).item())
-            else:
-                grad_norm.append(0)
-            grad_norm_ratio.append(grad_norm[-1] / (torch.norm(param.data).item() + 1e-6))
-        
-        avg_grad_norm = sum(grad_norm) / len(grad_norm)
-        max_grad_norm = max(grad_norm)
-        avg_grad_norm_ratio = sum(grad_norm_ratio) / len(grad_norm_ratio)
-        max_grad_norm_ratio = max(grad_norm_ratio)
-
-        if not self.only_stats:
-            self.grad_norm.append(grad_norm)
-            self.grad_norm_ratio.append(grad_norm_ratio)
-        
-        self.avg_grad_norm.append(avg_grad_norm)
-        self.max_grad_norm.append(max_grad_norm)
-        self.avg_grad_norm_ratio.append(avg_grad_norm_ratio)
-        self.max_grad_norm_ratio.append(max_grad_norm_ratio)
-
-        print(f"gd_norm_avg: {avg_grad_norm}")
-        print(f"gd_norm_max: {max_grad_norm}")
-        print(f"gd_norm_ratio_avg: {avg_grad_norm_ratio}")
-        print(f"gd_norm_ratio_max: {max_grad_norm_ratio}", flush=True)
 
 
 def _data_generator(dataset_infos, partitions, train_iters):
@@ -204,50 +126,6 @@ def get_tokenizer(
             use_fast=True)
 
     return tokenizer
-
-
-def get_model_and_tokenizer(
-        model_name, 
-        model_dtype, 
-        model_method, 
-        model_structure, 
-        save_ckp, 
-        load_ckp, 
-        config, 
-        device_map, 
-        **kwargs
-    ):
-
-    from accelerate import dispatch_model
-    token = "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"
-
-    if "tokenizer_name" in kwargs:
-        tokenizer = AutoTokenizer.from_pretrained(kwargs.get('tokenizer_name'))
-    else:
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
-
-    student_dtype = get_torch_dtype(model_dtype)
-    student = AutoModelForCausalLM.from_pretrained(
-        model_name, 
-        torch_dtype=student_dtype, 
-        token=token, 
-        device_map="auto" if device_map is None else None,
-        trust_remote_code=True)
-    _, student_modifier = get_modifier(model_method, model_structure)
-
-    if student_modifier is not None:
-        student = student_modifier(
-            student,
-            save_ckp=save_ckp,
-            load_ckp=load_ckp,
-            config=config)
-
-    student.eval()
-
-    if device_map is not None:
-        student.model = dispatch_model(student.model, device_map=device_map)
-
-    return tokenizer, student
 
 
 def get_optimizer_and_lr_adjuster(model, max_lr, train_iters, warmup, weight_decay, beta1, beta2, **kwargs):

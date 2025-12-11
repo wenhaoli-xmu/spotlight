@@ -1,0 +1,4 @@
+{
+    "num_hash_layers": 2,
+    "hash_dropout": 0.0
+}

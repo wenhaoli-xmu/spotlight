@@ -1,41 +1,58 @@
 import torch
-from spotlight.misc import get_model_and_tokenizer, get_env_conf, adjust_lr
-import gc, time
+import gc
 import os
 
-import deepspeed
-from corpus import LazyRandomSampleCorpus, get_processor
-
-from torch.utils.data import DataLoader, ConcatDataset, DistributedSampler
+from torch.utils.data import DataLoader, DistributedSampler
 import torch.distributed as dist
 
 from functools import partial
 import tqdm
-import json
 import argparse
 
 from concurrent.futures import ThreadPoolExecutor
 import concurrent
 
+from spotlight import get_monkey_patch
+from spotlight.misc import adjust_lr
+
+from transformers import (
+    AutoTokenizer,
+    AutoModelForCausalLM
+)
+import torch.distributed as dist
+import json
+
+
+class TrainingData(torch.utils.data.Dataset):
+    def __init__(self, args):
+        self.data = []
+        for data in args.train_data:
+            with open(data, 'r') as f:
+                for line in f:
+                    self.data.append(json.loads(line))
+    
+    def __getitem__(self, idx):
+        return self.data[idx]
+
+    def __len__(self):
+        return len(self.data)
+
 
 def compute_attn_supervise_loss(
         draft_attn, 
         true_attn, 
-        query_index, 
+        random_query_index, 
         max_top, 
         max_oth, 
-        maskout, 
-        beta: float = 1.0, 
-        margin: float = 0.0):
-
-    loss = torch.tensor(0, dtype=torch.float32)
-    criterion = torch.nn.BCEWithLogitsLoss()
+        maskout):
 
     # prepare & apply mask
     num_kv = true_attn.shape[-1]
     mask = torch.triu(torch.ones((num_kv, num_kv), dtype=torch.bool, device=true_attn.device), diagonal=1)[None, None, :, :]
-    if query_index is not None:
-        mask = mask[..., query_index, :]
+    
+    if random_query_index is not None:
+        mask = mask[..., random_query_index, :]
+    
     true_attn = torch.masked_fill(true_attn, mask, value=torch.finfo(true_attn.dtype).min)
 
     indices = torch.argsort(true_attn, dim=-1, descending=True)
@@ -54,37 +71,28 @@ def compute_attn_supervise_loss(
     top_mask = torch.gather(mask.expand_as(true_attn), dim=-1, index=top_indices)[..., :, None]
     oth_mask = torch.gather(mask.expand_as(true_attn), dim=-1, index=oth_indices)[..., None, :]
 
-    top_draft_attn = torch.gather(draft_attn, dim=-1, index=top_indices)[..., :, None]
-    oth_draft_attn = torch.gather(draft_attn, dim=-1, index=oth_indices)[..., None, :]
+    top_attn = torch.gather(draft_attn, dim=-1, index=top_indices)[..., :, None]
+    oth_attn = torch.gather(draft_attn, dim=-1, index=oth_indices)[..., None, :]
 
-    residual = top_draft_attn - oth_draft_attn
-    residual_mask = (top_mask | oth_mask).expand_as(residual).flatten(-3)
+    zeros = top_attn.new_zeros(top_attn.shape[:-1] + oth_attn.shape[-1:]).flatten(-2)
+    top_attn = top_attn.expand(-1, -1, -1, -1, top_attn.shape[-2])
+    oth_attn = oth_attn.expand(-1, -1, -1, oth_attn.shape[-1], -1)
 
-    logits = residual.flatten(-3)[~residual_mask.bool()]
-    labels = torch.ones_like(logits)
-    loss += criterion(logits * beta - margin, labels).cpu()
+    top_attn = top_attn.flatten(-2)
+    oth_attn = oth_attn.flatten(-2)
+    union_mask = (top_mask | oth_mask).flatten(-2)
 
-    # 算一下排序误差
-    diff = torch.count_nonzero(logits < 0) / logits.numel()
+    zeros = zeros[~union_mask.bool()]
+    top_attn = top_attn[~union_mask.bool()]
+    oth_attn = oth_attn[~union_mask.bool()]
 
-    return diff, loss
+    top_acc = (top_attn > 0).count_nonzero().item() / top_attn.numel()
+    oth_acc = (oth_attn < 0).count_nonzero().item() / oth_attn.numel()
 
+    logits = torch.stack([zeros, -top_attn, oth_attn], dim=0)
+    loss = torch.logsumexp(logits, dim=0).mean(-1).sum()
 
-def build_dataset(env_conf, tokenizer):
-    sum_partition = 0
-
-    num_iters = env_conf['train']['train_iters']
-    corpus = []
-    for info in env_conf['train']['corpus']:
-        sum_partition += info['partition']
-        num_instance = int(info['partition'] * num_iters)
-
-        proc = get_processor(info['conf'], tokenizer)
-        corp = LazyRandomSampleCorpus(info['data'], proc, max_instance=num_instance, use_cache=False)
-        corpus.append(corp)
-
-    assert sum_partition == 1
-    return ConcatDataset(corpus)
+    return top_acc, oth_acc, loss
 
 
 def get_optimizer_and_lr_adjuster(max_lr, train_iters, warmup, weight_decay, beta1, beta2, params, **kwargs):
@@ -93,14 +101,11 @@ def get_optimizer_and_lr_adjuster(max_lr, train_iters, warmup, weight_decay, bet
     return optim, lr_adjuster
 
 
-def clear_cache(local_rank, max_trial=10):
-    torch.cuda.set_device(local_rank)
-    while max_trial > 0:
-        torch.cuda.empty_cache()
-        torch.cuda.ipc_collect()
-        gc.collect()
-        time.sleep(0.1)
-        max_trial -= 1
+def clear_cache():
+    torch.cuda.synchronize()
+    torch.cuda.empty_cache()
+    torch.cuda.ipc_collect()
+    gc.collect()
 
 
 def collate_fn(batch, pad_token_id, max_tokens):
@@ -119,7 +124,7 @@ def collate_fn(batch, pad_token_id, max_tokens):
     input_ids = torch.tensor(input_ids, dtype=torch.int64)
     input_len = torch.tensor(input_len, dtype=torch.int64)
 
-    return {"input_ids": input_ids, "input_len": input_len}
+    return {"input_ids": input_ids.cuda(), "input_len": input_len}
 
 
 def reset_buffer_dir(buffer, disable):
@@ -131,23 +136,29 @@ def reset_buffer_dir(buffer, disable):
 
 
 def train(args):
-    deepspeed.init_distributed()
+    local_rank = int(os.environ['LOCAL_RANK'])
+    world_size = int(os.environ['WORLD_SIZE'])
+    dist.init_process_group('nccl', rank=local_rank, world_size=world_size)
+    torch.cuda.set_device(local_rank)
 
-    env_conf = get_env_conf(args.env_conf)
     num_gpus = dist.get_world_size()
     os.makedirs(args.buffer, exist_ok=True)
     reset_buffer_dir(args.buffer, args.use_prepared_data)
 
-    assert env_conf['train']['train_iters'] % args.instance_per_cycle == 0
+    assert args.train_iters % args.instance_per_cycle == 0
     assert args.num_layers % num_gpus == 0
     assert args.instance_per_cycle % args.prepare_batch_size_per_gpu == 0
     assert (args.instance_per_cycle // args.prepare_batch_size_per_gpu) % num_gpus == 0
-    assert env_conf['model']['model_dtype'] in ('bf16', 'fp16')
 
-    num_inn_cycle = env_conf['train']['train_iters'] // args.instance_per_cycle
+    num_inn_cycle = args.train_iters // args.instance_per_cycle
     num_out_cycle = args.num_layers // num_gpus
     gen_range = [args.out_cycle] if args.out_cycle is not None else range(num_out_cycle)
     executor = ThreadPoolExecutor(max_workers=args.max_prepare_workers)
+    monkey_patch = get_monkey_patch(args.method)
+
+    tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
+    pad_token_id = tokenizer.pad_token_id
+    del tokenizer
 
     # start training
     for out_cycle_idx in gen_range:
@@ -158,41 +169,65 @@ def train(args):
         pth_template = "train_results/{}/{}.pth"
         pth_exist = lambda layer_idx: os.path.exists(
             pth_template.format(
-                args.env_conf.split('/')[-1], 
+                args.model_name_or_path.split('/')[-1].lower(), 
                 out_cycle_idx * num_gpus + layer_idx))
 
         if all([pth_exist(layer_idx) for layer_idx in range(num_gpus)]):
             continue
 
         # load model and tokenizer
-        layer_idx = out_cycle_idx * num_gpus + args.local_rank
+        layer_idx = out_cycle_idx * num_gpus + local_rank
         layer_indices = [out_cycle_idx * num_gpus + i for i in range(num_gpus)]
-        env_conf["model"]["device_map"] = {"": args.local_rank}
-        tokenizer, model = get_model_and_tokenizer(**env_conf['model'])
-            
 
+        # create directories
+        save_path = args.model_name_or_path.split('/')[-1].lower()
+        os.makedirs(f"train_results/{save_path}", exist_ok=True)
+
+        # skip
+        local_cond = torch.tensor(os.path.exists(f"train_results/{save_path}/history-{layer_idx}.pth"), dtype=bool, device='cuda')
+        global_cond = [torch.zeros_like(local_cond) for _ in range(dist.get_world_size())]
+        dist.all_gather(global_cond, local_cond)
+        if global_cond.all():
+            print(f"Skipping layer-{layer_idx} because train results already exist.")
+            continue
+
+        model = AutoModelForCausalLM.from_pretrained(
+            args.model_name_or_path,
+            device_map='cuda',
+            torch_dtype=torch.bfloat16)
+        model = monkey_patch(model)
+            
         # delete other layers except the current training one
-        model.train()
-        model.freeze_model()
-        model.unfreeze_model()
         layer = model.dump_as_attn_modules()[layer_idx]
-        params = model.layer_ft_params(layer_idx)
+        layer.train()
+        params = list(layer.query_hash.parameters()) + list(layer.key_hash.parameters())
+
+        # get position embeddings
+        pos_ids = torch.arange(model.config.max_position_embeddings, dtype=torch.long, device='cuda')
+        pos_ids = pos_ids.unsqueeze(0)
+        
+        with torch.no_grad():
+            fake_tensor = torch.empty(1, dtype=torch.bfloat16, device='cuda')
+            pos_emb = model.model.rotary_emb(fake_tensor, pos_ids)
+
         del model
-        clear_cache(args.local_rank)
-        print(f"RANK-{args.local_rank} training started !")
+
+        # clear cache after model deleted
+        clear_cache()
+        print(f"RANK-{local_rank} training started !")
         dist.barrier()
 
         # construct dataloader
         if not args.use_prepared_data:
-            corpus = build_dataset(env_conf, tokenizer)
+            corpus = TrainingData(args)
             partial_collate_fn = partial(
                 collate_fn, 
-                pad_token_id=tokenizer.pad_token_id, 
+                pad_token_id=pad_token_id, 
                 max_tokens=args.max_tokens)
             sampler = DistributedSampler(
                 corpus, 
                 num_replicas=num_gpus, 
-                rank=args.local_rank, 
+                rank=local_rank, 
                 shuffle=True)
             loader = DataLoader(
                 corpus, 
@@ -203,32 +238,36 @@ def train(args):
             sampler.set_epoch(0)
 
         # construct optimizer and learning rate adjuster
-        optim, lr_adjust = get_optimizer_and_lr_adjuster(**env_conf['train'], params=params)
+        optim, lr_adjust = get_optimizer_and_lr_adjuster(
+            args.max_lr,
+            args.train_iters,
+            args.warmup,
+            args.weight_decay,
+            args.beta1,
+            args.beta2,
+            params=params)
         
-        # gradient related parameters
-        accum_grad = env_conf["train"]["accum_grad"]
-        clip_grad = env_conf["train"]["clip_grad"]
         step = 0
 
         history_loss = []
-        history_diff = []
-
-        loss_record = []
-        diff_record = []
+        history_tacc = []
+        history_oacc = []
 
         compute_loss = partial(
             compute_attn_supervise_loss,
             max_top=args.max_top, 
             max_oth=args.max_oth,
-            maskout=args.maskout,
-            beta=args.beta,
-            margin=args.margin)
+            maskout=args.maskout)
 
         for _ in range(num_inn_cycle):
 
             if not args.use_prepared_data:
-                # 加载数据准备模型
-                _, model = get_model_and_tokenizer(**env_conf['model'])
+
+                model = AutoModelForCausalLM.from_pretrained(
+                    args.model_name_or_path,
+                    torch_dtype=torch.bfloat16,
+                    device_map='cuda')
+                model = monkey_patch(model)
                 model.eval()
                 dist.barrier()
 
@@ -239,29 +278,29 @@ def train(args):
 
                     inputs = next(data_iter)
                     length = inputs.get("input_len")
-                    inputs.update({"return_inputs": True})
+                    inputs.update({"return_hidden_states": True})
 
                     # forward pass
                     with torch.no_grad():
                         outputs = model(**inputs)
-                    inputs = [outputs.hidden_states[i].cuda(args.local_rank) for i in layer_indices]
+                    inputs = [outputs.hidden_states[i].cuda(local_rank) for i in layer_indices]
                     inputs = torch.stack(inputs, dim=0)
 
                     # inter-process communication-1, exchange the hidden states
                     inputs_gather = [torch.empty_like(inputs) for _ in range(num_gpus)]
                     dist.all_gather(inputs_gather, inputs)
-                    inputs_gather = [inputs[args.local_rank] for inputs in inputs_gather]
+                    inputs_gather = [inputs[local_rank] for inputs in inputs_gather]
                     inputs_gather = torch.cat(inputs_gather, dim=0).cpu()
 
                     # inter-process communication-2, exchange the input sequence length
-                    length = torch.tensor(length, dtype=torch.int64, device=args.local_rank)
+                    length = torch.tensor(length, dtype=torch.int64, device=local_rank)
                     length_gather = [torch.empty_like(length) for _ in range(num_gpus)]
                     dist.all_gather(length_gather, length)
                     length_gather = torch.cat(length_gather)
 
                     # save data
                     buffer = (inputs_gather, length_gather)
-                    buffer_file = f"{args.buffer}/inputs_buffer_rank_{args.local_rank}_{idx:05d}.pt"
+                    buffer_file = f"{args.buffer}/inputs_buffer_rank_{local_rank}_{idx:05d}.pt"
 
                     future = executor.submit(torch.save, buffer, buffer_file)
                     futures.append(future)
@@ -271,17 +310,17 @@ def train(args):
 
                 # wait for all process to finish data preprocessing
                 del model, inputs, outputs
-                clear_cache(args.local_rank)
+                clear_cache()
                 dist.barrier()
 
                 if args.prepare_data:
-                    print(f"RANK-{args.local_rank} data preparation finished.")
+                    print(f"RANK-{local_rank} data preparation finished.")
                     return
 
             # sort the buffer files according to their IDs
             buffer_files = os.listdir(args.buffer)
             buffer_files = sorted(filter(
-                lambda x: x.startswith(f"inputs_buffer_rank_{args.local_rank}"), 
+                lambda x: x.startswith(f"inputs_buffer_rank_{local_rank}"), 
                 buffer_files))
 
             # read the first buffer file
@@ -299,22 +338,22 @@ def train(args):
                     lr_adjust(step=step)
 
                     # forward & backward
+                    random_query_index = None
                     if args.max_que is not None:
                         random_query_index = torch.randperm(
                             hidden_states.shape[-2], 
-                            dtype=torch.int64, 
-                            device=hidden_states.device)[:args.max_que]
-                    else:
-                        random_query_index = None
+                            dtype=torch.int64)[:args.max_que].cuda()
 
-                    _, _, draft_attn, true_attn = layer(
-                        hidden_states=hidden_states.to(args.local_rank), 
-                        early_exit=True,
-                        query_index=random_query_index)
-
+                    _, (draft_attn, true_attn) = layer(
+                        hidden_states=hidden_states.to(local_rank), 
+                        position_embeddings=pos_emb,
+                        random_query_index=random_query_index)
 
                     if args.backward_per_head:
-                        grad = torch.zeros_like(draft_attn)
+                        grad = torch.zeros_like(true_attn)
+                        tmp_loss = []
+                        tmp_tacc = []
+                        tmp_oacc = []
 
                         # per head calculation to save GPU memory
                         for head_idx, (draft_attn_head, true_attn_head) in enumerate(zip(
@@ -325,69 +364,72 @@ def train(args):
                             true_attn_head = true_attn_head.detach()
                             draft_attn_head.requires_grad_(True)
 
-                            diff, loss = compute_loss(draft_attn_head, true_attn_head, random_query_index)
+                            top_acc, oth_acc, loss = compute_loss(draft_attn_head, true_attn_head, random_query_index)
                             loss.backward()
 
                             grad[:, head_idx, ...] = draft_attn_head.grad.data[:]
 
-                            history_loss.append(loss.item())
-                            history_diff.append(diff.item())
+                            tmp_loss.append(loss.item())
+                            tmp_tacc.append(top_acc)
+                            tmp_oacc.append(oth_acc)
 
-                        grad /= accum_grad
+                        history_loss.append(sum(tmp_loss))
+                        history_tacc.append(sum(tmp_tacc) / len(tmp_tacc))
+                        history_oacc.append(sum(tmp_oacc) / len(tmp_oacc))
+
+                        grad /= args.gradient_accumulation
                         draft_attn.backward(gradient=grad)
+                        del grad, true_attn_head, draft_attn_head
+
                     else:
                         # direct calculation (NOTE: will cause mask selection error in training 8192 length models)
-                        diff, loss = compute_loss(draft_attn, true_attn, random_query_index)
+                        top_acc, oth_acc, loss = compute_loss(draft_attn, true_attn, random_query_index)
+                        
                         history_loss.append(loss.item())
-                        history_diff.append(diff.item())
-                        loss_record.append(loss.item())
-                        diff_record.append(diff.item())
-                        loss /= accum_grad
+                        history_tacc.append(top_acc)
+                        history_oacc.append(oth_acc)
+                        
+                        loss /= args.gradient_accumulation
                         loss.backward()
 
+                    # output key informantion
+                    print(f"layer: {layer_idx:>5d} | "
+                        f"step: {step:>5d} | "
+                        f"loss: {history_loss[-1]:>05.3f} | "
+                        f"tacc: {history_tacc[-1]:>05.3f} | "
+                        f"oacc: {history_oacc[-1]:>05.3f}", flush=True)
+
                     # update the parameters
-                    if (step + 1) % accum_grad == 0:
-                        if clip_grad is not None:
-                            torch.nn.utils.clip_grad_norm_(params, max_norm=clip_grad)
+                    if (step + 1) % args.gradient_accumulation == 0:
+                        if args.gradient_clipping is not None:
+                            torch.nn.utils.clip_grad_norm_(params, max_norm=args.gradient_clipping)
                         optim.step()
                         optim.zero_grad()
 
                     step += 1
 
+                    del draft_attn, true_attn, hidden_states, loss
+                    clear_cache()
+                    dist.barrier()
+
                 # get the already prefetched data
                 inputs_gather, length_gather = future.result()
 
-            # output key informantion
-            print(f"layer: {layer_idx}\t\
-                    step: {step}\t\
-                    loss: {sum(history_loss) / len(history_loss):<.3f}\t\
-                    diff: {sum(history_diff) / len(history_diff):<.3f}\t\
-                    abs_max: {max([p.abs().max().item() for p in params])}\t\
-                    abs_mean: {sum([p.abs().mean().item() for p in params]) / len(params)}", flush=True)
-
-            history_loss = []
-            history_diff = []
-            
-            clear_cache(args.local_rank)
-            dist.barrier()
             reset_buffer_dir(args.buffer, args.use_prepared_data)
 
-        # create directories
-        save_path = args.env_conf.split('/')[-1]
-        os.makedirs(f"train_results/{save_path}", exist_ok=True)
-        os.makedirs(f"train_curves/{save_path}", exist_ok=True)
-
         # save layerwise weight files
-        info = {"loss": loss_record, "diff": diff_record}
-        torch.save(info, f"train_curves/{save_path}/{layer_idx}.log")
-        torch.save(list(params), f"train_results/{save_path}/{layer_idx}.pth")
-        print(f"RANK-{args.local_rank} training done !")
+        info = {"loss": history_loss, "tacc": history_tacc, "oacc": history_oacc}
+        torch.save(info, f"train_results/{save_path}/history-{layer_idx}.pth")
+        torch.save(list(params), f"train_results/{save_path}/weight-{layer_idx}.pth")
+        print(f"RANK-{local_rank} training done !")
         dist.barrier()
 
         # clear buffer
         del layer, optim
-        clear_cache(args.local_rank)
+        clear_cache()
         dist.barrier()
+
+    dist.destroy_process_group()
 
 
 if __name__ == '__main__':
@@ -398,12 +440,10 @@ if __name__ == '__main__':
     parser.add_argument("--max_tokens", type=int, default=4096)
     parser.add_argument("--hidden_size", type=int, default=4096)
     parser.add_argument("--maskout", type=float, default=0.98)
-    parser.add_argument("--beta", type=float, default=1.0)
-    parser.add_argument("--margin", type=float, default=-10.0)
+    parser.add_argument("--model-name-or-path", type=str, default=None)
+    parser.add_argument("--method", type=str, default=None)
 
     # model non-related parameters
-    parser.add_argument("--env_conf", type=str, default=None)
-    parser.add_argument("--local_rank", type=int, default=-1)
     parser.add_argument("--prepare_data", action='store_true')
     parser.add_argument("--use_prepared_data", action='store_true')
     parser.add_argument("--buffer", type=str, default='train_buffer')
@@ -417,7 +457,18 @@ if __name__ == '__main__':
     parser.add_argument("--max_oth", type=int, default=None)
     parser.add_argument("--max_que", type=int, default=None)
     parser.add_argument("--backward_per_head", action='store_true')
-    
-    parser = deepspeed.add_config_arguments(parser)
+
+    # training data
+    parser.add_argument("--train-data", type=str, action='append')
+    parser.add_argument("--train-iters", type=int)
+
+    # adamw configuration
+    parser.add_argument("--max-lr", type=float, default=1e-3)
+    parser.add_argument("--warmup", type=float, default=0.)
+    parser.add_argument("--weight-decay", type=float, default=0.1)
+    parser.add_argument("--beta1", type=float, default=0.9)
+    parser.add_argument("--beta2", type=float, default=0.98)
+    parser.add_argument("--gradient-accumulation", type=int, default=1)
+    parser.add_argument("--gradient-clipping", type=float, default=None)
     args = parser.parse_args()
     train(args)
