@@ -46,6 +46,9 @@ class BasicIOWrapper(ABC):
         elif self.task_type == 'bottom_ppl':
             text = drop_tuple(data['text'])
             return self.wrap_bottom_ppl_task(text, self.truncation)
+        elif self.task_type == 'return_raw':
+            text = drop_tuple(data['text'])
+            return self.wrap_return_raw_task(text, self.truncation)
         
         else: raise NotImplementedError(self.task_type)
         
@@ -67,6 +70,19 @@ class TestIOWrapper(BasicIOWrapper):
         return ret
 
 
+    def wrap_return_raw_task(self, text: str, truncation: int):
+        text = self.tokenizer(text, truncation=False, return_tensors='pt')
+        input_ids = text.input_ids[:,:truncation]
+
+        def return_raw(outputs):
+            return outputs
+
+        ret = WrapperOutput(
+            inputs={"input_ids": input_ids},
+            compute_loss=return_raw)
+        return ret
+
+
     def wrap_top_ppl_task(self, text: str, truncation: int):
         text = self.tokenizer(text, truncation=False, return_tensors='pt')
         input_ids = text.input_ids[:,:truncation]
@@ -85,6 +101,7 @@ class TestIOWrapper(BasicIOWrapper):
             inputs={"input_ids": input_ids},
             compute_loss=partial(compute_top_ppl, input_ids=input_ids))
         return ret
+
 
     def wrap_bottom_ppl_task(self, text: str, truncation: int):
         text = self.tokenizer(text, truncation=False, return_tensors='pt')

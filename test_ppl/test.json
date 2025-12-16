@@ -1,6 +1,6 @@
 [
     {
-        "task_type": "ppl",
+        "task_type": "return_raw",
         "task_name": "proof-pile.256k",
         "num_instance": 1,
         "truncation": 40960

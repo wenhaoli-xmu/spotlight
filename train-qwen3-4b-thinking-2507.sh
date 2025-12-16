@@ -12,8 +12,8 @@ torchrun \
     --max_tokens 262144 \
     --model-name-or-path /mnt/petrelfs/share_data/liwenhao/Qwen3-4B-Thinking-2507 \
     --method hash-train \
-    --instance_per_cycle 8 \
-    --max_prepare_workers 8 \
+    --instance_per_cycle 32 \
+    --max_prepare_workers 1 \
     --prepare_batch_size_per_gpu 1 \
     --max_top 256 \
     --max_oth 256 \
@@ -29,6 +29,5 @@ torchrun \
     --train-iters 1024 \
     --gradient-clipping 1.0 \
     --gradient-accumulation 1 \
-    --train-data "data/github-256k-00000.json"
-
-# python train_results/convert.py --env_conf $train_script --num_layers 48
+    --train-data "data/github-256k-00000.json" \
+    --enable_fsdp

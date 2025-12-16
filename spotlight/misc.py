@@ -40,8 +40,7 @@ class Evaluator:
                 self.model, 
                 self.tokenizer, 
                 **task, 
-                callback=self.callback, 
-                return_raw=return_raw)
+                callback=self.callback)
 
             if not return_raw:
                 print(json.dumps(result, indent=4))

@@ -10,9 +10,9 @@ torchrun \
     train.py \
     --num_layers 36 \
     --max_tokens 40960 \
-    --model-name-or-path /mnt/petrelfs/share_data/liwenhao/Qwen3-4B \
+    --model-name-or-path /mnt/petrelfs/share_data/liwenhao/Qwen3-8B \
     --method hash-train \
-    --instance_per_cycle 64 \
+    --instance_per_cycle 32 \
     --max_prepare_workers 8 \
     --prepare_batch_size_per_gpu 1 \
     --max_top 256 \
@@ -25,7 +25,7 @@ torchrun \
     --beta1 0.9 \
     --beta2 0.999 \
     --maskout 0.975 \
-    --buffer train_buffer_qwen3_4b \
+    --buffer train_buffer_qwen3_8b \
     --train-iters 1024 \
     --gradient-clipping 1.0 \
     --gradient-accumulation 1 \

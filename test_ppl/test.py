@@ -2,6 +2,7 @@ from spotlight import get_monkey_patch
 from spotlight.misc import Evaluator, get_env_conf
 import argparse
 import torch
+import os
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -10,7 +11,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--model-name-or-path", type=str, default=None)
     parser.add_argument("--method", type=str, default=None)
-    parser.add_argument("--dist-ppl", action='store_true')
     args = parser.parse_args()
 
     test_conf = get_env_conf("test_ppl/test.json")
@@ -29,7 +29,11 @@ if __name__ == '__main__':
     evaluator_class = Evaluator
     evaluator = evaluator_class(model, tokenizer, eval=None, tasks=test_conf)
 
-    result = evaluator.evaluate(return_raw=args.dist_ppl)
+    result = evaluator.evaluate(return_raw=True)
 
-    if args.dist_ppl:
-        raise NotImplementedError
+    if args.save_results:
+        model_name = os.path.basename(os.path.normpath(args.model_name_or_path)).lower()
+        torch.save({
+            "config": test_conf,
+            "result": result}, 
+            f"test_ppl/{model_name}.pth")

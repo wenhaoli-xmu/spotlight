@@ -22,6 +22,8 @@ from transformers import (
 import torch.distributed as dist
 import json
 
+from torch.distributed._composable.fsdp import fully_shard
+
 
 class TrainingData(torch.utils.data.Dataset):
     def __init__(self, args):
@@ -46,53 +48,58 @@ def compute_attn_supervise_loss(
         max_oth, 
         maskout):
 
-    # prepare & apply mask
-    num_kv = true_attn.shape[-1]
-    mask = torch.triu(torch.ones((num_kv, num_kv), dtype=torch.bool, device=true_attn.device), diagonal=1)[None, None, :, :]
-    
+    B, H, Q, K = true_attn.shape
+
     if random_query_index is not None:
-        mask = mask[..., random_query_index, :]
+        key_indices = torch.arange(K, device=random_query_index.device)
+        causal_mask = (random_query_index[:, None] < key_indices[None, :])[None, None, :, :].expand(B, H, -1, -1)
+    else:
+        causal_mask = torch.triu(torch.ones((K, K), dtype=torch.bool, device=true_attn.device), diagonal=1)
+        causal_mask = causal_mask[None, None, :, :].expand(B, H, Q, K)
+
+    true_attn_masked = torch.masked_fill(true_attn, causal_mask, torch.finfo(true_attn.dtype).min)
+    k_cnt = int(K * (1 - maskout))
     
-    true_attn = torch.masked_fill(true_attn, mask, value=torch.finfo(true_attn.dtype).min)
+    top_values, _ = torch.topk(true_attn_masked, k_cnt, dim=-1)
+    threshold = top_values[..., -1, None] # [B, H, Q, 1]
+    
+    is_top_mask = (true_attn_masked >= threshold) & (~causal_mask)
+    is_oth_mask = (true_attn_masked < threshold) & (~causal_mask)
 
-    indices = torch.argsort(true_attn, dim=-1, descending=True)
+    random_scores = torch.rand_like(true_attn, dtype=torch.float32)
 
-    top_cnt = int(indices.shape[-1] * (1 - maskout))
-    top_indices = indices[..., :top_cnt]
-    oth_indices = indices[..., top_cnt:]
+    def parallel_sample(mask, n_sample):
+        if n_sample is None:
+            return mask, None
+        
+        masked_random = random_scores.masked_fill(~mask, -float('inf'))
+        _, indices = torch.topk(masked_random, n_sample, dim=-1)
+        
+        return None, indices
 
-    if max_top is not None:
-        top_rnd_indices = torch.randperm(top_cnt, dtype=torch.int64, device=indices.device)[:max_top]
-        top_indices = top_indices[..., top_rnd_indices]
-    if max_oth is not None:
-        oth_rnd_indices = torch.randperm(indices.shape[-1] - top_cnt, dtype=torch.int64, device=indices.device)[:max_oth]
-        oth_indices = oth_indices[..., oth_rnd_indices]
+    _, top_rnd_indices = parallel_sample(is_top_mask, max_top)
+    _, oth_rnd_indices = parallel_sample(is_oth_mask, max_oth)
 
-    top_mask = torch.gather(mask.expand_as(true_attn), dim=-1, index=top_indices)[..., :, None]
-    oth_mask = torch.gather(mask.expand_as(true_attn), dim=-1, index=oth_indices)[..., None, :]
+    draft_val_top = torch.gather(draft_attn, -1, top_rnd_indices)
+    draft_val_oth = torch.gather(draft_attn, -1, oth_rnd_indices)
 
-    top_attn = torch.gather(draft_attn, dim=-1, index=top_indices)[..., :, None]
-    oth_attn = torch.gather(draft_attn, dim=-1, index=oth_indices)[..., None, :]
+    valid_mask_top = torch.gather(is_top_mask, -1, top_rnd_indices)
+    valid_mask_oth = torch.gather(is_oth_mask, -1, oth_rnd_indices)
 
-    zeros = top_attn.new_zeros(top_attn.shape[:-1] + oth_attn.shape[-1:]).flatten(-2)
-    top_attn = top_attn.expand(-1, -1, -1, -1, top_attn.shape[-2])
-    oth_attn = oth_attn.expand(-1, -1, -1, oth_attn.shape[-1], -1)
+    v_top = draft_val_top.unsqueeze(-1) 
+    v_oth = draft_val_oth.unsqueeze(-2)
+    
+    mask_pair = valid_mask_top.unsqueeze(-1) & valid_mask_oth.unsqueeze(-2)
+    zeros = torch.zeros_like(v_top + v_oth)
+    logits = torch.stack([zeros, -v_top.expand_as(zeros), v_oth.expand_as(zeros)], dim=0)
+    
+    loss_matrix = torch.logsumexp(logits, dim=0)
+    loss = (loss_matrix * mask_pair).sum() / (mask_pair.count_nonzero() + 1e-6)
 
-    top_attn = top_attn.flatten(-2)
-    oth_attn = oth_attn.flatten(-2)
-    union_mask = (top_mask | oth_mask).flatten(-2)
+    top_acc = ((draft_val_top > 0) & valid_mask_top).float().sum() / (valid_mask_top.float().sum() + 1e-6)
+    oth_acc = ((draft_val_oth < 0) & valid_mask_oth).float().sum() / (valid_mask_oth.float().sum() + 1e-6)
 
-    zeros = zeros[~union_mask.bool()]
-    top_attn = top_attn[~union_mask.bool()]
-    oth_attn = oth_attn[~union_mask.bool()]
-
-    top_acc = (top_attn > 0).count_nonzero().item() / top_attn.numel()
-    oth_acc = (oth_attn < 0).count_nonzero().item() / oth_attn.numel()
-
-    logits = torch.stack([zeros, -top_attn, oth_attn], dim=0)
-    loss = torch.logsumexp(logits, dim=0).mean(-1).sum()
-
-    return top_acc, oth_acc, loss
+    return top_acc.item(), oth_acc.item(), loss
 
 
 def get_optimizer_and_lr_adjuster(max_lr, train_iters, warmup, weight_decay, beta1, beta2, params, **kwargs):
@@ -133,6 +140,23 @@ def reset_buffer_dir(buffer, disable):
             for file in os.listdir(buffer):
                 os.remove(os.path.join(buffer, file))
         dist.barrier()
+
+
+def build_fsdp_model(args, monkey_patch):
+    model = AutoModelForCausalLM.from_pretrained(
+        args.model_name_or_path,
+        torch_dtype=torch.bfloat16,
+        device_map='cuda')
+    model = monkey_patch(model)
+    model.eval()
+
+    # enable fsdp
+    if args.enable_fsdp:
+        for _layer in model.model.layers:
+            fully_shard(_layer)
+        fully_shard(model)
+
+    return model
 
 
 def train(args):
@@ -187,7 +211,7 @@ def train(args):
         local_cond = torch.tensor(os.path.exists(f"train_results/{save_path}/history-{layer_idx}.pth"), dtype=bool, device='cuda')
         global_cond = [torch.zeros_like(local_cond) for _ in range(dist.get_world_size())]
         dist.all_gather(global_cond, local_cond)
-        if global_cond.all():
+        if all(global_cond):
             print(f"Skipping layer-{layer_idx} because train results already exist.")
             continue
 
@@ -202,13 +226,19 @@ def train(args):
         layer.train()
         params = list(layer.query_hash.parameters()) + list(layer.key_hash.parameters())
 
-        # get position embeddings
+        for param in layer.parameters():
+            param.requires_grad_(False)
+        for param in params:
+            param.requires_grad_(True)
+
+        # get position embeddingss
         pos_ids = torch.arange(model.config.max_position_embeddings, dtype=torch.long, device='cuda')
         pos_ids = pos_ids.unsqueeze(0)
         
         with torch.no_grad():
             fake_tensor = torch.empty(1, dtype=torch.bfloat16, device='cuda')
             pos_emb = model.model.rotary_emb(fake_tensor, pos_ids)
+            del pos_ids, fake_tensor
 
         del model
 
@@ -253,8 +283,9 @@ def train(args):
         history_tacc = []
         history_oacc = []
 
+        compute_attn_supervise_loss_compiled = torch.compile(compute_attn_supervise_loss)
         compute_loss = partial(
-            compute_attn_supervise_loss,
+            compute_attn_supervise_loss_compiled,
             max_top=args.max_top, 
             max_oth=args.max_oth,
             maskout=args.maskout)
@@ -263,19 +294,13 @@ def train(args):
 
             if not args.use_prepared_data:
 
-                model = AutoModelForCausalLM.from_pretrained(
-                    args.model_name_or_path,
-                    torch_dtype=torch.bfloat16,
-                    device_map='cuda')
-                model = monkey_patch(model)
-                model.eval()
-                dist.barrier()
+                if 'model' not in locals():
+                    model = build_fsdp_model(args, monkey_patch)
 
                 increment = num_gpus * args.prepare_batch_size_per_gpu
                 futures = []
 
                 for idx in tqdm.tqdm(range(0, args.instance_per_cycle, increment)):
-
                     inputs = next(data_iter)
                     length = inputs.get("input_len")
                     inputs.update({"return_hidden_states": True})
@@ -287,29 +312,27 @@ def train(args):
                     inputs = torch.stack(inputs, dim=0)
 
                     # inter-process communication-1, exchange the hidden states
-                    inputs_gather = [torch.empty_like(inputs) for _ in range(num_gpus)]
-                    dist.all_gather(inputs_gather, inputs)
-                    inputs_gather = [inputs[local_rank] for inputs in inputs_gather]
-                    inputs_gather = torch.cat(inputs_gather, dim=0).cpu()
+                    inputs_recv = torch.empty_like(inputs)
+                    dist.all_to_all_single(inputs_recv, inputs)
+                    inputs_gather = inputs_recv.flatten(0, 1).cpu()
 
                     # inter-process communication-2, exchange the input sequence length
                     length = torch.tensor(length, dtype=torch.int64, device=local_rank)
                     length_gather = [torch.empty_like(length) for _ in range(num_gpus)]
                     dist.all_gather(length_gather, length)
-                    length_gather = torch.cat(length_gather)
+                    length_gather = torch.cat(length_gather).cpu()
 
                     # save data
                     buffer = (inputs_gather, length_gather)
                     buffer_file = f"{args.buffer}/inputs_buffer_rank_{local_rank}_{idx:05d}.pt"
 
+                    del inputs, inputs_recv, outputs
+
                     future = executor.submit(torch.save, buffer, buffer_file)
                     futures.append(future)
-                    if len(futures) >= args.max_prepare_workers:
-                        concurrent.futures.wait(futures)
-                        futures = []
 
                 # wait for all process to finish data preprocessing
-                del model, inputs, outputs
+                concurrent.futures.wait(futures) 
                 clear_cache()
                 dist.barrier()
 
@@ -415,6 +438,7 @@ def train(args):
                 # get the already prefetched data
                 inputs_gather, length_gather = future.result()
 
+            del inputs_gather, length_gather, random_query_index
             reset_buffer_dir(args.buffer, args.use_prepared_data)
 
         # save layerwise weight files
@@ -442,6 +466,7 @@ if __name__ == '__main__':
     parser.add_argument("--maskout", type=float, default=0.98)
     parser.add_argument("--model-name-or-path", type=str, default=None)
     parser.add_argument("--method", type=str, default=None)
+    parser.add_argument("--enable_fsdp", action='store_true')
 
     # model non-related parameters
     parser.add_argument("--prepare_data", action='store_true')

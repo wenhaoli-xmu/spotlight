@@ -18,6 +18,9 @@ from transformers.models.qwen3.modeling_qwen3 import (
 
 from .utils.hash_utils import HashModule
 from dataclasses import dataclass
+import tqdm
+from pygments.console import colorize
+from itertools import chain
 
 
 def aggregate_topk(x, k):
@@ -110,7 +113,6 @@ def causal_forward(
     )
 
 
-
 @check_model_inputs
 def model_forward(
         self,
@@ -164,7 +166,7 @@ def model_forward(
     position_ids = None
     metrics = []
 
-    for decoder_layer in self.layers[: self.config.num_hidden_layers]:
+    for decoder_layer in tqdm.tqdm(self.layers[: self.config.num_hidden_layers]):
         hidden_states, metric = decoder_layer(
             hidden_states,
             attention_mask=causal_mask_mapping[decoder_layer.attention_type],
@@ -238,6 +240,11 @@ def attention_forward(
 
         attn_output = []
         num_select = []
+        precision = [] # q, h
+        recall = [] # q, h
+
+        est_mask = []
+        oracle_mask = []
 
         chunk_size = 1024
         for chunk_start in range(0, q_hash.shape[1], chunk_size):
@@ -262,10 +269,52 @@ def attention_forward(
 
             mask = causal_mask & select_mask
             num_select.append(mask.sum(-1))
+            
+            est_mask.append(mask[0,0].cpu())
 
             q_chunk = query_states[:, chunk_start: chunk_end]
             k_chunk = key_states[:, :chunk_end]
             v_chunk = value_states[:, :chunk_end]
+
+            for q_idx in range(mask.shape[2]):
+                precision.append([])
+                recall.append([])
+
+                kv_length = chunk_start + q_idx + 1
+                topk = int(self.hash_config['topk'] * kv_length)
+                topk = max(1, topk)
+
+                _query = q_chunk[0, q_idx] # (h, d)
+                _key = k_chunk[0, :kv_length].repeat_interleave(repeats=group_size, dim=1) # (n, h, d)
+
+                label_indices = torch.einsum("hd,khd->hk", _query, _key).topk(dim=-1, k=topk).indices.tolist()
+                label_sets = [set(x) for x in label_indices]
+
+                _oracle_mask = torch.zeros((kv_length,), dtype=torch.bool, device='cpu')
+
+                try:
+                    _oracle_mask.scatter_(dim=-1, index=torch.tensor(label_indices[0], device='cpu'), value=True)
+                    oracle_mask.append(_oracle_mask)
+                except:
+                    import IPython
+                    IPython.embed()
+
+                for h_idx in range(mask.shape[1]):
+                    head_label = label_sets[h_idx]
+                    
+                    current_mask = mask[0, h_idx, q_idx, :kv_length]
+                    head_predict = set(torch.nonzero(current_mask).ravel().tolist())
+
+                    true_pos = len(head_predict.intersection(head_label))
+                    
+                    len_predict = len(head_predict)
+                    _precision = true_pos / len_predict if len_predict > 0 else 0.0
+                    
+                    len_label = len(head_label)
+                    _recall = true_pos / len_label if len_label > 0 else 0.0
+
+                    precision[-1].append(_precision)
+                    recall[-1].append(_recall)
 
             attn_output_chunk = torch.nn.functional.scaled_dot_product_attention(
                 q_chunk.transpose(1,2),
@@ -279,6 +328,17 @@ def attention_forward(
 
         attn_output = torch.cat(attn_output, dim=2)
         num_select = torch.cat(num_select, dim=2)
+        precision = torch.tensor(precision)
+        recall = torch.tensor(recall)
+
+        metric.update({
+            "num_select": num_select,
+            "precision": precision,
+            "recall": recall})
+        
+        if self.hash_config.get('visualize_head0', False):
+            import IPython
+            IPython.embed(header='debug')
 
     else:
 
@@ -347,32 +407,32 @@ def monkey_patch(model, config):
             layer.self_attn.hash_config = config
             weight_path = os.path.join(load_dir, f"weight-{layer_idx}.pth")
             
-            # if os.path.exists(weight_path):
-            #     weights = torch.load(weight_path, map_location=layer.device)
+            if os.path.exists(weight_path):
+                weights = torch.load(weight_path, map_location='cuda')
 
-            layer.self_attn.key_hash = HashModule(
-                layer.self_attn.config.num_key_value_heads,
-                layer.self_attn.head_dim,
-                n_layers=config['num_hash_layers'],
-                dropout=0.0)
+                layer.self_attn.key_hash = HashModule(
+                    layer.self_attn.config.num_key_value_heads,
+                    layer.self_attn.head_dim,
+                    n_layers=config['num_hash_layers'],
+                    dropout=0.0)
 
-            layer.self_attn.query_hash = HashModule(
-                layer.self_attn.config.num_attention_heads,
-                layer.self_attn.head_dim,
-                n_layers=config['num_hash_layers'],
-                dropout=0.0)
+                layer.self_attn.query_hash = HashModule(
+                    layer.self_attn.config.num_attention_heads,
+                    layer.self_attn.head_dim,
+                    n_layers=config['num_hash_layers'],
+                    dropout=0.0)
 
-                # params = chain.from_iterable(
-                #     layer.self_attn.query_hash.parameters(), 
-                #     layer.self_attn.key_hash.parameters())
+                params = chain.from_iterable((
+                    layer.self_attn.query_hash.parameters(), 
+                    layer.self_attn.key_hash.parameters()))
 
-                #     for p, w in zip(params, weights):
-                #         p.data = w
+                for p, w in zip(params, weights):
+                    p.data = w
 
-            # elif not config['ignore_missing_weights']:
-            #     raise RuntimeError(f"Missing checkpoint {weight_path}.")
+            elif not config['ignore_missing_weights']:
+                raise RuntimeError(f"Missing checkpoint {weight_path}.")
 
-            # else:
-            #     print(colorize("yellow", f"Missing checkpoint {weight_path}"))
+            else:
+                print(colorize("yellow", f"Missing checkpoint {weight_path}"))
 
     return model

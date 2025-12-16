@@ -1,8 +1,7 @@
-import math
 import torch
 import types
 from flash_attn import flash_attn_func
-from typing import Optional
+from typing import Optional, Union
 
 from transformers.models.qwen3.modeling_qwen3 import (
     FlashAttentionKwargs, 
@@ -40,6 +39,56 @@ def apply_rotary_pos_emb(x, cos, sin, head_dim=2):
     sin = sin.unsqueeze(head_dim)
     x_embed = (x * cos) + (rotate_half(x) * sin)
     return x_embed
+
+
+def causal_forward(
+    self,
+    input_ids: Optional[torch.LongTensor] = None,
+    attention_mask: Optional[torch.Tensor] = None,
+    position_ids: Optional[torch.LongTensor] = None,
+    past_key_values: Optional[Cache] = None,
+    inputs_embeds: Optional[torch.FloatTensor] = None,
+    labels: Optional[torch.LongTensor] = None,
+    use_cache: Optional[bool] = None,
+    cache_position: Optional[torch.LongTensor] = None,
+    logits_to_keep: Union[int, torch.Tensor] = 0,
+    **kwargs: Unpack[TransformersKwargs],
+) -> CausalLMOutputWithPast:
+    r"""
+    labels (`torch.LongTensor` of shape `(batch_size, sequence_length)`, *optional*):
+        Labels for computing the masked language modeling loss. Indices should either be in `[0, ...,
+        config.vocab_size]` or -100 (see `input_ids` docstring). Tokens with indices set to `-100` are ignored
+        (masked), the loss is only computed for the tokens with labels in `[0, ..., config.vocab_size]`.
+
+    Example:
+
+    ```python
+    >>> from transformers import AutoTokenizer, Qwen3ForCausalLM
+
+    >>> model = Qwen3ForCausalLM.from_pretrained("Qwen/Qwen3-8B")
+    >>> tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-8B")
+
+    >>> prompt = "Hey, are you conscious? Can you talk to me?"
+    >>> inputs = tokenizer(prompt, return_tensors="pt")
+
+    >>> # Generate
+    >>> generate_ids = model.generate(inputs.input_ids, max_length=30)
+    >>> tokenizer.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
+    "Hey, are you conscious? Can you talk to me?\nI'm not conscious, but I can talk to you."
+    ```"""
+    outputs = self.model(
+        input_ids=input_ids,
+        attention_mask=attention_mask,
+        position_ids=position_ids,
+        past_key_values=past_key_values,
+        inputs_embeds=inputs_embeds,
+        use_cache=use_cache,
+        cache_position=cache_position,
+        **kwargs)
+
+    return CausalLMOutputWithPast(
+        hidden_states=outputs.hidden_states,
+        attentions=outputs.attentions)
 
 
 @check_model_inputs
@@ -244,7 +293,16 @@ def layer_forward(
     # Fully Connected
     residual = hidden_states
     hidden_states = self.post_attention_layernorm(hidden_states)
-    hidden_states = self.mlp(hidden_states)
+
+    assert torch.is_grad_enabled() == False
+    chunk_size = 4096
+    outputs = []
+    for start in range(0, hidden_states.shape[1], chunk_size):
+        end = min(hidden_states.shape[1], start + chunk_size)
+        chunk_states = hidden_states[:, start: end]
+        outputs.append(self.mlp(chunk_states))
+    hidden_states = torch.cat(outputs, dim=1)
+
     hidden_states = residual + hidden_states
     return hidden_states, ret_scores
 
@@ -257,8 +315,11 @@ def dump_as_attn_modules(self):
 
 
 def monkey_patch(model, config):
+    model.forward = types.MethodType(causal_forward, model)
     model.model.forward = types.MethodType(model_forward, model.model)
     model.dump_as_attn_modules = types.MethodType(dump_as_attn_modules, model)
+
+    # layer_forward_compiled = torch.compile(layer_forward, dynamic=True)
 
     for layer in model.model.layers:
 
