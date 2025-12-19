@@ -224,7 +224,3 @@ To mitigate memory issues, adjust the following parameters (default: 1024):
 - `--max_oth`: Maximum other tokens.
 
 If out-of-memory errors occur, reduce `--max_que` and `--max_oth` first.
-
----
-
-This README provides a polished, professional guide to installing, evaluating, and training models with Spotlight Attention. For additional details or support, refer to the linked repositories or datasets.
