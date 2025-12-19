@@ -2,6 +2,8 @@
 train_results/*
 !train_results/convert.py
 models
+visualize
+train_buffer*
 
 # datasets
 mmlu/data

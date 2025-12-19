@@ -1,7 +1,19 @@
 [
     {
-        "task_type": "return_raw",
+        "task_type": "ppl",
+        "task_name": "code-parrot.256k",
+        "num_instance": 1,
+        "truncation": 40960
+    },
+    {
+        "task_type": "ppl",
         "task_name": "proof-pile.256k",
+        "num_instance": 1,
+        "truncation": 40960
+    },
+    {
+        "task_type": "ppl",
+        "task_name": "pg19.256k",
         "num_instance": 1,
         "truncation": 40960
     }

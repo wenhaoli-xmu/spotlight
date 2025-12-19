@@ -2,6 +2,8 @@ import torch
 import types
 from typing import Optional, Union, Any
 import os
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 
 from transformers.models.qwen3.modeling_qwen3 import (
     FlashAttentionKwargs, 
@@ -240,8 +242,8 @@ def attention_forward(
 
         attn_output = []
         num_select = []
-        precision = [] # q, h
-        recall = [] # q, h
+        precision = [] # q
+        recall = [] # q
 
         est_mask = []
         oracle_mask = []
@@ -276,45 +278,38 @@ def attention_forward(
             k_chunk = key_states[:, :chunk_end]
             v_chunk = value_states[:, :chunk_end]
 
+            q_head_chunk = q_chunk[..., 0, :]
+            k_head_chunk = k_chunk[..., 0, :]
+
             for q_idx in range(mask.shape[2]):
-                precision.append([])
-                recall.append([])
 
                 kv_length = chunk_start + q_idx + 1
                 topk = int(self.hash_config['topk'] * kv_length)
                 topk = max(1, topk)
 
-                _query = q_chunk[0, q_idx] # (h, d)
-                _key = k_chunk[0, :kv_length].repeat_interleave(repeats=group_size, dim=1) # (n, h, d)
+                _query = q_head_chunk[0, q_idx] # (d,)
+                _key = k_head_chunk[0, :kv_length] # (nk, d)
 
-                label_indices = torch.einsum("hd,khd->hk", _query, _key).topk(dim=-1, k=topk).indices.tolist()
-                label_sets = [set(x) for x in label_indices]
+                label_indices = torch.einsum("d,kd->k", _query, _key).topk(dim=-1, k=topk).indices.tolist()
 
                 _oracle_mask = torch.zeros((kv_length,), dtype=torch.bool, device='cpu')
+                _oracle_mask.scatter_(dim=-1, index=torch.tensor(label_indices, device='cpu'), value=True)
+                oracle_mask.append(_oracle_mask)
+                
+                current_mask = mask[0, 0, q_idx, :kv_length]
+                head_predict = set(torch.nonzero(current_mask).ravel().tolist())
 
-                try:
-                    _oracle_mask.scatter_(dim=-1, index=torch.tensor(label_indices[0], device='cpu'), value=True)
-                    oracle_mask.append(_oracle_mask)
-                except:
-                    import IPython
-                    IPython.embed()
+                label_sets = set(label_indices)
+                true_pos = len(head_predict.intersection(label_sets))
+                
+                len_predict = len(head_predict)
+                _precision = true_pos / len_predict if len_predict > 0 else 0.0
+                
+                len_label = len(label_sets)
+                _recall = true_pos / len_label if len_label > 0 else 0.0
 
-                for h_idx in range(mask.shape[1]):
-                    head_label = label_sets[h_idx]
-                    
-                    current_mask = mask[0, h_idx, q_idx, :kv_length]
-                    head_predict = set(torch.nonzero(current_mask).ravel().tolist())
-
-                    true_pos = len(head_predict.intersection(head_label))
-                    
-                    len_predict = len(head_predict)
-                    _precision = true_pos / len_predict if len_predict > 0 else 0.0
-                    
-                    len_label = len(head_label)
-                    _recall = true_pos / len_label if len_label > 0 else 0.0
-
-                    precision[-1].append(_precision)
-                    recall[-1].append(_recall)
+                precision.append(_precision)
+                recall.append(_recall)
 
             attn_output_chunk = torch.nn.functional.scaled_dot_product_attention(
                 q_chunk.transpose(1,2),
@@ -332,13 +327,55 @@ def attention_forward(
         recall = torch.tensor(recall)
 
         metric.update({
+            "num_tokens": hidden_states.shape[1],
             "num_select": num_select,
             "precision": precision,
             "recall": recall})
         
         if self.hash_config.get('visualize_head0', False):
-            import IPython
-            IPython.embed(header='debug')
+            thresh_prefix = f"thresh_{self.hash_config.get('select_thresh', 0.5)}"
+            topk_prefix = f"topk_{self.hash_config.get('topk', 0.05)}"
+            os.makedirs(f"visualize/{thresh_prefix}", exist_ok=True)
+            os.makedirs(f"visualize/{topk_prefix}", exist_ok=True)
+            seqlen = hidden_states.shape[1]
+            
+            full_est = torch.zeros((seqlen, seqlen), dtype=torch.float32)
+            full_oracle = torch.zeros((seqlen, seqlen), dtype=torch.float32)
+            
+            for i, m_est in enumerate(est_mask):
+                start_row = i * chunk_size
+                end_row = min(start_row + chunk_size, seqlen)
+                _, cols = m_est.shape
+                full_est[start_row:end_row, :cols] = m_est
+            
+            for i, m_oracle in enumerate(oracle_mask):
+                cols = m_oracle.shape[0]
+                full_oracle[i, :cols] = m_oracle
+                
+            plt.rcParams['font.family'] = 'sans-serif'
+            plt.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans']
+            
+            color_light = '#FBEBCF' 
+            color_dark  = '#112641'
+            cmap = ListedColormap([color_light, color_dark])
+
+            def save_single_plot(matrix_tensor, prefix):
+                plt.figure(figsize=[5, 5], dpi=300)
+                
+                plt.imshow(matrix_tensor.numpy(), cmap=cmap, vmin=0, vmax=1, interpolation='nearest')
+                plt.axis('off')
+                plt.tight_layout()
+                
+                path = f"visualize/{prefix}/layer-{self.layer_idx}.jpg"
+                plt.savefig(path, bbox_inches='tight', pad_inches=0)
+                
+                plt.close() 
+                return path
+
+            path_est = save_single_plot(full_est, thresh_prefix)
+            path_oracle = save_single_plot(full_oracle, topk_prefix)
+
+            print(f"✅ Visualization saved to:\n  - {path_est}\n  - {path_oracle}", flush=True)
 
     else:
 
@@ -397,7 +434,7 @@ def monkey_patch(model, config):
     model.model.forward = types.MethodType(model_forward, model.model)
 
     model_name = model.config._name_or_path.split('/')[-1].lower()
-    load_dir = f"train_results/{model_name}"
+    load_dir = f"train_results/{model_name}-bkp"
 
     for layer_idx, layer in enumerate(model.model.layers):
         layer.forward = types.MethodType(layer_forward, layer)

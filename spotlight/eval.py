@@ -43,7 +43,7 @@ def post_process(accum_total_output, task_type):
 
 
 @torch.no_grad()
-def test_on_task(model, tokenizer, task_type, task_name, num_instance, truncation, callback=None):
+def test_on_task(model, tokenizer, task_type, task_name, num_instance, truncation, callback=None, return_raw=False):
 
     io_wrapper = TestIOWrapper(tokenizer, truncation)
     task = get_corpus(task_name)
@@ -80,18 +80,15 @@ def test_on_task(model, tokenizer, task_type, task_name, num_instance, truncatio
 
         torch.cuda.empty_cache()
 
-    if task_type != 'return_raw':
-        accum_total_output = post_process(accum_total_output, task_type)
-        result = {
-            "task_name": task_name,
-            "task_type": task_type,
-            "num_instance": num_instance,
-            "truncation": truncation,
-            "avg": float(np.mean(accum_total_output)),
-            "max": float(max(accum_total_output)),
-            "min": float(min(accum_total_output))
-        }
-    else:
-        result = accum_total_output
+    if return_raw:
+        return accum_total_output
 
-    return result
+    accum_total_output = post_process(accum_total_output, task_type)
+    return {
+        "task_name": task_name,
+        "task_type": task_type,
+        "num_instance": num_instance,
+        "truncation": truncation,
+        "avg": float(np.mean(accum_total_output)),
+        "max": float(max(accum_total_output)),
+        "min": float(min(accum_total_output))}

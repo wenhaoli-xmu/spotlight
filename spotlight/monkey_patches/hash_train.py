@@ -244,8 +244,10 @@ def attention_forward(
     if return_hidden_states:
         value_states = self.v_proj(hidden_states).view(hidden_shape)
 
-    q_hash = self.query_hash(query_states)
-    k_hash = self.key_hash(key_states)
+    q_hash, k_hash = None, None
+    if not return_hidden_states:
+        q_hash = self.query_hash(query_states)
+        k_hash = self.key_hash(key_states)
 
     attn_output, ret_scores = flash_attention(
         query_states,
@@ -319,8 +321,6 @@ def monkey_patch(model, config):
     model.model.forward = types.MethodType(model_forward, model.model)
     model.dump_as_attn_modules = types.MethodType(dump_as_attn_modules, model)
 
-    # layer_forward_compiled = torch.compile(layer_forward, dynamic=True)
-
     for layer in model.model.layers:
 
         layer.forward = types.MethodType(layer_forward, layer)
@@ -328,14 +328,12 @@ def monkey_patch(model, config):
 
         layer.self_attn.key_hash = HashModule(
             layer.self_attn.config.num_key_value_heads,
-            layer.self_attn.head_dim,
-            n_layers=config['num_hash_layers'],
+            dims=config['hash_dims'],
             dropout=config['hash_dropout'])
 
         layer.self_attn.query_hash = HashModule(
             layer.self_attn.config.num_attention_heads,
-            layer.self_attn.head_dim,
-            n_layers=config['num_hash_layers'],
+            dims=config['hash_dims'],
             dropout=config['hash_dropout'])
 
     return model

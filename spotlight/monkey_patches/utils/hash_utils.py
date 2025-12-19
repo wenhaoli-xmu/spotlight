@@ -44,35 +44,40 @@ def compute_attn_score(q, k, random_query_index):
 
 
 class HashLayer(torch.nn.Module):
-    def __init__(self, num_heads, head_dim, silu, dropout):
+    def __init__(self, num_heads, dim_inp, dim_out, silu, dropout):
         super().__init__()
 
         self.proj = torch.nn.Parameter(
-            torch.zeros((num_heads,head_dim,head_dim), dtype=torch.bfloat16, device='cuda'), 
+            torch.zeros((num_heads,dim_inp,dim_out), dtype=torch.float, device='cuda'), 
             requires_grad=True)
         
         self.bias = torch.nn.Parameter(
-            torch.zeros((1, 1, num_heads, head_dim), 
-            dtype=torch.bfloat16, 
+            torch.zeros((1, 1, num_heads, dim_out), 
+            dtype=torch.float, 
             device='cuda'), 
             requires_grad=True)
 
-        std = (2.0 / head_dim) ** 0.5
+        std = (2.0 / dim_out) ** 0.5
         torch.nn.init.normal_(self.proj, mean=0.0, std=std)
         torch.nn.init.zeros_(self.bias)
 
         self.drop = torch.nn.Dropout(dropout)
         self.silu = torch.nn.SiLU() if silu else torch.nn.Identity()
+        self.enable_residual = dim_inp == dim_out
 
     def forward(self, x):
-        return self.silu(self.drop(torch.einsum('bnhd,hde->bnhe', x, self.proj) + self.bias)) + x
+        out = self.silu(self.drop(torch.einsum('bnhd,hde->bnhe', x, self.proj) + self.bias))
+        if self.enable_residual:
+            out = out + x
+        return out
 
 
 class HashModule(torch.nn.Module):
-    def __init__(self, num_heads, head_dim, n_layers, dropout):
+    def __init__(self, num_heads, dims, dropout):
         super().__init__()
+        n_layers = len(dims) - 1
         self.mlp = torch.nn.Sequential(*[
-            HashLayer(num_heads, head_dim, i < n_layers - 1, dropout)
+            HashLayer(num_heads, dims[i], dims[i+1], i < n_layers - 1, dropout)
             for i in range(n_layers)])
             
     def forward(self, x):

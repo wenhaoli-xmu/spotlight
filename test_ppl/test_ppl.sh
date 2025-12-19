@@ -15,7 +15,7 @@ do
         echo "Running PPL test for $(basename "$model")-${method}..."
         python test_ppl/test.py \
             --model-name-or-path "$model" \
-            --method "$method" \
+            --method "$method"
 
         echo "Finished processing ${model}-${method}."
         echo "-----------------------------------"

@@ -28,9 +28,4 @@ torchrun \
     --buffer train_buffer_qwen3_4b \
     --train-iters 1024 \
     --gradient-clipping 1.0 \
-    --gradient-accumulation 1 \
-    --train-data "data/github-40k-00000.json" \
-    --train-data "data/github-40k-00001.json" \
-    --train-data "data/github-40k-00002.json" \
-    --train-data "data/github-40k-00003.json" \
-    --train-data "data/github-40k-00004.json"
+    --gradient-accumulation 1

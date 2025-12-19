@@ -4,5 +4,5 @@
     "select_thresh": 0.5,
     "ignore_missing_weights": false,
     "topk": 0.025,
-    "visualize_head0": true
+    "visualize_head0": false
 }

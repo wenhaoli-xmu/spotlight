@@ -17,21 +17,32 @@ from spotlight.misc import adjust_lr
 
 from transformers import (
     AutoTokenizer,
-    AutoModelForCausalLM
+    AutoModelForCausalLM,
+    AutoConfig
 )
 import torch.distributed as dist
 import json
 
 from torch.distributed._composable.fsdp import fully_shard
+import random
 
 
 class TrainingData(torch.utils.data.Dataset):
     def __init__(self, args):
         self.data = []
-        for data in args.train_data:
-            with open(data, 'r') as f:
-                for line in f:
-                    self.data.append(json.loads(line))
+
+        if args.train_data is not None:
+            for data in args.train_data:
+                with open(data, 'r') as f:
+                    for line in f:
+                        self.data.append(json.loads(line))
+        else:
+            config = AutoConfig.from_pretrained(args.model_name_or_path)
+            vocab_size = config.vocab_size
+
+            for _ in range(args.train_iters):
+                random_ids = [random.randint(0, vocab_size-1) for _ in range(args.max_tokens)]
+                self.data.append({"input_ids": random_ids})
     
     def __getitem__(self, idx):
         return self.data[idx]
@@ -40,66 +51,134 @@ class TrainingData(torch.utils.data.Dataset):
         return len(self.data)
 
 
-def compute_attn_supervise_loss(
-        draft_attn, 
-        true_attn, 
-        random_query_index, 
-        max_top, 
-        max_oth, 
-        maskout):
+# def compute_attn_supervise_loss(
+#         draft_attn, 
+#         true_attn, 
+#         random_query_index, 
+#         max_top, 
+#         max_oth, 
+#         maskout,
+#         margin):
 
+#     B, H, Q, K = true_attn.shape
+
+#     if random_query_index is not None:
+#         key_indices = torch.arange(K, device=random_query_index.device)
+#         causal_mask = (random_query_index[:, None] < key_indices[None, :])[None, None, :, :].expand(B, H, -1, -1)
+#     else:
+#         causal_mask = torch.triu(torch.ones((K, K), dtype=torch.bool, device=true_attn.device), diagonal=1)
+#         causal_mask = causal_mask[None, None, :, :].expand(B, H, Q, K)
+
+#     true_attn_masked = torch.masked_fill(true_attn, causal_mask, torch.finfo(true_attn.dtype).min)
+#     k_cnt = int(K * (1 - maskout))
+    
+#     top_values, _ = torch.topk(true_attn_masked, k_cnt, dim=-1)
+#     threshold = top_values[..., -1, None] # [B, H, Q, 1]
+    
+#     is_top_mask = (true_attn_masked >= threshold) & (~causal_mask)
+#     is_oth_mask = (true_attn_masked < threshold) & (~causal_mask)
+
+#     random_scores = torch.rand_like(true_attn, dtype=torch.float32)
+
+#     def parallel_sample(mask, n_sample):
+#         if n_sample is None:
+#             return mask, None
+        
+#         masked_random = random_scores.masked_fill(~mask, -float('inf'))
+#         _, indices = torch.topk(masked_random, n_sample, dim=-1)
+        
+#         return None, indices
+
+#     _, top_rnd_indices = parallel_sample(is_top_mask, max_top)
+#     _, oth_rnd_indices = parallel_sample(is_oth_mask, max_oth)
+
+#     draft_val_top = torch.gather(draft_attn, -1, top_rnd_indices)
+#     draft_val_oth = torch.gather(draft_attn, -1, oth_rnd_indices)
+
+#     valid_mask_top = torch.gather(is_top_mask, -1, top_rnd_indices)
+#     valid_mask_oth = torch.gather(is_oth_mask, -1, oth_rnd_indices)
+
+#     v_top = draft_val_top.unsqueeze(-1) 
+#     v_oth = draft_val_oth.unsqueeze(-2)
+    
+#     mask_pair = valid_mask_top.unsqueeze(-1) & valid_mask_oth.unsqueeze(-2)
+#     zeros = torch.zeros_like(v_top + v_oth)
+#     logits = torch.stack([zeros, -v_top.expand_as(zeros) + margin, v_oth.expand_as(zeros) - margin], dim=0)
+    
+#     loss_matrix = torch.logsumexp(logits, dim=0)
+#     loss = (loss_matrix * mask_pair).sum() / (mask_pair.count_nonzero() + 1e-6)
+
+#     top_acc = ((draft_val_top > 0) & valid_mask_top).float().sum() / (valid_mask_top.float().sum() + 1e-6)
+#     oth_acc = ((draft_val_oth < 0) & valid_mask_oth).float().sum() / (valid_mask_oth.float().sum() + 1e-6)
+
+#     return top_acc.item(), oth_acc.item(), loss
+
+
+def compute_attn_supervise_loss(
+    draft_attn,
+    true_attn,
+    random_query_index,
+    max_top,
+    max_oth,
+    maskout,
+    *,
+    margin=0.0,
+    lambda_oth=1.0,
+    lambda_fp=0.0,
+):
     B, H, Q, K = true_attn.shape
 
     if random_query_index is not None:
         key_indices = torch.arange(K, device=random_query_index.device)
         causal_mask = (random_query_index[:, None] < key_indices[None, :])[None, None, :, :].expand(B, H, -1, -1)
     else:
-        causal_mask = torch.triu(torch.ones((K, K), dtype=torch.bool, device=true_attn.device), diagonal=1)
-        causal_mask = causal_mask[None, None, :, :].expand(B, H, Q, K)
+        causal_mask = torch.triu(
+            torch.ones((K, K), dtype=torch.bool, device=true_attn.device),
+            diagonal=1
+        )[None, None].expand(B, H, Q, K)
 
-    true_attn_masked = torch.masked_fill(true_attn, causal_mask, torch.finfo(true_attn.dtype).min)
+    true_attn_masked = true_attn.masked_fill(
+        causal_mask, torch.finfo(true_attn.dtype).min
+    )
+
     k_cnt = int(K * (1 - maskout))
-    
-    top_values, _ = torch.topk(true_attn_masked, k_cnt, dim=-1)
-    threshold = top_values[..., -1, None] # [B, H, Q, 1]
-    
-    is_top_mask = (true_attn_masked >= threshold) & (~causal_mask)
-    is_oth_mask = (true_attn_masked < threshold) & (~causal_mask)
+    top_vals, _ = torch.topk(true_attn_masked, k_cnt, dim=-1)
+    threshold = top_vals[..., -1, None]
 
-    random_scores = torch.rand_like(true_attn, dtype=torch.float32)
+    is_top = (true_attn_masked >= threshold) & (~causal_mask)
+    is_oth = (true_attn_masked < threshold) & (~causal_mask)
 
-    def parallel_sample(mask, n_sample):
-        if n_sample is None:
-            return mask, None
-        
-        masked_random = random_scores.masked_fill(~mask, -float('inf'))
-        _, indices = torch.topk(masked_random, n_sample, dim=-1)
-        
-        return None, indices
+    rand = torch.rand_like(true_attn, dtype=torch.float32)
 
-    _, top_rnd_indices = parallel_sample(is_top_mask, max_top)
-    _, oth_rnd_indices = parallel_sample(is_oth_mask, max_oth)
+    def sample(mask, n):
+        if n is None:
+            return None
+        r = rand.masked_fill(~mask, -float("inf"))
+        _, idx = torch.topk(r, n, dim=-1)
+        return idx
 
-    draft_val_top = torch.gather(draft_attn, -1, top_rnd_indices)
-    draft_val_oth = torch.gather(draft_attn, -1, oth_rnd_indices)
+    top_idx = sample(is_top, max_top)
+    oth_idx = sample(is_oth, max_oth)
 
-    valid_mask_top = torch.gather(is_top_mask, -1, top_rnd_indices)
-    valid_mask_oth = torch.gather(is_oth_mask, -1, oth_rnd_indices)
+    A = torch.gather(draft_attn, -1, top_idx)
+    Bv = torch.gather(draft_attn, -1, oth_idx)
 
-    v_top = draft_val_top.unsqueeze(-1) 
-    v_oth = draft_val_oth.unsqueeze(-2)
-    
-    mask_pair = valid_mask_top.unsqueeze(-1) & valid_mask_oth.unsqueeze(-2)
-    zeros = torch.zeros_like(v_top + v_oth)
-    logits = torch.stack([zeros, -v_top.expand_as(zeros), v_oth.expand_as(zeros)], dim=0)
-    
-    loss_matrix = torch.logsumexp(logits, dim=0)
-    loss = (loss_matrix * mask_pair).sum() / (mask_pair.count_nonzero() + 1e-6)
+    mask_A = torch.gather(is_top, -1, top_idx)
+    mask_B = torch.gather(is_oth, -1, oth_idx)
 
-    top_acc = ((draft_val_top > 0) & valid_mask_top).float().sum() / (valid_mask_top.float().sum() + 1e-6)
-    oth_acc = ((draft_val_oth < 0) & valid_mask_oth).float().sum() / (valid_mask_oth.float().sum() + 1e-6)
+    L_top = torch.nn.functional.softplus(-(A - margin))
+    L_top = (L_top * mask_A).sum() / (mask_A.sum() + 1e-6)
 
-    return top_acc.item(), oth_acc.item(), loss
+    L_oth = torch.nn.functional.softplus(Bv + margin)
+    L_oth = (L_oth * mask_B).sum() / (mask_B.sum() + 1e-6)
+    L_fp = ((Bv > 0).float() * Bv * mask_B).sum() / (mask_B.sum() + 1e-6)
+
+    loss = L_top + lambda_oth * L_oth + lambda_fp * L_fp
+
+    top_acc = ((A > 0) & mask_A).float().sum() / (mask_A.sum() + 1e-6)
+    oth_fp = ((Bv > 0) & mask_B).float().sum() / (mask_B.sum() + 1e-6)
+
+    return top_acc.item(), oth_fp.item(), loss
 
 
 def get_optimizer_and_lr_adjuster(max_lr, train_iters, warmup, weight_decay, beta1, beta2, params, **kwargs):
@@ -218,7 +297,7 @@ def train(args):
         model = AutoModelForCausalLM.from_pretrained(
             args.model_name_or_path,
             device_map='cuda',
-            torch_dtype=torch.bfloat16)
+            torch_dtype=torch.float)
         model = monkey_patch(model)
             
         # delete other layers except the current training one
@@ -236,7 +315,7 @@ def train(args):
         pos_ids = pos_ids.unsqueeze(0)
         
         with torch.no_grad():
-            fake_tensor = torch.empty(1, dtype=torch.bfloat16, device='cuda')
+            fake_tensor = torch.empty(1, dtype=torch.float, device='cuda')
             pos_emb = model.model.rotary_emb(fake_tensor, pos_ids)
             del pos_ids, fake_tensor
 
@@ -367,10 +446,11 @@ def train(args):
                             hidden_states.shape[-2], 
                             dtype=torch.int64)[:args.max_que].cuda()
 
-                    _, (draft_attn, true_attn) = layer(
-                        hidden_states=hidden_states.to(local_rank), 
-                        position_embeddings=pos_emb,
-                        random_query_index=random_query_index)
+                    with torch.autocast('cuda', torch.bfloat16):
+                        _, (draft_attn, true_attn) = layer(
+                            hidden_states=hidden_states.to(local_rank), 
+                            position_embeddings=pos_emb,
+                            random_query_index=random_query_index)
 
                     if args.backward_per_head:
                         grad = torch.zeros_like(true_attn)
@@ -387,7 +467,9 @@ def train(args):
                             true_attn_head = true_attn_head.detach()
                             draft_attn_head.requires_grad_(True)
 
-                            top_acc, oth_acc, loss = compute_loss(draft_attn_head, true_attn_head, random_query_index)
+                            with torch.autocast('cuda', torch.bfloat16):
+                                top_acc, oth_acc, loss = compute_loss(draft_attn_head, true_attn_head, random_query_index)
+
                             loss.backward()
 
                             grad[:, head_idx, ...] = draft_attn_head.grad.data[:]
@@ -484,7 +566,7 @@ if __name__ == '__main__':
     parser.add_argument("--backward_per_head", action='store_true')
 
     # training data
-    parser.add_argument("--train-data", type=str, action='append')
+    parser.add_argument("--train-data", type=str, action='append', help="will be random if not given.")
     parser.add_argument("--train-iters", type=int)
 
     # adamw configuration
