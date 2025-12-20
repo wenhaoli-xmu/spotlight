@@ -59,13 +59,13 @@ Pre-trained model checkpoints are available for download:
 
 | Model           | Checkpoint                                                                 |
 |-----------------|---------------------------------------------------------------------------|
-| LLaMA3-8B       | [llama3-8b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/llama3-8b-spotlight.pth)       |
-| LLaMA3-8B (C4)  | [llama3-8b-spotlight-c4.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/llama3-8b-spotlight-c4.pth) |
-| LLaMA3-8B (Code)| [llama3-8b-spotlight-code.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/llama3-8b-spotlight-code.pth) |
-| Qwen2.5-1.5B    | [qwen2.5-1.5b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/qwen2.5-1.5b-spotlight.pth) |
-| Qwen2.5-3B      | [qwen2.5-3b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/qwen2.5-3b-spotlight.pth)     |
-| Qwen2.5-7B      | [qwen2.5-7b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/qwen2.5-7b-spotlight.pth)     |
-| Qwen2.5-14B     | [qwen2.5-14b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/qwen2.5-14b-spotlight.pth)   |
+| LLaMA3-8B       | [llama3-8b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/blob/main/ckp/llama3-8b-spotlight.pth)       |
+| LLaMA3-8B (C4)  | [llama3-8b-spotlight-c4.pth](https://github.com/wenhaoli-xmu/spotlight/blob/main/ckp/llama3-8b-spotlight-c4.pth) |
+| LLaMA3-8B (Code)| [llama3-8b-spotlight-code.pth](https://github.com/wenhaoli-xmu/spotlight/blob/main/ckp/llama3-8b-spotlight-code.pth) |
+| Qwen2.5-1.5B    | [qwen2.5-1.5b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/blob/main/ckp/qwen2.5-1.5b-spotlight.pth) |
+| Qwen2.5-3B      | [qwen2.5-3b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/blob/main/ckp/qwen2.5-3b-spotlight.pth)     |
+| Qwen2.5-7B      | [qwen2.5-7b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/blob/main/ckp/qwen2.5-7b-spotlight.pth)     |
+| Qwen2.5-14B     | [qwen2.5-14b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/blob/main/ckp/qwen2.5-14b-spotlight.pth)   |
 
 <span style="color:red; font-weight:bold">**Kindly reminder**: If you’re unable to download these files on anonymous GitHub, you can clone the repository locally and use Git LFS to fetch them. Each file is small in size, with the largest being only a few dozen megabytes.</span>
 
@@ -136,34 +136,34 @@ bash scripts/test_lmeval.sh
 
    | Method        | Config       | Eval Log                                                                                                           |
    |---------------|--------------|--------------------------------------------------------------------------------------------------------------------|
-   | Original      | N/A          | [llama2-7b](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b/result.json)                     |
-   | +Quest        | 1024 Budget  | [llama2-7b-quest-1024](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-quest-1024/result.json) |
-   | +Quest        | 128 Budget   | [llama2-7b-quest-128](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-quest-128/result.json)   |
-   | +MagicPIG     | Default      | [llama2-7b-magicpig](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-magicpig/result.json)     |
-   | +Spotlight    | 90% Pruned   | [llama2-7b-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-spotlight-90/result.json) |
-   | +Spotlight    | 98% Pruned   | [llama2-7b-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-spotlight-98/result.json) |
+   | Original      | N/A          | [llama2-7b](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b/result.json)                     |
+   | +Quest        | 1024 Budget  | [llama2-7b-quest-1024](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b-quest-1024/result.json) |
+   | +Quest        | 128 Budget   | [llama2-7b-quest-128](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b-quest-128/result.json)   |
+   | +MagicPIG     | Default      | [llama2-7b-magicpig](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b-magicpig/result.json)     |
+   | +Spotlight    | 90% Pruned   | [llama2-7b-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b-spotlight-90/result.json) |
+   | +Spotlight    | 98% Pruned   | [llama2-7b-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b-spotlight-98/result.json) |
 
    **LLaMA2-7B-Chat**
 
    | Method        | Config       | Eval Log                                                                                                                     |
    |---------------|--------------|------------------------------------------------------------------------------------------------------------------------------|
-   | Original      | N/A          | [llama2-7b-chat](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat/result.json)                     |
-   | +Quest        | 1024 Budget  | [llama2-7b-chat-quest-1024](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat-quest-1024/result.json) |
-   | +Quest        | 128 Budget   | [llama2-7b-chat-quest-128](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat-quest-128/result.json)   |
-   | +MagicPIG     | Default      | [llama2-7b-chat-magicpig](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat-magicpig/result.json)     |
-   | +Spotlight    | 90% Pruned   | [llama2-7b-chat-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat-spotlight-90/result.json) |
-   | +Spotlight    | 98% Pruned   | [llama2-7b-chat-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama2-7b-chat-spotlight-98/result.json) |
+   | Original      | N/A          | [llama2-7b-chat](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b-chat/result.json)                     |
+   | +Quest        | 1024 Budget  | [llama2-7b-chat-quest-1024](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b-chat-quest-1024/result.json) |
+   | +Quest        | 128 Budget   | [llama2-7b-chat-quest-128](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b-chat-quest-128/result.json)   |
+   | +MagicPIG     | Default      | [llama2-7b-chat-magicpig](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b-chat-magicpig/result.json)     |
+   | +Spotlight    | 90% Pruned   | [llama2-7b-chat-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b-chat-spotlight-90/result.json) |
+   | +Spotlight    | 98% Pruned   | [llama2-7b-chat-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama2-7b-chat-spotlight-98/result.json) |
 
    **LLaMA3-8B**
 
    | Method        | Config       | Eval Log                                                                                                           |
    |---------------|--------------|--------------------------------------------------------------------------------------------------------------------|
-   | Original      | N/A          | [llama3-8b](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b/result.json)                     |
-   | +Quest        | 1024 Budget  | [llama3-8b-quest-1024](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b-quest-1024/result.json) |
-   | +Quest        | 256 Budget   | [llama3-8b-quest-256](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b-quest-256/result.json)   |
-   | +MagicPIG     | Default      | [llama3-8b-magicpig](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b-magicpig/result.json)     |
-   | +Spotlight    | 90% Pruned   | [llama3-8b-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b-spotlight-90/result.json) |
-   | +Spotlight    | 98% Pruned   | [llama3-8b-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/test_longbench/log/llama3-8b-spotlight-98/result.json) |
+   | Original      | N/A          | [llama3-8b](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama3-8b/result.json)                     |
+   | +Quest        | 1024 Budget  | [llama3-8b-quest-1024](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama3-8b-quest-1024/result.json) |
+   | +Quest        | 256 Budget   | [llama3-8b-quest-256](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama3-8b-quest-256/result.json)   |
+   | +MagicPIG     | Default      | [llama3-8b-magicpig](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama3-8b-magicpig/result.json)     |
+   | +Spotlight    | 90% Pruned   | [llama3-8b-spotlight-90](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama3-8b-spotlight-90/result.json) |
+   | +Spotlight    | 98% Pruned   | [llama3-8b-spotlight-98](https://github.com/wenhaoli-xmu/spotlight/blob/main/test_longbench/log/llama3-8b-spotlight-98/result.json) |
 
    <span style="color:red; font-weight:bold">**Kindly reminder**: The link above points to a summary of the results (if it doesn’t open properly, please click the view raw button in the top right corner). The detailed responses generated by each model can be found under test_longbench/log, where you’ll find hundreds of JSON files recording each model’s output on each sub-dataset.</span>
 
