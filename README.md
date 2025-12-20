@@ -59,13 +59,13 @@ Pre-trained model checkpoints are available for download:
 
 | Model           | Checkpoint                                                                 |
 |-----------------|---------------------------------------------------------------------------|
-| LLaMA3-8B       | [llama3-8b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/llama3-8b-spotlight.pth)       |
-| LLaMA3-8B (C4)  | [llama3-8b-spotlight-c4.pth](https://anonymous.4open.science/r/spotlight/ckp/llama3-8b-spotlight-c4.pth) |
-| LLaMA3-8B (Code)| [llama3-8b-spotlight-code.pth](https://anonymous.4open.science/r/spotlight/ckp/llama3-8b-spotlight-code.pth) |
-| Qwen2.5-1.5B    | [qwen2.5-1.5b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/qwen2.5-1.5b-spotlight.pth) |
-| Qwen2.5-3B      | [qwen2.5-3b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/qwen2.5-3b-spotlight.pth)     |
-| Qwen2.5-7B      | [qwen2.5-7b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/qwen2.5-7b-spotlight.pth)     |
-| Qwen2.5-14B     | [qwen2.5-14b-spotlight.pth](https://anonymous.4open.science/r/spotlight/ckp/qwen2.5-14b-spotlight.pth)   |
+| LLaMA3-8B       | [llama3-8b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/llama3-8b-spotlight.pth)       |
+| LLaMA3-8B (C4)  | [llama3-8b-spotlight-c4.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/llama3-8b-spotlight-c4.pth) |
+| LLaMA3-8B (Code)| [llama3-8b-spotlight-code.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/llama3-8b-spotlight-code.pth) |
+| Qwen2.5-1.5B    | [qwen2.5-1.5b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/qwen2.5-1.5b-spotlight.pth) |
+| Qwen2.5-3B      | [qwen2.5-3b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/qwen2.5-3b-spotlight.pth)     |
+| Qwen2.5-7B      | [qwen2.5-7b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/qwen2.5-7b-spotlight.pth)     |
+| Qwen2.5-14B     | [qwen2.5-14b-spotlight.pth](https://github.com/wenhaoli-xmu/spotlight/ckp/qwen2.5-14b-spotlight.pth)   |
 
 <span style="color:red; font-weight:bold">**Kindly reminder**: If you’re unable to download these files on anonymous GitHub, you can clone the repository locally and use Git LFS to fetch them. Each file is small in size, with the largest being only a few dozen megabytes.</span>
 
