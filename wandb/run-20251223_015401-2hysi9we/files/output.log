@@ -1,0 +1,65 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:12<00:00,  4.32s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.64s/it]
+  0%|                                                                                                                                                                                                 | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:341: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.73s/it]
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 517, in <module>
+    train(args)
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 392, in train
+    _, extra_rets = layer(
+                    ^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 260, in attention_forward
+    attn_output, ret_scores = flash_attention(
+                              ^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 215, in flash_attention
+    attn_score = compute_attn_score(query, key, random_query_index)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/utils/hash_utils.py", line 44, in compute_attn_score
+    head_score.scatter_(msk, dim=-1, value=torch.finfo(head_score.dtype).min)
+TypeError: scatter_() received an invalid combination of arguments - got (Tensor, value=float, dim=int), but expected one of:
+ * (int dim, Tensor index, Tensor src)
+      didn't match because some of the keywords were incorrect: value, dim
+ * (int dim, Tensor index, Tensor src, *, str reduce)
+ * (int dim, Tensor index, Number value)
+      didn't match because some of the keywords were incorrect: dim
+ * (int dim, Tensor index, Number value, *, str reduce)
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 517, in <module>
+[rank0]:     train(args)
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 392, in train
+[rank0]:     _, extra_rets = layer(
+[rank0]:                     ^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 260, in attention_forward
+[rank0]:     attn_output, ret_scores = flash_attention(
+[rank0]:                               ^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 215, in flash_attention
+[rank0]:     attn_score = compute_attn_score(query, key, random_query_index)
+[rank0]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/utils/hash_utils.py", line 44, in compute_attn_score
+[rank0]:     head_score.scatter_(msk, dim=-1, value=torch.finfo(head_score.dtype).min)
+[rank0]: TypeError: scatter_() received an invalid combination of arguments - got (Tensor, value=float, dim=int), but expected one of:
+[rank0]:  * (int dim, Tensor index, Tensor src)
+[rank0]:       didn't match because some of the keywords were incorrect: value, dim
+[rank0]:  * (int dim, Tensor index, Tensor src, *, str reduce)
+[rank0]:  * (int dim, Tensor index, Number value)
+[rank0]:       didn't match because some of the keywords were incorrect: dim
+[rank0]:  * (int dim, Tensor index, Number value, *, str reduce)

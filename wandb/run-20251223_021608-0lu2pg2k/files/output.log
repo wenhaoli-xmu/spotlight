@@ -1,0 +1,40 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:12<00:00,  4.08s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.42s/it]
+  0%|                                                                                                                                                                                                 | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:339: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:16<00:00,  4.75s/it]
+[rank0]:W1223 02:17:51.419000 2178848 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break from `Tensor.item()`, consider setting:
+[rank0]:W1223 02:17:51.419000 2178848 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+[rank0]:W1223 02:17:51.419000 2178848 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] or:
+[rank0]:W1223 02:17:51.419000 2178848 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+[rank0]:W1223 02:17:51.419000 2178848 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] to include these operations in the captured graph.
+[rank0]:W1223 02:17:51.419000 2178848 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1223 02:17:51.419000 2178848 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break: from user code at:
+[rank0]:W1223 02:17:51.419000 2178848 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 85, in compute_attn_supervise_loss
+[rank0]:W1223 02:17:51.419000 2178848 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     sparsity = is_top.sum(-1).float().mean().item() / is_top.shape[-1] / 2
+[rank0]:W1223 02:17:51.419000 2178848 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1223 02:17:51.419000 2178848 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+layer:     0 | step:     0 | loss: 8.206 | thresh: 0.000 | sparse: 0.023 | tacc: 0.523 | oacc: 0.465
+layer:     0 | step:     1 | loss: 8.232 | thresh: 0.000 | sparse: 0.022 | tacc: 0.524 | oacc: 0.464
+layer:     0 | step:     2 | loss: 8.282 | thresh: 0.000 | sparse: 0.024 | tacc: 0.517 | oacc: 0.461
+layer:     0 | step:     3 | loss: 8.230 | thresh: 0.000 | sparse: 0.024 | tacc: 0.518 | oacc: 0.460
+layer:     0 | step:     4 | loss: 8.226 | thresh: 0.000 | sparse: 0.023 | tacc: 0.519 | oacc: 0.460
+layer:     0 | step:     5 | loss: 8.204 | thresh: 0.000 | sparse: 0.021 | tacc: 0.522 | oacc: 0.464
+layer:     0 | step:     6 | loss: 8.206 | thresh: 0.000 | sparse: 0.022 | tacc: 0.521 | oacc: 0.461
+layer:     0 | step:     7 | loss: 8.186 | thresh: 0.000 | sparse: 0.024 | tacc: 0.519 | oacc: 0.461
+[rank0]:W1223 02:18:31.398000 2178848 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8] torch._dynamo hit config.recompile_limit (8)
+[rank0]:W1223 02:18:31.398000 2178848 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8]    function: 'torch_dynamo_resume_in_compute_attn_supervise_loss_at_85' (/pfs/rl-train/wenhaoli/spotlight/train.py:85)
+[rank0]:W1223 02:18:31.398000 2178848 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8]    last reason: 1/7: ___as_tensor(___stack0).item() == 1954.941650390625  # (unknown source ___as_tensor(___stack0).item(), please file a bug)
+[rank0]:W1223 02:18:31.398000 2178848 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank0]:W1223 02:18:31.398000 2178848 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html.
+layer:     0 | step:     8 | loss: 8.225 | thresh: 0.000 | sparse: 0.023 | tacc: 0.521 | oacc: 0.461
+layer:     0 | step:     9 | loss: 8.223 | thresh: 0.000 | sparse: 0.023 | tacc: 0.519 | oacc: 0.461
+layer:     0 | step:    10 | loss: 8.160 | thresh: 0.000 | sparse: 0.025 | tacc: 0.522 | oacc: 0.463
+layer:     0 | step:    11 | loss: 8.155 | thresh: 0.000 | sparse: 0.024 | tacc: 0.520 | oacc: 0.459
+layer:     0 | step:    12 | loss: 8.174 | thresh: 0.000 | sparse: 0.024 | tacc: 0.520 | oacc: 0.461
+layer:     0 | step:    13 | loss: 8.177 | thresh: -0.000 | sparse: 0.023 | tacc: 0.518 | oacc: 0.457

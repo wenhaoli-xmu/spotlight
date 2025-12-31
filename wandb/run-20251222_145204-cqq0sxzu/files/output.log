@@ -1,0 +1,35 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:23<00:00,  7.76s/it]
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 617, in <module>
+    train(args)
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 308, in train
+    model = monkey_patch(model)
+            ^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 344, in monkey_patch
+    layer.self_attn.query_hash = HashModule(
+                                 ^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/utils/hash_utils.py", line 98, in __init__
+    self.thresh_pred = ThreshHead(num_heads, dims[-1])
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/utils/hash_utils.py", line 79, in __init__
+    torch.zeros((num_heads, dims[-1]), device='cuda'),
+                           ^^^^
+NameError: name 'dims' is not defined. Did you mean: 'dim'?
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 617, in <module>
+[rank0]:     train(args)
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 308, in train
+[rank0]:     model = monkey_patch(model)
+[rank0]:             ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 344, in monkey_patch
+[rank0]:     layer.self_attn.query_hash = HashModule(
+[rank0]:                                  ^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/utils/hash_utils.py", line 98, in __init__
+[rank0]:     self.thresh_pred = ThreshHead(num_heads, dims[-1])
+[rank0]:                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/utils/hash_utils.py", line 79, in __init__
+[rank0]:     torch.zeros((num_heads, dims[-1]), device='cuda'),
+[rank0]:                             ^^^^
+[rank0]: NameError: name 'dims' is not defined. Did you mean: 'dim'?

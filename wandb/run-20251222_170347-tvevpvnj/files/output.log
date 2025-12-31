@@ -1,0 +1,35 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|██████████████████████████████████████████████| 3/3 [00:12<00:00,  4.26s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|██████████████████████████████████████████████| 3/3 [00:04<00:00,  1.52s/it]
+  0%|                                                                                | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:344: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|███████████████████████████████████████████████████████████████████████| 16/16 [01:17<00:00,  4.83s/it]
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 556, in <module>
+    train(args)
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 444, in train
+    top_acc, oth_acc, thresh, loss = compute_loss(draft_attn, true_attn, thresh, random_query_index)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 103, in compute_attn_supervise_loss
+    A = torch.gather(draft_attn, -1, top_idx)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: gather() received an invalid combination of arguments - got (Tensor, int, NoneType), but expected one of:
+ * (Tensor input, int dim, Tensor index, *, bool sparse_grad = False, Tensor out = None)
+ * (Tensor input, name dim, Tensor index, *, bool sparse_grad = False, Tensor out = None)
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 556, in <module>
+[rank0]:     train(args)
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 444, in train
+[rank0]:     top_acc, oth_acc, thresh, loss = compute_loss(draft_attn, true_attn, thresh, random_query_index)
+[rank0]:                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 103, in compute_attn_supervise_loss
+[rank0]:     A = torch.gather(draft_attn, -1, top_idx)
+[rank0]:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: TypeError: gather() received an invalid combination of arguments - got (Tensor, int, NoneType), but expected one of:
+[rank0]:  * (Tensor input, int dim, Tensor index, *, bool sparse_grad = False, Tensor out = None)
+[rank0]:  * (Tensor input, name dim, Tensor index, *, bool sparse_grad = False, Tensor out = None)

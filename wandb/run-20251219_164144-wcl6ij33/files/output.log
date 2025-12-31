@@ -1,0 +1,154 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████████| 3/3 [00:12<00:00,  4.09s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.56s/it]
+  0%|                                                                                                              | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:406: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.70s/it]
+[rank0]:W1219 16:43:55.601000 2246858 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break from `Tensor.item()`, consider setting:
+[rank0]:W1219 16:43:55.601000 2246858 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+[rank0]:W1219 16:43:55.601000 2246858 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] or:
+[rank0]:W1219 16:43:55.601000 2246858 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+[rank0]:W1219 16:43:55.601000 2246858 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] to include these operations in the captured graph.
+[rank0]:W1219 16:43:55.601000 2246858 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1219 16:43:55.601000 2246858 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break: from user code at:
+[rank0]:W1219 16:43:55.601000 2246858 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 182, in compute_attn_supervise_loss
+[rank0]:W1219 16:43:55.601000 2246858 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     return top_acc.item(), oth_fp.item(), loss
+[rank0]:W1219 16:43:55.601000 2246858 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1219 16:43:55.601000 2246858 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+layer:     0 | step:     0 | loss: 136.503 | tacc: 0.626 | oacc: 0.574
+layer:     0 | step:     1 | loss: 136.405 | tacc: 0.631 | oacc: 0.577
+layer:     0 | step:     2 | loss: 136.303 | tacc: 0.629 | oacc: 0.575
+layer:     0 | step:     3 | loss: 136.168 | tacc: 0.633 | oacc: 0.576
+layer:     0 | step:     4 | loss: 136.110 | tacc: 0.625 | oacc: 0.567
+layer:     0 | step:     5 | loss: 136.153 | tacc: 0.618 | oacc: 0.561
+layer:     0 | step:     6 | loss: 135.710 | tacc: 0.614 | oacc: 0.552
+layer:     0 | step:     7 | loss: 135.481 | tacc: 0.615 | oacc: 0.549
+layer:     0 | step:     8 | loss: 135.311 | tacc: 0.602 | oacc: 0.534
+layer:     0 | step:     9 | loss: 134.798 | tacc: 0.598 | oacc: 0.522
+layer:     0 | step:    10 | loss: 134.197 | tacc: 0.586 | oacc: 0.502
+layer:     0 | step:    11 | loss: 134.230 | tacc: 0.585 | oacc: 0.502
+layer:     0 | step:    12 | loss: 133.904 | tacc: 0.576 | oacc: 0.488
+layer:     0 | step:    13 | loss: 133.609 | tacc: 0.569 | oacc: 0.477
+layer:     0 | step:    14 | loss: 133.175 | tacc: 0.564 | oacc: 0.466
+layer:     0 | step:    15 | loss: 133.107 | tacc: 0.552 | oacc: 0.453
+layer:     0 | step:    16 | loss: 132.560 | tacc: 0.548 | oacc: 0.440
+layer:     0 | step:    17 | loss: 132.124 | tacc: 0.544 | oacc: 0.430
+layer:     0 | step:    18 | loss: 132.101 | tacc: 0.536 | oacc: 0.423
+layer:     0 | step:    19 | loss: 131.603 | tacc: 0.537 | oacc: 0.417
+layer:     0 | step:    20 | loss: 130.103 | tacc: 0.524 | oacc: 0.384
+layer:     0 | step:    21 | loss: 130.897 | tacc: 0.533 | oacc: 0.403
+layer:     0 | step:    22 | loss: 130.830 | tacc: 0.532 | oacc: 0.402
+layer:     0 | step:    23 | loss: 130.125 | tacc: 0.536 | oacc: 0.396
+layer:     0 | step:    24 | loss: 129.792 | tacc: 0.542 | oacc: 0.397
+layer:     0 | step:    25 | loss: 129.473 | tacc: 0.544 | oacc: 0.396
+layer:     0 | step:    26 | loss: 128.931 | tacc: 0.549 | oacc: 0.393
+layer:     0 | step:    27 | loss: 129.049 | tacc: 0.550 | oacc: 0.396
+layer:     0 | step:    28 | loss: 128.388 | tacc: 0.556 | oacc: 0.393
+layer:     0 | step:    29 | loss: 128.022 | tacc: 0.563 | oacc: 0.396
+layer:     0 | step:    30 | loss: 127.794 | tacc: 0.566 | oacc: 0.395
+layer:     0 | step:    31 | loss: 127.306 | tacc: 0.571 | oacc: 0.394
+layer:     0 | step:    32 | loss: 127.041 | tacc: 0.575 | oacc: 0.395
+layer:     0 | step:    33 | loss: 126.862 | tacc: 0.575 | oacc: 0.392
+layer:     0 | step:    34 | loss: 126.210 | tacc: 0.582 | oacc: 0.391
+layer:     0 | step:    35 | loss: 125.856 | tacc: 0.586 | oacc: 0.391
+layer:     0 | step:    36 | loss: 125.811 | tacc: 0.589 | oacc: 0.393
+layer:     0 | step:    37 | loss: 125.544 | tacc: 0.588 | oacc: 0.389
+layer:     0 | step:    38 | loss: 125.070 | tacc: 0.592 | oacc: 0.387
+layer:     0 | step:    39 | loss: 124.649 | tacc: 0.594 | oacc: 0.384
+layer:     0 | step:    40 | loss: 124.397 | tacc: 0.597 | oacc: 0.384
+layer:     0 | step:    41 | loss: 124.196 | tacc: 0.595 | oacc: 0.382
+layer:     0 | step:    42 | loss: 123.928 | tacc: 0.596 | oacc: 0.379
+layer:     0 | step:    43 | loss: 123.584 | tacc: 0.596 | oacc: 0.376
+layer:     0 | step:    44 | loss: 123.387 | tacc: 0.596 | oacc: 0.373
+layer:     0 | step:    45 | loss: 122.287 | tacc: 0.603 | oacc: 0.368
+layer:     0 | step:    46 | loss: 123.113 | tacc: 0.600 | oacc: 0.373
+layer:     0 | step:    47 | loss: 122.679 | tacc: 0.600 | oacc: 0.369
+layer:     0 | step:    48 | loss: 121.963 | tacc: 0.603 | oacc: 0.364
+layer:     0 | step:    49 | loss: 121.206 | tacc: 0.610 | oacc: 0.363
+layer:     0 | step:    50 | loss: 121.877 | tacc: 0.604 | oacc: 0.365
+layer:     0 | step:    51 | loss: 121.976 | tacc: 0.604 | oacc: 0.366
+layer:     0 | step:    52 | loss: 121.500 | tacc: 0.609 | oacc: 0.365
+layer:     0 | step:    53 | loss: 120.564 | tacc: 0.617 | oacc: 0.363
+layer:     0 | step:    54 | loss: 120.774 | tacc: 0.615 | oacc: 0.364
+layer:     0 | step:    55 | loss: 120.734 | tacc: 0.614 | oacc: 0.362
+layer:     0 | step:    56 | loss: 120.341 | tacc: 0.620 | oacc: 0.364
+layer:     0 | step:    57 | loss: 120.004 | tacc: 0.624 | oacc: 0.363
+layer:     0 | step:    58 | loss: 120.041 | tacc: 0.623 | oacc: 0.365
+layer:     0 | step:    59 | loss: 119.142 | tacc: 0.626 | oacc: 0.358
+layer:     0 | step:    60 | loss: 119.840 | tacc: 0.622 | oacc: 0.361
+layer:     0 | step:    61 | loss: 119.330 | tacc: 0.623 | oacc: 0.356
+layer:     0 | step:    62 | loss: 118.007 | tacc: 0.640 | oacc: 0.360
+layer:     0 | step:    63 | loss: 118.774 | tacc: 0.630 | oacc: 0.357
+  0%|                                                                                                              | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:406: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:14<00:00,  4.66s/it]
+layer:     0 | step:    64 | loss: 118.641 | tacc: 0.628 | oacc: 0.355
+layer:     0 | step:    65 | loss: 118.413 | tacc: 0.633 | oacc: 0.357
+layer:     0 | step:    66 | loss: 118.107 | tacc: 0.634 | oacc: 0.354
+layer:     0 | step:    67 | loss: 116.798 | tacc: 0.643 | oacc: 0.353
+layer:     0 | step:    68 | loss: 118.123 | tacc: 0.631 | oacc: 0.352
+layer:     0 | step:    69 | loss: 116.248 | tacc: 0.647 | oacc: 0.351
+layer:     0 | step:    70 | loss: 117.020 | tacc: 0.641 | oacc: 0.350
+layer:     0 | step:    71 | loss: 118.034 | tacc: 0.633 | oacc: 0.353
+layer:     0 | step:    72 | loss: 116.798 | tacc: 0.641 | oacc: 0.348
+layer:     0 | step:    73 | loss: 117.292 | tacc: 0.638 | oacc: 0.350
+layer:     0 | step:    74 | loss: 117.108 | tacc: 0.640 | oacc: 0.350
+layer:     0 | step:    75 | loss: 116.427 | tacc: 0.644 | oacc: 0.347
+layer:     0 | step:    76 | loss: 116.419 | tacc: 0.646 | oacc: 0.348
+layer:     0 | step:    77 | loss: 116.582 | tacc: 0.646 | oacc: 0.350
+layer:     0 | step:    78 | loss: 116.257 | tacc: 0.649 | oacc: 0.350
+layer:     0 | step:    79 | loss: 115.763 | tacc: 0.653 | oacc: 0.349
+layer:     0 | step:    80 | loss: 116.094 | tacc: 0.650 | oacc: 0.350
+layer:     0 | step:    81 | loss: 116.516 | tacc: 0.647 | oacc: 0.351
+layer:     0 | step:    82 | loss: 115.152 | tacc: 0.657 | oacc: 0.347
+layer:     0 | step:    83 | loss: 115.278 | tacc: 0.652 | oacc: 0.344
+layer:     0 | step:    84 | loss: 115.049 | tacc: 0.654 | oacc: 0.344
+layer:     0 | step:    85 | loss: 115.346 | tacc: 0.653 | oacc: 0.346
+layer:     0 | step:    86 | loss: 113.541 | tacc: 0.666 | oacc: 0.343
+layer:     0 | step:    87 | loss: 114.339 | tacc: 0.663 | oacc: 0.346
+layer:     0 | step:    88 | loss: 114.452 | tacc: 0.659 | oacc: 0.342
+layer:     0 | step:    89 | loss: 114.491 | tacc: 0.659 | oacc: 0.343
+layer:     0 | step:    90 | loss: 114.331 | tacc: 0.657 | oacc: 0.340
+layer:     0 | step:    91 | loss: 114.402 | tacc: 0.659 | oacc: 0.343
+layer:     0 | step:    92 | loss: 114.046 | tacc: 0.662 | oacc: 0.342
+layer:     0 | step:    93 | loss: 114.330 | tacc: 0.661 | oacc: 0.343
+layer:     0 | step:    94 | loss: 113.773 | tacc: 0.664 | oacc: 0.341
+layer:     0 | step:    95 | loss: 113.713 | tacc: 0.666 | oacc: 0.342
+layer:     0 | step:    96 | loss: 113.570 | tacc: 0.666 | oacc: 0.341
+layer:     0 | step:    97 | loss: 113.221 | tacc: 0.669 | oacc: 0.340
+layer:     0 | step:    98 | loss: 113.341 | tacc: 0.667 | oacc: 0.340
+layer:     0 | step:    99 | loss: 113.157 | tacc: 0.667 | oacc: 0.338
+layer:     0 | step:   100 | loss: 112.506 | tacc: 0.673 | oacc: 0.338
+layer:     0 | step:   101 | loss: 113.046 | tacc: 0.669 | oacc: 0.340
+layer:     0 | step:   102 | loss: 111.660 | tacc: 0.676 | oacc: 0.332
+layer:     0 | step:   103 | loss: 112.642 | tacc: 0.670 | oacc: 0.337
+layer:     0 | step:   104 | loss: 112.753 | tacc: 0.670 | oacc: 0.338
+layer:     0 | step:   105 | loss: 112.576 | tacc: 0.671 | oacc: 0.336
+layer:     0 | step:   106 | loss: 112.244 | tacc: 0.675 | oacc: 0.338
+layer:     0 | step:   107 | loss: 111.366 | tacc: 0.682 | oacc: 0.335
+layer:     0 | step:   108 | loss: 112.224 | tacc: 0.677 | oacc: 0.340
+layer:     0 | step:   109 | loss: 112.020 | tacc: 0.677 | oacc: 0.337
+layer:     0 | step:   110 | loss: 111.323 | tacc: 0.681 | oacc: 0.335
+layer:     0 | step:   111 | loss: 111.185 | tacc: 0.680 | oacc: 0.332
+layer:     0 | step:   112 | loss: 112.060 | tacc: 0.677 | oacc: 0.338
+layer:     0 | step:   113 | loss: 111.036 | tacc: 0.683 | oacc: 0.333
+layer:     0 | step:   114 | loss: 111.428 | tacc: 0.679 | oacc: 0.334
+layer:     0 | step:   115 | loss: 111.712 | tacc: 0.679 | oacc: 0.337
+layer:     0 | step:   116 | loss: 111.227 | tacc: 0.682 | oacc: 0.335
+layer:     0 | step:   117 | loss: 111.177 | tacc: 0.681 | oacc: 0.333
+layer:     0 | step:   118 | loss: 110.717 | tacc: 0.685 | oacc: 0.333
+layer:     0 | step:   119 | loss: 111.039 | tacc: 0.685 | oacc: 0.335
+layer:     0 | step:   120 | loss: 110.669 | tacc: 0.682 | oacc: 0.330
+layer:     0 | step:   121 | loss: 110.426 | tacc: 0.691 | oacc: 0.336
+layer:     0 | step:   122 | loss: 110.223 | tacc: 0.687 | oacc: 0.330
+layer:     0 | step:   123 | loss: 110.102 | tacc: 0.686 | oacc: 0.328
+layer:     0 | step:   124 | loss: 109.376 | tacc: 0.691 | oacc: 0.325
+layer:     0 | step:   125 | loss: 110.403 | tacc: 0.685 | oacc: 0.330
+layer:     0 | step:   126 | loss: 109.149 | tacc: 0.692 | oacc: 0.325
+layer:     0 | step:   127 | loss: 109.679 | tacc: 0.694 | oacc: 0.330
+ 50%|███████████████████████████████████████████████████                                                   | 8/16 [00:37<00:37,  4.69s/it]
+Traceback (most recent call last):

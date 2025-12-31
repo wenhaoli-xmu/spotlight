@@ -1,0 +1,6 @@
+{"time":"2025-12-24T11:21:45.402162164Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-24T11:21:46.345450138Z","level":"INFO","msg":"stream: created new stream","id":"6djisdml"}
+{"time":"2025-12-24T11:21:46.345508161Z","level":"INFO","msg":"stream: started","id":"6djisdml"}
+{"time":"2025-12-24T11:21:46.34553132Z","level":"INFO","msg":"sender: started","stream_id":"6djisdml"}
+{"time":"2025-12-24T11:21:46.345531364Z","level":"INFO","msg":"writer: started","stream_id":"6djisdml"}
+{"time":"2025-12-24T11:21:46.345553599Z","level":"INFO","msg":"handler: started","stream_id":"6djisdml"}

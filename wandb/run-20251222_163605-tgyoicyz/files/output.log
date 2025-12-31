@@ -1,0 +1,89 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:13<00:00,  4.40s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:05<00:00,  1.86s/it]
+  0%|                                                                                                                         | 0/8 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:344: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [00:44<00:00,  5.59s/it]
+layer:     0 | step:     0 | loss: 8.811 | thresh: 0.000 | tacc: 0.629 | oacc: 0.578
+layer:     0 | step:     1 | loss: 8.712 | thresh: 0.000 | tacc: 0.633 | oacc: 0.578
+layer:     0 | step:     2 | loss: 8.821 | thresh: 0.000 | tacc: 0.633 | oacc: 0.579
+layer:     0 | step:     3 | loss: 8.806 | thresh: 0.000 | tacc: 0.634 | oacc: 0.581
+layer:     0 | step:     4 | loss: 8.707 | thresh: 0.000 | tacc: 0.632 | oacc: 0.577
+layer:     0 | step:     5 | loss: 8.805 | thresh: 0.000 | tacc: 0.627 | oacc: 0.578
+layer:     0 | step:     6 | loss: 8.714 | thresh: 0.000 | tacc: 0.625 | oacc: 0.572
+layer:     0 | step:     7 | loss: 8.794 | thresh: 0.000 | tacc: 0.632 | oacc: 0.577
+layer:     0 | step:     8 | loss: 8.768 | thresh: 0.001 | tacc: 0.630 | oacc: 0.576
+layer:     0 | step:     9 | loss: 8.775 | thresh: 0.018 | tacc: 0.630 | oacc: 0.579
+layer:     0 | step:    10 | loss: 8.731 | thresh: 0.083 | tacc: 0.630 | oacc: 0.575
+layer:     0 | step:    11 | loss: 8.651 | thresh: 0.188 | tacc: 0.625 | oacc: 0.572
+layer:     0 | step:    12 | loss: 8.643 | thresh: 0.285 | tacc: 0.629 | oacc: 0.577
+layer:     0 | step:    13 | loss: 8.647 | thresh: 0.352 | tacc: 0.630 | oacc: 0.576
+layer:     0 | step:    14 | loss: 8.627 | thresh: 0.402 | tacc: 0.631 | oacc: 0.577
+layer:     0 | step:    15 | loss: 8.651 | thresh: 0.436 | tacc: 0.626 | oacc: 0.573
+layer:     0 | step:    16 | loss: 8.628 | thresh: 0.482 | tacc: 0.632 | oacc: 0.577
+layer:     0 | step:    17 | loss: 8.550 | thresh: 0.543 | tacc: 0.630 | oacc: 0.574
+layer:     0 | step:    18 | loss: 8.473 | thresh: 0.602 | tacc: 0.625 | oacc: 0.569
+layer:     0 | step:    19 | loss: 8.550 | thresh: 0.676 | tacc: 0.627 | oacc: 0.572
+layer:     0 | step:    20 | loss: 8.491 | thresh: 0.754 | tacc: 0.627 | oacc: 0.571
+layer:     0 | step:    21 | loss: 8.440 | thresh: 0.824 | tacc: 0.623 | oacc: 0.568
+layer:     0 | step:    22 | loss: 8.483 | thresh: 0.906 | tacc: 0.626 | oacc: 0.573
+layer:     0 | step:    23 | loss: 8.353 | thresh: 1.000 | tacc: 0.620 | oacc: 0.564
+layer:     0 | step:    24 | loss: 8.413 | thresh: 1.078 | tacc: 0.620 | oacc: 0.566
+layer:     0 | step:    25 | loss: 8.364 | thresh: 1.164 | tacc: 0.621 | oacc: 0.564
+layer:     0 | step:    26 | loss: 8.284 | thresh: 1.258 | tacc: 0.615 | oacc: 0.557
+layer:     0 | step:    27 | loss: 8.277 | thresh: 1.352 | tacc: 0.602 | oacc: 0.545
+layer:     0 | step:    28 | loss: 8.270 | thresh: 1.438 | tacc: 0.600 | oacc: 0.544
+layer:     0 | step:    29 | loss: 8.201 | thresh: 1.562 | tacc: 0.593 | oacc: 0.535
+layer:     0 | step:    30 | loss: 8.190 | thresh: 1.617 | tacc: 0.590 | oacc: 0.531
+layer:     0 | step:    31 | loss: 8.136 | thresh: 1.750 | tacc: 0.583 | oacc: 0.523
+layer:     0 | step:    32 | loss: 8.113 | thresh: 1.875 | tacc: 0.578 | oacc: 0.520
+layer:     0 | step:    33 | loss: 8.118 | thresh: 1.945 | tacc: 0.569 | oacc: 0.511
+layer:     0 | step:    34 | loss: 8.110 | thresh: 2.062 | tacc: 0.571 | oacc: 0.513
+layer:     0 | step:    35 | loss: 8.070 | thresh: 2.188 | tacc: 0.568 | oacc: 0.509
+layer:     0 | step:    36 | loss: 8.054 | thresh: 2.281 | tacc: 0.564 | oacc: 0.504
+layer:     0 | step:    37 | loss: 7.973 | thresh: 2.406 | tacc: 0.556 | oacc: 0.495
+layer:     0 | step:    38 | loss: 7.975 | thresh: 2.500 | tacc: 0.552 | oacc: 0.491
+layer:     0 | step:    39 | loss: 7.969 | thresh: 2.578 | tacc: 0.550 | oacc: 0.489
+layer:     0 | step:    40 | loss: 7.942 | thresh: 2.719 | tacc: 0.543 | oacc: 0.481
+layer:     0 | step:    41 | loss: 7.944 | thresh: 2.766 | tacc: 0.541 | oacc: 0.481
+layer:     0 | step:    42 | loss: 7.862 | thresh: 2.859 | tacc: 0.538 | oacc: 0.476
+layer:     0 | step:    43 | loss: 7.858 | thresh: 2.938 | tacc: 0.535 | oacc: 0.472
+layer:     0 | step:    44 | loss: 7.836 | thresh: 3.062 | tacc: 0.531 | oacc: 0.465
+layer:     0 | step:    45 | loss: 7.811 | thresh: 3.109 | tacc: 0.527 | oacc: 0.463
+layer:     0 | step:    46 | loss: 7.818 | thresh: 3.125 | tacc: 0.526 | oacc: 0.463
+layer:     0 | step:    47 | loss: 7.789 | thresh: 3.172 | tacc: 0.524 | oacc: 0.461
+layer:     0 | step:    48 | loss: 7.759 | thresh: 3.250 | tacc: 0.524 | oacc: 0.459
+layer:     0 | step:    49 | loss: 7.762 | thresh: 3.250 | tacc: 0.518 | oacc: 0.453
+layer:     0 | step:    50 | loss: 7.742 | thresh: 3.297 | tacc: 0.520 | oacc: 0.453
+layer:     0 | step:    51 | loss: 7.685 | thresh: 3.312 | tacc: 0.516 | oacc: 0.448
+layer:     0 | step:    52 | loss: 7.701 | thresh: 3.297 | tacc: 0.519 | oacc: 0.452
+layer:     0 | step:    53 | loss: 7.639 | thresh: 3.312 | tacc: 0.521 | oacc: 0.452
+layer:     0 | step:    54 | loss: 7.649 | thresh: 3.312 | tacc: 0.518 | oacc: 0.448
+layer:     0 | step:    55 | loss: 7.623 | thresh: 3.266 | tacc: 0.523 | oacc: 0.452
+layer:     0 | step:    56 | loss: 7.624 | thresh: 3.250 | tacc: 0.527 | oacc: 0.456
+layer:     0 | step:    57 | loss: 7.606 | thresh: 3.219 | tacc: 0.523 | oacc: 0.454
+layer:     0 | step:    58 | loss: 7.587 | thresh: 3.250 | tacc: 0.527 | oacc: 0.456
+layer:     0 | step:    59 | loss: 7.563 | thresh: 3.234 | tacc: 0.528 | oacc: 0.457
+layer:     0 | step:    60 | loss: 7.595 | thresh: 3.125 | tacc: 0.528 | oacc: 0.458
+layer:     0 | step:    61 | loss: 7.524 | thresh: 3.172 | tacc: 0.532 | oacc: 0.460
+layer:     0 | step:    62 | loss: 7.527 | thresh: 3.141 | tacc: 0.531 | oacc: 0.457
+layer:     0 | step:    63 | loss: 7.530 | thresh: 3.078 | tacc: 0.529 | oacc: 0.457
+  0%|                                                                                                                         | 0/8 [00:03<?, ?it/s]
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 556, in <module>
+    train(args)
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 339, in train
+    inputs_recv = torch.empty_like(inputs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 556, in <module>
+[rank0]:     train(args)
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 339, in train
+[rank0]:     inputs_recv = torch.empty_like(inputs)
+[rank0]:                   ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: KeyboardInterrupt

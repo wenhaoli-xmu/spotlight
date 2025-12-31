@@ -1,0 +1,7 @@
+{"time":"2025-12-27T05:36:54.94408198Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-27T05:36:55.747560998Z","level":"INFO","msg":"stream: created new stream","id":"i1agigu6"}
+{"time":"2025-12-27T05:36:55.747609634Z","level":"INFO","msg":"stream: started","id":"i1agigu6"}
+{"time":"2025-12-27T05:36:55.74763558Z","level":"INFO","msg":"sender: started","stream_id":"i1agigu6"}
+{"time":"2025-12-27T05:36:55.747656437Z","level":"INFO","msg":"handler: started","stream_id":"i1agigu6"}
+{"time":"2025-12-27T05:36:55.747643665Z","level":"INFO","msg":"writer: started","stream_id":"i1agigu6"}
+{"time":"2025-12-27T05:40:57.578315795Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/wenhaoli20000901/spotlight-v2/i1agigu6/file_stream\": read tcp 192.168.14.159:47528->35.186.228.49:443: read: connection reset by peer"}

@@ -1,0 +1,774 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:12<00:00,  4.29s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.61s/it]
+  0%|                                                                                                                                           | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:404: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.72s/it]
+layer:     0 | step:     0 | loss: 8.744 | thresh: 0.000 | tacc: 0.633 | oacc: 0.578
+layer:     0 | step:     1 | loss: 8.738 | thresh: 0.000 | tacc: 0.631 | oacc: 0.575
+layer:     0 | step:     2 | loss: 8.640 | thresh: 0.293 | tacc: 0.630 | oacc: 0.575
+layer:     0 | step:     3 | loss: 8.483 | thresh: 0.805 | tacc: 0.622 | oacc: 0.567
+layer:     0 | step:     4 | loss: 8.240 | thresh: 1.586 | tacc: 0.591 | oacc: 0.532
+layer:     0 | step:     5 | loss: 8.047 | thresh: 2.547 | tacc: 0.548 | oacc: 0.489
+layer:     0 | step:     6 | loss: 7.912 | thresh: 3.594 | tacc: 0.504 | oacc: 0.442
+layer:     0 | step:     7 | loss: 7.922 | thresh: 4.344 | tacc: 0.470 | oacc: 0.408
+layer:     0 | step:     8 | loss: 7.912 | thresh: 4.719 | tacc: 0.449 | oacc: 0.385
+layer:     0 | step:     9 | loss: 7.854 | thresh: 4.812 | tacc: 0.449 | oacc: 0.382
+layer:     0 | step:    10 | loss: 7.754 | thresh: 4.531 | tacc: 0.464 | oacc: 0.394
+layer:     0 | step:    11 | loss: 7.645 | thresh: 4.031 | tacc: 0.484 | oacc: 0.409
+layer:     0 | step:    12 | loss: 7.644 | thresh: 3.406 | tacc: 0.512 | oacc: 0.439
+layer:     0 | step:    13 | loss: 7.521 | thresh: 2.688 | tacc: 0.545 | oacc: 0.467
+layer:     0 | step:    14 | loss: 7.411 | thresh: 2.359 | tacc: 0.565 | oacc: 0.479
+layer:     0 | step:    15 | loss: 7.426 | thresh: 2.328 | tacc: 0.566 | oacc: 0.483
+layer:     0 | step:    16 | loss: 7.329 | thresh: 2.641 | tacc: 0.557 | oacc: 0.468
+layer:     0 | step:    17 | loss: 7.273 | thresh: 3.000 | tacc: 0.542 | oacc: 0.449
+layer:     0 | step:    18 | loss: 7.227 | thresh: 3.203 | tacc: 0.538 | oacc: 0.445
+layer:     0 | step:    19 | loss: 7.193 | thresh: 3.203 | tacc: 0.533 | oacc: 0.437
+layer:     0 | step:    20 | loss: 7.066 | thresh: 3.125 | tacc: 0.544 | oacc: 0.442
+layer:     0 | step:    21 | loss: 7.058 | thresh: 3.031 | tacc: 0.543 | oacc: 0.442
+layer:     0 | step:    22 | loss: 6.989 | thresh: 3.203 | tacc: 0.541 | oacc: 0.437
+layer:     0 | step:    23 | loss: 6.954 | thresh: 3.281 | tacc: 0.533 | oacc: 0.427
+layer:     0 | step:    24 | loss: 6.920 | thresh: 3.172 | tacc: 0.541 | oacc: 0.434
+layer:     0 | step:    25 | loss: 6.836 | thresh: 3.047 | tacc: 0.553 | oacc: 0.441
+layer:     0 | step:    26 | loss: 6.796 | thresh: 2.938 | tacc: 0.558 | oacc: 0.442
+layer:     0 | step:    27 | loss: 6.807 | thresh: 2.844 | tacc: 0.557 | oacc: 0.442
+layer:     0 | step:    28 | loss: 6.736 | thresh: 2.875 | tacc: 0.558 | oacc: 0.437
+layer:     0 | step:    29 | loss: 6.691 | thresh: 2.938 | tacc: 0.553 | oacc: 0.429
+layer:     0 | step:    30 | loss: 6.653 | thresh: 3.062 | tacc: 0.551 | oacc: 0.423
+layer:     0 | step:    31 | loss: 6.586 | thresh: 2.984 | tacc: 0.559 | oacc: 0.425
+layer:     0 | step:    32 | loss: 6.578 | thresh: 2.953 | tacc: 0.558 | oacc: 0.424
+layer:     0 | step:    33 | loss: 6.568 | thresh: 2.812 | tacc: 0.563 | oacc: 0.427
+layer:     0 | step:    34 | loss: 6.498 | thresh: 2.812 | tacc: 0.566 | oacc: 0.423
+layer:     0 | step:    35 | loss: 6.498 | thresh: 2.891 | tacc: 0.565 | oacc: 0.423
+layer:     0 | step:    36 | loss: 6.474 | thresh: 2.984 | tacc: 0.560 | oacc: 0.415
+layer:     0 | step:    37 | loss: 6.483 | thresh: 2.922 | tacc: 0.565 | oacc: 0.420
+layer:     0 | step:    38 | loss: 6.422 | thresh: 2.688 | tacc: 0.573 | oacc: 0.422
+layer:     0 | step:    39 | loss: 6.406 | thresh: 2.609 | tacc: 0.577 | oacc: 0.425
+layer:     0 | step:    40 | loss: 6.363 | thresh: 2.797 | tacc: 0.574 | oacc: 0.416
+layer:     0 | step:    41 | loss: 6.353 | thresh: 2.906 | tacc: 0.566 | oacc: 0.409
+layer:     0 | step:    42 | loss: 6.349 | thresh: 2.906 | tacc: 0.565 | oacc: 0.407
+layer:     0 | step:    43 | loss: 6.303 | thresh: 2.828 | tacc: 0.575 | oacc: 0.412
+layer:     0 | step:    44 | loss: 6.269 | thresh: 2.703 | tacc: 0.583 | oacc: 0.417
+layer:     0 | step:    45 | loss: 6.288 | thresh: 2.750 | tacc: 0.581 | oacc: 0.415
+layer:     0 | step:    46 | loss: 6.255 | thresh: 2.812 | tacc: 0.579 | oacc: 0.409
+layer:     0 | step:    47 | loss: 6.195 | thresh: 2.984 | tacc: 0.580 | oacc: 0.404
+layer:     0 | step:    48 | loss: 6.167 | thresh: 2.938 | tacc: 0.576 | oacc: 0.397
+layer:     0 | step:    49 | loss: 6.146 | thresh: 2.844 | tacc: 0.583 | oacc: 0.401
+layer:     0 | step:    50 | loss: 6.110 | thresh: 2.656 | tacc: 0.594 | oacc: 0.405
+layer:     0 | step:    51 | loss: 6.155 | thresh: 2.672 | tacc: 0.589 | oacc: 0.407
+layer:     0 | step:    52 | loss: 6.135 | thresh: 2.734 | tacc: 0.588 | oacc: 0.405
+layer:     0 | step:    53 | loss: 6.014 | thresh: 2.969 | tacc: 0.584 | oacc: 0.383
+layer:     0 | step:    54 | loss: 6.065 | thresh: 2.828 | tacc: 0.589 | oacc: 0.397
+layer:     0 | step:    55 | loss: 6.049 | thresh: 2.828 | tacc: 0.595 | oacc: 0.398
+layer:     0 | step:    56 | loss: 6.048 | thresh: 2.812 | tacc: 0.592 | oacc: 0.396
+layer:     0 | step:    57 | loss: 5.983 | thresh: 2.859 | tacc: 0.595 | oacc: 0.393
+layer:     0 | step:    58 | loss: 6.000 | thresh: 2.906 | tacc: 0.595 | oacc: 0.393
+layer:     0 | step:    59 | loss: 5.943 | thresh: 3.031 | tacc: 0.591 | oacc: 0.385
+layer:     0 | step:    60 | loss: 5.952 | thresh: 2.859 | tacc: 0.598 | oacc: 0.392
+layer:     0 | step:    61 | loss: 5.871 | thresh: 2.844 | tacc: 0.609 | oacc: 0.392
+layer:     0 | step:    62 | loss: 5.909 | thresh: 2.938 | tacc: 0.600 | oacc: 0.388
+layer:     0 | step:    63 | loss: 5.888 | thresh: 3.062 | tacc: 0.599 | oacc: 0.384
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.69s/it]
+layer:     0 | step:    64 | loss: 5.813 | thresh: 3.047 | tacc: 0.606 | oacc: 0.380
+layer:     0 | step:    65 | loss: 5.869 | thresh: 2.969 | tacc: 0.603 | oacc: 0.385
+layer:     0 | step:    66 | loss: 5.844 | thresh: 2.984 | tacc: 0.607 | oacc: 0.385
+layer:     0 | step:    67 | loss: 5.839 | thresh: 2.953 | tacc: 0.607 | oacc: 0.386
+layer:     0 | step:    68 | loss: 5.722 | thresh: 3.172 | tacc: 0.610 | oacc: 0.372
+layer:     0 | step:    69 | loss: 5.810 | thresh: 2.969 | tacc: 0.609 | oacc: 0.384
+layer:     0 | step:    70 | loss: 5.752 | thresh: 3.047 | tacc: 0.612 | oacc: 0.381
+layer:     0 | step:    71 | loss: 5.795 | thresh: 3.062 | tacc: 0.605 | oacc: 0.378
+layer:     0 | step:    72 | loss: 5.692 | thresh: 3.219 | tacc: 0.613 | oacc: 0.373
+layer:     0 | step:    73 | loss: 5.758 | thresh: 3.109 | tacc: 0.606 | oacc: 0.374
+layer:     0 | step:    74 | loss: 5.734 | thresh: 3.000 | tacc: 0.611 | oacc: 0.376
+layer:     0 | step:    75 | loss: 5.672 | thresh: 2.984 | tacc: 0.619 | oacc: 0.377
+layer:     0 | step:    76 | loss: 5.677 | thresh: 3.062 | tacc: 0.619 | oacc: 0.377
+layer:     0 | step:    77 | loss: 5.692 | thresh: 3.016 | tacc: 0.615 | oacc: 0.375
+layer:     0 | step:    78 | loss: 5.659 | thresh: 3.125 | tacc: 0.613 | oacc: 0.369
+layer:     0 | step:    79 | loss: 5.517 | thresh: 3.312 | tacc: 0.626 | oacc: 0.363
+layer:     0 | step:    80 | loss: 5.616 | thresh: 3.031 | tacc: 0.618 | oacc: 0.370
+layer:     0 | step:    81 | loss: 5.640 | thresh: 3.047 | tacc: 0.618 | oacc: 0.371
+layer:     0 | step:    82 | loss: 5.461 | thresh: 3.250 | tacc: 0.629 | oacc: 0.362
+layer:     0 | step:    83 | loss: 5.574 | thresh: 3.156 | tacc: 0.622 | oacc: 0.367
+layer:     0 | step:    84 | loss: 5.541 | thresh: 3.203 | tacc: 0.623 | oacc: 0.366
+layer:     0 | step:    85 | loss: 5.532 | thresh: 3.094 | tacc: 0.624 | oacc: 0.366
+layer:     0 | step:    86 | loss: 5.521 | thresh: 3.078 | tacc: 0.627 | oacc: 0.368
+layer:     0 | step:    87 | loss: 5.492 | thresh: 3.203 | tacc: 0.628 | oacc: 0.366
+layer:     0 | step:    88 | loss: 5.391 | thresh: 3.281 | tacc: 0.634 | oacc: 0.360
+layer:     0 | step:    89 | loss: 5.469 | thresh: 3.297 | tacc: 0.623 | oacc: 0.358
+layer:     0 | step:    90 | loss: 5.454 | thresh: 3.297 | tacc: 0.625 | oacc: 0.359
+layer:     0 | step:    91 | loss: 5.457 | thresh: 3.250 | tacc: 0.626 | oacc: 0.360
+layer:     0 | step:    92 | loss: 5.417 | thresh: 3.234 | tacc: 0.630 | oacc: 0.359
+layer:     0 | step:    93 | loss: 5.419 | thresh: 3.188 | tacc: 0.629 | oacc: 0.358
+layer:     0 | step:    94 | loss: 5.385 | thresh: 3.188 | tacc: 0.636 | oacc: 0.361
+layer:     0 | step:    95 | loss: 5.381 | thresh: 3.297 | tacc: 0.632 | oacc: 0.358
+layer:     0 | step:    96 | loss: 5.355 | thresh: 3.328 | tacc: 0.631 | oacc: 0.355
+layer:     0 | step:    97 | loss: 5.317 | thresh: 3.375 | tacc: 0.634 | oacc: 0.353
+layer:     0 | step:    98 | loss: 5.331 | thresh: 3.312 | tacc: 0.633 | oacc: 0.354
+layer:     0 | step:    99 | loss: 5.332 | thresh: 3.281 | tacc: 0.637 | oacc: 0.357
+layer:     0 | step:   100 | loss: 5.257 | thresh: 3.375 | tacc: 0.639 | oacc: 0.352
+layer:     0 | step:   101 | loss: 5.279 | thresh: 3.312 | tacc: 0.638 | oacc: 0.354
+layer:     0 | step:   102 | loss: 5.179 | thresh: 3.422 | tacc: 0.647 | oacc: 0.352
+layer:     0 | step:   103 | loss: 5.250 | thresh: 3.359 | tacc: 0.639 | oacc: 0.351
+layer:     0 | step:   104 | loss: 5.224 | thresh: 3.438 | tacc: 0.639 | oacc: 0.348
+layer:     0 | step:   105 | loss: 5.171 | thresh: 3.500 | tacc: 0.641 | oacc: 0.346
+layer:     0 | step:   106 | loss: 5.188 | thresh: 3.438 | tacc: 0.643 | oacc: 0.348
+layer:     0 | step:   107 | loss: 5.136 | thresh: 3.547 | tacc: 0.645 | oacc: 0.345
+layer:     0 | step:   108 | loss: 5.200 | thresh: 3.344 | tacc: 0.643 | oacc: 0.349
+layer:     0 | step:   109 | loss: 5.090 | thresh: 3.453 | tacc: 0.655 | oacc: 0.348
+layer:     0 | step:   110 | loss: 5.093 | thresh: 3.609 | tacc: 0.646 | oacc: 0.341
+layer:     0 | step:   111 | loss: 5.075 | thresh: 3.766 | tacc: 0.644 | oacc: 0.337
+layer:     0 | step:   112 | loss: 5.146 | thresh: 3.500 | tacc: 0.641 | oacc: 0.342
+layer:     0 | step:   113 | loss: 5.071 | thresh: 3.578 | tacc: 0.648 | oacc: 0.341
+layer:     0 | step:   114 | loss: 4.994 | thresh: 3.734 | tacc: 0.652 | oacc: 0.335
+layer:     0 | step:   115 | loss: 5.078 | thresh: 3.406 | tacc: 0.653 | oacc: 0.348
+layer:     0 | step:   116 | loss: 5.040 | thresh: 3.500 | tacc: 0.652 | oacc: 0.343
+layer:     0 | step:   117 | loss: 5.033 | thresh: 3.562 | tacc: 0.652 | oacc: 0.341
+layer:     0 | step:   118 | loss: 5.002 | thresh: 3.688 | tacc: 0.650 | oacc: 0.337
+layer:     0 | step:   119 | loss: 5.027 | thresh: 3.719 | tacc: 0.643 | oacc: 0.333
+layer:     0 | step:   120 | loss: 4.989 | thresh: 3.656 | tacc: 0.650 | oacc: 0.335
+layer:     0 | step:   121 | loss: 4.962 | thresh: 3.625 | tacc: 0.658 | oacc: 0.340
+layer:     0 | step:   122 | loss: 4.945 | thresh: 3.672 | tacc: 0.656 | oacc: 0.337
+layer:     0 | step:   123 | loss: 4.919 | thresh: 3.641 | tacc: 0.662 | oacc: 0.340
+layer:     0 | step:   124 | loss: 4.857 | thresh: 3.859 | tacc: 0.659 | oacc: 0.331
+layer:     0 | step:   125 | loss: 4.897 | thresh: 3.781 | tacc: 0.655 | oacc: 0.331
+layer:     0 | step:   126 | loss: 4.832 | thresh: 3.938 | tacc: 0.658 | oacc: 0.327
+layer:     0 | step:   127 | loss: 4.869 | thresh: 3.812 | tacc: 0.656 | oacc: 0.330
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.70s/it]
+layer:     0 | step:   128 | loss: 4.862 | thresh: 3.766 | tacc: 0.661 | oacc: 0.334
+layer:     0 | step:   129 | loss: 4.850 | thresh: 3.812 | tacc: 0.659 | oacc: 0.329
+layer:     0 | step:   130 | loss: 4.850 | thresh: 3.797 | tacc: 0.661 | oacc: 0.331
+layer:     0 | step:   131 | loss: 4.900 | thresh: 3.641 | tacc: 0.659 | oacc: 0.335
+layer:     0 | step:   132 | loss: 4.809 | thresh: 3.812 | tacc: 0.663 | oacc: 0.329
+layer:     0 | step:   133 | loss: 4.787 | thresh: 3.969 | tacc: 0.665 | oacc: 0.325
+layer:     0 | step:   134 | loss: 4.745 | thresh: 4.000 | tacc: 0.666 | oacc: 0.325
+layer:     0 | step:   135 | loss: 4.706 | thresh: 4.062 | tacc: 0.666 | oacc: 0.322
+layer:     0 | step:   136 | loss: 4.760 | thresh: 3.906 | tacc: 0.662 | oacc: 0.322
+layer:     0 | step:   137 | loss: 4.759 | thresh: 3.875 | tacc: 0.667 | oacc: 0.328
+layer:     0 | step:   138 | loss: 4.708 | thresh: 3.969 | tacc: 0.670 | oacc: 0.326
+layer:     0 | step:   139 | loss: 4.717 | thresh: 3.891 | tacc: 0.669 | oacc: 0.327
+layer:     0 | step:   140 | loss: 4.619 | thresh: 4.219 | tacc: 0.666 | oacc: 0.310
+layer:     0 | step:   141 | loss: 4.730 | thresh: 3.938 | tacc: 0.667 | oacc: 0.326
+layer:     0 | step:   142 | loss: 4.698 | thresh: 4.031 | tacc: 0.669 | oacc: 0.324
+layer:     0 | step:   143 | loss: 4.681 | thresh: 4.062 | tacc: 0.666 | oacc: 0.320
+layer:     0 | step:   144 | loss: 4.668 | thresh: 4.031 | tacc: 0.669 | oacc: 0.322
+layer:     0 | step:   145 | loss: 4.675 | thresh: 4.000 | tacc: 0.667 | oacc: 0.321
+layer:     0 | step:   146 | loss: 4.616 | thresh: 4.094 | tacc: 0.673 | oacc: 0.322
+layer:     0 | step:   147 | loss: 4.631 | thresh: 4.031 | tacc: 0.673 | oacc: 0.322
+layer:     0 | step:   148 | loss: 4.612 | thresh: 4.062 | tacc: 0.674 | oacc: 0.321
+layer:     0 | step:   149 | loss: 4.600 | thresh: 4.156 | tacc: 0.671 | oacc: 0.317
+layer:     0 | step:   150 | loss: 4.554 | thresh: 4.281 | tacc: 0.672 | oacc: 0.313
+layer:     0 | step:   151 | loss: 4.584 | thresh: 4.094 | tacc: 0.677 | oacc: 0.320
+layer:     0 | step:   152 | loss: 4.539 | thresh: 4.250 | tacc: 0.675 | oacc: 0.315
+layer:     0 | step:   153 | loss: 4.561 | thresh: 4.219 | tacc: 0.669 | oacc: 0.311
+layer:     0 | step:   154 | loss: 4.543 | thresh: 4.188 | tacc: 0.675 | oacc: 0.315
+layer:     0 | step:   155 | loss: 4.509 | thresh: 4.219 | tacc: 0.679 | oacc: 0.315
+layer:     0 | step:   156 | loss: 4.590 | thresh: 4.031 | tacc: 0.676 | oacc: 0.321
+layer:     0 | step:   157 | loss: 4.553 | thresh: 4.094 | tacc: 0.676 | oacc: 0.318
+layer:     0 | step:   158 | loss: 4.495 | thresh: 4.219 | tacc: 0.678 | oacc: 0.315
+layer:     0 | step:   159 | loss: 4.492 | thresh: 4.219 | tacc: 0.679 | oacc: 0.315
+layer:     0 | step:   160 | loss: 4.482 | thresh: 4.250 | tacc: 0.680 | oacc: 0.313
+layer:     0 | step:   161 | loss: 4.505 | thresh: 4.156 | tacc: 0.680 | oacc: 0.315
+layer:     0 | step:   162 | loss: 4.477 | thresh: 4.312 | tacc: 0.677 | oacc: 0.310
+layer:     0 | step:   163 | loss: 4.469 | thresh: 4.312 | tacc: 0.678 | oacc: 0.310
+layer:     0 | step:   164 | loss: 4.387 | thresh: 4.438 | tacc: 0.683 | oacc: 0.308
+layer:     0 | step:   165 | loss: 4.422 | thresh: 4.344 | tacc: 0.680 | oacc: 0.307
+layer:     0 | step:   166 | loss: 4.388 | thresh: 4.375 | tacc: 0.686 | oacc: 0.310
+layer:     0 | step:   167 | loss: 4.404 | thresh: 4.375 | tacc: 0.685 | oacc: 0.311
+layer:     0 | step:   168 | loss: 4.403 | thresh: 4.312 | tacc: 0.683 | oacc: 0.309
+layer:     0 | step:   169 | loss: 4.391 | thresh: 4.375 | tacc: 0.686 | oacc: 0.310
+layer:     0 | step:   170 | loss: 4.407 | thresh: 4.406 | tacc: 0.683 | oacc: 0.308
+layer:     0 | step:   171 | loss: 4.362 | thresh: 4.438 | tacc: 0.683 | oacc: 0.304
+layer:     0 | step:   172 | loss: 4.346 | thresh: 4.562 | tacc: 0.689 | oacc: 0.307
+layer:     0 | step:   173 | loss: 4.364 | thresh: 4.562 | tacc: 0.681 | oacc: 0.303
+layer:     0 | step:   174 | loss: 4.281 | thresh: 4.688 | tacc: 0.690 | oacc: 0.303
+layer:     0 | step:   175 | loss: 4.331 | thresh: 4.531 | tacc: 0.687 | oacc: 0.305
+layer:     0 | step:   176 | loss: 4.305 | thresh: 4.531 | tacc: 0.688 | oacc: 0.304
+layer:     0 | step:   177 | loss: 4.355 | thresh: 4.375 | tacc: 0.689 | oacc: 0.309
+layer:     0 | step:   178 | loss: 4.332 | thresh: 4.438 | tacc: 0.686 | oacc: 0.304
+layer:     0 | step:   179 | loss: 4.294 | thresh: 4.688 | tacc: 0.683 | oacc: 0.295
+layer:     0 | step:   180 | loss: 4.301 | thresh: 4.531 | tacc: 0.689 | oacc: 0.304
+layer:     0 | step:   181 | loss: 4.258 | thresh: 4.656 | tacc: 0.691 | oacc: 0.302
+layer:     0 | step:   182 | loss: 4.264 | thresh: 4.594 | tacc: 0.690 | oacc: 0.301
+layer:     0 | step:   183 | loss: 4.254 | thresh: 4.625 | tacc: 0.690 | oacc: 0.301
+layer:     0 | step:   184 | loss: 4.297 | thresh: 4.531 | tacc: 0.686 | oacc: 0.301
+layer:     0 | step:   185 | loss: 4.276 | thresh: 4.500 | tacc: 0.691 | oacc: 0.303
+layer:     0 | step:   186 | loss: 4.212 | thresh: 4.656 | tacc: 0.694 | oacc: 0.300
+layer:     0 | step:   187 | loss: 4.233 | thresh: 4.594 | tacc: 0.693 | oacc: 0.302
+layer:     0 | step:   188 | loss: 4.189 | thresh: 4.719 | tacc: 0.693 | oacc: 0.297
+layer:     0 | step:   189 | loss: 4.216 | thresh: 4.656 | tacc: 0.690 | oacc: 0.297
+layer:     0 | step:   190 | loss: 4.211 | thresh: 4.688 | tacc: 0.690 | oacc: 0.296
+layer:     0 | step:   191 | loss: 4.197 | thresh: 4.625 | tacc: 0.694 | oacc: 0.300
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.73s/it]
+layer:     0 | step:   192 | loss: 4.164 | thresh: 4.719 | tacc: 0.695 | oacc: 0.296
+layer:     0 | step:   193 | loss: 4.167 | thresh: 4.625 | tacc: 0.703 | oacc: 0.302
+layer:     0 | step:   194 | loss: 4.175 | thresh: 4.750 | tacc: 0.695 | oacc: 0.297
+layer:     0 | step:   195 | loss: 4.194 | thresh: 4.719 | tacc: 0.690 | oacc: 0.294
+layer:     0 | step:   196 | loss: 4.153 | thresh: 4.938 | tacc: 0.689 | oacc: 0.286
+layer:     0 | step:   197 | loss: 4.113 | thresh: 4.844 | tacc: 0.702 | oacc: 0.296
+layer:     0 | step:   198 | loss: 4.150 | thresh: 4.656 | tacc: 0.702 | oacc: 0.301
+layer:     0 | step:   199 | loss: 4.053 | thresh: 4.938 | tacc: 0.703 | oacc: 0.290
+layer:     0 | step:   200 | loss: 4.169 | thresh: 4.625 | tacc: 0.698 | oacc: 0.300
+layer:     0 | step:   201 | loss: 4.094 | thresh: 5.094 | tacc: 0.690 | oacc: 0.283
+layer:     0 | step:   202 | loss: 4.083 | thresh: 4.906 | tacc: 0.700 | oacc: 0.290
+layer:     0 | step:   203 | loss: 4.075 | thresh: 4.719 | tacc: 0.704 | oacc: 0.296
+layer:     0 | step:   204 | loss: 4.027 | thresh: 5.094 | tacc: 0.700 | oacc: 0.286
+layer:     0 | step:   205 | loss: 4.072 | thresh: 4.781 | tacc: 0.705 | oacc: 0.296
+layer:     0 | step:   206 | loss: 4.039 | thresh: 4.844 | tacc: 0.706 | oacc: 0.293
+layer:     0 | step:   207 | loss: 4.036 | thresh: 4.906 | tacc: 0.702 | oacc: 0.290
+layer:     0 | step:   208 | loss: 4.023 | thresh: 5.250 | tacc: 0.695 | oacc: 0.279
+layer:     0 | step:   209 | loss: 4.037 | thresh: 4.969 | tacc: 0.700 | oacc: 0.288
+layer:     0 | step:   210 | loss: 4.052 | thresh: 4.844 | tacc: 0.702 | oacc: 0.291
+layer:     0 | step:   211 | loss: 4.064 | thresh: 4.812 | tacc: 0.702 | oacc: 0.293
+layer:     0 | step:   212 | loss: 4.019 | thresh: 4.938 | tacc: 0.704 | oacc: 0.290
+layer:     0 | step:   213 | loss: 3.997 | thresh: 4.969 | tacc: 0.702 | oacc: 0.287
+layer:     0 | step:   214 | loss: 4.089 | thresh: 4.812 | tacc: 0.697 | oacc: 0.289
+layer:     0 | step:   215 | loss: 4.045 | thresh: 4.844 | tacc: 0.703 | oacc: 0.292
+layer:     0 | step:   216 | loss: 4.005 | thresh: 4.906 | tacc: 0.706 | oacc: 0.291
+layer:     0 | step:   217 | loss: 3.976 | thresh: 5.000 | tacc: 0.707 | oacc: 0.288
+layer:     0 | step:   218 | loss: 3.994 | thresh: 4.969 | tacc: 0.705 | oacc: 0.288
+layer:     0 | step:   219 | loss: 3.998 | thresh: 5.031 | tacc: 0.702 | oacc: 0.285
+layer:     0 | step:   220 | loss: 4.063 | thresh: 4.906 | tacc: 0.698 | oacc: 0.290
+layer:     0 | step:   221 | loss: 3.990 | thresh: 5.062 | tacc: 0.703 | oacc: 0.287
+layer:     0 | step:   222 | loss: 3.982 | thresh: 5.000 | tacc: 0.703 | oacc: 0.286
+layer:     0 | step:   223 | loss: 4.028 | thresh: 4.906 | tacc: 0.701 | oacc: 0.288
+layer:     0 | step:   224 | loss: 3.971 | thresh: 5.000 | tacc: 0.707 | oacc: 0.289
+layer:     0 | step:   225 | loss: 3.943 | thresh: 5.062 | tacc: 0.709 | oacc: 0.287
+layer:     0 | step:   226 | loss: 3.895 | thresh: 5.188 | tacc: 0.717 | oacc: 0.285
+layer:     0 | step:   227 | loss: 3.973 | thresh: 5.000 | tacc: 0.707 | oacc: 0.289
+layer:     0 | step:   228 | loss: 3.980 | thresh: 5.031 | tacc: 0.702 | oacc: 0.285
+layer:     0 | step:   229 | loss: 3.959 | thresh: 5.062 | tacc: 0.702 | oacc: 0.282
+layer:     0 | step:   230 | loss: 3.937 | thresh: 5.062 | tacc: 0.703 | oacc: 0.281
+layer:     0 | step:   231 | loss: 3.921 | thresh: 5.031 | tacc: 0.709 | oacc: 0.285
+layer:     0 | step:   232 | loss: 3.964 | thresh: 4.906 | tacc: 0.709 | oacc: 0.289
+layer:     0 | step:   233 | loss: 3.906 | thresh: 5.000 | tacc: 0.716 | oacc: 0.287
+layer:     0 | step:   234 | loss: 3.885 | thresh: 5.031 | tacc: 0.714 | oacc: 0.285
+layer:     0 | step:   235 | loss: 3.921 | thresh: 5.031 | tacc: 0.708 | oacc: 0.285
+layer:     0 | step:   236 | loss: 3.895 | thresh: 5.156 | tacc: 0.707 | oacc: 0.281
+layer:     0 | step:   237 | loss: 3.900 | thresh: 5.188 | tacc: 0.705 | oacc: 0.278
+layer:     0 | step:   238 | loss: 3.854 | thresh: 5.344 | tacc: 0.706 | oacc: 0.276
+layer:     0 | step:   239 | loss: 3.885 | thresh: 5.219 | tacc: 0.708 | oacc: 0.280
+layer:     0 | step:   240 | loss: 3.847 | thresh: 5.250 | tacc: 0.715 | oacc: 0.284
+layer:     0 | step:   241 | loss: 3.845 | thresh: 5.125 | tacc: 0.716 | oacc: 0.283
+layer:     0 | step:   242 | loss: 3.862 | thresh: 5.094 | tacc: 0.715 | oacc: 0.285
+layer:     0 | step:   243 | loss: 3.889 | thresh: 5.125 | tacc: 0.710 | oacc: 0.282
+layer:     0 | step:   244 | loss: 3.857 | thresh: 5.219 | tacc: 0.709 | oacc: 0.278
+layer:     0 | step:   245 | loss: 3.892 | thresh: 5.156 | tacc: 0.705 | oacc: 0.280
+layer:     0 | step:   246 | loss: 3.826 | thresh: 5.219 | tacc: 0.713 | oacc: 0.279
+layer:     0 | step:   247 | loss: 3.836 | thresh: 5.125 | tacc: 0.715 | oacc: 0.282
+layer:     0 | step:   248 | loss: 3.827 | thresh: 5.188 | tacc: 0.715 | oacc: 0.281
+layer:     0 | step:   249 | loss: 3.837 | thresh: 5.219 | tacc: 0.714 | oacc: 0.282
+layer:     0 | step:   250 | loss: 3.821 | thresh: 5.250 | tacc: 0.713 | oacc: 0.281
+layer:     0 | step:   251 | loss: 3.794 | thresh: 5.375 | tacc: 0.710 | oacc: 0.275
+layer:     0 | step:   252 | loss: 3.742 | thresh: 5.469 | tacc: 0.714 | oacc: 0.273
+layer:     0 | step:   253 | loss: 3.813 | thresh: 5.281 | tacc: 0.711 | oacc: 0.275
+layer:     0 | step:   254 | loss: 3.810 | thresh: 5.156 | tacc: 0.716 | oacc: 0.281
+layer:     0 | step:   255 | loss: 3.766 | thresh: 5.250 | tacc: 0.722 | oacc: 0.281
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.71s/it]
+layer:     0 | step:   256 | loss: 3.741 | thresh: 5.375 | tacc: 0.719 | oacc: 0.275
+layer:     0 | step:   257 | loss: 3.755 | thresh: 5.375 | tacc: 0.716 | oacc: 0.275
+layer:     0 | step:   258 | loss: 3.738 | thresh: 5.406 | tacc: 0.714 | oacc: 0.271
+layer:     0 | step:   259 | loss: 3.725 | thresh: 5.438 | tacc: 0.715 | oacc: 0.271
+layer:     0 | step:   260 | loss: 3.740 | thresh: 5.375 | tacc: 0.715 | oacc: 0.272
+layer:     0 | step:   261 | loss: 3.727 | thresh: 5.406 | tacc: 0.722 | oacc: 0.277
+layer:     0 | step:   262 | loss: 3.760 | thresh: 5.312 | tacc: 0.718 | oacc: 0.277
+layer:     0 | step:   263 | loss: 3.764 | thresh: 5.250 | tacc: 0.717 | oacc: 0.277
+layer:     0 | step:   264 | loss: 3.700 | thresh: 5.438 | tacc: 0.721 | oacc: 0.275
+layer:     0 | step:   265 | loss: 3.728 | thresh: 5.438 | tacc: 0.716 | oacc: 0.273
+layer:     0 | step:   266 | loss: 3.748 | thresh: 5.406 | tacc: 0.714 | oacc: 0.273
+layer:     0 | step:   267 | loss: 3.706 | thresh: 5.469 | tacc: 0.718 | oacc: 0.272
+layer:     0 | step:   268 | loss: 3.702 | thresh: 5.469 | tacc: 0.718 | oacc: 0.271
+layer:     0 | step:   269 | loss: 3.743 | thresh: 5.312 | tacc: 0.717 | oacc: 0.274
+layer:     0 | step:   270 | loss: 3.666 | thresh: 5.438 | tacc: 0.726 | oacc: 0.274
+layer:     0 | step:   271 | loss: 3.673 | thresh: 5.438 | tacc: 0.724 | oacc: 0.275
+layer:     0 | step:   272 | loss: 3.683 | thresh: 5.469 | tacc: 0.721 | oacc: 0.272
+layer:     0 | step:   273 | loss: 3.717 | thresh: 5.438 | tacc: 0.715 | oacc: 0.271
+layer:     0 | step:   274 | loss: 3.739 | thresh: 5.656 | tacc: 0.710 | oacc: 0.265
+layer:     0 | step:   275 | loss: 3.665 | thresh: 5.531 | tacc: 0.722 | oacc: 0.271
+layer:     0 | step:   276 | loss: 3.635 | thresh: 5.594 | tacc: 0.725 | oacc: 0.271
+layer:     0 | step:   277 | loss: 3.690 | thresh: 5.438 | tacc: 0.720 | oacc: 0.272
+layer:     0 | step:   278 | loss: 3.638 | thresh: 5.562 | tacc: 0.722 | oacc: 0.269
+layer:     0 | step:   279 | loss: 3.692 | thresh: 5.438 | tacc: 0.718 | oacc: 0.270
+layer:     0 | step:   280 | loss: 3.668 | thresh: 5.438 | tacc: 0.725 | oacc: 0.274
+layer:     0 | step:   281 | loss: 3.682 | thresh: 5.438 | tacc: 0.719 | oacc: 0.270
+layer:     0 | step:   282 | loss: 3.719 | thresh: 5.344 | tacc: 0.718 | oacc: 0.274
+layer:     0 | step:   283 | loss: 3.608 | thresh: 5.594 | tacc: 0.724 | oacc: 0.268
+layer:     0 | step:   284 | loss: 3.652 | thresh: 5.531 | tacc: 0.722 | oacc: 0.269
+layer:     0 | step:   285 | loss: 3.621 | thresh: 5.562 | tacc: 0.726 | oacc: 0.270
+layer:     0 | step:   286 | loss: 3.630 | thresh: 5.594 | tacc: 0.723 | oacc: 0.269
+layer:     0 | step:   287 | loss: 3.601 | thresh: 5.656 | tacc: 0.723 | oacc: 0.267
+layer:     0 | step:   288 | loss: 3.636 | thresh: 5.500 | tacc: 0.722 | oacc: 0.268
+layer:     0 | step:   289 | loss: 3.645 | thresh: 5.531 | tacc: 0.721 | oacc: 0.268
+layer:     0 | step:   290 | loss: 3.681 | thresh: 5.406 | tacc: 0.720 | oacc: 0.271
+layer:     0 | step:   291 | loss: 3.668 | thresh: 5.375 | tacc: 0.725 | oacc: 0.272
+layer:     0 | step:   292 | loss: 3.558 | thresh: 5.656 | tacc: 0.731 | oacc: 0.268
+layer:     0 | step:   293 | loss: 3.623 | thresh: 5.562 | tacc: 0.722 | oacc: 0.268
+layer:     0 | step:   294 | loss: 3.659 | thresh: 5.375 | tacc: 0.719 | oacc: 0.268
+layer:     0 | step:   295 | loss: 3.618 | thresh: 5.469 | tacc: 0.724 | oacc: 0.269
+layer:     0 | step:   296 | loss: 3.556 | thresh: 5.719 | tacc: 0.729 | oacc: 0.267
+layer:     0 | step:   297 | loss: 3.587 | thresh: 5.625 | tacc: 0.726 | oacc: 0.268
+layer:     0 | step:   298 | loss: 3.561 | thresh: 5.656 | tacc: 0.729 | oacc: 0.267
+layer:     0 | step:   299 | loss: 3.591 | thresh: 5.594 | tacc: 0.724 | oacc: 0.266
+layer:     0 | step:   300 | loss: 3.526 | thresh: 5.969 | tacc: 0.724 | oacc: 0.259
+layer:     0 | step:   301 | loss: 3.623 | thresh: 5.469 | tacc: 0.724 | oacc: 0.269
+layer:     0 | step:   302 | loss: 3.513 | thresh: 5.875 | tacc: 0.727 | oacc: 0.259
+layer:     0 | step:   303 | loss: 3.549 | thresh: 5.625 | tacc: 0.734 | oacc: 0.268
+layer:     0 | step:   304 | loss: 3.534 | thresh: 5.719 | tacc: 0.730 | oacc: 0.264
+layer:     0 | step:   305 | loss: 3.550 | thresh: 5.656 | tacc: 0.729 | oacc: 0.265
+layer:     0 | step:   306 | loss: 3.520 | thresh: 5.781 | tacc: 0.727 | oacc: 0.261
+layer:     0 | step:   307 | loss: 3.561 | thresh: 5.656 | tacc: 0.725 | oacc: 0.265
+layer:     0 | step:   308 | loss: 3.549 | thresh: 5.656 | tacc: 0.727 | oacc: 0.265
+layer:     0 | step:   309 | loss: 3.498 | thresh: 5.750 | tacc: 0.732 | oacc: 0.264
+layer:     0 | step:   310 | loss: 3.452 | thresh: 6.062 | tacc: 0.730 | oacc: 0.254
+layer:     0 | step:   311 | loss: 3.550 | thresh: 5.656 | tacc: 0.731 | oacc: 0.267
+layer:     0 | step:   312 | loss: 3.588 | thresh: 5.531 | tacc: 0.727 | oacc: 0.267
+layer:     0 | step:   313 | loss: 3.573 | thresh: 5.625 | tacc: 0.725 | oacc: 0.265
+layer:     0 | step:   314 | loss: 3.514 | thresh: 5.875 | tacc: 0.726 | oacc: 0.260
+layer:     0 | step:   315 | loss: 3.560 | thresh: 5.625 | tacc: 0.725 | oacc: 0.263
+layer:     0 | step:   316 | loss: 3.524 | thresh: 5.750 | tacc: 0.727 | oacc: 0.263
+layer:     0 | step:   317 | loss: 3.532 | thresh: 5.750 | tacc: 0.729 | oacc: 0.265
+layer:     0 | step:   318 | loss: 3.543 | thresh: 5.656 | tacc: 0.729 | oacc: 0.265
+layer:     0 | step:   319 | loss: 3.483 | thresh: 6.156 | tacc: 0.723 | oacc: 0.251
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.70s/it]
+layer:     0 | step:   320 | loss: 3.567 | thresh: 5.562 | tacc: 0.729 | oacc: 0.267
+layer:     0 | step:   321 | loss: 3.544 | thresh: 5.656 | tacc: 0.732 | oacc: 0.267
+layer:     0 | step:   322 | loss: 3.499 | thresh: 5.781 | tacc: 0.729 | oacc: 0.261
+layer:     0 | step:   323 | loss: 3.574 | thresh: 5.562 | tacc: 0.724 | oacc: 0.264
+layer:     0 | step:   324 | loss: 3.494 | thresh: 6.312 | tacc: 0.709 | oacc: 0.239
+layer:     0 | step:   325 | loss: 3.502 | thresh: 5.625 | tacc: 0.733 | oacc: 0.266
+layer:     0 | step:   326 | loss: 3.562 | thresh: 5.469 | tacc: 0.729 | oacc: 0.268
+layer:     0 | step:   327 | loss: 3.518 | thresh: 5.562 | tacc: 0.732 | oacc: 0.266
+layer:     0 | step:   328 | loss: 3.475 | thresh: 5.781 | tacc: 0.731 | oacc: 0.261
+layer:     0 | step:   329 | loss: 3.443 | thresh: 5.812 | tacc: 0.732 | oacc: 0.258
+layer:     0 | step:   330 | loss: 3.481 | thresh: 5.750 | tacc: 0.730 | oacc: 0.260
+layer:     0 | step:   331 | loss: 3.504 | thresh: 5.750 | tacc: 0.728 | oacc: 0.261
+layer:     0 | step:   332 | loss: 3.426 | thresh: 5.969 | tacc: 0.734 | oacc: 0.260
+layer:     0 | step:   333 | loss: 3.486 | thresh: 5.781 | tacc: 0.729 | oacc: 0.261
+layer:     0 | step:   334 | loss: 3.508 | thresh: 5.812 | tacc: 0.726 | oacc: 0.258
+layer:     0 | step:   335 | loss: 3.480 | thresh: 5.781 | tacc: 0.731 | oacc: 0.260
+layer:     0 | step:   336 | loss: 3.485 | thresh: 5.719 | tacc: 0.734 | oacc: 0.265
+layer:     0 | step:   337 | loss: 3.497 | thresh: 5.750 | tacc: 0.729 | oacc: 0.259
+layer:     0 | step:   338 | loss: 3.384 | thresh: 6.000 | tacc: 0.737 | oacc: 0.257
+layer:     0 | step:   339 | loss: 3.430 | thresh: 5.875 | tacc: 0.733 | oacc: 0.258
+layer:     0 | step:   340 | loss: 3.401 | thresh: 5.938 | tacc: 0.733 | oacc: 0.254
+layer:     0 | step:   341 | loss: 3.406 | thresh: 5.938 | tacc: 0.735 | oacc: 0.258
+layer:     0 | step:   342 | loss: 3.408 | thresh: 5.938 | tacc: 0.735 | oacc: 0.258
+layer:     0 | step:   343 | loss: 3.461 | thresh: 5.781 | tacc: 0.731 | oacc: 0.260
+layer:     0 | step:   344 | loss: 3.386 | thresh: 5.938 | tacc: 0.740 | oacc: 0.259
+layer:     0 | step:   345 | loss: 3.439 | thresh: 5.812 | tacc: 0.736 | oacc: 0.260
+layer:     0 | step:   346 | loss: 3.409 | thresh: 5.969 | tacc: 0.734 | oacc: 0.257
+layer:     0 | step:   347 | loss: 3.416 | thresh: 6.000 | tacc: 0.732 | oacc: 0.255
+layer:     0 | step:   348 | loss: 3.447 | thresh: 5.875 | tacc: 0.726 | oacc: 0.254
+layer:     0 | step:   349 | loss: 3.414 | thresh: 5.906 | tacc: 0.732 | oacc: 0.256
+layer:     0 | step:   350 | loss: 3.394 | thresh: 5.938 | tacc: 0.739 | oacc: 0.258
+layer:     0 | step:   351 | loss: 3.450 | thresh: 5.719 | tacc: 0.736 | oacc: 0.263
+layer:     0 | step:   352 | loss: 3.417 | thresh: 5.875 | tacc: 0.735 | oacc: 0.257
+layer:     0 | step:   353 | loss: 3.420 | thresh: 5.844 | tacc: 0.732 | oacc: 0.256
+layer:     0 | step:   354 | loss: 3.430 | thresh: 5.812 | tacc: 0.732 | oacc: 0.258
+layer:     0 | step:   355 | loss: 3.423 | thresh: 5.906 | tacc: 0.731 | oacc: 0.256
+layer:     0 | step:   356 | loss: 3.416 | thresh: 5.844 | tacc: 0.735 | oacc: 0.259
+layer:     0 | step:   357 | loss: 3.417 | thresh: 5.875 | tacc: 0.732 | oacc: 0.257
+layer:     0 | step:   358 | loss: 3.378 | thresh: 5.906 | tacc: 0.736 | oacc: 0.255
+layer:     0 | step:   359 | loss: 3.385 | thresh: 5.969 | tacc: 0.736 | oacc: 0.256
+layer:     0 | step:   360 | loss: 3.438 | thresh: 5.812 | tacc: 0.731 | oacc: 0.258
+layer:     0 | step:   361 | loss: 3.373 | thresh: 5.938 | tacc: 0.738 | oacc: 0.257
+layer:     0 | step:   362 | loss: 3.467 | thresh: 5.656 | tacc: 0.730 | oacc: 0.259
+layer:     0 | step:   363 | loss: 3.397 | thresh: 5.875 | tacc: 0.737 | oacc: 0.258
+layer:     0 | step:   364 | loss: 3.406 | thresh: 5.875 | tacc: 0.732 | oacc: 0.255
+layer:     0 | step:   365 | loss: 3.365 | thresh: 6.000 | tacc: 0.736 | oacc: 0.254
+layer:     0 | step:   366 | loss: 3.351 | thresh: 6.156 | tacc: 0.730 | oacc: 0.247
+layer:     0 | step:   367 | loss: 3.396 | thresh: 5.875 | tacc: 0.733 | oacc: 0.256
+layer:     0 | step:   368 | loss: 3.404 | thresh: 5.781 | tacc: 0.739 | oacc: 0.261
+layer:     0 | step:   369 | loss: 3.405 | thresh: 5.781 | tacc: 0.739 | oacc: 0.261
+layer:     0 | step:   370 | loss: 3.345 | thresh: 6.031 | tacc: 0.739 | oacc: 0.253
+layer:     0 | step:   371 | loss: 3.410 | thresh: 5.844 | tacc: 0.732 | oacc: 0.254
+layer:     0 | step:   372 | loss: 3.365 | thresh: 5.969 | tacc: 0.734 | oacc: 0.253
+layer:     0 | step:   373 | loss: 3.358 | thresh: 5.938 | tacc: 0.738 | oacc: 0.255
+layer:     0 | step:   374 | loss: 3.312 | thresh: 6.031 | tacc: 0.741 | oacc: 0.255
+layer:     0 | step:   375 | loss: 3.354 | thresh: 5.906 | tacc: 0.740 | oacc: 0.256
+layer:     0 | step:   376 | loss: 3.362 | thresh: 5.906 | tacc: 0.736 | oacc: 0.254
+layer:     0 | step:   377 | loss: 3.317 | thresh: 6.312 | tacc: 0.738 | oacc: 0.249
+layer:     0 | step:   378 | loss: 3.340 | thresh: 6.062 | tacc: 0.738 | oacc: 0.253
+layer:     0 | step:   379 | loss: 3.299 | thresh: 6.312 | tacc: 0.737 | oacc: 0.248
+layer:     0 | step:   380 | loss: 3.304 | thresh: 6.094 | tacc: 0.743 | oacc: 0.254
+layer:     0 | step:   381 | loss: 3.358 | thresh: 5.938 | tacc: 0.737 | oacc: 0.255
+layer:     0 | step:   382 | loss: 3.314 | thresh: 6.031 | tacc: 0.742 | oacc: 0.254
+layer:     0 | step:   383 | loss: 3.297 | thresh: 6.156 | tacc: 0.739 | oacc: 0.251
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.71s/it]
+layer:     0 | step:   384 | loss: 3.306 | thresh: 6.125 | tacc: 0.740 | oacc: 0.253
+layer:     0 | step:   385 | loss: 3.378 | thresh: 5.969 | tacc: 0.733 | oacc: 0.253
+layer:     0 | step:   386 | loss: 3.305 | thresh: 6.125 | tacc: 0.740 | oacc: 0.252
+layer:     0 | step:   387 | loss: 3.351 | thresh: 5.969 | tacc: 0.734 | oacc: 0.251
+layer:     0 | step:   388 | loss: 3.302 | thresh: 6.062 | tacc: 0.741 | oacc: 0.253
+layer:     0 | step:   389 | loss: 3.354 | thresh: 6.000 | tacc: 0.736 | oacc: 0.254
+layer:     0 | step:   390 | loss: 3.328 | thresh: 5.969 | tacc: 0.740 | oacc: 0.254
+layer:     0 | step:   391 | loss: 3.334 | thresh: 5.969 | tacc: 0.737 | oacc: 0.254
+layer:     0 | step:   392 | loss: 3.347 | thresh: 5.938 | tacc: 0.736 | oacc: 0.252
+layer:     0 | step:   393 | loss: 3.315 | thresh: 5.969 | tacc: 0.737 | oacc: 0.251
+layer:     0 | step:   394 | loss: 3.291 | thresh: 6.031 | tacc: 0.741 | oacc: 0.253
+layer:     0 | step:   395 | loss: 3.321 | thresh: 5.938 | tacc: 0.741 | oacc: 0.254
+layer:     0 | step:   396 | loss: 3.335 | thresh: 5.875 | tacc: 0.741 | oacc: 0.256
+layer:     0 | step:   397 | loss: 3.334 | thresh: 5.969 | tacc: 0.738 | oacc: 0.253
+layer:     0 | step:   398 | loss: 3.366 | thresh: 6.000 | tacc: 0.733 | oacc: 0.248
+layer:     0 | step:   399 | loss: 3.349 | thresh: 6.000 | tacc: 0.735 | oacc: 0.250
+layer:     0 | step:   400 | loss: 3.328 | thresh: 6.031 | tacc: 0.737 | oacc: 0.251
+layer:     0 | step:   401 | loss: 3.365 | thresh: 5.969 | tacc: 0.739 | oacc: 0.256
+layer:     0 | step:   402 | loss: 3.332 | thresh: 5.969 | tacc: 0.740 | oacc: 0.255
+layer:     0 | step:   403 | loss: 3.316 | thresh: 6.000 | tacc: 0.740 | oacc: 0.253
+layer:     0 | step:   404 | loss: 3.316 | thresh: 6.031 | tacc: 0.738 | oacc: 0.250
+layer:     0 | step:   405 | loss: 3.297 | thresh: 6.094 | tacc: 0.738 | oacc: 0.251
+layer:     0 | step:   406 | loss: 3.264 | thresh: 6.156 | tacc: 0.741 | oacc: 0.247
+layer:     0 | step:   407 | loss: 3.308 | thresh: 6.094 | tacc: 0.736 | oacc: 0.248
+layer:     0 | step:   408 | loss: 3.257 | thresh: 6.094 | tacc: 0.747 | oacc: 0.252
+layer:     0 | step:   409 | loss: 3.283 | thresh: 6.031 | tacc: 0.745 | oacc: 0.253
+layer:     0 | step:   410 | loss: 3.291 | thresh: 6.031 | tacc: 0.741 | oacc: 0.252
+layer:     0 | step:   411 | loss: 3.289 | thresh: 6.000 | tacc: 0.739 | oacc: 0.250
+layer:     0 | step:   412 | loss: 3.314 | thresh: 6.031 | tacc: 0.736 | oacc: 0.249
+layer:     0 | step:   413 | loss: 3.323 | thresh: 6.031 | tacc: 0.733 | oacc: 0.248
+layer:     0 | step:   414 | loss: 3.254 | thresh: 6.125 | tacc: 0.744 | oacc: 0.251
+layer:     0 | step:   415 | loss: 3.266 | thresh: 6.094 | tacc: 0.744 | oacc: 0.251
+layer:     0 | step:   416 | loss: 3.269 | thresh: 6.031 | tacc: 0.744 | oacc: 0.250
+layer:     0 | step:   417 | loss: 3.234 | thresh: 6.188 | tacc: 0.745 | oacc: 0.249
+layer:     0 | step:   418 | loss: 3.275 | thresh: 6.062 | tacc: 0.739 | oacc: 0.247
+layer:     0 | step:   419 | loss: 3.269 | thresh: 6.094 | tacc: 0.741 | oacc: 0.249
+layer:     0 | step:   420 | loss: 3.290 | thresh: 6.094 | tacc: 0.742 | oacc: 0.251
+layer:     0 | step:   421 | loss: 3.314 | thresh: 6.000 | tacc: 0.738 | oacc: 0.253
+layer:     0 | step:   422 | loss: 3.283 | thresh: 6.094 | tacc: 0.738 | oacc: 0.248
+layer:     0 | step:   423 | loss: 3.316 | thresh: 6.000 | tacc: 0.739 | oacc: 0.253
+layer:     0 | step:   424 | loss: 3.253 | thresh: 6.188 | tacc: 0.741 | oacc: 0.247
+layer:     0 | step:   425 | loss: 3.234 | thresh: 6.156 | tacc: 0.744 | oacc: 0.250
+layer:     0 | step:   426 | loss: 3.213 | thresh: 6.250 | tacc: 0.745 | oacc: 0.248
+layer:     0 | step:   427 | loss: 3.257 | thresh: 6.094 | tacc: 0.741 | oacc: 0.247
+layer:     0 | step:   428 | loss: 3.332 | thresh: 6.344 | tacc: 0.725 | oacc: 0.240
+layer:     0 | step:   429 | loss: 3.256 | thresh: 6.094 | tacc: 0.743 | oacc: 0.249
+layer:     0 | step:   430 | loss: 3.288 | thresh: 5.906 | tacc: 0.743 | oacc: 0.254
+layer:     0 | step:   431 | loss: 3.203 | thresh: 6.188 | tacc: 0.748 | oacc: 0.249
+layer:     0 | step:   432 | loss: 3.214 | thresh: 6.125 | tacc: 0.746 | oacc: 0.248
+layer:     0 | step:   433 | loss: 3.331 | thresh: 5.875 | tacc: 0.735 | oacc: 0.251
+layer:     0 | step:   434 | loss: 3.253 | thresh: 6.094 | tacc: 0.740 | oacc: 0.246
+layer:     0 | step:   435 | loss: 3.234 | thresh: 6.062 | tacc: 0.744 | oacc: 0.249
+layer:     0 | step:   436 | loss: 3.272 | thresh: 6.000 | tacc: 0.745 | oacc: 0.254
+layer:     0 | step:   437 | loss: 3.237 | thresh: 6.125 | tacc: 0.744 | oacc: 0.249
+layer:     0 | step:   438 | loss: 3.253 | thresh: 6.094 | tacc: 0.741 | oacc: 0.248
+layer:     0 | step:   439 | loss: 3.234 | thresh: 6.219 | tacc: 0.740 | oacc: 0.245
+layer:     0 | step:   440 | loss: 3.400 | thresh: 6.031 | tacc: 0.717 | oacc: 0.241
+layer:     0 | step:   441 | loss: 3.213 | thresh: 6.188 | tacc: 0.744 | oacc: 0.247
+layer:     0 | step:   442 | loss: 3.248 | thresh: 6.062 | tacc: 0.747 | oacc: 0.253
+layer:     0 | step:   443 | loss: 3.271 | thresh: 6.031 | tacc: 0.744 | oacc: 0.252
+layer:     0 | step:   444 | loss: 3.251 | thresh: 6.062 | tacc: 0.740 | oacc: 0.248
+layer:     0 | step:   445 | loss: 3.181 | thresh: 6.281 | tacc: 0.745 | oacc: 0.245
+layer:     0 | step:   446 | loss: 3.288 | thresh: 6.000 | tacc: 0.734 | oacc: 0.245
+layer:     0 | step:   447 | loss: 3.216 | thresh: 6.156 | tacc: 0.744 | oacc: 0.248
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.72s/it]
+layer:     0 | step:   448 | loss: 3.249 | thresh: 6.031 | tacc: 0.742 | oacc: 0.249
+layer:     0 | step:   449 | loss: 3.263 | thresh: 5.969 | tacc: 0.742 | oacc: 0.249
+layer:     0 | step:   450 | loss: 3.248 | thresh: 5.938 | tacc: 0.750 | oacc: 0.255
+layer:     0 | step:   451 | loss: 3.310 | thresh: 5.969 | tacc: 0.737 | oacc: 0.252
+layer:     0 | step:   452 | loss: 3.232 | thresh: 6.156 | tacc: 0.738 | oacc: 0.243
+layer:     0 | step:   453 | loss: 3.211 | thresh: 6.188 | tacc: 0.741 | oacc: 0.243
+layer:     0 | step:   454 | loss: 3.205 | thresh: 6.125 | tacc: 0.747 | oacc: 0.249
+layer:     0 | step:   455 | loss: 3.228 | thresh: 6.031 | tacc: 0.745 | oacc: 0.249
+layer:     0 | step:   456 | loss: 3.250 | thresh: 6.000 | tacc: 0.746 | oacc: 0.252
+layer:     0 | step:   457 | loss: 3.230 | thresh: 6.156 | tacc: 0.742 | oacc: 0.246
+layer:     0 | step:   458 | loss: 3.219 | thresh: 6.094 | tacc: 0.744 | oacc: 0.247
+layer:     0 | step:   459 | loss: 3.267 | thresh: 5.969 | tacc: 0.740 | oacc: 0.248
+layer:     0 | step:   460 | loss: 3.206 | thresh: 6.125 | tacc: 0.743 | oacc: 0.247
+layer:     0 | step:   461 | loss: 3.210 | thresh: 6.188 | tacc: 0.744 | oacc: 0.246
+layer:     0 | step:   462 | loss: 3.210 | thresh: 6.188 | tacc: 0.742 | oacc: 0.245
+layer:     0 | step:   463 | loss: 3.199 | thresh: 6.312 | tacc: 0.741 | oacc: 0.242
+layer:     0 | step:   464 | loss: 3.253 | thresh: 6.031 | tacc: 0.741 | oacc: 0.249
+layer:     0 | step:   465 | loss: 3.274 | thresh: 5.969 | tacc: 0.744 | oacc: 0.253
+layer:     0 | step:   466 | loss: 3.211 | thresh: 6.156 | tacc: 0.746 | oacc: 0.248
+layer:     0 | step:   467 | loss: 3.200 | thresh: 6.094 | tacc: 0.746 | oacc: 0.247
+layer:     0 | step:   468 | loss: 3.175 | thresh: 6.188 | tacc: 0.744 | oacc: 0.243
+layer:     0 | step:   469 | loss: 3.231 | thresh: 6.000 | tacc: 0.743 | oacc: 0.247
+layer:     0 | step:   470 | loss: 3.209 | thresh: 6.031 | tacc: 0.750 | oacc: 0.252
+layer:     0 | step:   471 | loss: 3.245 | thresh: 6.031 | tacc: 0.740 | oacc: 0.246
+layer:     0 | step:   472 | loss: 3.208 | thresh: 6.094 | tacc: 0.745 | oacc: 0.247
+layer:     0 | step:   473 | loss: 3.227 | thresh: 6.094 | tacc: 0.742 | oacc: 0.246
+layer:     0 | step:   474 | loss: 3.259 | thresh: 5.969 | tacc: 0.740 | oacc: 0.248
+layer:     0 | step:   475 | loss: 3.139 | thresh: 6.281 | tacc: 0.750 | oacc: 0.244
+layer:     0 | step:   476 | loss: 3.181 | thresh: 6.125 | tacc: 0.748 | oacc: 0.248
+layer:     0 | step:   477 | loss: 3.200 | thresh: 6.094 | tacc: 0.744 | oacc: 0.245
+layer:     0 | step:   478 | loss: 3.227 | thresh: 6.031 | tacc: 0.744 | oacc: 0.249
+layer:     0 | step:   479 | loss: 3.188 | thresh: 6.156 | tacc: 0.745 | oacc: 0.247
+layer:     0 | step:   480 | loss: 3.207 | thresh: 6.156 | tacc: 0.743 | oacc: 0.246
+layer:     0 | step:   481 | loss: 3.244 | thresh: 6.094 | tacc: 0.742 | oacc: 0.247
+layer:     0 | step:   482 | loss: 3.197 | thresh: 6.188 | tacc: 0.744 | oacc: 0.246
+layer:     0 | step:   483 | loss: 3.188 | thresh: 6.250 | tacc: 0.745 | oacc: 0.243
+layer:     0 | step:   484 | loss: 3.152 | thresh: 6.281 | tacc: 0.747 | oacc: 0.243
+layer:     0 | step:   485 | loss: 3.215 | thresh: 6.094 | tacc: 0.744 | oacc: 0.248
+layer:     0 | step:   486 | loss: 3.220 | thresh: 6.094 | tacc: 0.741 | oacc: 0.244
+layer:     0 | step:   487 | loss: 3.176 | thresh: 6.219 | tacc: 0.746 | oacc: 0.245
+layer:     0 | step:   488 | loss: 3.203 | thresh: 6.156 | tacc: 0.745 | oacc: 0.248
+layer:     0 | step:   489 | loss: 3.230 | thresh: 6.062 | tacc: 0.742 | oacc: 0.246
+layer:     0 | step:   490 | loss: 3.179 | thresh: 6.219 | tacc: 0.745 | oacc: 0.245
+layer:     0 | step:   491 | loss: 3.225 | thresh: 6.000 | tacc: 0.742 | oacc: 0.247
+layer:     0 | step:   492 | loss: 3.241 | thresh: 6.500 | tacc: 0.733 | oacc: 0.237
+layer:     0 | step:   493 | loss: 3.144 | thresh: 6.250 | tacc: 0.750 | oacc: 0.245
+layer:     0 | step:   494 | loss: 3.134 | thresh: 6.250 | tacc: 0.753 | oacc: 0.245
+layer:     0 | step:   495 | loss: 3.173 | thresh: 6.188 | tacc: 0.748 | oacc: 0.247
+layer:     0 | step:   496 | loss: 3.137 | thresh: 6.406 | tacc: 0.747 | oacc: 0.240
+layer:     0 | step:   497 | loss: 3.195 | thresh: 6.156 | tacc: 0.743 | oacc: 0.244
+layer:     0 | step:   498 | loss: 3.068 | thresh: 6.562 | tacc: 0.750 | oacc: 0.236
+layer:     0 | step:   499 | loss: 3.168 | thresh: 6.219 | tacc: 0.744 | oacc: 0.243
+layer:     0 | step:   500 | loss: 3.269 | thresh: 5.906 | tacc: 0.740 | oacc: 0.250
+layer:     0 | step:   501 | loss: 3.225 | thresh: 5.906 | tacc: 0.746 | oacc: 0.250
+layer:     0 | step:   502 | loss: 3.170 | thresh: 6.156 | tacc: 0.748 | oacc: 0.246
+layer:     0 | step:   503 | loss: 3.179 | thresh: 6.094 | tacc: 0.745 | oacc: 0.244
+layer:     0 | step:   504 | loss: 3.107 | thresh: 6.375 | tacc: 0.749 | oacc: 0.241
+layer:     0 | step:   505 | loss: 3.079 | thresh: 6.438 | tacc: 0.752 | oacc: 0.241
+layer:     0 | step:   506 | loss: 3.231 | thresh: 5.969 | tacc: 0.743 | oacc: 0.248
+layer:     0 | step:   507 | loss: 3.124 | thresh: 6.344 | tacc: 0.751 | oacc: 0.244
+layer:     0 | step:   508 | loss: 3.099 | thresh: 6.406 | tacc: 0.750 | oacc: 0.241
+layer:     0 | step:   509 | loss: 3.210 | thresh: 6.156 | tacc: 0.741 | oacc: 0.245
+layer:     0 | step:   510 | loss: 3.219 | thresh: 6.062 | tacc: 0.738 | oacc: 0.243
+layer:     0 | step:   511 | loss: 3.147 | thresh: 6.281 | tacc: 0.747 | oacc: 0.243
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.71s/it]
+layer:     0 | step:   512 | loss: 3.165 | thresh: 6.156 | tacc: 0.747 | oacc: 0.244
+layer:     0 | step:   513 | loss: 3.169 | thresh: 6.156 | tacc: 0.749 | oacc: 0.247
+layer:     0 | step:   514 | loss: 3.145 | thresh: 6.219 | tacc: 0.749 | oacc: 0.244
+layer:     0 | step:   515 | loss: 3.157 | thresh: 6.281 | tacc: 0.744 | oacc: 0.242
+layer:     0 | step:   516 | loss: 3.113 | thresh: 6.375 | tacc: 0.748 | oacc: 0.242
+layer:     0 | step:   517 | loss: 3.119 | thresh: 6.312 | tacc: 0.748 | oacc: 0.241
+layer:     0 | step:   518 | loss: 3.112 | thresh: 6.344 | tacc: 0.749 | oacc: 0.241
+layer:     0 | step:   519 | loss: 3.181 | thresh: 6.094 | tacc: 0.743 | oacc: 0.243
+layer:     0 | step:   520 | loss: 3.147 | thresh: 6.250 | tacc: 0.745 | oacc: 0.243
+layer:     0 | step:   521 | loss: 3.163 | thresh: 6.188 | tacc: 0.746 | oacc: 0.244
+layer:     0 | step:   522 | loss: 3.178 | thresh: 6.031 | tacc: 0.746 | oacc: 0.247
+layer:     0 | step:   523 | loss: 3.182 | thresh: 6.094 | tacc: 0.746 | oacc: 0.246
+layer:     0 | step:   524 | loss: 3.185 | thresh: 6.125 | tacc: 0.743 | oacc: 0.243
+layer:     0 | step:   525 | loss: 3.185 | thresh: 6.156 | tacc: 0.744 | oacc: 0.245
+layer:     0 | step:   526 | loss: 3.274 | thresh: 6.375 | tacc: 0.724 | oacc: 0.233
+layer:     0 | step:   527 | loss: 3.129 | thresh: 6.188 | tacc: 0.750 | oacc: 0.244
+layer:     0 | step:   528 | loss: 3.175 | thresh: 6.125 | tacc: 0.751 | oacc: 0.250
+layer:     0 | step:   529 | loss: 3.149 | thresh: 6.156 | tacc: 0.749 | oacc: 0.246
+layer:     0 | step:   530 | loss: 3.132 | thresh: 6.125 | tacc: 0.746 | oacc: 0.240
+layer:     0 | step:   531 | loss: 3.079 | thresh: 6.375 | tacc: 0.750 | oacc: 0.239
+layer:     0 | step:   532 | loss: 3.127 | thresh: 6.188 | tacc: 0.750 | oacc: 0.243
+layer:     0 | step:   533 | loss: 3.138 | thresh: 6.156 | tacc: 0.751 | oacc: 0.245
+layer:     0 | step:   534 | loss: 3.115 | thresh: 6.219 | tacc: 0.754 | oacc: 0.245
+layer:     0 | step:   535 | loss: 3.168 | thresh: 6.125 | tacc: 0.744 | oacc: 0.242
+layer:     0 | step:   536 | loss: 3.109 | thresh: 6.688 | tacc: 0.739 | oacc: 0.230
+layer:     0 | step:   537 | loss: 3.143 | thresh: 6.438 | tacc: 0.742 | oacc: 0.238
+layer:     0 | step:   538 | loss: 3.146 | thresh: 6.375 | tacc: 0.744 | oacc: 0.241
+layer:     0 | step:   539 | loss: 3.130 | thresh: 6.281 | tacc: 0.752 | oacc: 0.245
+layer:     0 | step:   540 | loss: 3.167 | thresh: 6.125 | tacc: 0.746 | oacc: 0.245
+layer:     0 | step:   541 | loss: 3.117 | thresh: 6.312 | tacc: 0.747 | oacc: 0.240
+layer:     0 | step:   542 | loss: 3.125 | thresh: 6.219 | tacc: 0.751 | oacc: 0.245
+layer:     0 | step:   543 | loss: 3.114 | thresh: 6.219 | tacc: 0.751 | oacc: 0.243
+layer:     0 | step:   544 | loss: 3.125 | thresh: 6.156 | tacc: 0.751 | oacc: 0.245
+layer:     0 | step:   545 | loss: 3.130 | thresh: 6.219 | tacc: 0.748 | oacc: 0.243
+layer:     0 | step:   546 | loss: 3.256 | thresh: 6.406 | tacc: 0.725 | oacc: 0.233
+layer:     0 | step:   547 | loss: 3.115 | thresh: 6.344 | tacc: 0.747 | oacc: 0.240
+layer:     0 | step:   548 | loss: 3.090 | thresh: 6.375 | tacc: 0.749 | oacc: 0.239
+layer:     0 | step:   549 | loss: 3.134 | thresh: 6.188 | tacc: 0.747 | oacc: 0.243
+layer:     0 | step:   550 | loss: 3.073 | thresh: 6.406 | tacc: 0.755 | oacc: 0.242
+layer:     0 | step:   551 | loss: 3.107 | thresh: 6.312 | tacc: 0.751 | oacc: 0.243
+layer:     0 | step:   552 | loss: 3.096 | thresh: 6.281 | tacc: 0.750 | oacc: 0.240
+layer:     0 | step:   553 | loss: 3.072 | thresh: 6.406 | tacc: 0.751 | oacc: 0.240
+layer:     0 | step:   554 | loss: 3.136 | thresh: 6.250 | tacc: 0.748 | oacc: 0.243
+layer:     0 | step:   555 | loss: 3.096 | thresh: 6.281 | tacc: 0.753 | oacc: 0.244
+layer:     0 | step:   556 | loss: 3.171 | thresh: 6.125 | tacc: 0.741 | oacc: 0.240
+layer:     0 | step:   557 | loss: 3.156 | thresh: 6.219 | tacc: 0.743 | oacc: 0.242
+layer:     0 | step:   558 | loss: 3.099 | thresh: 6.438 | tacc: 0.747 | oacc: 0.239
+layer:     0 | step:   559 | loss: 3.140 | thresh: 6.219 | tacc: 0.748 | oacc: 0.244
+layer:     0 | step:   560 | loss: 3.096 | thresh: 6.312 | tacc: 0.749 | oacc: 0.241
+layer:     0 | step:   561 | loss: 3.110 | thresh: 6.312 | tacc: 0.750 | oacc: 0.242
+layer:     0 | step:   562 | loss: 3.067 | thresh: 6.375 | tacc: 0.753 | oacc: 0.238
+layer:     0 | step:   563 | loss: 3.036 | thresh: 6.500 | tacc: 0.751 | oacc: 0.236
+layer:     0 | step:   564 | loss: 3.172 | thresh: 6.156 | tacc: 0.742 | oacc: 0.241
+layer:     0 | step:   565 | loss: 3.102 | thresh: 6.219 | tacc: 0.752 | oacc: 0.242
+layer:     0 | step:   566 | loss: 3.124 | thresh: 6.219 | tacc: 0.749 | oacc: 0.242
+layer:     0 | step:   567 | loss: 3.135 | thresh: 6.219 | tacc: 0.748 | oacc: 0.244
+layer:     0 | step:   568 | loss: 3.092 | thresh: 6.312 | tacc: 0.751 | oacc: 0.241
+layer:     0 | step:   569 | loss: 3.117 | thresh: 6.156 | tacc: 0.748 | oacc: 0.242
+layer:     0 | step:   570 | loss: 3.050 | thresh: 6.406 | tacc: 0.750 | oacc: 0.236
+layer:     0 | step:   571 | loss: 3.114 | thresh: 6.219 | tacc: 0.747 | oacc: 0.240
+layer:     0 | step:   572 | loss: 3.100 | thresh: 6.250 | tacc: 0.749 | oacc: 0.239
+layer:     0 | step:   573 | loss: 3.108 | thresh: 6.281 | tacc: 0.752 | oacc: 0.243
+layer:     0 | step:   574 | loss: 3.093 | thresh: 6.312 | tacc: 0.753 | oacc: 0.242
+layer:     0 | step:   575 | loss: 3.058 | thresh: 6.344 | tacc: 0.753 | oacc: 0.240
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.71s/it]
+layer:     0 | step:   576 | loss: 3.106 | thresh: 6.312 | tacc: 0.748 | oacc: 0.240
+layer:     0 | step:   577 | loss: 3.079 | thresh: 6.438 | tacc: 0.747 | oacc: 0.236
+layer:     0 | step:   578 | loss: 3.098 | thresh: 6.312 | tacc: 0.747 | oacc: 0.238
+layer:     0 | step:   579 | loss: 3.118 | thresh: 6.219 | tacc: 0.748 | oacc: 0.241
+layer:     0 | step:   580 | loss: 3.073 | thresh: 6.312 | tacc: 0.754 | oacc: 0.242
+layer:     0 | step:   581 | loss: 3.103 | thresh: 6.281 | tacc: 0.752 | oacc: 0.242
+layer:     0 | step:   582 | loss: 3.082 | thresh: 6.375 | tacc: 0.752 | oacc: 0.241
+layer:     0 | step:   583 | loss: 3.054 | thresh: 6.438 | tacc: 0.751 | oacc: 0.236
+layer:     0 | step:   584 | loss: 3.103 | thresh: 6.344 | tacc: 0.744 | oacc: 0.237
+layer:     0 | step:   585 | loss: 3.079 | thresh: 6.562 | tacc: 0.747 | oacc: 0.236
+layer:     0 | step:   586 | loss: 3.073 | thresh: 6.344 | tacc: 0.752 | oacc: 0.239
+layer:     0 | step:   587 | loss: 3.060 | thresh: 6.438 | tacc: 0.753 | oacc: 0.239
+layer:     0 | step:   588 | loss: 3.126 | thresh: 6.250 | tacc: 0.749 | oacc: 0.242
+layer:     0 | step:   589 | loss: 3.078 | thresh: 6.312 | tacc: 0.754 | oacc: 0.242
+layer:     0 | step:   590 | loss: 3.061 | thresh: 6.344 | tacc: 0.752 | oacc: 0.239
+layer:     0 | step:   591 | loss: 3.067 | thresh: 6.344 | tacc: 0.751 | oacc: 0.240
+layer:     0 | step:   592 | loss: 3.095 | thresh: 6.375 | tacc: 0.749 | oacc: 0.239
+layer:     0 | step:   593 | loss: 3.022 | thresh: 6.500 | tacc: 0.757 | oacc: 0.238
+layer:     0 | step:   594 | loss: 3.131 | thresh: 6.188 | tacc: 0.746 | oacc: 0.242
+layer:     0 | step:   595 | loss: 3.077 | thresh: 6.375 | tacc: 0.750 | oacc: 0.239
+layer:     0 | step:   596 | loss: 3.082 | thresh: 6.375 | tacc: 0.750 | oacc: 0.240
+layer:     0 | step:   597 | loss: 3.040 | thresh: 6.469 | tacc: 0.753 | oacc: 0.238
+layer:     0 | step:   598 | loss: 3.038 | thresh: 6.500 | tacc: 0.751 | oacc: 0.237
+layer:     0 | step:   599 | loss: 3.091 | thresh: 6.375 | tacc: 0.746 | oacc: 0.237
+layer:     0 | step:   600 | loss: 3.103 | thresh: 6.562 | tacc: 0.744 | oacc: 0.237
+layer:     0 | step:   601 | loss: 3.070 | thresh: 6.406 | tacc: 0.753 | oacc: 0.241
+layer:     0 | step:   602 | loss: 3.100 | thresh: 6.344 | tacc: 0.753 | oacc: 0.243
+layer:     0 | step:   603 | loss: 3.069 | thresh: 6.375 | tacc: 0.752 | oacc: 0.240
+layer:     0 | step:   604 | loss: 3.044 | thresh: 6.438 | tacc: 0.751 | oacc: 0.237
+layer:     0 | step:   605 | loss: 3.032 | thresh: 6.469 | tacc: 0.754 | oacc: 0.239
+layer:     0 | step:   606 | loss: 3.087 | thresh: 6.219 | tacc: 0.747 | oacc: 0.238
+layer:     0 | step:   607 | loss: 3.095 | thresh: 6.250 | tacc: 0.746 | oacc: 0.238
+layer:     0 | step:   608 | loss: 3.093 | thresh: 6.250 | tacc: 0.750 | oacc: 0.242
+layer:     0 | step:   609 | loss: 3.129 | thresh: 6.062 | tacc: 0.747 | oacc: 0.244
+layer:     0 | step:   610 | loss: 3.047 | thresh: 6.375 | tacc: 0.754 | oacc: 0.239
+layer:     0 | step:   611 | loss: 3.087 | thresh: 6.281 | tacc: 0.750 | oacc: 0.240
+layer:     0 | step:   612 | loss: 3.033 | thresh: 6.531 | tacc: 0.753 | oacc: 0.235
+layer:     0 | step:   613 | loss: 3.138 | thresh: 6.125 | tacc: 0.744 | oacc: 0.241
+layer:     0 | step:   614 | loss: 3.062 | thresh: 6.344 | tacc: 0.751 | oacc: 0.239
+layer:     0 | step:   615 | loss: 3.087 | thresh: 6.281 | tacc: 0.749 | oacc: 0.240
+layer:     0 | step:   616 | loss: 3.123 | thresh: 6.250 | tacc: 0.743 | oacc: 0.237
+layer:     0 | step:   617 | loss: 3.059 | thresh: 6.312 | tacc: 0.755 | oacc: 0.242
+layer:     0 | step:   618 | loss: 3.044 | thresh: 6.438 | tacc: 0.756 | oacc: 0.241
+layer:     0 | step:   619 | loss: 3.105 | thresh: 6.250 | tacc: 0.747 | oacc: 0.240
+layer:     0 | step:   620 | loss: 3.052 | thresh: 6.344 | tacc: 0.749 | oacc: 0.236
+layer:     0 | step:   621 | loss: 3.099 | thresh: 6.250 | tacc: 0.746 | oacc: 0.237
+layer:     0 | step:   622 | loss: 3.116 | thresh: 6.188 | tacc: 0.748 | oacc: 0.242
+layer:     0 | step:   623 | loss: 3.086 | thresh: 6.188 | tacc: 0.753 | oacc: 0.242
+layer:     0 | step:   624 | loss: 3.045 | thresh: 6.375 | tacc: 0.753 | oacc: 0.239
+layer:     0 | step:   625 | loss: 3.148 | thresh: 6.031 | tacc: 0.746 | oacc: 0.245
+layer:     0 | step:   626 | loss: 3.075 | thresh: 6.406 | tacc: 0.747 | oacc: 0.237
+layer:     0 | step:   627 | loss: 3.064 | thresh: 6.344 | tacc: 0.747 | oacc: 0.236
+layer:     0 | step:   628 | loss: 3.122 | thresh: 6.156 | tacc: 0.744 | oacc: 0.239
+layer:     0 | step:   629 | loss: 3.090 | thresh: 6.156 | tacc: 0.751 | oacc: 0.241
+layer:     0 | step:   630 | loss: 3.100 | thresh: 6.188 | tacc: 0.751 | oacc: 0.243
+layer:     0 | step:   631 | loss: 3.101 | thresh: 6.219 | tacc: 0.751 | oacc: 0.243
+layer:     0 | step:   632 | loss: 3.027 | thresh: 6.438 | tacc: 0.753 | oacc: 0.237
+layer:     0 | step:   633 | loss: 3.013 | thresh: 6.469 | tacc: 0.754 | oacc: 0.236
+layer:     0 | step:   634 | loss: 3.084 | thresh: 6.250 | tacc: 0.747 | oacc: 0.238
+layer:     0 | step:   635 | loss: 3.009 | thresh: 6.438 | tacc: 0.755 | oacc: 0.236
+layer:     0 | step:   636 | loss: 3.065 | thresh: 6.312 | tacc: 0.753 | oacc: 0.241
+layer:     0 | step:   637 | loss: 3.095 | thresh: 6.344 | tacc: 0.750 | oacc: 0.240
+layer:     0 | step:   638 | loss: 3.041 | thresh: 6.406 | tacc: 0.752 | oacc: 0.237
+layer:     0 | step:   639 | loss: 3.087 | thresh: 6.312 | tacc: 0.749 | oacc: 0.239
+ 25%|████████████████████████████                                                                                    | 4/16 [00:20<01:00,  5.04s/it]
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 616, in <module>
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 394, in train
+    position_embeddings=pos_emb,
+          ^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 80, in causal_forward
+    outputs = self.model(
+              ^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/utils/generic.py", line 1083, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 152, in model_forward
+    hidden_states, ret_scores = decoder_layer(
+                                ^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 293, in layer_forward
+    hidden_states, ret_scores = self.self_attn(
+                                ^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 247, in attention_forward
+    query_states = self.q_norm(self.q_proj(hidden_states).view(hidden_shape))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 61, in forward
+    variance = hidden_states.pow(2).mean(-1, keepdim=True)
+               ^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 616, in <module>
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 394, in train
+[rank0]:     position_embeddings=pos_emb,
+[rank0]:           ^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 80, in causal_forward
+[rank0]:     outputs = self.model(
+[rank0]:               ^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/utils/generic.py", line 1083, in wrapper
+[rank0]:     outputs = func(self, *args, **kwargs)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 152, in model_forward
+[rank0]:     hidden_states, ret_scores = decoder_layer(
+[rank0]:                                 ^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/modeling_layers.py", line 94, in __call__
+[rank0]:     return super().__call__(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 293, in layer_forward
+[rank0]:     hidden_states, ret_scores = self.self_attn(
+[rank0]:                                 ^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 247, in attention_forward
+[rank0]:     query_states = self.q_norm(self.q_proj(hidden_states).view(hidden_shape))
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 61, in forward
+[rank0]:     variance = hidden_states.pow(2).mean(-1, keepdim=True)
+[rank0]:                ^^^^^^^^^^^^^^^^^^^^
+[rank0]: KeyboardInterrupt

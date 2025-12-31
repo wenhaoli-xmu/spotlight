@@ -1,0 +1,54 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:13<00:00,  4.37s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.66s/it]
+  0%|                                                                                                                                 | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:334: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:16<00:00,  4.75s/it]
+layer:     0 | step:     0 | loss: 0.803 | iou: 0.006
+layer:     0 | step:     1 | loss: 0.801 | iou: 0.006
+layer:     0 | step:     2 | loss: 0.794 | iou: 0.006
+layer:     0 | step:     3 | loss: 0.786 | iou: 0.006
+layer:     0 | step:     4 | loss: 0.784 | iou: 0.006
+layer:     0 | step:     5 | loss: 0.782 | iou: 0.006
+layer:     0 | step:     6 | loss: 0.779 | iou: 0.006
+layer:     0 | step:     7 | loss: 0.780 | iou: 0.006
+layer:     0 | step:     8 | loss: 0.785 | iou: 0.006
+layer:     0 | step:     9 | loss: 0.764 | iou: 0.006
+layer:     0 | step:    10 | loss: 0.767 | iou: 0.006
+layer:     0 | step:    11 | loss: 0.769 | iou: 0.006
+layer:     0 | step:    12 | loss: 0.765 | iou: 0.006
+layer:     0 | step:    13 | loss: 0.764 | iou: 0.006
+layer:     0 | step:    14 | loss: 0.754 | iou: 0.006
+layer:     0 | step:    15 | loss: 0.760 | iou: 0.006
+layer:     0 | step:    16 | loss: 0.750 | iou: 0.006
+layer:     0 | step:    17 | loss: 0.744 | iou: 0.006
+layer:     0 | step:    18 | loss: 0.751 | iou: 0.006
+layer:     0 | step:    19 | loss: 0.746 | iou: 0.006
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 495, in <module>
+    parser.add_argument("--max_que", type=int, default=None)
+    ^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 423, in train
+    })
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 122, in clear_cache
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/cuda/__init__.py", line 1085, in synchronize
+    return torch._C._cuda_synchronize()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 495, in <module>
+[rank0]:     parser.add_argument("--max_que", type=int, default=None)
+[rank0]:     ^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 423, in train
+[rank0]:     })
+[rank0]: ^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 122, in clear_cache
+[rank0]:
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/cuda/__init__.py", line 1085, in synchronize
+[rank0]:     return torch._C._cuda_synchronize()
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: KeyboardInterrupt

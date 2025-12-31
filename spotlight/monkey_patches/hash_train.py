@@ -16,7 +16,7 @@ from transformers.models.qwen3.modeling_qwen3 import (
     create_sliding_window_causal_mask,
 )
 
-from .utils.hash_utils import (
+from .hash_utils import (
     HashModule, 
     compute_lsh_score,
     compute_attn_score)
@@ -208,14 +208,20 @@ def flash_attention(
 
     assert query.shape[1] == key.shape[1]
 
-    ret_scores = None
+    extra_rets = None
     if not return_hidden_states:
         hash_score = compute_lsh_score(q_hash, k_hash, random_query_index)
         attn_score = compute_attn_score(query, key, random_query_index)
-        return None, (hash_score, attn_score)
+
+        extra_rets = {
+            "hash_score": hash_score,
+            "attn_score": attn_score}
+
+        return None, extra_rets
 
     attn_output = flash_attn_func(query, key, value, causal=True)
-    return attn_output, ret_scores
+
+    return attn_output, extra_rets
 
 
 def attention_forward(
@@ -328,12 +334,10 @@ def monkey_patch(model, config):
 
         layer.self_attn.key_hash = HashModule(
             layer.self_attn.config.num_key_value_heads,
-            dims=config['hash_dims'],
-            dropout=config['hash_dropout'])
+            dims=config['hash_dims'])
 
         layer.self_attn.query_hash = HashModule(
             layer.self_attn.config.num_attention_heads,
-            dims=config['hash_dims'],
-            dropout=config['hash_dropout'])
+            dims=config['hash_dims'])
 
     return model

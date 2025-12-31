@@ -1,0 +1,6 @@
+{"time":"2025-12-24T02:48:09.407592239Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-24T02:48:10.374248564Z","level":"INFO","msg":"stream: created new stream","id":"whgspmqb"}
+{"time":"2025-12-24T02:48:10.374304215Z","level":"INFO","msg":"stream: started","id":"whgspmqb"}
+{"time":"2025-12-24T02:48:10.374327554Z","level":"INFO","msg":"sender: started","stream_id":"whgspmqb"}
+{"time":"2025-12-24T02:48:10.374324698Z","level":"INFO","msg":"writer: started","stream_id":"whgspmqb"}
+{"time":"2025-12-24T02:48:10.374347673Z","level":"INFO","msg":"handler: started","stream_id":"whgspmqb"}

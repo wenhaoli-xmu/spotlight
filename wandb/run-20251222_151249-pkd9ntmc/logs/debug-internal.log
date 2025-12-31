@@ -1,0 +1,11 @@
+{"time":"2025-12-22T15:12:49.509590798Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-22T15:12:50.466050487Z","level":"INFO","msg":"stream: created new stream","id":"pkd9ntmc"}
+{"time":"2025-12-22T15:12:50.466098579Z","level":"INFO","msg":"stream: started","id":"pkd9ntmc"}
+{"time":"2025-12-22T15:12:50.466119216Z","level":"INFO","msg":"handler: started","stream_id":"pkd9ntmc"}
+{"time":"2025-12-22T15:12:50.46612117Z","level":"INFO","msg":"writer: started","stream_id":"pkd9ntmc"}
+{"time":"2025-12-22T15:12:50.46613059Z","level":"INFO","msg":"sender: started","stream_id":"pkd9ntmc"}
+{"time":"2025-12-22T15:15:07.924483678Z","level":"INFO","msg":"stream: closing","id":"pkd9ntmc"}
+{"time":"2025-12-22T15:15:09.495679931Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-22T15:15:12.943915335Z","level":"INFO","msg":"handler: closed","stream_id":"pkd9ntmc"}
+{"time":"2025-12-22T15:15:12.944826666Z","level":"INFO","msg":"sender: closed","stream_id":"pkd9ntmc"}
+{"time":"2025-12-22T15:15:12.94485134Z","level":"INFO","msg":"stream: closed","id":"pkd9ntmc"}

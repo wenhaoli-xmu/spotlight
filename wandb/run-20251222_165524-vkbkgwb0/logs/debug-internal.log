@@ -1,0 +1,10 @@
+{"time":"2025-12-22T16:55:24.532480732Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-22T16:55:27.62487938Z","level":"INFO","msg":"stream: created new stream","id":"vkbkgwb0"}
+{"time":"2025-12-22T16:55:27.624951231Z","level":"INFO","msg":"stream: started","id":"vkbkgwb0"}
+{"time":"2025-12-22T16:55:27.624969964Z","level":"INFO","msg":"handler: started","stream_id":"vkbkgwb0"}
+{"time":"2025-12-22T16:55:27.624975028Z","level":"INFO","msg":"sender: started","stream_id":"vkbkgwb0"}
+{"time":"2025-12-22T16:55:27.624983162Z","level":"INFO","msg":"writer: started","stream_id":"vkbkgwb0"}
+{"time":"2025-12-22T17:57:57.120062384Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/wenhaoli20000901/spotlight-v2/vkbkgwb0/file_stream\": unexpected EOF"}
+{"time":"2025-12-23T00:06:11.145981012Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/wenhaoli20000901/spotlight-v2/vkbkgwb0/file_stream\": EOF"}
+{"time":"2025-12-23T00:34:38.552695282Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/wenhaoli20000901/spotlight-v2/vkbkgwb0/file_stream\": unexpected EOF"}
+{"time":"2025-12-23T01:29:03.564839757Z","level":"INFO","msg":"stream: closing","id":"vkbkgwb0"}

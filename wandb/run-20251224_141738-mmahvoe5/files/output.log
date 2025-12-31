@@ -1,0 +1,735 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:12<00:00,  4.30s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.65s/it]
+  0%|                                                                                                                                | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:316: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.70s/it]
+[rank0]:W1224 14:19:20.310000 159978 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break from `Tensor.item()`, consider setting:
+[rank0]:W1224 14:19:20.310000 159978 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+[rank0]:W1224 14:19:20.310000 159978 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] or:
+[rank0]:W1224 14:19:20.310000 159978 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+[rank0]:W1224 14:19:20.310000 159978 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] to include these operations in the captured graph.
+[rank0]:W1224 14:19:20.310000 159978 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1224 14:19:20.310000 159978 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break: from user code at:
+[rank0]:W1224 14:19:20.310000 159978 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 92, in compute_attn_supervise_loss
+[rank0]:W1224 14:19:20.310000 159978 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     sparsity = (is_top.sum(-1) / is_top.shape[-1]).float().mean().item() / 2
+[rank0]:W1224 14:19:20.310000 159978 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1224 14:19:20.310000 159978 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+layer:     0 | step:     0 | loss: 684.361 | sparse: 0.022 | tacc: 0.522 | oacc: 0.463
+layer:     0 | step:     1 | loss: 674.656 | sparse: 0.025 | tacc: 0.517 | oacc: 0.455
+layer:     0 | step:     2 | loss: 669.076 | sparse: 0.026 | tacc: 0.512 | oacc: 0.451
+layer:     0 | step:     3 | loss: 658.953 | sparse: 0.024 | tacc: 0.502 | oacc: 0.442
+layer:     0 | step:     4 | loss: 648.941 | sparse: 0.023 | tacc: 0.495 | oacc: 0.434
+layer:     0 | step:     5 | loss: 638.892 | sparse: 0.021 | tacc: 0.487 | oacc: 0.426
+layer:     0 | step:     6 | loss: 634.622 | sparse: 0.023 | tacc: 0.483 | oacc: 0.421
+layer:     0 | step:     7 | loss: 625.008 | sparse: 0.024 | tacc: 0.476 | oacc: 0.413
+[rank0]:W1224 14:19:45.765000 159978 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8] torch._dynamo hit config.recompile_limit (8)
+[rank0]:W1224 14:19:45.765000 159978 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8]    function: 'torch_dynamo_resume_in_compute_attn_supervise_loss_at_92' (/pfs/rl-train/wenhaoli/spotlight/train.py:92)
+[rank0]:W1224 14:19:45.765000 159978 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8]    last reason: 1/7: ___as_tensor(___stack0).item() == 0.04705670475959778  # (unknown source ___as_tensor(___stack0).item(), please file a bug)
+[rank0]:W1224 14:19:45.765000 159978 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank0]:W1224 14:19:45.765000 159978 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html.
+layer:     0 | step:     8 | loss: 619.849 | sparse: 0.023 | tacc: 0.468 | oacc: 0.405
+layer:     0 | step:     9 | loss: 609.770 | sparse: 0.023 | tacc: 0.462 | oacc: 0.399
+layer:     0 | step:    10 | loss: 607.351 | sparse: 0.024 | tacc: 0.456 | oacc: 0.393
+layer:     0 | step:    11 | loss: 599.282 | sparse: 0.025 | tacc: 0.450 | oacc: 0.387
+layer:     0 | step:    12 | loss: 594.960 | sparse: 0.023 | tacc: 0.444 | oacc: 0.380
+layer:     0 | step:    13 | loss: 590.163 | sparse: 0.022 | tacc: 0.440 | oacc: 0.378
+layer:     0 | step:    14 | loss: 581.671 | sparse: 0.024 | tacc: 0.430 | oacc: 0.367
+layer:     0 | step:    15 | loss: 577.844 | sparse: 0.022 | tacc: 0.424 | oacc: 0.360
+layer:     0 | step:    16 | loss: 572.079 | sparse: 0.024 | tacc: 0.419 | oacc: 0.353
+layer:     0 | step:    17 | loss: 568.715 | sparse: 0.024 | tacc: 0.413 | oacc: 0.348
+layer:     0 | step:    18 | loss: 563.514 | sparse: 0.022 | tacc: 0.406 | oacc: 0.340
+layer:     0 | step:    19 | loss: 557.520 | sparse: 0.023 | tacc: 0.399 | oacc: 0.335
+layer:     0 | step:    20 | loss: 555.357 | sparse: 0.025 | tacc: 0.397 | oacc: 0.333
+layer:     0 | step:    21 | loss: 550.227 | sparse: 0.023 | tacc: 0.389 | oacc: 0.324
+layer:     0 | step:    22 | loss: 543.986 | sparse: 0.022 | tacc: 0.385 | oacc: 0.319
+layer:     0 | step:    23 | loss: 542.910 | sparse: 0.025 | tacc: 0.378 | oacc: 0.311
+layer:     0 | step:    24 | loss: 535.783 | sparse: 0.023 | tacc: 0.371 | oacc: 0.305
+layer:     0 | step:    25 | loss: 534.713 | sparse: 0.023 | tacc: 0.371 | oacc: 0.303
+layer:     0 | step:    26 | loss: 529.308 | sparse: 0.024 | tacc: 0.360 | oacc: 0.295
+layer:     0 | step:    27 | loss: 525.607 | sparse: 0.023 | tacc: 0.357 | oacc: 0.291
+layer:     0 | step:    28 | loss: 521.047 | sparse: 0.023 | tacc: 0.350 | oacc: 0.284
+layer:     0 | step:    29 | loss: 520.664 | sparse: 0.023 | tacc: 0.349 | oacc: 0.282
+layer:     0 | step:    30 | loss: 515.409 | sparse: 0.024 | tacc: 0.336 | oacc: 0.267
+layer:     0 | step:    31 | loss: 513.664 | sparse: 0.023 | tacc: 0.337 | oacc: 0.272
+layer:     0 | step:    32 | loss: 512.130 | sparse: 0.024 | tacc: 0.331 | oacc: 0.266
+layer:     0 | step:    33 | loss: 507.038 | sparse: 0.023 | tacc: 0.330 | oacc: 0.264
+layer:     0 | step:    34 | loss: 506.729 | sparse: 0.024 | tacc: 0.323 | oacc: 0.259
+layer:     0 | step:    35 | loss: 505.904 | sparse: 0.023 | tacc: 0.330 | oacc: 0.262
+layer:     0 | step:    36 | loss: 501.799 | sparse: 0.023 | tacc: 0.320 | oacc: 0.254
+layer:     0 | step:    37 | loss: 500.611 | sparse: 0.022 | tacc: 0.319 | oacc: 0.252
+layer:     0 | step:    38 | loss: 496.699 | sparse: 0.023 | tacc: 0.311 | oacc: 0.243
+layer:     0 | step:    39 | loss: 495.444 | sparse: 0.023 | tacc: 0.308 | oacc: 0.240
+layer:     0 | step:    40 | loss: 496.161 | sparse: 0.024 | tacc: 0.304 | oacc: 0.239
+layer:     0 | step:    41 | loss: 492.442 | sparse: 0.023 | tacc: 0.305 | oacc: 0.238
+layer:     0 | step:    42 | loss: 489.968 | sparse: 0.022 | tacc: 0.300 | oacc: 0.233
+layer:     0 | step:    43 | loss: 489.559 | sparse: 0.023 | tacc: 0.297 | oacc: 0.231
+layer:     0 | step:    44 | loss: 487.226 | sparse: 0.024 | tacc: 0.292 | oacc: 0.223
+layer:     0 | step:    45 | loss: 485.783 | sparse: 0.022 | tacc: 0.295 | oacc: 0.225
+layer:     0 | step:    46 | loss: 486.461 | sparse: 0.023 | tacc: 0.294 | oacc: 0.223
+layer:     0 | step:    47 | loss: 482.151 | sparse: 0.024 | tacc: 0.291 | oacc: 0.219
+layer:     0 | step:    48 | loss: 484.019 | sparse: 0.024 | tacc: 0.288 | oacc: 0.218
+layer:     0 | step:    49 | loss: 480.783 | sparse: 0.024 | tacc: 0.285 | oacc: 0.215
+layer:     0 | step:    50 | loss: 479.047 | sparse: 0.023 | tacc: 0.281 | oacc: 0.211
+layer:     0 | step:    51 | loss: 478.350 | sparse: 0.022 | tacc: 0.287 | oacc: 0.212
+layer:     0 | step:    52 | loss: 477.505 | sparse: 0.022 | tacc: 0.285 | oacc: 0.212
+layer:     0 | step:    53 | loss: 479.563 | sparse: 0.023 | tacc: 0.297 | oacc: 0.223
+layer:     0 | step:    54 | loss: 475.154 | sparse: 0.024 | tacc: 0.286 | oacc: 0.211
+layer:     0 | step:    55 | loss: 475.633 | sparse: 0.024 | tacc: 0.285 | oacc: 0.211
+layer:     0 | step:    56 | loss: 474.057 | sparse: 0.025 | tacc: 0.283 | oacc: 0.206
+layer:     0 | step:    57 | loss: 473.572 | sparse: 0.024 | tacc: 0.287 | oacc: 0.209
+layer:     0 | step:    58 | loss: 470.768 | sparse: 0.023 | tacc: 0.284 | oacc: 0.207
+layer:     0 | step:    59 | loss: 471.820 | sparse: 0.026 | tacc: 0.275 | oacc: 0.197
+layer:     0 | step:    60 | loss: 469.791 | sparse: 0.023 | tacc: 0.281 | oacc: 0.204
+layer:     0 | step:    61 | loss: 468.130 | sparse: 0.024 | tacc: 0.281 | oacc: 0.203
+layer:     0 | step:    62 | loss: 468.441 | sparse: 0.023 | tacc: 0.289 | oacc: 0.209
+layer:     0 | step:    63 | loss: 465.712 | sparse: 0.024 | tacc: 0.287 | oacc: 0.205
+  0%|                                                                                                                                | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:316: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.72s/it]
+layer:     0 | step:    64 | loss: 464.250 | sparse: 0.024 | tacc: 0.283 | oacc: 0.201
+layer:     0 | step:    65 | loss: 464.611 | sparse: 0.023 | tacc: 0.288 | oacc: 0.205
+layer:     0 | step:    66 | loss: 465.621 | sparse: 0.024 | tacc: 0.286 | oacc: 0.202
+layer:     0 | step:    67 | loss: 462.102 | sparse: 0.023 | tacc: 0.286 | oacc: 0.202
+layer:     0 | step:    68 | loss: 463.197 | sparse: 0.024 | tacc: 0.288 | oacc: 0.203
+layer:     0 | step:    69 | loss: 462.029 | sparse: 0.023 | tacc: 0.292 | oacc: 0.208
+layer:     0 | step:    70 | loss: 460.294 | sparse: 0.024 | tacc: 0.289 | oacc: 0.203
+layer:     0 | step:    71 | loss: 458.022 | sparse: 0.022 | tacc: 0.289 | oacc: 0.200
+layer:     0 | step:    72 | loss: 460.316 | sparse: 0.026 | tacc: 0.281 | oacc: 0.191
+layer:     0 | step:    73 | loss: 462.075 | sparse: 0.026 | tacc: 0.280 | oacc: 0.190
+layer:     0 | step:    74 | loss: 455.465 | sparse: 0.022 | tacc: 0.291 | oacc: 0.200
+layer:     0 | step:    75 | loss: 456.107 | sparse: 0.024 | tacc: 0.295 | oacc: 0.204
+layer:     0 | step:    76 | loss: 454.762 | sparse: 0.024 | tacc: 0.291 | oacc: 0.200
+layer:     0 | step:    77 | loss: 453.878 | sparse: 0.023 | tacc: 0.290 | oacc: 0.200
+layer:     0 | step:    78 | loss: 456.224 | sparse: 0.024 | tacc: 0.294 | oacc: 0.204
+layer:     0 | step:    79 | loss: 452.827 | sparse: 0.024 | tacc: 0.292 | oacc: 0.198
+layer:     0 | step:    80 | loss: 451.496 | sparse: 0.023 | tacc: 0.288 | oacc: 0.197
+layer:     0 | step:    81 | loss: 452.003 | sparse: 0.021 | tacc: 0.301 | oacc: 0.206
+layer:     0 | step:    82 | loss: 451.448 | sparse: 0.025 | tacc: 0.294 | oacc: 0.195
+layer:     0 | step:    83 | loss: 452.257 | sparse: 0.023 | tacc: 0.304 | oacc: 0.210
+layer:     0 | step:    84 | loss: 448.166 | sparse: 0.024 | tacc: 0.298 | oacc: 0.198
+layer:     0 | step:    85 | loss: 450.006 | sparse: 0.023 | tacc: 0.297 | oacc: 0.200
+layer:     0 | step:    86 | loss: 447.053 | sparse: 0.024 | tacc: 0.301 | oacc: 0.198
+layer:     0 | step:    87 | loss: 445.831 | sparse: 0.026 | tacc: 0.285 | oacc: 0.182
+layer:     0 | step:    88 | loss: 445.782 | sparse: 0.024 | tacc: 0.294 | oacc: 0.190
+layer:     0 | step:    89 | loss: 445.162 | sparse: 0.023 | tacc: 0.293 | oacc: 0.195
+layer:     0 | step:    90 | loss: 442.739 | sparse: 0.025 | tacc: 0.296 | oacc: 0.187
+layer:     0 | step:    91 | loss: 445.877 | sparse: 0.025 | tacc: 0.285 | oacc: 0.177
+layer:     0 | step:    92 | loss: 444.912 | sparse: 0.023 | tacc: 0.296 | oacc: 0.193
+layer:     0 | step:    93 | loss: 445.393 | sparse: 0.022 | tacc: 0.292 | oacc: 0.191
+layer:     0 | step:    94 | loss: 444.699 | sparse: 0.023 | tacc: 0.298 | oacc: 0.195
+layer:     0 | step:    95 | loss: 443.533 | sparse: 0.023 | tacc: 0.297 | oacc: 0.195
+layer:     0 | step:    96 | loss: 443.397 | sparse: 0.022 | tacc: 0.308 | oacc: 0.204
+layer:     0 | step:    97 | loss: 438.386 | sparse: 0.024 | tacc: 0.302 | oacc: 0.189
+layer:     0 | step:    98 | loss: 441.866 | sparse: 0.023 | tacc: 0.302 | oacc: 0.194
+layer:     0 | step:    99 | loss: 438.759 | sparse: 0.024 | tacc: 0.303 | oacc: 0.190
+layer:     0 | step:   100 | loss: 441.925 | sparse: 0.024 | tacc: 0.298 | oacc: 0.193
+layer:     0 | step:   101 | loss: 439.904 | sparse: 0.022 | tacc: 0.301 | oacc: 0.194
+layer:     0 | step:   102 | loss: 432.487 | sparse: 0.027 | tacc: 0.302 | oacc: 0.183
+layer:     0 | step:   103 | loss: 438.653 | sparse: 0.023 | tacc: 0.302 | oacc: 0.193
+layer:     0 | step:   104 | loss: 437.932 | sparse: 0.023 | tacc: 0.300 | oacc: 0.192
+layer:     0 | step:   105 | loss: 433.741 | sparse: 0.024 | tacc: 0.304 | oacc: 0.187
+layer:     0 | step:   106 | loss: 437.890 | sparse: 0.023 | tacc: 0.299 | oacc: 0.192
+layer:     0 | step:   107 | loss: 436.469 | sparse: 0.023 | tacc: 0.308 | oacc: 0.197
+layer:     0 | step:   108 | loss: 434.688 | sparse: 0.022 | tacc: 0.300 | oacc: 0.190
+layer:     0 | step:   109 | loss: 436.323 | sparse: 0.023 | tacc: 0.302 | oacc: 0.191
+layer:     0 | step:   110 | loss: 435.558 | sparse: 0.023 | tacc: 0.304 | oacc: 0.192
+layer:     0 | step:   111 | loss: 435.129 | sparse: 0.025 | tacc: 0.301 | oacc: 0.189
+layer:     0 | step:   112 | loss: 433.216 | sparse: 0.021 | tacc: 0.300 | oacc: 0.190
+layer:     0 | step:   113 | loss: 431.266 | sparse: 0.024 | tacc: 0.300 | oacc: 0.188
+layer:     0 | step:   114 | loss: 427.383 | sparse: 0.025 | tacc: 0.294 | oacc: 0.169
+layer:     0 | step:   115 | loss: 431.466 | sparse: 0.022 | tacc: 0.299 | oacc: 0.184
+layer:     0 | step:   116 | loss: 430.524 | sparse: 0.022 | tacc: 0.302 | oacc: 0.187
+layer:     0 | step:   117 | loss: 430.066 | sparse: 0.023 | tacc: 0.303 | oacc: 0.187
+layer:     0 | step:   118 | loss: 424.639 | sparse: 0.025 | tacc: 0.299 | oacc: 0.168
+layer:     0 | step:   119 | loss: 424.167 | sparse: 0.023 | tacc: 0.307 | oacc: 0.174
+layer:     0 | step:   120 | loss: 430.512 | sparse: 0.023 | tacc: 0.309 | oacc: 0.192
+layer:     0 | step:   121 | loss: 430.118 | sparse: 0.022 | tacc: 0.309 | oacc: 0.191
+layer:     0 | step:   122 | loss: 428.562 | sparse: 0.023 | tacc: 0.304 | oacc: 0.186
+layer:     0 | step:   123 | loss: 427.829 | sparse: 0.023 | tacc: 0.304 | oacc: 0.186
+layer:     0 | step:   124 | loss: 428.915 | sparse: 0.025 | tacc: 0.308 | oacc: 0.190
+layer:     0 | step:   125 | loss: 419.273 | sparse: 0.024 | tacc: 0.310 | oacc: 0.172
+layer:     0 | step:   126 | loss: 426.618 | sparse: 0.025 | tacc: 0.308 | oacc: 0.189
+layer:     0 | step:   127 | loss: 421.738 | sparse: 0.024 | tacc: 0.314 | oacc: 0.182
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.72s/it]
+layer:     0 | step:   128 | loss: 425.323 | sparse: 0.022 | tacc: 0.308 | oacc: 0.186
+layer:     0 | step:   129 | loss: 424.664 | sparse: 0.023 | tacc: 0.309 | oacc: 0.187
+layer:     0 | step:   130 | loss: 423.530 | sparse: 0.022 | tacc: 0.310 | oacc: 0.187
+layer:     0 | step:   131 | loss: 423.459 | sparse: 0.021 | tacc: 0.310 | oacc: 0.187
+layer:     0 | step:   132 | loss: 418.945 | sparse: 0.026 | tacc: 0.305 | oacc: 0.167
+layer:     0 | step:   133 | loss: 421.745 | sparse: 0.024 | tacc: 0.305 | oacc: 0.182
+layer:     0 | step:   134 | loss: 423.729 | sparse: 0.024 | tacc: 0.310 | oacc: 0.186
+layer:     0 | step:   135 | loss: 423.041 | sparse: 0.024 | tacc: 0.322 | oacc: 0.196
+layer:     0 | step:   136 | loss: 422.686 | sparse: 0.023 | tacc: 0.310 | oacc: 0.186
+layer:     0 | step:   137 | loss: 420.839 | sparse: 0.023 | tacc: 0.306 | oacc: 0.180
+layer:     0 | step:   138 | loss: 421.331 | sparse: 0.025 | tacc: 0.308 | oacc: 0.183
+layer:     0 | step:   139 | loss: 420.879 | sparse: 0.023 | tacc: 0.309 | oacc: 0.182
+layer:     0 | step:   140 | loss: 421.014 | sparse: 0.024 | tacc: 0.308 | oacc: 0.181
+layer:     0 | step:   141 | loss: 414.074 | sparse: 0.026 | tacc: 0.306 | oacc: 0.162
+layer:     0 | step:   142 | loss: 418.589 | sparse: 0.023 | tacc: 0.309 | oacc: 0.180
+layer:     0 | step:   143 | loss: 412.370 | sparse: 0.025 | tacc: 0.314 | oacc: 0.171
+layer:     0 | step:   144 | loss: 417.676 | sparse: 0.023 | tacc: 0.310 | oacc: 0.181
+layer:     0 | step:   145 | loss: 418.103 | sparse: 0.022 | tacc: 0.315 | oacc: 0.185
+layer:     0 | step:   146 | loss: 416.855 | sparse: 0.024 | tacc: 0.312 | oacc: 0.183
+layer:     0 | step:   147 | loss: 416.490 | sparse: 0.023 | tacc: 0.314 | oacc: 0.183
+layer:     0 | step:   148 | loss: 415.134 | sparse: 0.023 | tacc: 0.310 | oacc: 0.180
+layer:     0 | step:   149 | loss: 414.610 | sparse: 0.023 | tacc: 0.312 | oacc: 0.180
+layer:     0 | step:   150 | loss: 413.829 | sparse: 0.024 | tacc: 0.311 | oacc: 0.179
+layer:     0 | step:   151 | loss: 415.668 | sparse: 0.023 | tacc: 0.317 | oacc: 0.185
+layer:     0 | step:   152 | loss: 415.026 | sparse: 0.023 | tacc: 0.325 | oacc: 0.191
+layer:     0 | step:   153 | loss: 407.201 | sparse: 0.024 | tacc: 0.322 | oacc: 0.174
+layer:     0 | step:   154 | loss: 413.866 | sparse: 0.023 | tacc: 0.318 | oacc: 0.182
+layer:     0 | step:   155 | loss: 411.598 | sparse: 0.024 | tacc: 0.313 | oacc: 0.179
+layer:     0 | step:   156 | loss: 411.708 | sparse: 0.022 | tacc: 0.313 | oacc: 0.178
+layer:     0 | step:   157 | loss: 410.880 | sparse: 0.023 | tacc: 0.312 | oacc: 0.178
+layer:     0 | step:   158 | loss: 411.907 | sparse: 0.023 | tacc: 0.315 | oacc: 0.179
+layer:     0 | step:   159 | loss: 410.545 | sparse: 0.023 | tacc: 0.316 | oacc: 0.179
+layer:     0 | step:   160 | loss: 410.478 | sparse: 0.023 | tacc: 0.313 | oacc: 0.176
+layer:     0 | step:   161 | loss: 408.322 | sparse: 0.021 | tacc: 0.325 | oacc: 0.185
+layer:     0 | step:   162 | loss: 410.037 | sparse: 0.023 | tacc: 0.314 | oacc: 0.176
+layer:     0 | step:   163 | loss: 408.806 | sparse: 0.023 | tacc: 0.311 | oacc: 0.174
+layer:     0 | step:   164 | loss: 409.680 | sparse: 0.024 | tacc: 0.312 | oacc: 0.175
+layer:     0 | step:   165 | loss: 408.583 | sparse: 0.023 | tacc: 0.319 | oacc: 0.182
+layer:     0 | step:   166 | loss: 403.211 | sparse: 0.025 | tacc: 0.325 | oacc: 0.174
+layer:     0 | step:   167 | loss: 407.052 | sparse: 0.025 | tacc: 0.311 | oacc: 0.172
+layer:     0 | step:   168 | loss: 407.426 | sparse: 0.023 | tacc: 0.315 | oacc: 0.176
+layer:     0 | step:   169 | loss: 407.743 | sparse: 0.024 | tacc: 0.312 | oacc: 0.175
+layer:     0 | step:   170 | loss: 405.603 | sparse: 0.023 | tacc: 0.317 | oacc: 0.177
+layer:     0 | step:   171 | loss: 404.826 | sparse: 0.023 | tacc: 0.322 | oacc: 0.180
+layer:     0 | step:   172 | loss: 404.021 | sparse: 0.023 | tacc: 0.318 | oacc: 0.174
+layer:     0 | step:   173 | loss: 403.277 | sparse: 0.023 | tacc: 0.319 | oacc: 0.175
+layer:     0 | step:   174 | loss: 404.705 | sparse: 0.025 | tacc: 0.321 | oacc: 0.176
+layer:     0 | step:   175 | loss: 402.457 | sparse: 0.023 | tacc: 0.319 | oacc: 0.174
+layer:     0 | step:   176 | loss: 402.248 | sparse: 0.024 | tacc: 0.321 | oacc: 0.176
+layer:     0 | step:   177 | loss: 403.633 | sparse: 0.023 | tacc: 0.320 | oacc: 0.175
+layer:     0 | step:   178 | loss: 401.917 | sparse: 0.022 | tacc: 0.320 | oacc: 0.175
+layer:     0 | step:   179 | loss: 403.494 | sparse: 0.023 | tacc: 0.321 | oacc: 0.176
+layer:     0 | step:   180 | loss: 402.068 | sparse: 0.023 | tacc: 0.319 | oacc: 0.173
+layer:     0 | step:   181 | loss: 402.236 | sparse: 0.024 | tacc: 0.318 | oacc: 0.171
+layer:     0 | step:   182 | loss: 400.539 | sparse: 0.024 | tacc: 0.320 | oacc: 0.172
+layer:     0 | step:   183 | loss: 399.035 | sparse: 0.023 | tacc: 0.321 | oacc: 0.172
+layer:     0 | step:   184 | loss: 398.299 | sparse: 0.022 | tacc: 0.321 | oacc: 0.172
+layer:     0 | step:   185 | loss: 398.548 | sparse: 0.022 | tacc: 0.324 | oacc: 0.175
+layer:     0 | step:   186 | loss: 397.364 | sparse: 0.024 | tacc: 0.323 | oacc: 0.172
+layer:     0 | step:   187 | loss: 397.022 | sparse: 0.023 | tacc: 0.324 | oacc: 0.174
+layer:     0 | step:   188 | loss: 398.364 | sparse: 0.023 | tacc: 0.322 | oacc: 0.172
+layer:     0 | step:   189 | loss: 398.099 | sparse: 0.023 | tacc: 0.323 | oacc: 0.173
+layer:     0 | step:   190 | loss: 397.592 | sparse: 0.023 | tacc: 0.324 | oacc: 0.173
+layer:     0 | step:   191 | loss: 395.556 | sparse: 0.022 | tacc: 0.333 | oacc: 0.175
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.71s/it]
+layer:     0 | step:   192 | loss: 393.723 | sparse: 0.025 | tacc: 0.335 | oacc: 0.170
+layer:     0 | step:   193 | loss: 395.529 | sparse: 0.023 | tacc: 0.321 | oacc: 0.169
+layer:     0 | step:   194 | loss: 396.910 | sparse: 0.024 | tacc: 0.321 | oacc: 0.171
+layer:     0 | step:   195 | loss: 397.719 | sparse: 0.022 | tacc: 0.333 | oacc: 0.181
+layer:     0 | step:   196 | loss: 395.536 | sparse: 0.023 | tacc: 0.324 | oacc: 0.172
+layer:     0 | step:   197 | loss: 393.360 | sparse: 0.024 | tacc: 0.323 | oacc: 0.169
+layer:     0 | step:   198 | loss: 394.147 | sparse: 0.023 | tacc: 0.334 | oacc: 0.178
+layer:     0 | step:   199 | loss: 392.721 | sparse: 0.024 | tacc: 0.322 | oacc: 0.167
+layer:     0 | step:   200 | loss: 392.483 | sparse: 0.023 | tacc: 0.324 | oacc: 0.169
+layer:     0 | step:   201 | loss: 393.735 | sparse: 0.023 | tacc: 0.323 | oacc: 0.166
+layer:     0 | step:   202 | loss: 391.865 | sparse: 0.023 | tacc: 0.323 | oacc: 0.168
+layer:     0 | step:   203 | loss: 393.166 | sparse: 0.024 | tacc: 0.322 | oacc: 0.167
+layer:     0 | step:   204 | loss: 392.714 | sparse: 0.022 | tacc: 0.330 | oacc: 0.172
+layer:     0 | step:   205 | loss: 390.906 | sparse: 0.024 | tacc: 0.326 | oacc: 0.168
+layer:     0 | step:   206 | loss: 390.423 | sparse: 0.024 | tacc: 0.326 | oacc: 0.169
+layer:     0 | step:   207 | loss: 390.142 | sparse: 0.024 | tacc: 0.327 | oacc: 0.168
+layer:     0 | step:   208 | loss: 390.205 | sparse: 0.021 | tacc: 0.336 | oacc: 0.179
+layer:     0 | step:   209 | loss: 388.952 | sparse: 0.024 | tacc: 0.330 | oacc: 0.170
+layer:     0 | step:   210 | loss: 388.754 | sparse: 0.023 | tacc: 0.328 | oacc: 0.168
+layer:     0 | step:   211 | loss: 389.768 | sparse: 0.024 | tacc: 0.327 | oacc: 0.167
+layer:     0 | step:   212 | loss: 388.583 | sparse: 0.023 | tacc: 0.328 | oacc: 0.167
+layer:     0 | step:   213 | loss: 387.815 | sparse: 0.024 | tacc: 0.329 | oacc: 0.167
+layer:     0 | step:   214 | loss: 386.032 | sparse: 0.022 | tacc: 0.331 | oacc: 0.168
+layer:     0 | step:   215 | loss: 387.216 | sparse: 0.023 | tacc: 0.330 | oacc: 0.169
+layer:     0 | step:   216 | loss: 387.256 | sparse: 0.023 | tacc: 0.331 | oacc: 0.168
+layer:     0 | step:   217 | loss: 386.191 | sparse: 0.024 | tacc: 0.328 | oacc: 0.166
+layer:     0 | step:   218 | loss: 385.535 | sparse: 0.023 | tacc: 0.328 | oacc: 0.165
+layer:     0 | step:   219 | loss: 386.070 | sparse: 0.023 | tacc: 0.330 | oacc: 0.167
+layer:     0 | step:   220 | loss: 385.275 | sparse: 0.021 | tacc: 0.335 | oacc: 0.171
+layer:     0 | step:   221 | loss: 385.180 | sparse: 0.023 | tacc: 0.332 | oacc: 0.167
+layer:     0 | step:   222 | loss: 385.889 | sparse: 0.023 | tacc: 0.331 | oacc: 0.168
+layer:     0 | step:   223 | loss: 384.507 | sparse: 0.022 | tacc: 0.328 | oacc: 0.164
+layer:     0 | step:   224 | loss: 383.272 | sparse: 0.025 | tacc: 0.339 | oacc: 0.162
+layer:     0 | step:   225 | loss: 383.400 | sparse: 0.024 | tacc: 0.329 | oacc: 0.164
+layer:     0 | step:   226 | loss: 383.075 | sparse: 0.024 | tacc: 0.331 | oacc: 0.166
+layer:     0 | step:   227 | loss: 384.702 | sparse: 0.023 | tacc: 0.331 | oacc: 0.166
+layer:     0 | step:   228 | loss: 383.590 | sparse: 0.022 | tacc: 0.330 | oacc: 0.164
+layer:     0 | step:   229 | loss: 382.589 | sparse: 0.023 | tacc: 0.331 | oacc: 0.164
+layer:     0 | step:   230 | loss: 381.793 | sparse: 0.023 | tacc: 0.336 | oacc: 0.166
+layer:     0 | step:   231 | loss: 381.487 | sparse: 0.023 | tacc: 0.331 | oacc: 0.163
+layer:     0 | step:   232 | loss: 379.875 | sparse: 0.022 | tacc: 0.336 | oacc: 0.165
+layer:     0 | step:   233 | loss: 380.345 | sparse: 0.022 | tacc: 0.345 | oacc: 0.172
+layer:     0 | step:   234 | loss: 379.018 | sparse: 0.024 | tacc: 0.337 | oacc: 0.165
+layer:     0 | step:   235 | loss: 379.954 | sparse: 0.022 | tacc: 0.344 | oacc: 0.170
+layer:     0 | step:   236 | loss: 380.236 | sparse: 0.023 | tacc: 0.332 | oacc: 0.163
+layer:     0 | step:   237 | loss: 378.987 | sparse: 0.023 | tacc: 0.336 | oacc: 0.163
+layer:     0 | step:   238 | loss: 377.534 | sparse: 0.024 | tacc: 0.334 | oacc: 0.162
+layer:     0 | step:   239 | loss: 379.765 | sparse: 0.023 | tacc: 0.333 | oacc: 0.163
+layer:     0 | step:   240 | loss: 378.585 | sparse: 0.024 | tacc: 0.333 | oacc: 0.162
+layer:     0 | step:   241 | loss: 377.889 | sparse: 0.023 | tacc: 0.337 | oacc: 0.164
+layer:     0 | step:   242 | loss: 378.189 | sparse: 0.023 | tacc: 0.333 | oacc: 0.161
+layer:     0 | step:   243 | loss: 377.862 | sparse: 0.022 | tacc: 0.338 | oacc: 0.163
+layer:     0 | step:   244 | loss: 377.448 | sparse: 0.023 | tacc: 0.349 | oacc: 0.171
+layer:     0 | step:   245 | loss: 376.080 | sparse: 0.022 | tacc: 0.336 | oacc: 0.162
+layer:     0 | step:   246 | loss: 376.674 | sparse: 0.023 | tacc: 0.337 | oacc: 0.162
+layer:     0 | step:   247 | loss: 373.976 | sparse: 0.022 | tacc: 0.337 | oacc: 0.161
+layer:     0 | step:   248 | loss: 374.205 | sparse: 0.024 | tacc: 0.339 | oacc: 0.162
+layer:     0 | step:   249 | loss: 375.766 | sparse: 0.022 | tacc: 0.343 | oacc: 0.168
+layer:     0 | step:   250 | loss: 375.555 | sparse: 0.023 | tacc: 0.338 | oacc: 0.162
+layer:     0 | step:   251 | loss: 376.125 | sparse: 0.023 | tacc: 0.340 | oacc: 0.163
+layer:     0 | step:   252 | loss: 375.532 | sparse: 0.025 | tacc: 0.338 | oacc: 0.162
+layer:     0 | step:   253 | loss: 375.459 | sparse: 0.025 | tacc: 0.346 | oacc: 0.158
+layer:     0 | step:   254 | loss: 373.063 | sparse: 0.023 | tacc: 0.339 | oacc: 0.161
+layer:     0 | step:   255 | loss: 373.104 | sparse: 0.024 | tacc: 0.338 | oacc: 0.161
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.72s/it]
+layer:     0 | step:   256 | loss: 374.103 | sparse: 0.024 | tacc: 0.339 | oacc: 0.161
+layer:     0 | step:   257 | loss: 372.532 | sparse: 0.023 | tacc: 0.339 | oacc: 0.161
+layer:     0 | step:   258 | loss: 372.013 | sparse: 0.024 | tacc: 0.339 | oacc: 0.160
+layer:     0 | step:   259 | loss: 371.826 | sparse: 0.024 | tacc: 0.344 | oacc: 0.162
+layer:     0 | step:   260 | loss: 371.419 | sparse: 0.023 | tacc: 0.341 | oacc: 0.161
+layer:     0 | step:   261 | loss: 371.770 | sparse: 0.024 | tacc: 0.347 | oacc: 0.164
+layer:     0 | step:   262 | loss: 371.350 | sparse: 0.023 | tacc: 0.345 | oacc: 0.163
+layer:     0 | step:   263 | loss: 370.483 | sparse: 0.023 | tacc: 0.342 | oacc: 0.160
+layer:     0 | step:   264 | loss: 370.258 | sparse: 0.023 | tacc: 0.340 | oacc: 0.160
+layer:     0 | step:   265 | loss: 371.472 | sparse: 0.023 | tacc: 0.341 | oacc: 0.160
+layer:     0 | step:   266 | loss: 370.223 | sparse: 0.025 | tacc: 0.345 | oacc: 0.153
+layer:     0 | step:   267 | loss: 369.646 | sparse: 0.023 | tacc: 0.342 | oacc: 0.159
+layer:     0 | step:   268 | loss: 368.633 | sparse: 0.024 | tacc: 0.339 | oacc: 0.158
+layer:     0 | step:   269 | loss: 368.255 | sparse: 0.022 | tacc: 0.343 | oacc: 0.158
+layer:     0 | step:   270 | loss: 369.056 | sparse: 0.024 | tacc: 0.346 | oacc: 0.161
+layer:     0 | step:   271 | loss: 368.646 | sparse: 0.023 | tacc: 0.341 | oacc: 0.159
+layer:     0 | step:   272 | loss: 366.476 | sparse: 0.025 | tacc: 0.354 | oacc: 0.157
+layer:     0 | step:   273 | loss: 368.872 | sparse: 0.022 | tacc: 0.344 | oacc: 0.159
+layer:     0 | step:   274 | loss: 367.025 | sparse: 0.023 | tacc: 0.343 | oacc: 0.159
+layer:     0 | step:   275 | loss: 367.634 | sparse: 0.024 | tacc: 0.345 | oacc: 0.160
+layer:     0 | step:   276 | loss: 364.927 | sparse: 0.026 | tacc: 0.356 | oacc: 0.158
+layer:     0 | step:   277 | loss: 366.790 | sparse: 0.023 | tacc: 0.344 | oacc: 0.158
+layer:     0 | step:   278 | loss: 366.805 | sparse: 0.024 | tacc: 0.355 | oacc: 0.162
+layer:     0 | step:   279 | loss: 366.053 | sparse: 0.022 | tacc: 0.347 | oacc: 0.160
+layer:     0 | step:   280 | loss: 364.094 | sparse: 0.024 | tacc: 0.354 | oacc: 0.158
+layer:     0 | step:   281 | loss: 365.186 | sparse: 0.022 | tacc: 0.346 | oacc: 0.159
+layer:     0 | step:   282 | loss: 364.841 | sparse: 0.022 | tacc: 0.344 | oacc: 0.157
+layer:     0 | step:   283 | loss: 364.895 | sparse: 0.024 | tacc: 0.355 | oacc: 0.161
+layer:     0 | step:   284 | loss: 365.007 | sparse: 0.024 | tacc: 0.341 | oacc: 0.155
+layer:     0 | step:   285 | loss: 364.444 | sparse: 0.023 | tacc: 0.347 | oacc: 0.158
+layer:     0 | step:   286 | loss: 365.140 | sparse: 0.024 | tacc: 0.344 | oacc: 0.157
+layer:     0 | step:   287 | loss: 365.545 | sparse: 0.022 | tacc: 0.351 | oacc: 0.162
+layer:     0 | step:   288 | loss: 363.036 | sparse: 0.024 | tacc: 0.347 | oacc: 0.156
+layer:     0 | step:   289 | loss: 363.602 | sparse: 0.023 | tacc: 0.358 | oacc: 0.160
+layer:     0 | step:   290 | loss: 362.139 | sparse: 0.021 | tacc: 0.343 | oacc: 0.154
+layer:     0 | step:   291 | loss: 362.304 | sparse: 0.022 | tacc: 0.350 | oacc: 0.159
+layer:     0 | step:   292 | loss: 362.489 | sparse: 0.025 | tacc: 0.344 | oacc: 0.155
+layer:     0 | step:   293 | loss: 363.289 | sparse: 0.023 | tacc: 0.346 | oacc: 0.156
+layer:     0 | step:   294 | loss: 360.384 | sparse: 0.022 | tacc: 0.348 | oacc: 0.156
+layer:     0 | step:   295 | loss: 361.028 | sparse: 0.023 | tacc: 0.349 | oacc: 0.157
+layer:     0 | step:   296 | loss: 361.725 | sparse: 0.025 | tacc: 0.346 | oacc: 0.155
+layer:     0 | step:   297 | loss: 361.648 | sparse: 0.023 | tacc: 0.351 | oacc: 0.157
+layer:     0 | step:   298 | loss: 360.417 | sparse: 0.024 | tacc: 0.349 | oacc: 0.156
+layer:     0 | step:   299 | loss: 359.428 | sparse: 0.022 | tacc: 0.358 | oacc: 0.164
+layer:     0 | step:   300 | loss: 359.771 | sparse: 0.024 | tacc: 0.350 | oacc: 0.156
+layer:     0 | step:   301 | loss: 359.442 | sparse: 0.022 | tacc: 0.353 | oacc: 0.157
+layer:     0 | step:   302 | loss: 360.159 | sparse: 0.024 | tacc: 0.351 | oacc: 0.157
+layer:     0 | step:   303 | loss: 358.706 | sparse: 0.024 | tacc: 0.351 | oacc: 0.156
+layer:     0 | step:   304 | loss: 355.865 | sparse: 0.026 | tacc: 0.360 | oacc: 0.153
+layer:     0 | step:   305 | loss: 358.948 | sparse: 0.024 | tacc: 0.354 | oacc: 0.157
+layer:     0 | step:   306 | loss: 357.981 | sparse: 0.024 | tacc: 0.350 | oacc: 0.156
+layer:     0 | step:   307 | loss: 358.047 | sparse: 0.022 | tacc: 0.359 | oacc: 0.161
+layer:     0 | step:   308 | loss: 357.826 | sparse: 0.023 | tacc: 0.348 | oacc: 0.153
+layer:     0 | step:   309 | loss: 358.719 | sparse: 0.024 | tacc: 0.349 | oacc: 0.154
+layer:     0 | step:   310 | loss: 357.802 | sparse: 0.025 | tacc: 0.351 | oacc: 0.153
+layer:     0 | step:   311 | loss: 358.464 | sparse: 0.024 | tacc: 0.350 | oacc: 0.153
+layer:     0 | step:   312 | loss: 356.713 | sparse: 0.022 | tacc: 0.354 | oacc: 0.155
+layer:     0 | step:   313 | loss: 356.156 | sparse: 0.022 | tacc: 0.355 | oacc: 0.156
+layer:     0 | step:   314 | loss: 356.470 | sparse: 0.023 | tacc: 0.353 | oacc: 0.154
+layer:     0 | step:   315 | loss: 356.851 | sparse: 0.022 | tacc: 0.354 | oacc: 0.155
+layer:     0 | step:   316 | loss: 355.571 | sparse: 0.023 | tacc: 0.352 | oacc: 0.153
+layer:     0 | step:   317 | loss: 356.863 | sparse: 0.024 | tacc: 0.356 | oacc: 0.157
+layer:     0 | step:   318 | loss: 357.847 | sparse: 0.026 | tacc: 0.363 | oacc: 0.152
+layer:     0 | step:   319 | loss: 355.326 | sparse: 0.022 | tacc: 0.363 | oacc: 0.162
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.71s/it]
+layer:     0 | step:   320 | loss: 354.965 | sparse: 0.022 | tacc: 0.352 | oacc: 0.154
+layer:     0 | step:   321 | loss: 353.672 | sparse: 0.025 | tacc: 0.363 | oacc: 0.149
+layer:     0 | step:   322 | loss: 353.656 | sparse: 0.024 | tacc: 0.352 | oacc: 0.151
+layer:     0 | step:   323 | loss: 354.672 | sparse: 0.022 | tacc: 0.355 | oacc: 0.154
+layer:     0 | step:   324 | loss: 353.756 | sparse: 0.024 | tacc: 0.352 | oacc: 0.152
+layer:     0 | step:   325 | loss: 352.529 | sparse: 0.024 | tacc: 0.354 | oacc: 0.152
+layer:     0 | step:   326 | loss: 352.110 | sparse: 0.022 | tacc: 0.353 | oacc: 0.152
+layer:     0 | step:   327 | loss: 353.649 | sparse: 0.023 | tacc: 0.356 | oacc: 0.153
+layer:     0 | step:   328 | loss: 353.838 | sparse: 0.025 | tacc: 0.354 | oacc: 0.152
+layer:     0 | step:   329 | loss: 353.099 | sparse: 0.023 | tacc: 0.363 | oacc: 0.159
+layer:     0 | step:   330 | loss: 351.856 | sparse: 0.023 | tacc: 0.357 | oacc: 0.155
+layer:     0 | step:   331 | loss: 352.794 | sparse: 0.023 | tacc: 0.358 | oacc: 0.154
+layer:     0 | step:   332 | loss: 351.664 | sparse: 0.024 | tacc: 0.357 | oacc: 0.152
+layer:     0 | step:   333 | loss: 349.685 | sparse: 0.023 | tacc: 0.367 | oacc: 0.154
+layer:     0 | step:   334 | loss: 349.730 | sparse: 0.024 | tacc: 0.366 | oacc: 0.150
+layer:     0 | step:   335 | loss: 350.452 | sparse: 0.023 | tacc: 0.360 | oacc: 0.155
+layer:     0 | step:   336 | loss: 349.960 | sparse: 0.023 | tacc: 0.358 | oacc: 0.152
+layer:     0 | step:   337 | loss: 350.232 | sparse: 0.023 | tacc: 0.355 | oacc: 0.151
+layer:     0 | step:   338 | loss: 345.583 | sparse: 0.027 | tacc: 0.370 | oacc: 0.148
+layer:     0 | step:   339 | loss: 351.004 | sparse: 0.024 | tacc: 0.356 | oacc: 0.151
+layer:     0 | step:   340 | loss: 344.437 | sparse: 0.027 | tacc: 0.371 | oacc: 0.148
+layer:     0 | step:   341 | loss: 348.711 | sparse: 0.024 | tacc: 0.360 | oacc: 0.152
+layer:     0 | step:   342 | loss: 350.898 | sparse: 0.023 | tacc: 0.359 | oacc: 0.152
+layer:     0 | step:   343 | loss: 349.722 | sparse: 0.023 | tacc: 0.357 | oacc: 0.150
+layer:     0 | step:   344 | loss: 348.915 | sparse: 0.024 | tacc: 0.359 | oacc: 0.150
+layer:     0 | step:   345 | loss: 348.716 | sparse: 0.023 | tacc: 0.360 | oacc: 0.152
+layer:     0 | step:   346 | loss: 347.449 | sparse: 0.024 | tacc: 0.361 | oacc: 0.151
+layer:     0 | step:   347 | loss: 348.259 | sparse: 0.024 | tacc: 0.363 | oacc: 0.153
+layer:     0 | step:   348 | loss: 348.055 | sparse: 0.023 | tacc: 0.362 | oacc: 0.151
+layer:     0 | step:   349 | loss: 348.084 | sparse: 0.024 | tacc: 0.360 | oacc: 0.151
+layer:     0 | step:   350 | loss: 346.364 | sparse: 0.024 | tacc: 0.362 | oacc: 0.151
+layer:     0 | step:   351 | loss: 347.058 | sparse: 0.022 | tacc: 0.361 | oacc: 0.151
+layer:     0 | step:   352 | loss: 347.058 | sparse: 0.024 | tacc: 0.362 | oacc: 0.151
+layer:     0 | step:   353 | loss: 345.614 | sparse: 0.023 | tacc: 0.361 | oacc: 0.150
+layer:     0 | step:   354 | loss: 343.636 | sparse: 0.024 | tacc: 0.374 | oacc: 0.149
+layer:     0 | step:   355 | loss: 346.572 | sparse: 0.023 | tacc: 0.364 | oacc: 0.152
+layer:     0 | step:   356 | loss: 344.952 | sparse: 0.022 | tacc: 0.364 | oacc: 0.150
+layer:     0 | step:   357 | loss: 344.869 | sparse: 0.023 | tacc: 0.362 | oacc: 0.150
+layer:     0 | step:   358 | loss: 344.515 | sparse: 0.024 | tacc: 0.363 | oacc: 0.150
+layer:     0 | step:   359 | loss: 345.415 | sparse: 0.027 | tacc: 0.367 | oacc: 0.143
+layer:     0 | step:   360 | loss: 344.648 | sparse: 0.022 | tacc: 0.363 | oacc: 0.149
+layer:     0 | step:   361 | loss: 343.621 | sparse: 0.023 | tacc: 0.368 | oacc: 0.153
+layer:     0 | step:   362 | loss: 344.115 | sparse: 0.022 | tacc: 0.361 | oacc: 0.149
+layer:     0 | step:   363 | loss: 344.915 | sparse: 0.022 | tacc: 0.367 | oacc: 0.153
+layer:     0 | step:   364 | loss: 344.338 | sparse: 0.026 | tacc: 0.368 | oacc: 0.143
+layer:     0 | step:   365 | loss: 342.532 | sparse: 0.023 | tacc: 0.365 | oacc: 0.148
+layer:     0 | step:   366 | loss: 342.796 | sparse: 0.023 | tacc: 0.366 | oacc: 0.149
+layer:     0 | step:   367 | loss: 342.998 | sparse: 0.022 | tacc: 0.365 | oacc: 0.150
+layer:     0 | step:   368 | loss: 342.737 | sparse: 0.023 | tacc: 0.364 | oacc: 0.149
+layer:     0 | step:   369 | loss: 341.918 | sparse: 0.022 | tacc: 0.365 | oacc: 0.148
+layer:     0 | step:   370 | loss: 342.314 | sparse: 0.024 | tacc: 0.363 | oacc: 0.148
+layer:     0 | step:   371 | loss: 343.311 | sparse: 0.024 | tacc: 0.365 | oacc: 0.149
+layer:     0 | step:   372 | loss: 341.522 | sparse: 0.024 | tacc: 0.367 | oacc: 0.150
+layer:     0 | step:   373 | loss: 341.575 | sparse: 0.023 | tacc: 0.375 | oacc: 0.155
+layer:     0 | step:   374 | loss: 341.195 | sparse: 0.025 | tacc: 0.367 | oacc: 0.149
+layer:     0 | step:   375 | loss: 340.929 | sparse: 0.023 | tacc: 0.368 | oacc: 0.149
+layer:     0 | step:   376 | loss: 341.253 | sparse: 0.023 | tacc: 0.365 | oacc: 0.148
+layer:     0 | step:   377 | loss: 340.489 | sparse: 0.023 | tacc: 0.370 | oacc: 0.151
+layer:     0 | step:   378 | loss: 340.602 | sparse: 0.024 | tacc: 0.363 | oacc: 0.147
+layer:     0 | step:   379 | loss: 338.574 | sparse: 0.023 | tacc: 0.366 | oacc: 0.147
+layer:     0 | step:   380 | loss: 339.360 | sparse: 0.023 | tacc: 0.369 | oacc: 0.150
+layer:     0 | step:   381 | loss: 340.707 | sparse: 0.023 | tacc: 0.368 | oacc: 0.149
+layer:     0 | step:   382 | loss: 339.838 | sparse: 0.024 | tacc: 0.368 | oacc: 0.149
+layer:     0 | step:   383 | loss: 337.199 | sparse: 0.027 | tacc: 0.375 | oacc: 0.143
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.70s/it]
+layer:     0 | step:   384 | loss: 339.432 | sparse: 0.023 | tacc: 0.366 | oacc: 0.146
+layer:     0 | step:   385 | loss: 338.701 | sparse: 0.023 | tacc: 0.380 | oacc: 0.148
+layer:     0 | step:   386 | loss: 338.404 | sparse: 0.024 | tacc: 0.368 | oacc: 0.147
+layer:     0 | step:   387 | loss: 338.390 | sparse: 0.024 | tacc: 0.368 | oacc: 0.146
+layer:     0 | step:   388 | loss: 339.261 | sparse: 0.024 | tacc: 0.371 | oacc: 0.149
+layer:     0 | step:   389 | loss: 338.598 | sparse: 0.023 | tacc: 0.369 | oacc: 0.147
+layer:     0 | step:   390 | loss: 338.387 | sparse: 0.026 | tacc: 0.376 | oacc: 0.141
+layer:     0 | step:   391 | loss: 338.413 | sparse: 0.022 | tacc: 0.373 | oacc: 0.149
+layer:     0 | step:   392 | loss: 336.582 | sparse: 0.023 | tacc: 0.372 | oacc: 0.147
+layer:     0 | step:   393 | loss: 336.558 | sparse: 0.023 | tacc: 0.377 | oacc: 0.151
+layer:     0 | step:   394 | loss: 338.209 | sparse: 0.024 | tacc: 0.370 | oacc: 0.147
+layer:     0 | step:   395 | loss: 336.147 | sparse: 0.023 | tacc: 0.372 | oacc: 0.146
+layer:     0 | step:   396 | loss: 335.246 | sparse: 0.022 | tacc: 0.379 | oacc: 0.151
+layer:     0 | step:   397 | loss: 335.562 | sparse: 0.023 | tacc: 0.370 | oacc: 0.145
+layer:     0 | step:   398 | loss: 335.698 | sparse: 0.022 | tacc: 0.377 | oacc: 0.149
+layer:     0 | step:   399 | loss: 332.766 | sparse: 0.024 | tacc: 0.379 | oacc: 0.141
+layer:     0 | step:   400 | loss: 336.742 | sparse: 0.023 | tacc: 0.370 | oacc: 0.147
+layer:     0 | step:   401 | loss: 335.692 | sparse: 0.023 | tacc: 0.371 | oacc: 0.146
+layer:     0 | step:   402 | loss: 332.395 | sparse: 0.025 | tacc: 0.377 | oacc: 0.139
+layer:     0 | step:   403 | loss: 335.635 | sparse: 0.023 | tacc: 0.378 | oacc: 0.148
+layer:     0 | step:   404 | loss: 334.748 | sparse: 0.023 | tacc: 0.369 | oacc: 0.146
+layer:     0 | step:   405 | loss: 333.858 | sparse: 0.024 | tacc: 0.377 | oacc: 0.146
+layer:     0 | step:   406 | loss: 334.516 | sparse: 0.025 | tacc: 0.370 | oacc: 0.145
+layer:     0 | step:   407 | loss: 334.019 | sparse: 0.023 | tacc: 0.372 | oacc: 0.146
+layer:     0 | step:   408 | loss: 334.530 | sparse: 0.024 | tacc: 0.373 | oacc: 0.147
+layer:     0 | step:   409 | loss: 331.034 | sparse: 0.024 | tacc: 0.387 | oacc: 0.145
+layer:     0 | step:   410 | loss: 334.339 | sparse: 0.023 | tacc: 0.373 | oacc: 0.145
+layer:     0 | step:   411 | loss: 332.012 | sparse: 0.023 | tacc: 0.375 | oacc: 0.145
+layer:     0 | step:   412 | loss: 333.164 | sparse: 0.023 | tacc: 0.376 | oacc: 0.148
+layer:     0 | step:   413 | loss: 332.299 | sparse: 0.021 | tacc: 0.378 | oacc: 0.148
+layer:     0 | step:   414 | loss: 330.630 | sparse: 0.027 | tacc: 0.384 | oacc: 0.140
+layer:     0 | step:   415 | loss: 331.836 | sparse: 0.024 | tacc: 0.377 | oacc: 0.145
+layer:     0 | step:   416 | loss: 331.506 | sparse: 0.023 | tacc: 0.375 | oacc: 0.144
+layer:     0 | step:   417 | loss: 332.164 | sparse: 0.025 | tacc: 0.372 | oacc: 0.143
+layer:     0 | step:   418 | loss: 327.757 | sparse: 0.026 | tacc: 0.388 | oacc: 0.140
+layer:     0 | step:   419 | loss: 329.752 | sparse: 0.023 | tacc: 0.379 | oacc: 0.145
+layer:     0 | step:   420 | loss: 332.643 | sparse: 0.023 | tacc: 0.375 | oacc: 0.145
+layer:     0 | step:   421 | loss: 329.954 | sparse: 0.022 | tacc: 0.379 | oacc: 0.145
+layer:     0 | step:   422 | loss: 331.645 | sparse: 0.023 | tacc: 0.377 | oacc: 0.145
+layer:     0 | step:   423 | loss: 331.444 | sparse: 0.022 | tacc: 0.376 | oacc: 0.145
+layer:     0 | step:   424 | loss: 330.532 | sparse: 0.024 | tacc: 0.375 | oacc: 0.144
+layer:     0 | step:   425 | loss: 331.189 | sparse: 0.024 | tacc: 0.375 | oacc: 0.144
+layer:     0 | step:   426 | loss: 331.320 | sparse: 0.025 | tacc: 0.378 | oacc: 0.146
+layer:     0 | step:   427 | loss: 330.021 | sparse: 0.023 | tacc: 0.377 | oacc: 0.144
+layer:     0 | step:   428 | loss: 329.501 | sparse: 0.022 | tacc: 0.378 | oacc: 0.143
+layer:     0 | step:   429 | loss: 330.130 | sparse: 0.024 | tacc: 0.378 | oacc: 0.145
+layer:     0 | step:   430 | loss: 329.056 | sparse: 0.022 | tacc: 0.382 | oacc: 0.145
+layer:     0 | step:   431 | loss: 330.298 | sparse: 0.025 | tacc: 0.378 | oacc: 0.144
+layer:     0 | step:   432 | loss: 330.000 | sparse: 0.024 | tacc: 0.377 | oacc: 0.144
+layer:     0 | step:   433 | loss: 328.278 | sparse: 0.021 | tacc: 0.379 | oacc: 0.144
+layer:     0 | step:   434 | loss: 327.565 | sparse: 0.024 | tacc: 0.394 | oacc: 0.147
+layer:     0 | step:   435 | loss: 326.838 | sparse: 0.023 | tacc: 0.380 | oacc: 0.143
+layer:     0 | step:   436 | loss: 328.947 | sparse: 0.023 | tacc: 0.378 | oacc: 0.144
+layer:     0 | step:   437 | loss: 327.019 | sparse: 0.024 | tacc: 0.395 | oacc: 0.143
+layer:     0 | step:   438 | loss: 326.351 | sparse: 0.023 | tacc: 0.380 | oacc: 0.143
+layer:     0 | step:   439 | loss: 328.112 | sparse: 0.023 | tacc: 0.376 | oacc: 0.143
+layer:     0 | step:   440 | loss: 325.436 | sparse: 0.020 | tacc: 0.381 | oacc: 0.144
+layer:     0 | step:   441 | loss: 328.428 | sparse: 0.024 | tacc: 0.375 | oacc: 0.141
+layer:     0 | step:   442 | loss: 325.764 | sparse: 0.023 | tacc: 0.377 | oacc: 0.140
+layer:     0 | step:   443 | loss: 325.779 | sparse: 0.023 | tacc: 0.386 | oacc: 0.143
+layer:     0 | step:   444 | loss: 325.826 | sparse: 0.025 | tacc: 0.387 | oacc: 0.138
+layer:     0 | step:   445 | loss: 325.304 | sparse: 0.024 | tacc: 0.381 | oacc: 0.142
+layer:     0 | step:   446 | loss: 324.721 | sparse: 0.022 | tacc: 0.382 | oacc: 0.142
+layer:     0 | step:   447 | loss: 326.855 | sparse: 0.023 | tacc: 0.390 | oacc: 0.146
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.71s/it]
+layer:     0 | step:   448 | loss: 325.597 | sparse: 0.022 | tacc: 0.388 | oacc: 0.146
+layer:     0 | step:   449 | loss: 325.493 | sparse: 0.023 | tacc: 0.381 | oacc: 0.142
+layer:     0 | step:   450 | loss: 325.251 | sparse: 0.024 | tacc: 0.380 | oacc: 0.142
+layer:     0 | step:   451 | loss: 325.686 | sparse: 0.022 | tacc: 0.380 | oacc: 0.141
+layer:     0 | step:   452 | loss: 324.188 | sparse: 0.023 | tacc: 0.381 | oacc: 0.143
+layer:     0 | step:   453 | loss: 324.498 | sparse: 0.024 | tacc: 0.380 | oacc: 0.141
+layer:     0 | step:   454 | loss: 324.090 | sparse: 0.023 | tacc: 0.384 | oacc: 0.143
+layer:     0 | step:   455 | loss: 325.543 | sparse: 0.023 | tacc: 0.381 | oacc: 0.142
+layer:     0 | step:   456 | loss: 325.739 | sparse: 0.023 | tacc: 0.383 | oacc: 0.142
+layer:     0 | step:   457 | loss: 324.079 | sparse: 0.023 | tacc: 0.383 | oacc: 0.141
+layer:     0 | step:   458 | loss: 323.488 | sparse: 0.023 | tacc: 0.383 | oacc: 0.141
+layer:     0 | step:   459 | loss: 323.470 | sparse: 0.022 | tacc: 0.385 | oacc: 0.142
+layer:     0 | step:   460 | loss: 322.152 | sparse: 0.023 | tacc: 0.385 | oacc: 0.142
+layer:     0 | step:   461 | loss: 323.296 | sparse: 0.025 | tacc: 0.397 | oacc: 0.141
+layer:     0 | step:   462 | loss: 322.343 | sparse: 0.023 | tacc: 0.387 | oacc: 0.143
+layer:     0 | step:   463 | loss: 323.025 | sparse: 0.024 | tacc: 0.388 | oacc: 0.143
+layer:     0 | step:   464 | loss: 321.928 | sparse: 0.022 | tacc: 0.384 | oacc: 0.140
+layer:     0 | step:   465 | loss: 322.319 | sparse: 0.022 | tacc: 0.387 | oacc: 0.142
+layer:     0 | step:   466 | loss: 323.006 | sparse: 0.024 | tacc: 0.383 | oacc: 0.140
+layer:     0 | step:   467 | loss: 321.708 | sparse: 0.023 | tacc: 0.386 | oacc: 0.140
+layer:     0 | step:   468 | loss: 322.707 | sparse: 0.024 | tacc: 0.385 | oacc: 0.142
+layer:     0 | step:   469 | loss: 320.608 | sparse: 0.023 | tacc: 0.388 | oacc: 0.141
+layer:     0 | step:   470 | loss: 321.720 | sparse: 0.023 | tacc: 0.386 | oacc: 0.141
+layer:     0 | step:   471 | loss: 320.536 | sparse: 0.022 | tacc: 0.387 | oacc: 0.141
+layer:     0 | step:   472 | loss: 320.067 | sparse: 0.023 | tacc: 0.386 | oacc: 0.140
+layer:     0 | step:   473 | loss: 320.698 | sparse: 0.023 | tacc: 0.390 | oacc: 0.142
+layer:     0 | step:   474 | loss: 320.124 | sparse: 0.021 | tacc: 0.388 | oacc: 0.141
+layer:     0 | step:   475 | loss: 321.356 | sparse: 0.025 | tacc: 0.388 | oacc: 0.141
+layer:     0 | step:   476 | loss: 320.825 | sparse: 0.024 | tacc: 0.386 | oacc: 0.140
+layer:     0 | step:   477 | loss: 319.734 | sparse: 0.023 | tacc: 0.389 | oacc: 0.141
+layer:     0 | step:   478 | loss: 320.789 | sparse: 0.023 | tacc: 0.396 | oacc: 0.142
+layer:     0 | step:   479 | loss: 319.000 | sparse: 0.023 | tacc: 0.389 | oacc: 0.141
+layer:     0 | step:   480 | loss: 319.905 | sparse: 0.023 | tacc: 0.387 | oacc: 0.140
+layer:     0 | step:   481 | loss: 320.118 | sparse: 0.023 | tacc: 0.388 | oacc: 0.140
+layer:     0 | step:   482 | loss: 318.650 | sparse: 0.023 | tacc: 0.387 | oacc: 0.139
+layer:     0 | step:   483 | loss: 318.110 | sparse: 0.025 | tacc: 0.403 | oacc: 0.142
+layer:     0 | step:   484 | loss: 319.398 | sparse: 0.024 | tacc: 0.389 | oacc: 0.140
+layer:     0 | step:   485 | loss: 318.121 | sparse: 0.022 | tacc: 0.392 | oacc: 0.141
+layer:     0 | step:   486 | loss: 317.682 | sparse: 0.023 | tacc: 0.389 | oacc: 0.139
+layer:     0 | step:   487 | loss: 318.232 | sparse: 0.023 | tacc: 0.389 | oacc: 0.140
+layer:     0 | step:   488 | loss: 319.026 | sparse: 0.023 | tacc: 0.389 | oacc: 0.140
+layer:     0 | step:   489 | loss: 317.188 | sparse: 0.022 | tacc: 0.391 | oacc: 0.139
+layer:     0 | step:   490 | loss: 318.068 | sparse: 0.024 | tacc: 0.389 | oacc: 0.139
+layer:     0 | step:   491 | loss: 317.394 | sparse: 0.022 | tacc: 0.388 | oacc: 0.139
+layer:     0 | step:   492 | loss: 317.494 | sparse: 0.024 | tacc: 0.397 | oacc: 0.140
+layer:     0 | step:   493 | loss: 318.350 | sparse: 0.024 | tacc: 0.394 | oacc: 0.141
+layer:     0 | step:   494 | loss: 318.045 | sparse: 0.025 | tacc: 0.389 | oacc: 0.138
+layer:     0 | step:   495 | loss: 316.223 | sparse: 0.023 | tacc: 0.391 | oacc: 0.139
+layer:     0 | step:   496 | loss: 316.518 | sparse: 0.024 | tacc: 0.390 | oacc: 0.138
+layer:     0 | step:   497 | loss: 317.532 | sparse: 0.023 | tacc: 0.391 | oacc: 0.139
+layer:     0 | step:   498 | loss: 317.173 | sparse: 0.025 | tacc: 0.391 | oacc: 0.139
+layer:     0 | step:   499 | loss: 315.929 | sparse: 0.023 | tacc: 0.390 | oacc: 0.138
+layer:     0 | step:   500 | loss: 314.959 | sparse: 0.021 | tacc: 0.394 | oacc: 0.140
+layer:     0 | step:   501 | loss: 315.367 | sparse: 0.022 | tacc: 0.395 | oacc: 0.140
+layer:     0 | step:   502 | loss: 315.345 | sparse: 0.023 | tacc: 0.392 | oacc: 0.139
+layer:     0 | step:   503 | loss: 314.509 | sparse: 0.023 | tacc: 0.395 | oacc: 0.139
+layer:     0 | step:   504 | loss: 315.673 | sparse: 0.025 | tacc: 0.396 | oacc: 0.140
+layer:     0 | step:   505 | loss: 315.673 | sparse: 0.025 | tacc: 0.394 | oacc: 0.139
+layer:     0 | step:   506 | loss: 313.357 | sparse: 0.021 | tacc: 0.393 | oacc: 0.139
+layer:     0 | step:   507 | loss: 314.804 | sparse: 0.024 | tacc: 0.399 | oacc: 0.140
+layer:     0 | step:   508 | loss: 314.182 | sparse: 0.024 | tacc: 0.391 | oacc: 0.137
+layer:     0 | step:   509 | loss: 312.720 | sparse: 0.024 | tacc: 0.404 | oacc: 0.137
+layer:     0 | step:   510 | loss: 313.748 | sparse: 0.021 | tacc: 0.396 | oacc: 0.141
+layer:     0 | step:   511 | loss: 314.511 | sparse: 0.023 | tacc: 0.392 | oacc: 0.137
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.73s/it]
+layer:     0 | step:   512 | loss: 313.671 | sparse: 0.023 | tacc: 0.394 | oacc: 0.137
+layer:     0 | step:   513 | loss: 313.598 | sparse: 0.023 | tacc: 0.394 | oacc: 0.138
+layer:     0 | step:   514 | loss: 312.855 | sparse: 0.024 | tacc: 0.393 | oacc: 0.137
+layer:     0 | step:   515 | loss: 314.588 | sparse: 0.023 | tacc: 0.395 | oacc: 0.139
+layer:     0 | step:   516 | loss: 314.134 | sparse: 0.024 | tacc: 0.398 | oacc: 0.139
+layer:     0 | step:   517 | loss: 313.275 | sparse: 0.025 | tacc: 0.404 | oacc: 0.138
+layer:     0 | step:   518 | loss: 313.819 | sparse: 0.024 | tacc: 0.396 | oacc: 0.138
+layer:     0 | step:   519 | loss: 312.389 | sparse: 0.022 | tacc: 0.398 | oacc: 0.138
+layer:     0 | step:   520 | loss: 312.070 | sparse: 0.024 | tacc: 0.397 | oacc: 0.137
+layer:     0 | step:   521 | loss: 311.498 | sparse: 0.023 | tacc: 0.398 | oacc: 0.138
+layer:     0 | step:   522 | loss: 312.637 | sparse: 0.022 | tacc: 0.395 | oacc: 0.138
+layer:     0 | step:   523 | loss: 312.276 | sparse: 0.022 | tacc: 0.399 | oacc: 0.139
+layer:     0 | step:   524 | loss: 310.836 | sparse: 0.022 | tacc: 0.400 | oacc: 0.139
+layer:     0 | step:   525 | loss: 311.573 | sparse: 0.023 | tacc: 0.395 | oacc: 0.136
+layer:     0 | step:   526 | loss: 311.698 | sparse: 0.023 | tacc: 0.397 | oacc: 0.138
+layer:     0 | step:   527 | loss: 310.676 | sparse: 0.023 | tacc: 0.397 | oacc: 0.136
+layer:     0 | step:   528 | loss: 311.736 | sparse: 0.023 | tacc: 0.396 | oacc: 0.137
+layer:     0 | step:   529 | loss: 310.724 | sparse: 0.023 | tacc: 0.400 | oacc: 0.138
+layer:     0 | step:   530 | loss: 309.873 | sparse: 0.024 | tacc: 0.399 | oacc: 0.137
+layer:     0 | step:   531 | loss: 310.980 | sparse: 0.026 | tacc: 0.413 | oacc: 0.139
+layer:     0 | step:   532 | loss: 309.995 | sparse: 0.025 | tacc: 0.410 | oacc: 0.137
+layer:     0 | step:   533 | loss: 311.123 | sparse: 0.023 | tacc: 0.398 | oacc: 0.137
+layer:     0 | step:   534 | loss: 308.651 | sparse: 0.026 | tacc: 0.412 | oacc: 0.136
+layer:     0 | step:   535 | loss: 310.602 | sparse: 0.022 | tacc: 0.398 | oacc: 0.137
+layer:     0 | step:   536 | loss: 310.497 | sparse: 0.024 | tacc: 0.398 | oacc: 0.137
+layer:     0 | step:   537 | loss: 310.585 | sparse: 0.024 | tacc: 0.398 | oacc: 0.136
+layer:     0 | step:   538 | loss: 311.380 | sparse: 0.024 | tacc: 0.396 | oacc: 0.136
+layer:     0 | step:   539 | loss: 309.822 | sparse: 0.024 | tacc: 0.399 | oacc: 0.136
+layer:     0 | step:   540 | loss: 308.380 | sparse: 0.024 | tacc: 0.410 | oacc: 0.133
+layer:     0 | step:   541 | loss: 309.623 | sparse: 0.023 | tacc: 0.401 | oacc: 0.137
+layer:     0 | step:   542 | loss: 310.224 | sparse: 0.023 | tacc: 0.399 | oacc: 0.136
+layer:     0 | step:   543 | loss: 310.007 | sparse: 0.023 | tacc: 0.403 | oacc: 0.138
+layer:     0 | step:   544 | loss: 307.715 | sparse: 0.024 | tacc: 0.413 | oacc: 0.138
+layer:     0 | step:   545 | loss: 308.915 | sparse: 0.025 | tacc: 0.410 | oacc: 0.134
+layer:     0 | step:   546 | loss: 308.748 | sparse: 0.022 | tacc: 0.402 | oacc: 0.137
+layer:     0 | step:   547 | loss: 310.207 | sparse: 0.023 | tacc: 0.406 | oacc: 0.140
+layer:     0 | step:   548 | loss: 308.875 | sparse: 0.024 | tacc: 0.402 | oacc: 0.137
+layer:     0 | step:   549 | loss: 308.372 | sparse: 0.023 | tacc: 0.403 | oacc: 0.137
+layer:     0 | step:   550 | loss: 308.344 | sparse: 0.024 | tacc: 0.401 | oacc: 0.135
+layer:     0 | step:   551 | loss: 307.200 | sparse: 0.023 | tacc: 0.405 | oacc: 0.138
+layer:     0 | step:   552 | loss: 304.715 | sparse: 0.026 | tacc: 0.414 | oacc: 0.133
+layer:     0 | step:   553 | loss: 308.651 | sparse: 0.025 | tacc: 0.397 | oacc: 0.134
+layer:     0 | step:   554 | loss: 306.710 | sparse: 0.023 | tacc: 0.399 | oacc: 0.134
+layer:     0 | step:   555 | loss: 307.021 | sparse: 0.023 | tacc: 0.404 | oacc: 0.134
+layer:     0 | step:   556 | loss: 307.397 | sparse: 0.022 | tacc: 0.401 | oacc: 0.134
+layer:     0 | step:   557 | loss: 307.378 | sparse: 0.021 | tacc: 0.403 | oacc: 0.136
+layer:     0 | step:   558 | loss: 305.813 | sparse: 0.023 | tacc: 0.405 | oacc: 0.137
+layer:     0 | step:   559 | loss: 306.817 | sparse: 0.022 | tacc: 0.404 | oacc: 0.135
+layer:     0 | step:   560 | loss: 306.396 | sparse: 0.023 | tacc: 0.403 | oacc: 0.136
+layer:     0 | step:   561 | loss: 311.032 | sparse: 0.026 | tacc: 0.402 | oacc: 0.128
+layer:     0 | step:   562 | loss: 306.292 | sparse: 0.024 | tacc: 0.401 | oacc: 0.135
+layer:     0 | step:   563 | loss: 305.190 | sparse: 0.025 | tacc: 0.404 | oacc: 0.135
+layer:     0 | step:   564 | loss: 306.127 | sparse: 0.022 | tacc: 0.404 | oacc: 0.136
+layer:     0 | step:   565 | loss: 305.370 | sparse: 0.023 | tacc: 0.406 | oacc: 0.136
+layer:     0 | step:   566 | loss: 306.006 | sparse: 0.023 | tacc: 0.405 | oacc: 0.136
+layer:     0 | step:   567 | loss: 304.713 | sparse: 0.022 | tacc: 0.406 | oacc: 0.137
+layer:     0 | step:   568 | loss: 303.675 | sparse: 0.026 | tacc: 0.418 | oacc: 0.134
+layer:     0 | step:   569 | loss: 304.425 | sparse: 0.022 | tacc: 0.403 | oacc: 0.134
+layer:     0 | step:   570 | loss: 304.940 | sparse: 0.024 | tacc: 0.405 | oacc: 0.135
+layer:     0 | step:   571 | loss: 306.599 | sparse: 0.025 | tacc: 0.415 | oacc: 0.135
+layer:     0 | step:   572 | loss: 303.545 | sparse: 0.023 | tacc: 0.408 | oacc: 0.135
+layer:     0 | step:   573 | loss: 305.647 | sparse: 0.025 | tacc: 0.405 | oacc: 0.135
+layer:     0 | step:   574 | loss: 305.497 | sparse: 0.023 | tacc: 0.403 | oacc: 0.134
+layer:     0 | step:   575 | loss: 304.260 | sparse: 0.024 | tacc: 0.411 | oacc: 0.138
+ 88%|████████████████████████████████████████████████████████████████████████████████████████████████████████▏              | 14/16 [01:08<00:09,  4.93s/it]
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 487, in <module>
+    train(args)
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 306, in train
+    outputs = model(**inputs)
+              ^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 79, in causal_forward
+    outputs = self.model(
+              ^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/utils/generic.py", line 1083, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 151, in model_forward
+    hidden_states, ret_scores = decoder_layer(
+                                ^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 311, in layer_forward
+    outputs.append(self.mlp(chunk_states))
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 81, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 434, in forward
+    return F.silu(input, inplace=self.inplace)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/functional.py", line 2375, in silu
+    return torch._C._nn.silu(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 487, in <module>
+[rank0]:     train(args)
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 306, in train
+[rank0]:     outputs = model(**inputs)
+[rank0]:               ^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 79, in causal_forward
+[rank0]:     outputs = self.model(
+[rank0]:               ^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/utils/generic.py", line 1083, in wrapper
+[rank0]:     outputs = func(self, *args, **kwargs)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 151, in model_forward
+[rank0]:     hidden_states, ret_scores = decoder_layer(
+[rank0]:                                 ^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/modeling_layers.py", line 94, in __call__
+[rank0]:     return super().__call__(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 311, in layer_forward
+[rank0]:     outputs.append(self.mlp(chunk_states))
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 81, in forward
+[rank0]:     down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+[rank0]:                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 434, in forward
+[rank0]:     return F.silu(input, inplace=self.inplace)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/functional.py", line 2375, in silu
+[rank0]:     return torch._C._nn.silu(input)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: KeyboardInterrupt

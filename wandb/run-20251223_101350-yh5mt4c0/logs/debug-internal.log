@@ -1,0 +1,8 @@
+{"time":"2025-12-23T10:13:51.215206372Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-23T10:13:52.127551571Z","level":"INFO","msg":"stream: created new stream","id":"yh5mt4c0"}
+{"time":"2025-12-23T10:13:52.127612658Z","level":"INFO","msg":"stream: started","id":"yh5mt4c0"}
+{"time":"2025-12-23T10:13:52.127637597Z","level":"INFO","msg":"writer: started","stream_id":"yh5mt4c0"}
+{"time":"2025-12-23T10:13:52.127643339Z","level":"INFO","msg":"handler: started","stream_id":"yh5mt4c0"}
+{"time":"2025-12-23T10:13:52.127653771Z","level":"INFO","msg":"sender: started","stream_id":"yh5mt4c0"}
+{"time":"2025-12-23T10:14:09.214592976Z","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/wenhaoli20000901/spotlight-v2/yh5mt4c0/file_stream"}
+{"time":"2025-12-23T10:14:09.214653443Z","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/wenhaoli20000901/spotlight-v2/yh5mt4c0/file_stream: {\"error\":\"run spotlight-v2/yh5mt4c0 not found while streaming file\"}"}

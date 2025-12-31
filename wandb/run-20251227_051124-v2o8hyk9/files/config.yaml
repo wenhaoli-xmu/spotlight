@@ -1,0 +1,144 @@
+_wandb:
+    value:
+        cli_version: 0.22.0
+        e:
+            wjj3qs1fvlb71py3sinwczadwtjnwjta:
+                args:
+                    - --num_layers
+                    - "36"
+                    - --max_tokens
+                    - "40960"
+                    - --model-name-or-path
+                    - /pfs/rl-train/wenhaoli/gdrive/model/Qwen3-4B
+                    - --method
+                    - hash-train
+                    - --instance_per_cycle
+                    - "64"
+                    - --max_prepare_workers
+                    - "8"
+                    - --prepare_batch_size_per_gpu
+                    - "1"
+                    - --maskout
+                    - "0.975"
+                    - --max_que
+                    - "256"
+                    - --max_top
+                    - "256"
+                    - --max_oth
+                    - "256"
+                    - --max-lr
+                    - "3e-4"
+                    - --warmup
+                    - "0"
+                    - --weight-decay
+                    - "0.01"
+                    - --beta1
+                    - "0.9"
+                    - --beta2
+                    - "0.99"
+                    - --buffer
+                    - train_buffer_qwen3_4b_buffer
+                    - --train-iters
+                    - "6144"
+                    - --gradient-clipping
+                    - "1.0"
+                    - --gradient-accumulation
+                    - "1"
+                    - --run-name
+                    - test
+                    - --enable_fsdp
+                codePath: train.py
+                codePathLocal: train.py
+                cpu_count: 64
+                cpu_count_logical: 109
+                cudaVersion: "12.2"
+                disk:
+                    /:
+                        total: "20957446144"
+                        used: "8829988864"
+                email: wenhaoli@stu.xmu.edu.cn
+                executable: /pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/bin/python
+                git:
+                    commit: 350bb2381b808e7ac5b4fe30c45905caa0685e33
+                    remote: https://github.com/wenhaoli-xmu/spotlight
+                gpu: NVIDIA A800-SXM4-80GB
+                gpu_count: 8
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A800-SXM4-80GB
+                      uuid: GPU-77fad9f0-9fb6-49cd-a67a-a115d7d2ffb5
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A800-SXM4-80GB
+                      uuid: GPU-d0d9b480-28b3-770c-8e25-8e8716c9ea49
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A800-SXM4-80GB
+                      uuid: GPU-126aef15-8d76-491a-c656-6b95bd326bd1
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A800-SXM4-80GB
+                      uuid: GPU-841f6014-edd3-f098-02e3-f64652026b89
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A800-SXM4-80GB
+                      uuid: GPU-c57b34e1-18dc-f480-29e4-e216d586bf23
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A800-SXM4-80GB
+                      uuid: GPU-b5cca798-7029-afc4-fdc9-7886746c4449
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A800-SXM4-80GB
+                      uuid: GPU-c1fb774a-c48a-e8e8-0692-ac10d46cca22
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A800-SXM4-80GB
+                      uuid: GPU-26f672b8-624c-a8d3-4acc-548fc957d03f
+                host: di-20251124111633-mdrt5
+                memory:
+                    total: "2019574153216"
+                os: Linux-5.4.250-2-velinux1u1-amd64-x86_64-with-glibc2.35
+                program: /pfs/rl-train/wenhaoli/spotlight/train.py
+                python: CPython 3.12.0
+                root: /pfs/rl-train/wenhaoli/spotlight
+                startedAt: "2025-12-27T05:11:24.684916Z"
+                writerId: wjj3qs1fvlb71py3sinwczadwtjnwjta
+        m: []
+        python_version: 3.12.0
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 51
+                - 53
+                - 71
+                - 105
+            "2":
+                - 1
+                - 5
+                - 11
+                - 41
+                - 49
+                - 51
+                - 53
+                - 71
+                - 105
+            "3":
+                - 13
+            "4": 3.12.0
+            "5": 0.22.0
+            "6": 4.55.0
+            "12": 0.22.0
+            "13": linux-x86_64

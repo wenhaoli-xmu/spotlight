@@ -1,0 +1,13 @@
+{"time":"2025-12-22T16:55:54.004674606Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-22T16:55:57.034177601Z","level":"INFO","msg":"stream: created new stream","id":"u0ezao90"}
+{"time":"2025-12-22T16:55:57.034235892Z","level":"INFO","msg":"stream: started","id":"u0ezao90"}
+{"time":"2025-12-22T16:55:57.034256662Z","level":"INFO","msg":"sender: started","stream_id":"u0ezao90"}
+{"time":"2025-12-22T16:55:57.034286765Z","level":"INFO","msg":"handler: started","stream_id":"u0ezao90"}
+{"time":"2025-12-22T16:55:57.034257808Z","level":"INFO","msg":"writer: started","stream_id":"u0ezao90"}
+{"time":"2025-12-22T17:03:15.359292459Z","level":"INFO","msg":"stream: closing","id":"u0ezao90"}
+{"time":"2025-12-22T17:03:17.714126085Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-22T17:03:18.804217621Z","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/wenhaoli20000901/spotlight-v2/u0ezao90/file_stream"}
+{"time":"2025-12-22T17:03:18.811939972Z","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/wenhaoli20000901/spotlight-v2/u0ezao90/file_stream: {\"error\":\"run spotlight-v2/u0ezao90 not found while streaming file\"}"}
+{"time":"2025-12-22T17:03:18.813196044Z","level":"INFO","msg":"handler: closed","stream_id":"u0ezao90"}
+{"time":"2025-12-22T17:03:18.815367458Z","level":"INFO","msg":"sender: closed","stream_id":"u0ezao90"}
+{"time":"2025-12-22T17:03:18.815406218Z","level":"INFO","msg":"stream: closed","id":"u0ezao90"}

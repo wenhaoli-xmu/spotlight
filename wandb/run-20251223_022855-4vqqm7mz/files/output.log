@@ -1,0 +1,22 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:12<00:00,  4.23s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.43s/it]
+  0%|                                                                                                                                                                                                 | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:339: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.69s/it]
+[rank0]:W1223 02:34:00.461000 2204286 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break from `Tensor.item()`, consider setting:
+[rank0]:W1223 02:34:00.461000 2204286 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+[rank0]:W1223 02:34:00.461000 2204286 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] or:
+[rank0]:W1223 02:34:00.461000 2204286 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+[rank0]:W1223 02:34:00.461000 2204286 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] to include these operations in the captured graph.
+[rank0]:W1223 02:34:00.461000 2204286 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1223 02:34:00.461000 2204286 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break: from user code at:
+[rank0]:W1223 02:34:00.461000 2204286 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 85, in compute_attn_supervise_loss
+[rank0]:W1223 02:34:00.461000 2204286 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     sparsity = is_top.sum(-1).float().mean().item() / is_top.shape[-1] / 2
+[rank0]:W1223 02:34:00.461000 2204286 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1223 02:34:00.461000 2204286 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+layer:     0 | step:     0 | loss: 8.251 | thresh: 0.000 | sparse: 0.026 | tacc: 0.523 | oacc: 0.469

@@ -1,0 +1,46 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/kernel/__init__.py", line 8, in <module>
+    from .attn_k4_q28 import attn_k4_q28
+ModuleNotFoundError: No module named 'spotlight.kernel.attn_k4_q28'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 487, in <module>
+    train(args)
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 176, in train
+    monkey_patch = get_monkey_patch(args.method)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/__init__.py", line 27, in get_monkey_patch
+    from .hash_train import monkey_patch
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 19, in <module>
+    from .hash_utils import (
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_utils.py", line 5, in <module>
+    from spotlight.kernel import attn_k4_q28_kernel, packbits_kernel
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/kernel/__init__.py", line 11, in <module>
+    raise ImportError('Should install compile cuda kernel first, please run `bash install.sh`.')
+ImportError: Should install compile cuda kernel first, please run `bash install.sh`.
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/kernel/__init__.py", line 8, in <module>
+[rank0]:     from .attn_k4_q28 import attn_k4_q28
+[rank0]: ModuleNotFoundError: No module named 'spotlight.kernel.attn_k4_q28'
+
+[rank0]: During handling of the above exception, another exception occurred:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 487, in <module>
+[rank0]:     train(args)
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 176, in train
+[rank0]:     monkey_patch = get_monkey_patch(args.method)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/__init__.py", line 27, in get_monkey_patch
+[rank0]:     from .hash_train import monkey_patch
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 19, in <module>
+[rank0]:     from .hash_utils import (
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_utils.py", line 5, in <module>
+[rank0]:     from spotlight.kernel import attn_k4_q28_kernel, packbits_kernel
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/kernel/__init__.py", line 11, in <module>
+[rank0]:     raise ImportError('Should install compile cuda kernel first, please run `bash install.sh`.')
+[rank0]: ImportError: Should install compile cuda kernel first, please run `bash install.sh`.

@@ -1,0 +1,243 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████| 3/3 [00:12<00:00,  4.26s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.57s/it]
+  0%|                                                                                                             | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:316: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.72s/it]
+[rank0]:W1224 02:35:07.001000 4159468 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break from `Tensor.item()`, consider setting:
+[rank0]:W1224 02:35:07.001000 4159468 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+[rank0]:W1224 02:35:07.001000 4159468 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] or:
+[rank0]:W1224 02:35:07.001000 4159468 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+[rank0]:W1224 02:35:07.001000 4159468 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] to include these operations in the captured graph.
+[rank0]:W1224 02:35:07.001000 4159468 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1224 02:35:07.001000 4159468 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break: from user code at:
+[rank0]:W1224 02:35:07.001000 4159468 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 92, in compute_attn_supervise_loss
+[rank0]:W1224 02:35:07.001000 4159468 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     sparsity = (is_top.sum(-1) / is_top.shape[-1]).float().mean().item() / 2
+[rank0]:W1224 02:35:07.001000 4159468 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1224 02:35:07.001000 4159468 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1] Triton compilation failed: triton_red_fused_add_bitwise_and_bitwise_not_ge_lt_masked_fill_mul_neg_softplus_sub_sum_0
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1] def triton_red_fused_add_bitwise_and_bitwise_not_ge_lt_masked_fill_mul_neg_softplus_sub_sum_0(in_ptr0, in_ptr1, in_ptr2, out_ptr0, out_ptr1, out_ptr2, out_ptr3, out_ptr4, out_ptr6, out_ptr7, xnumel, r0_numel, XBLOCK : tl.constexpr, R0_BLOCK : tl.constexpr):
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     xnumel = 8192
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     r0_numel = 40960
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     rnumel = r0_numel
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     RBLOCK: tl.constexpr = R0_BLOCK
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     xoffset = tl.program_id(0) * XBLOCK
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     xindex = xoffset + tl.arange(0, XBLOCK)[:, None]
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     xmask = tl.full([XBLOCK, R0_BLOCK], True, tl.int1)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     r0_base = tl.arange(0, R0_BLOCK)[None, :]
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     rbase = r0_base
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     x0 = (xindex % 256)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tmp0 = tl.load(in_ptr0 + (x0), None, eviction_policy='evict_last')
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     x3 = xindex
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     _tmp24 = tl.full([XBLOCK, R0_BLOCK], 0, tl.float32)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     _tmp33 = tl.full([XBLOCK, R0_BLOCK], 0, tl.float32)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     _tmp37 = tl.full([XBLOCK, R0_BLOCK], 0, tl.int64)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     _tmp41 = tl.full([XBLOCK, R0_BLOCK], 0, tl.int64)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     for r0_offset in range(0, r0_numel, R0_BLOCK):
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         r0_index = r0_offset + r0_base
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         r0_mask = r0_index < r0_numel
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         roffset = r0_offset
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         rindex = r0_index
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         r0_2 = r0_index
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp3 = tl.load(in_ptr1 + (r0_2 + 40960*x3), r0_mask, eviction_policy='evict_first', other=0.0)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp12 = tl.load(in_ptr2 + (r0_2 + 40960*x3), r0_mask, eviction_policy='evict_first', other=0.0)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp1 = r0_2
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp2 = tmp0 < tmp1
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp4 = -3.4028234663852886e+38
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp5 = tl.where(tmp2, tmp4, tmp3)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp6 = 1e-05
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp7 = tmp5 >= tmp6
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp8 = tmp2 == 0
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp9 = tmp7 & tmp8
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp10 = tmp5 < tmp6
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp11 = tmp10 & tmp8
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp13 = 2.0
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp14 = tmp12 - tmp13
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp15 = -tmp14
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp16 = 20.0
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp17 = tmp15 > tmp16
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp18 = tl_math.exp(tmp15)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp19 = libdevice.log1p(tmp18)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp20 = tl.where(tmp17, tmp15, tmp19)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp21 = tmp9.to(tl.float32)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp22 = tmp20 * tmp21
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp23 = tl.broadcast_to(tmp22, [XBLOCK, R0_BLOCK])
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp25 = _tmp24 + tmp23
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         _tmp24 = tl.where(r0_mask, tmp25, _tmp24)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp26 = tmp14 > tmp16
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp27 = tl_math.exp(tmp14)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp28 = libdevice.log1p(tmp27)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp29 = tl.where(tmp26, tmp14, tmp28)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp30 = tmp11.to(tl.float32)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp31 = tmp29 * tmp30
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp32 = tl.broadcast_to(tmp31, [XBLOCK, R0_BLOCK])
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp34 = _tmp33 + tmp32
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         _tmp33 = tl.where(r0_mask, tmp34, _tmp33)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp35 = tmp9.to(tl.int64)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp36 = tl.broadcast_to(tmp35, [XBLOCK, R0_BLOCK])
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp38 = _tmp37 + tmp36
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         _tmp37 = tl.where(r0_mask, tmp38, _tmp37)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp39 = tmp11.to(tl.int64)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp40 = tl.broadcast_to(tmp39, [XBLOCK, R0_BLOCK])
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tmp42 = _tmp41 + tmp40
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         _tmp41 = tl.where(r0_mask, tmp42, _tmp41)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tl.store(out_ptr0 + (r0_2 + 40960*x3), tmp9, r0_mask)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]         tl.store(out_ptr1 + (r0_2 + 40960*x3), tmp11, r0_mask)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tmp24 = tl.sum(_tmp24, 1)[:, None]
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tmp33 = tl.sum(_tmp33, 1)[:, None]
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tmp37 = tl.sum(_tmp37, 1)[:, None]
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tmp41 = tl.sum(_tmp41, 1)[:, None]
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tl.store(out_ptr2 + (x3), tmp24, None)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tl.store(out_ptr3 + (x3), tmp33, None)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tl.store(out_ptr4 + (x3), tmp37, None)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tmp43 = tmp37.to(tl.float32)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tmp44 = 1e-08
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tmp45 = tmp43 + tmp44
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tmp46 = tmp41.to(tl.float32)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tmp47 = tmp46 + tmp44
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tl.store(out_ptr6 + (x3), tmp45, None)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     tl.store(out_ptr7 + (x3), tmp47, None)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1] metadata: {'signature': {'in_ptr0': '*i64', 'in_ptr1': '*fp32', 'in_ptr2': '*fp32', 'out_ptr0': '*i1', 'out_ptr1': '*i1', 'out_ptr2': '*fp32', 'out_ptr3': '*fp32', 'out_ptr4': '*i64', 'out_ptr6': '*fp32', 'out_ptr7': '*fp32', 'xnumel': 'i32', 'r0_numel': 'i32', 'XBLOCK': 'constexpr', 'R0_BLOCK': 'constexpr'}, 'device': 0, 'constants': {'XBLOCK': 1, 'R0_BLOCK': 1024}, 'configs': [{(0,): [['tt.divisibility', 16]], (1,): [['tt.divisibility', 16]], (2,): [['tt.divisibility', 16]], (3,): [['tt.divisibility', 16]], (4,): [['tt.divisibility', 16]], (5,): [['tt.divisibility', 16]], (6,): [['tt.divisibility', 16]], (7,): [['tt.divisibility', 16]], (8,): [['tt.divisibility', 16]], (9,): [['tt.divisibility', 16]], (10,): [['tt.divisibility', 16]], (11,): [['tt.divisibility', 16]]}], 'device_type': 'cuda', 'num_warps': 16, 'num_stages': 1, 'debug': True, 'cc': 80}
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1] Traceback (most recent call last):
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 713, in _precompile_config
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     binary = triton.compile(*compile_args, **compile_kwargs)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/triton/compiler/compiler.py", line 371, in compile
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     metadata_group[ir_filename] = fn_cache_manager.put(next_module, ir_filename)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/triton/runtime/cache.py", line 110, in put
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]     os.makedirs(temp_dir, exist_ok=True)
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1]   File "<frozen os>", line 225, in makedirs
+[rank0]:E1224 02:35:10.784000 4159468 site-packages/torch/_inductor/runtime/triton_heuristics.py:715] [0/0_1] OSError: [Errno 28] No space left on device: '/tmp/torchinductor_root/triton/0/VLMH3IBSNEPNYXRM745N2S5LFCXWULMHFMJY6LL4WQ2LSO24RMJQ/tmp.pid_4159468_10f369e2-9c37-4e62-8a01-13078a3d2eac'
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 486, in <module>
+    train(args)
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 375, in train
+    top_acc, oth_acc, sparse, loss = compute_loss(draft_attn, true_attn, random_query_index)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 749, in compile_wrapper
+    raise e.remove_dynamo_frames() from None  # see TORCHDYNAMO_VERBOSE=1
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 923, in _compile_fx_inner
+    raise InductorError(e, currentframe()).with_traceback(
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 907, in _compile_fx_inner
+    mb_compiled_graph = fx_codegen_and_compile(
+                        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1578, in fx_codegen_and_compile
+    return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1456, in codegen_and_compile
+    compiled_module = graph.compile_to_module()
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/graph.py", line 2293, in compile_to_module
+    return self._compile_to_module()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/graph.py", line 2303, in _compile_to_module
+    mod = self._compile_to_module_lines(wrapper_code)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/graph.py", line 2371, in _compile_to_module_lines
+    mod = PyCodeCache.load_by_key_path(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/codecache.py", line 3296, in load_by_key_path
+    mod = _reload_python_module(key, path, set_sys_modules=in_toplevel)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/runtime/compile_tasks.py", line 31, in _reload_python_module
+    exec(code, mod.__dict__, mod.__dict__)
+  File "/tmp/torchinductor_root/2f/c2f2y7m6b7nvf4ddwzfsuxrut33fa4snpoeyolfzed7w4e2hlrrn.py", line 536, in <module>
+    async_compile.wait(globals())
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/async_compile.py", line 491, in wait
+    self._wait_futures(scope)
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/async_compile.py", line 511, in _wait_futures
+    kernel = result.result()
+             ^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/codecache.py", line 4014, in result
+    return self.result_fn()
+           ^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/async_compile.py", line 376, in get_result
+    kernel.precompile(
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 412, in precompile
+    self._dynamic_scale_rblock()
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 548, in _dynamic_scale_rblock
+    self.compile_results.append(self._precompile_config(new_config))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 713, in _precompile_config
+    binary = triton.compile(*compile_args, **compile_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/triton/compiler/compiler.py", line 371, in compile
+    metadata_group[ir_filename] = fn_cache_manager.put(next_module, ir_filename)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/triton/runtime/cache.py", line 110, in put
+    os.makedirs(temp_dir, exist_ok=True)
+  File "<frozen os>", line 225, in makedirs
+torch._inductor.exc.InductorError: OSError: [Errno 28] No space left on device: '/tmp/torchinductor_root/triton/0/VLMH3IBSNEPNYXRM745N2S5LFCXWULMHFMJY6LL4WQ2LSO24RMJQ/tmp.pid_4159468_10f369e2-9c37-4e62-8a01-13078a3d2eac'
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 486, in <module>
+[rank0]:     train(args)
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 375, in train
+[rank0]:     top_acc, oth_acc, sparse, loss = compute_loss(draft_attn, true_attn, random_query_index)
+[rank0]:                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 749, in compile_wrapper
+[rank0]:     raise e.remove_dynamo_frames() from None  # see TORCHDYNAMO_VERBOSE=1
+[rank0]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 923, in _compile_fx_inner
+[rank0]:     raise InductorError(e, currentframe()).with_traceback(
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 907, in _compile_fx_inner
+[rank0]:     mb_compiled_graph = fx_codegen_and_compile(
+[rank0]:                         ^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1578, in fx_codegen_and_compile
+[rank0]:     return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1456, in codegen_and_compile
+[rank0]:     compiled_module = graph.compile_to_module()
+[rank0]:                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/graph.py", line 2293, in compile_to_module
+[rank0]:     return self._compile_to_module()
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/graph.py", line 2303, in _compile_to_module
+[rank0]:     mod = self._compile_to_module_lines(wrapper_code)
+[rank0]:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/graph.py", line 2371, in _compile_to_module_lines
+[rank0]:     mod = PyCodeCache.load_by_key_path(
+[rank0]:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/codecache.py", line 3296, in load_by_key_path
+[rank0]:     mod = _reload_python_module(key, path, set_sys_modules=in_toplevel)
+[rank0]:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/runtime/compile_tasks.py", line 31, in _reload_python_module
+[rank0]:     exec(code, mod.__dict__, mod.__dict__)
+[rank0]:   File "/tmp/torchinductor_root/2f/c2f2y7m6b7nvf4ddwzfsuxrut33fa4snpoeyolfzed7w4e2hlrrn.py", line 536, in <module>
+[rank0]:     async_compile.wait(globals())
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/async_compile.py", line 491, in wait
+[rank0]:     self._wait_futures(scope)
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/async_compile.py", line 511, in _wait_futures
+[rank0]:     kernel = result.result()
+[rank0]:              ^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/codecache.py", line 4014, in result
+[rank0]:     return self.result_fn()
+[rank0]:            ^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/async_compile.py", line 376, in get_result
+[rank0]:     kernel.precompile(
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 412, in precompile
+[rank0]:     self._dynamic_scale_rblock()
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 548, in _dynamic_scale_rblock
+[rank0]:     self.compile_results.append(self._precompile_config(new_config))
+[rank0]:                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 713, in _precompile_config
+[rank0]:     binary = triton.compile(*compile_args, **compile_kwargs)
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/triton/compiler/compiler.py", line 371, in compile
+[rank0]:     metadata_group[ir_filename] = fn_cache_manager.put(next_module, ir_filename)
+[rank0]:                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/triton/runtime/cache.py", line 110, in put
+[rank0]:     os.makedirs(temp_dir, exist_ok=True)
+[rank0]:   File "<frozen os>", line 225, in makedirs
+[rank0]: torch._inductor.exc.InductorError: OSError: [Errno 28] No space left on device: '/tmp/torchinductor_root/triton/0/VLMH3IBSNEPNYXRM745N2S5LFCXWULMHFMJY6LL4WQ2LSO24RMJQ/tmp.pid_4159468_10f369e2-9c37-4e62-8a01-13078a3d2eac'
+
+[rank0]: Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"

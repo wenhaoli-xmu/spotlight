@@ -1,0 +1,6 @@
+{"time":"2025-12-22T15:40:31.385313631Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-22T15:40:32.344128765Z","level":"INFO","msg":"stream: created new stream","id":"wmhywhly"}
+{"time":"2025-12-22T15:40:32.344198963Z","level":"INFO","msg":"stream: started","id":"wmhywhly"}
+{"time":"2025-12-22T15:40:32.344218882Z","level":"INFO","msg":"writer: started","stream_id":"wmhywhly"}
+{"time":"2025-12-22T15:40:32.344225604Z","level":"INFO","msg":"sender: started","stream_id":"wmhywhly"}
+{"time":"2025-12-22T15:40:32.344244439Z","level":"INFO","msg":"handler: started","stream_id":"wmhywhly"}

@@ -1,0 +1,133 @@
+{
+  "os":  "Linux-5.4.250-2-velinux1u1-amd64-x86_64-with-glibc2.35",
+  "python":  "CPython 3.12.0",
+  "startedAt":  "2025-12-23T09:27:33.779574Z",
+  "args":  [
+    "--num_layers",
+    "36",
+    "--max_tokens",
+    "40960",
+    "--model-name-or-path",
+    "/pfs/rl-train/wenhaoli/gdrive/model/Qwen3-4B",
+    "--method",
+    "hash-train",
+    "--instance_per_cycle",
+    "64",
+    "--max_prepare_workers",
+    "8",
+    "--prepare_batch_size_per_gpu",
+    "1",
+    "--max_que",
+    "10240",
+    "--max_top",
+    "40960",
+    "--max_oth",
+    "40960",
+    "--max-lr",
+    "1e-3",
+    "--warmup",
+    "0.02",
+    "--weight-decay",
+    "0",
+    "--beta1",
+    "0.9",
+    "--beta2",
+    "0.999",
+    "--attn_thresh",
+    "1e-5",
+    "--buffer",
+    "train_buffer_qwen3_4b",
+    "--train-iters",
+    "32768",
+    "--gradient-clipping",
+    "1.0",
+    "--gradient-accumulation",
+    "1",
+    "--lambda_oth",
+    "1.0"
+  ],
+  "program":  "/pfs/rl-train/wenhaoli/spotlight/train.py",
+  "codePath":  "train.py",
+  "codePathLocal":  "train.py",
+  "git":  {
+    "remote":  "https://github.com/wenhaoli-xmu/spotlight",
+    "commit":  "350bb2381b808e7ac5b4fe30c45905caa0685e33"
+  },
+  "email":  "wenhaoli@stu.xmu.edu.cn",
+  "root":  "/pfs/rl-train/wenhaoli/spotlight",
+  "host":  "di-20251124111633-mdrt5",
+  "executable":  "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/bin/python",
+  "cpu_count":  64,
+  "cpu_count_logical":  109,
+  "gpu":  "NVIDIA A800-SXM4-80GB",
+  "gpu_count":  8,
+  "disk":  {
+    "/":  {
+      "total":  "20957446144",
+      "used":  "19890298880"
+    }
+  },
+  "memory":  {
+    "total":  "2019574153216"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA A800-SXM4-80GB",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-77fad9f0-9fb6-49cd-a67a-a115d7d2ffb5"
+    },
+    {
+      "name":  "NVIDIA A800-SXM4-80GB",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-d0d9b480-28b3-770c-8e25-8e8716c9ea49"
+    },
+    {
+      "name":  "NVIDIA A800-SXM4-80GB",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-126aef15-8d76-491a-c656-6b95bd326bd1"
+    },
+    {
+      "name":  "NVIDIA A800-SXM4-80GB",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-841f6014-edd3-f098-02e3-f64652026b89"
+    },
+    {
+      "name":  "NVIDIA A800-SXM4-80GB",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-c57b34e1-18dc-f480-29e4-e216d586bf23"
+    },
+    {
+      "name":  "NVIDIA A800-SXM4-80GB",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-b5cca798-7029-afc4-fdc9-7886746c4449"
+    },
+    {
+      "name":  "NVIDIA A800-SXM4-80GB",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-c1fb774a-c48a-e8e8-0692-ac10d46cca22"
+    },
+    {
+      "name":  "NVIDIA A800-SXM4-80GB",
+      "memoryTotal":  "85899345920",
+      "cudaCores":  6912,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-26f672b8-624c-a8d3-4acc-548fc957d03f"
+    }
+  ],
+  "cudaVersion":  "12.2",
+  "writerId":  "vypc9y0q85eedpp7zoxjmbpu88yh1g4d"
+}

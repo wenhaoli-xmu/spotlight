@@ -18,7 +18,7 @@ from transformers.models.qwen3.modeling_qwen3 import (
     create_sliding_window_causal_mask,
 )
 
-from .utils.hash_utils import HashModule
+from .hash_utils import HashModule
 from dataclasses import dataclass
 import tqdm
 from pygments.console import colorize
@@ -434,7 +434,7 @@ def monkey_patch(model, config):
     model.model.forward = types.MethodType(model_forward, model.model)
 
     model_name = model.config._name_or_path.split('/')[-1].lower()
-    load_dir = f"train_results/{model_name}-bkp"
+    load_dir = f"train_results/{model_name}"
 
     for layer_idx, layer in enumerate(model.model.layers):
         layer.forward = types.MethodType(layer_forward, layer)
@@ -449,22 +449,18 @@ def monkey_patch(model, config):
 
                 layer.self_attn.key_hash = HashModule(
                     layer.self_attn.config.num_key_value_heads,
-                    layer.self_attn.head_dim,
-                    n_layers=config['num_hash_layers'],
-                    dropout=0.0)
+                    dims=config['hash_dims']).bfloat16()
 
                 layer.self_attn.query_hash = HashModule(
                     layer.self_attn.config.num_attention_heads,
-                    layer.self_attn.head_dim,
-                    n_layers=config['num_hash_layers'],
-                    dropout=0.0)
+                    dims=config['hash_dims']).bfloat16()
 
                 params = chain.from_iterable((
                     layer.self_attn.query_hash.parameters(), 
                     layer.self_attn.key_hash.parameters()))
 
                 for p, w in zip(params, weights):
-                    p.data = w
+                    p.data = w.bfloat16()
 
             elif not config['ignore_missing_weights']:
                 raise RuntimeError(f"Missing checkpoint {weight_path}.")

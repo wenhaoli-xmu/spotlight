@@ -1,0 +1,11 @@
+{"time":"2025-12-22T15:07:58.51154054Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-22T15:07:59.467188555Z","level":"INFO","msg":"stream: created new stream","id":"tiic3224"}
+{"time":"2025-12-22T15:07:59.467240371Z","level":"INFO","msg":"stream: started","id":"tiic3224"}
+{"time":"2025-12-22T15:07:59.467258768Z","level":"INFO","msg":"handler: started","stream_id":"tiic3224"}
+{"time":"2025-12-22T15:07:59.467262277Z","level":"INFO","msg":"sender: started","stream_id":"tiic3224"}
+{"time":"2025-12-22T15:07:59.467289655Z","level":"INFO","msg":"writer: started","stream_id":"tiic3224"}
+{"time":"2025-12-22T15:10:07.165468531Z","level":"INFO","msg":"stream: closing","id":"tiic3224"}
+{"time":"2025-12-22T15:10:08.471644682Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-22T15:10:09.402000254Z","level":"INFO","msg":"handler: closed","stream_id":"tiic3224"}
+{"time":"2025-12-22T15:10:09.403032087Z","level":"INFO","msg":"sender: closed","stream_id":"tiic3224"}
+{"time":"2025-12-22T15:10:09.403059238Z","level":"INFO","msg":"stream: closed","id":"tiic3224"}

@@ -1,0 +1,85 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:11<00:00,  3.85s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.54s/it]
+  0%|                                                                                                                                                                                                 | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:339: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:16<00:00,  4.76s/it]
+[rank0]:W1223 02:14:09.305000 2156394 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break from `Tensor.item()`, consider setting:
+[rank0]:W1223 02:14:09.305000 2156394 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+[rank0]:W1223 02:14:09.305000 2156394 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] or:
+[rank0]:W1223 02:14:09.305000 2156394 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+[rank0]:W1223 02:14:09.305000 2156394 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] to include these operations in the captured graph.
+[rank0]:W1223 02:14:09.305000 2156394 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1223 02:14:09.305000 2156394 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break: from user code at:
+[rank0]:W1223 02:14:09.305000 2156394 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 85, in compute_attn_supervise_loss
+[rank0]:W1223 02:14:09.305000 2156394 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     sparsity = is_top.sum(-1).float().mean().item() / is_top.shape[-1] / 2
+[rank0]:W1223 02:14:09.305000 2156394 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1223 02:14:09.305000 2156394 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+layer:     0 | step:     0 | loss: 8.068 | thresh: 0.000 | sparse: 0.005 | tacc: 0.533 | oacc: 0.464
+layer:     0 | step:     1 | loss: 8.071 | thresh: 0.000 | sparse: 0.005 | tacc: 0.537 | oacc: 0.465
+layer:     0 | step:     2 | loss: 8.089 | thresh: 0.000 | sparse: 0.005 | tacc: 0.537 | oacc: 0.466
+layer:     0 | step:     3 | loss: 8.058 | thresh: 0.000 | sparse: 0.005 | tacc: 0.540 | oacc: 0.467
+layer:     0 | step:     4 | loss: 8.041 | thresh: 0.000 | sparse: 0.005 | tacc: 0.539 | oacc: 0.466
+layer:     0 | step:     5 | loss: 8.103 | thresh: 0.000 | sparse: 0.005 | tacc: 0.534 | oacc: 0.464
+layer:     0 | step:     6 | loss: 8.006 | thresh: 0.000 | sparse: 0.005 | tacc: 0.535 | oacc: 0.463
+layer:     0 | step:     7 | loss: 8.059 | thresh: 0.000 | sparse: 0.005 | tacc: 0.542 | oacc: 0.468
+[rank0]:W1223 02:14:49.250000 2156394 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8] torch._dynamo hit config.recompile_limit (8)
+[rank0]:W1223 02:14:49.250000 2156394 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8]    function: 'torch_dynamo_resume_in_compute_attn_supervise_loss_at_85' (/pfs/rl-train/wenhaoli/spotlight/train.py:85)
+[rank0]:W1223 02:14:49.250000 2156394 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8]    last reason: 1/7: ___as_tensor(___stack0).item() == 449.401123046875  # (unknown source ___as_tensor(___stack0).item(), please file a bug)
+[rank0]:W1223 02:14:49.250000 2156394 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank0]:W1223 02:14:49.250000 2156394 site-packages/torch/_dynamo/convert_frame.py:1016] [1/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html.
+layer:     0 | step:     8 | loss: 8.047 | thresh: 0.000 | sparse: 0.005 | tacc: 0.539 | oacc: 0.466
+layer:     0 | step:     9 | loss: 8.028 | thresh: 0.000 | sparse: 0.005 | tacc: 0.536 | oacc: 0.464
+layer:     0 | step:    10 | loss: 8.075 | thresh: 0.000 | sparse: 0.006 | tacc: 0.538 | oacc: 0.467
+layer:     0 | step:    11 | loss: 8.026 | thresh: 0.000 | sparse: 0.006 | tacc: 0.538 | oacc: 0.465
+layer:     0 | step:    12 | loss: 7.974 | thresh: 0.000 | sparse: 0.006 | tacc: 0.545 | oacc: 0.470
+layer:     0 | step:    13 | loss: 8.036 | thresh: 0.000 | sparse: 0.005 | tacc: 0.535 | oacc: 0.463
+layer:     0 | step:    14 | loss: 8.054 | thresh: -0.000 | sparse: 0.005 | tacc: 0.537 | oacc: 0.465
+layer:     0 | step:    15 | loss: 8.080 | thresh: -0.001 | sparse: 0.005 | tacc: 0.536 | oacc: 0.462
+layer:     0 | step:    16 | loss: 8.067 | thresh: -0.001 | sparse: 0.005 | tacc: 0.537 | oacc: 0.466
+layer:     0 | step:    17 | loss: 7.982 | thresh: -0.003 | sparse: 0.005 | tacc: 0.537 | oacc: 0.463
+layer:     0 | step:    18 | loss: 8.026 | thresh: -0.003 | sparse: 0.006 | tacc: 0.543 | oacc: 0.470
+layer:     0 | step:    19 | loss: 8.026 | thresh: -0.007 | sparse: 0.005 | tacc: 0.541 | oacc: 0.467
+layer:     0 | step:    20 | loss: 8.023 | thresh: -0.008 | sparse: 0.006 | tacc: 0.543 | oacc: 0.469
+layer:     0 | step:    21 | loss: 8.014 | thresh: -0.008 | sparse: 0.005 | tacc: 0.543 | oacc: 0.468
+layer:     0 | step:    22 | loss: 7.977 | thresh: -0.008 | sparse: 0.005 | tacc: 0.546 | oacc: 0.469
+layer:     0 | step:    23 | loss: 8.040 | thresh: 0.004 | sparse: 0.005 | tacc: 0.542 | oacc: 0.468
+layer:     0 | step:    24 | loss: 7.973 | thresh: 0.005 | sparse: 0.005 | tacc: 0.542 | oacc: 0.466
+layer:     0 | step:    25 | loss: 7.932 | thresh: 0.015 | sparse: 0.005 | tacc: 0.549 | oacc: 0.469
+layer:     0 | step:    26 | loss: 7.973 | thresh: 0.035 | sparse: 0.006 | tacc: 0.546 | oacc: 0.472
+layer:     0 | step:    27 | loss: 7.953 | thresh: 0.037 | sparse: 0.005 | tacc: 0.549 | oacc: 0.472
+layer:     0 | step:    28 | loss: 7.996 | thresh: 0.050 | sparse: 0.005 | tacc: 0.551 | oacc: 0.473
+layer:     0 | step:    29 | loss: 7.945 | thresh: 0.063 | sparse: 0.005 | tacc: 0.551 | oacc: 0.472
+layer:     0 | step:    30 | loss: 7.950 | thresh: 0.071 | sparse: 0.005 | tacc: 0.551 | oacc: 0.473
+layer:     0 | step:    31 | loss: 7.897 | thresh: 0.082 | sparse: 0.005 | tacc: 0.552 | oacc: 0.473
+layer:     0 | step:    32 | loss: 7.888 | thresh: 0.090 | sparse: 0.005 | tacc: 0.550 | oacc: 0.472
+layer:     0 | step:    33 | loss: 7.935 | thresh: 0.100 | sparse: 0.005 | tacc: 0.550 | oacc: 0.474
+layer:     0 | step:    34 | loss: 7.897 | thresh: 0.114 | sparse: 0.005 | tacc: 0.554 | oacc: 0.476
+layer:     0 | step:    35 | loss: 7.883 | thresh: 0.116 | sparse: 0.005 | tacc: 0.552 | oacc: 0.471
+layer:     0 | step:    36 | loss: 7.859 | thresh: 0.117 | sparse: 0.005 | tacc: 0.554 | oacc: 0.472
+layer:     0 | step:    37 | loss: 7.918 | thresh: 0.133 | sparse: 0.005 | tacc: 0.555 | oacc: 0.475
+layer:     0 | step:    38 | loss: 7.832 | thresh: 0.148 | sparse: 0.005 | tacc: 0.555 | oacc: 0.473
+layer:     0 | step:    39 | loss: 7.921 | thresh: 0.153 | sparse: 0.005 | tacc: 0.559 | oacc: 0.479
+layer:     0 | step:    40 | loss: 7.816 | thresh: 0.207 | sparse: 0.006 | tacc: 0.551 | oacc: 0.472
+layer:     0 | step:    41 | loss: 7.836 | thresh: 0.187 | sparse: 0.006 | tacc: 0.553 | oacc: 0.474
+layer:     0 | step:    42 | loss: 7.861 | thresh: 0.204 | sparse: 0.006 | tacc: 0.553 | oacc: 0.473
+layer:     0 | step:    43 | loss: 7.843 | thresh: 0.174 | sparse: 0.005 | tacc: 0.555 | oacc: 0.473
+layer:     0 | step:    44 | loss: 7.821 | thresh: 0.184 | sparse: 0.005 | tacc: 0.560 | oacc: 0.476
+layer:     0 | step:    45 | loss: 7.761 | thresh: 0.189 | sparse: 0.005 | tacc: 0.560 | oacc: 0.476
+layer:     0 | step:    46 | loss: 7.805 | thresh: 0.192 | sparse: 0.005 | tacc: 0.555 | oacc: 0.472
+layer:     0 | step:    47 | loss: 7.735 | thresh: 0.210 | sparse: 0.005 | tacc: 0.557 | oacc: 0.472
+layer:     0 | step:    48 | loss: 7.742 | thresh: 0.223 | sparse: 0.005 | tacc: 0.558 | oacc: 0.473
+layer:     0 | step:    49 | loss: 7.738 | thresh: 0.235 | sparse: 0.005 | tacc: 0.559 | oacc: 0.473
+layer:     0 | step:    50 | loss: 7.705 | thresh: 0.229 | sparse: 0.005 | tacc: 0.561 | oacc: 0.473
+layer:     0 | step:    51 | loss: 7.752 | thresh: 0.297 | sparse: 0.006 | tacc: 0.555 | oacc: 0.471
+layer:     0 | step:    52 | loss: 7.719 | thresh: 0.275 | sparse: 0.005 | tacc: 0.559 | oacc: 0.474
+layer:     0 | step:    53 | loss: 7.707 | thresh: 0.260 | sparse: 0.005 | tacc: 0.554 | oacc: 0.470
+layer:     0 | step:    54 | loss: 7.718 | thresh: 0.273 | sparse: 0.005 | tacc: 0.560 | oacc: 0.475
+layer:     0 | step:    55 | loss: 7.695 | thresh: 0.281 | sparse: 0.005 | tacc: 0.559 | oacc: 0.473
+layer:     0 | step:    56 | loss: 7.725 | thresh: 0.328 | sparse: 0.005 | tacc: 0.561 | oacc: 0.476
+layer:     0 | step:    57 | loss: 7.635 | thresh: 0.305 | sparse: 0.005 | tacc: 0.563 | oacc: 0.473
+layer:     0 | step:    58 | loss: 7.654 | thresh: 0.281 | sparse: 0.005 | tacc: 0.560 | oacc: 0.471

@@ -1,0 +1,30 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 487, in <module>
+    train(args)
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 176, in train
+    monkey_patch = get_monkey_patch(args.method)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/__init__.py", line 27, in get_monkey_patch
+    from .hash_train import monkey_patch
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 19, in <module>
+    from .hash_utils import (
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_utils.py", line 304
+    def (self, query, key, value):
+        ^
+SyntaxError: invalid syntax
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 487, in <module>
+[rank0]:     train(args)
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 176, in train
+[rank0]:     monkey_patch = get_monkey_patch(args.method)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/__init__.py", line 27, in get_monkey_patch
+[rank0]:     from .hash_train import monkey_patch
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 19, in <module>
+[rank0]:     from .hash_utils import (
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_utils.py", line 304
+[rank0]:     def (self, query, key, value):
+[rank0]:         ^
+[rank0]: SyntaxError: invalid syntax

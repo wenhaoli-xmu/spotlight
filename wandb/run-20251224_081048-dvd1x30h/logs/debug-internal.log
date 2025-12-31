@@ -1,0 +1,7 @@
+{"time":"2025-12-24T08:10:49.133572198Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-24T08:10:50.153665026Z","level":"INFO","msg":"stream: created new stream","id":"dvd1x30h"}
+{"time":"2025-12-24T08:10:50.153722536Z","level":"INFO","msg":"stream: started","id":"dvd1x30h"}
+{"time":"2025-12-24T08:10:50.153742315Z","level":"INFO","msg":"sender: started","stream_id":"dvd1x30h"}
+{"time":"2025-12-24T08:10:50.153743828Z","level":"INFO","msg":"writer: started","stream_id":"dvd1x30h"}
+{"time":"2025-12-24T08:10:50.153760608Z","level":"INFO","msg":"handler: started","stream_id":"dvd1x30h"}
+{"time":"2025-12-24T08:36:37.1595603Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/wenhaoli20000901/spotlight-v2/dvd1x30h/file_stream\": read tcp 192.168.14.159:43982->35.186.228.49:443: read: connection reset by peer"}

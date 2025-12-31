@@ -1,0 +1,11 @@
+{"time":"2025-12-23T02:05:02.512928622Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-23T02:05:05.296208042Z","level":"INFO","msg":"stream: created new stream","id":"uowyss9s"}
+{"time":"2025-12-23T02:05:05.2962641Z","level":"INFO","msg":"stream: started","id":"uowyss9s"}
+{"time":"2025-12-23T02:05:05.296292193Z","level":"INFO","msg":"handler: started","stream_id":"uowyss9s"}
+{"time":"2025-12-23T02:05:05.296297649Z","level":"INFO","msg":"writer: started","stream_id":"uowyss9s"}
+{"time":"2025-12-23T02:05:05.296310908Z","level":"INFO","msg":"sender: started","stream_id":"uowyss9s"}
+{"time":"2025-12-23T02:06:48.245809095Z","level":"INFO","msg":"stream: closing","id":"uowyss9s"}
+{"time":"2025-12-23T02:06:49.425757637Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-23T02:06:50.89933078Z","level":"INFO","msg":"handler: closed","stream_id":"uowyss9s"}
+{"time":"2025-12-23T02:06:50.900239562Z","level":"INFO","msg":"sender: closed","stream_id":"uowyss9s"}
+{"time":"2025-12-23T02:06:50.900258482Z","level":"INFO","msg":"stream: closed","id":"uowyss9s"}

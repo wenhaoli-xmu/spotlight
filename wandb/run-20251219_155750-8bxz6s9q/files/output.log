@@ -1,0 +1,48 @@
+[34m[1mwandb[0m: 409 encountered ({"errors":[{"message":"project may already be created, please retry","path":["upsertBucket"]}],"data":{"upsertBucket":null}}), retrying request
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████████| 3/3 [00:12<00:00,  4.09s/it]
+RANK-1 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.43s/it]
+  0%|                                                                                                              | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:403: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:16<00:00,  4.79s/it]
+[rank1]:W1219 16:00:03.879000 2114617 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break from `Tensor.item()`, consider setting:
+[rank1]:W1219 16:00:03.879000 2114617 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+[rank1]:W1219 16:00:03.879000 2114617 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] or:
+[rank1]:W1219 16:00:03.879000 2114617 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+[rank1]:W1219 16:00:03.879000 2114617 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] to include these operations in the captured graph.
+[rank1]:W1219 16:00:03.879000 2114617 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank1]:W1219 16:00:03.879000 2114617 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break: from user code at:
+[rank1]:W1219 16:00:03.879000 2114617 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 182, in compute_attn_supervise_loss
+[rank1]:W1219 16:00:03.879000 2114617 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     return top_acc.item(), oth_fp.item(), loss
+[rank1]:W1219 16:00:03.879000 2114617 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank1]:W1219 16:00:03.879000 2114617 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+layer:     1 | step:     0 | loss: 50.076 | tacc: 0.606 | oacc: 0.559
+layer:     1 | step:     1 | loss: 50.076 | tacc: 0.607 | oacc: 0.558
+layer:     1 | step:     2 | loss: 50.001 | tacc: 0.600 | oacc: 0.552
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 609, in <module>
+[rank1]:     parser.add_argument("--gradient-clipping", type=float, default=None)
+[rank1]:     ^^^^^^^^^^^
+[rank1]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 454, in train
+[rank1]:     dtype=torch.int64)[:args.max_que].cuda()
+[rank1]:                              ^^^^^^^^^^^^^^^
+[rank1]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 252, in attention_forward
+[rank1]:     attn_output, ret_scores = flash_attention(
+[rank1]:                               ^^^^^^^^^^^^^^^^
+[rank1]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 213, in flash_attention
+[rank1]:     hash_score = compute_lsh_score(q_hash, k_hash, random_query_index)
+[rank1]:                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/utils/hash_utils.py", line 14, in compute_lsh_score
+[rank1]:     q_bin = (q_hash > 0).bfloat16() * 2 - 1
+[rank1]:             ^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]: KeyboardInterrupt

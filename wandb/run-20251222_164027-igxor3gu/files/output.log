@@ -1,0 +1,238 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 3/3 [00:13<00:00,  4.37s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.60s/it]
+  0%|                                                                                                    | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:344: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|███████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.75s/it]
+layer:     0 | step:     0 | loss: 15.409 | thresh: 0.000 | tacc: 0.886 | oacc: 0.884
+layer:     0 | step:     1 | loss: 15.410 | thresh: 0.000 | tacc: 0.887 | oacc: 0.884
+layer:     0 | step:     2 | loss: 15.468 | thresh: 0.000 | tacc: 0.887 | oacc: 0.884
+layer:     0 | step:     3 | loss: 15.451 | thresh: 0.000 | tacc: 0.884 | oacc: 0.881
+layer:     0 | step:     4 | loss: 15.455 | thresh: 0.111 | tacc: 0.887 | oacc: 0.886
+layer:     0 | step:     5 | loss: 14.958 | thresh: 0.471 | tacc: 0.883 | oacc: 0.880
+layer:     0 | step:     6 | loss: 14.910 | thresh: 0.520 | tacc: 0.886 | oacc: 0.884
+layer:     0 | step:     7 | loss: 14.832 | thresh: 0.754 | tacc: 0.884 | oacc: 0.882
+layer:     0 | step:     8 | loss: 14.463 | thresh: 1.016 | tacc: 0.884 | oacc: 0.881
+layer:     0 | step:     9 | loss: 14.289 | thresh: 1.297 | tacc: 0.882 | oacc: 0.880
+layer:     0 | step:    10 | loss: 13.852 | thresh: 1.609 | tacc: 0.868 | oacc: 0.865
+layer:     0 | step:    11 | loss: 13.530 | thresh: 1.969 | tacc: 0.851 | oacc: 0.849
+layer:     0 | step:    12 | loss: 13.104 | thresh: 2.359 | tacc: 0.841 | oacc: 0.837
+layer:     0 | step:    13 | loss: 12.749 | thresh: 2.797 | tacc: 0.832 | oacc: 0.828
+layer:     0 | step:    14 | loss: 12.485 | thresh: 3.234 | tacc: 0.823 | oacc: 0.818
+layer:     0 | step:    15 | loss: 12.073 | thresh: 3.703 | tacc: 0.807 | oacc: 0.802
+layer:     0 | step:    16 | loss: 11.588 | thresh: 4.250 | tacc: 0.785 | oacc: 0.780
+layer:     0 | step:    17 | loss: 11.217 | thresh: 4.812 | tacc: 0.765 | oacc: 0.764
+layer:     0 | step:    18 | loss: 10.820 | thresh: 5.375 | tacc: 0.752 | oacc: 0.748
+layer:     0 | step:    19 | loss: 10.421 | thresh: 5.938 | tacc: 0.728 | oacc: 0.722
+layer:     0 | step:    20 | loss: 10.104 | thresh: 6.594 | tacc: 0.712 | oacc: 0.710
+layer:     0 | step:    21 | loss: 9.643 | thresh: 7.219 | tacc: 0.685 | oacc: 0.678
+layer:     0 | step:    22 | loss: 9.320 | thresh: 7.812 | tacc: 0.663 | oacc: 0.658
+layer:     0 | step:    23 | loss: 9.018 | thresh: 8.500 | tacc: 0.627 | oacc: 0.625
+layer:     0 | step:    24 | loss: 8.741 | thresh: 9.125 | tacc: 0.599 | oacc: 0.596
+layer:     0 | step:    25 | loss: 8.522 | thresh: 9.688 | tacc: 0.580 | oacc: 0.572
+layer:     0 | step:    26 | loss: 8.332 | thresh: 10.250 | tacc: 0.555 | oacc: 0.549
+layer:     0 | step:    27 | loss: 8.017 | thresh: 10.875 | tacc: 0.520 | oacc: 0.514
+layer:     0 | step:    28 | loss: 7.979 | thresh: 11.250 | tacc: 0.506 | oacc: 0.498
+layer:     0 | step:    29 | loss: 7.799 | thresh: 11.688 | tacc: 0.480 | oacc: 0.470
+layer:     0 | step:    30 | loss: 7.753 | thresh: 12.000 | tacc: 0.466 | oacc: 0.458
+layer:     0 | step:    31 | loss: 7.602 | thresh: 12.188 | tacc: 0.458 | oacc: 0.449
+layer:     0 | step:    32 | loss: 7.601 | thresh: 12.312 | tacc: 0.448 | oacc: 0.437
+layer:     0 | step:    33 | loss: 7.488 | thresh: 12.250 | tacc: 0.450 | oacc: 0.440
+layer:     0 | step:    34 | loss: 7.490 | thresh: 12.250 | tacc: 0.447 | oacc: 0.436
+layer:     0 | step:    35 | loss: 7.469 | thresh: 12.062 | tacc: 0.453 | oacc: 0.444
+layer:     0 | step:    36 | loss: 7.441 | thresh: 11.938 | tacc: 0.464 | oacc: 0.454
+layer:     0 | step:    37 | loss: 7.461 | thresh: 11.812 | tacc: 0.462 | oacc: 0.452
+layer:     0 | step:    38 | loss: 7.394 | thresh: 11.562 | tacc: 0.482 | oacc: 0.471
+layer:     0 | step:    39 | loss: 7.372 | thresh: 11.312 | tacc: 0.490 | oacc: 0.479
+layer:     0 | step:    40 | loss: 7.364 | thresh: 11.312 | tacc: 0.494 | oacc: 0.482
+layer:     0 | step:    41 | loss: 7.259 | thresh: 11.188 | tacc: 0.493 | oacc: 0.480
+layer:     0 | step:    42 | loss: 7.185 | thresh: 11.000 | tacc: 0.500 | oacc: 0.487
+layer:     0 | step:    43 | loss: 7.110 | thresh: 11.125 | tacc: 0.497 | oacc: 0.483
+layer:     0 | step:    44 | loss: 7.053 | thresh: 11.000 | tacc: 0.503 | oacc: 0.487
+layer:     0 | step:    45 | loss: 6.986 | thresh: 10.938 | tacc: 0.505 | oacc: 0.491
+layer:     0 | step:    46 | loss: 6.926 | thresh: 10.938 | tacc: 0.499 | oacc: 0.482
+layer:     0 | step:    47 | loss: 6.903 | thresh: 10.812 | tacc: 0.506 | oacc: 0.490
+layer:     0 | step:    48 | loss: 6.901 | thresh: 10.688 | tacc: 0.510 | oacc: 0.492
+layer:     0 | step:    49 | loss: 6.828 | thresh: 10.562 | tacc: 0.521 | oacc: 0.503
+layer:     0 | step:    50 | loss: 6.805 | thresh: 10.500 | tacc: 0.524 | oacc: 0.508
+layer:     0 | step:    51 | loss: 6.732 | thresh: 10.438 | tacc: 0.518 | oacc: 0.498
+layer:     0 | step:    52 | loss: 6.685 | thresh: 10.375 | tacc: 0.525 | oacc: 0.505
+layer:     0 | step:    53 | loss: 6.649 | thresh: 10.375 | tacc: 0.519 | oacc: 0.500
+layer:     0 | step:    54 | loss: 6.639 | thresh: 10.312 | tacc: 0.525 | oacc: 0.505
+layer:     0 | step:    55 | loss: 6.604 | thresh: 10.375 | tacc: 0.513 | oacc: 0.493
+layer:     0 | step:    56 | loss: 6.594 | thresh: 10.375 | tacc: 0.511 | oacc: 0.492
+layer:     0 | step:    57 | loss: 6.530 | thresh: 10.500 | tacc: 0.501 | oacc: 0.480
+layer:     0 | step:    58 | loss: 6.508 | thresh: 10.562 | tacc: 0.501 | oacc: 0.476
+layer:     0 | step:    59 | loss: 6.468 | thresh: 10.812 | tacc: 0.491 | oacc: 0.467
+layer:     0 | step:    60 | loss: 6.411 | thresh: 10.500 | tacc: 0.494 | oacc: 0.470
+layer:     0 | step:    61 | loss: 6.382 | thresh: 10.438 | tacc: 0.503 | oacc: 0.480
+layer:     0 | step:    62 | loss: 6.315 | thresh: 10.438 | tacc: 0.501 | oacc: 0.477
+layer:     0 | step:    63 | loss: 6.340 | thresh: 10.188 | tacc: 0.505 | oacc: 0.479
+100%|███████████████████████████████████████████████████████████████████████| 16/16 [01:15<00:00,  4.71s/it]
+layer:     0 | step:    64 | loss: 6.237 | thresh: 10.125 | tacc: 0.513 | oacc: 0.485
+layer:     0 | step:    65 | loss: 6.254 | thresh: 9.875 | tacc: 0.523 | oacc: 0.497
+layer:     0 | step:    66 | loss: 6.249 | thresh: 9.812 | tacc: 0.520 | oacc: 0.494
+layer:     0 | step:    67 | loss: 6.187 | thresh: 9.688 | tacc: 0.517 | oacc: 0.492
+layer:     0 | step:    68 | loss: 6.158 | thresh: 9.750 | tacc: 0.515 | oacc: 0.488
+layer:     0 | step:    69 | loss: 6.094 | thresh: 9.812 | tacc: 0.511 | oacc: 0.482
+layer:     0 | step:    70 | loss: 6.102 | thresh: 9.812 | tacc: 0.501 | oacc: 0.476
+layer:     0 | step:    71 | loss: 6.077 | thresh: 9.688 | tacc: 0.509 | oacc: 0.479
+layer:     0 | step:    72 | loss: 6.047 | thresh: 9.750 | tacc: 0.502 | oacc: 0.475
+layer:     0 | step:    73 | loss: 6.053 | thresh: 9.812 | tacc: 0.499 | oacc: 0.473
+layer:     0 | step:    74 | loss: 6.009 | thresh: 9.562 | tacc: 0.506 | oacc: 0.477
+layer:     0 | step:    75 | loss: 5.965 | thresh: 9.562 | tacc: 0.509 | oacc: 0.480
+layer:     0 | step:    76 | loss: 6.021 | thresh: 9.375 | tacc: 0.503 | oacc: 0.476
+layer:     0 | step:    77 | loss: 5.948 | thresh: 9.125 | tacc: 0.520 | oacc: 0.491
+layer:     0 | step:    78 | loss: 5.907 | thresh: 9.000 | tacc: 0.521 | oacc: 0.493
+layer:     0 | step:    79 | loss: 5.870 | thresh: 9.062 | tacc: 0.513 | oacc: 0.485
+layer:     0 | step:    80 | loss: 5.873 | thresh: 9.188 | tacc: 0.507 | oacc: 0.477
+layer:     0 | step:    81 | loss: 5.846 | thresh: 9.250 | tacc: 0.501 | oacc: 0.471
+layer:     0 | step:    82 | loss: 5.871 | thresh: 9.312 | tacc: 0.494 | oacc: 0.464
+layer:     0 | step:    83 | loss: 5.819 | thresh: 9.250 | tacc: 0.500 | oacc: 0.469
+layer:     0 | step:    84 | loss: 5.783 | thresh: 8.938 | tacc: 0.511 | oacc: 0.479
+layer:     0 | step:    85 | loss: 5.746 | thresh: 8.750 | tacc: 0.513 | oacc: 0.483
+layer:     0 | step:    86 | loss: 5.729 | thresh: 8.500 | tacc: 0.519 | oacc: 0.490
+layer:     0 | step:    87 | loss: 5.748 | thresh: 8.500 | tacc: 0.525 | oacc: 0.492
+layer:     0 | step:    88 | loss: 5.657 | thresh: 8.562 | tacc: 0.517 | oacc: 0.484
+layer:     0 | step:    89 | loss: 5.661 | thresh: 8.688 | tacc: 0.510 | oacc: 0.477
+layer:     0 | step:    90 | loss: 5.654 | thresh: 8.688 | tacc: 0.501 | oacc: 0.470
+layer:     0 | step:    91 | loss: 5.620 | thresh: 8.625 | tacc: 0.500 | oacc: 0.466
+layer:     0 | step:    92 | loss: 5.590 | thresh: 8.500 | tacc: 0.498 | oacc: 0.466
+layer:     0 | step:    93 | loss: 5.626 | thresh: 8.250 | tacc: 0.506 | oacc: 0.478
+layer:     0 | step:    94 | loss: 5.632 | thresh: 8.125 | tacc: 0.515 | oacc: 0.486
+layer:     0 | step:    95 | loss: 5.539 | thresh: 7.969 | tacc: 0.518 | oacc: 0.486
+layer:     0 | step:    96 | loss: 5.537 | thresh: 8.125 | tacc: 0.512 | oacc: 0.478
+layer:     0 | step:    97 | loss: 5.536 | thresh: 8.062 | tacc: 0.501 | oacc: 0.469
+layer:     0 | step:    98 | loss: 5.493 | thresh: 8.062 | tacc: 0.509 | oacc: 0.477
+layer:     0 | step:    99 | loss: 5.517 | thresh: 7.844 | tacc: 0.506 | oacc: 0.472
+layer:     0 | step:   100 | loss: 5.486 | thresh: 7.812 | tacc: 0.516 | oacc: 0.484
+layer:     0 | step:   101 | loss: 5.454 | thresh: 7.719 | tacc: 0.512 | oacc: 0.478
+layer:     0 | step:   102 | loss: 5.445 | thresh: 7.781 | tacc: 0.503 | oacc: 0.474
+layer:     0 | step:   103 | loss: 5.355 | thresh: 7.562 | tacc: 0.511 | oacc: 0.472
+layer:     0 | step:   104 | loss: 5.360 | thresh: 7.594 | tacc: 0.516 | oacc: 0.481
+layer:     0 | step:   105 | loss: 5.356 | thresh: 7.594 | tacc: 0.509 | oacc: 0.476
+layer:     0 | step:   106 | loss: 5.348 | thresh: 7.594 | tacc: 0.495 | oacc: 0.463
+layer:     0 | step:   107 | loss: 5.348 | thresh: 7.656 | tacc: 0.499 | oacc: 0.465
+layer:     0 | step:   108 | loss: 5.325 | thresh: 7.219 | tacc: 0.513 | oacc: 0.480
+layer:     0 | step:   109 | loss: 5.312 | thresh: 7.156 | tacc: 0.520 | oacc: 0.485
+layer:     0 | step:   110 | loss: 5.260 | thresh: 7.156 | tacc: 0.511 | oacc: 0.473
+layer:     0 | step:   111 | loss: 5.293 | thresh: 7.125 | tacc: 0.513 | oacc: 0.481
+layer:     0 | step:   112 | loss: 5.257 | thresh: 7.125 | tacc: 0.509 | oacc: 0.474
+layer:     0 | step:   113 | loss: 5.195 | thresh: 7.188 | tacc: 0.500 | oacc: 0.462
+layer:     0 | step:   114 | loss: 5.171 | thresh: 7.031 | tacc: 0.504 | oacc: 0.470
+layer:     0 | step:   115 | loss: 5.220 | thresh: 6.812 | tacc: 0.513 | oacc: 0.479
+layer:     0 | step:   116 | loss: 5.220 | thresh: 6.812 | tacc: 0.510 | oacc: 0.475
+layer:     0 | step:   117 | loss: 5.150 | thresh: 6.875 | tacc: 0.514 | oacc: 0.477
+layer:     0 | step:   118 | loss: 5.184 | thresh: 6.844 | tacc: 0.502 | oacc: 0.467
+layer:     0 | step:   119 | loss: 5.130 | thresh: 6.656 | tacc: 0.514 | oacc: 0.478
+layer:     0 | step:   120 | loss: 5.137 | thresh: 6.625 | tacc: 0.514 | oacc: 0.477
+layer:     0 | step:   121 | loss: 5.119 | thresh: 6.656 | tacc: 0.506 | oacc: 0.475
+layer:     0 | step:   122 | loss: 5.093 | thresh: 6.625 | tacc: 0.495 | oacc: 0.461
+layer:     0 | step:   123 | loss: 5.109 | thresh: 6.469 | tacc: 0.504 | oacc: 0.470
+layer:     0 | step:   124 | loss: 5.057 | thresh: 6.281 | tacc: 0.506 | oacc: 0.470
+layer:     0 | step:   125 | loss: 5.048 | thresh: 6.125 | tacc: 0.513 | oacc: 0.477
+layer:     0 | step:   126 | loss: 5.075 | thresh: 6.094 | tacc: 0.517 | oacc: 0.482
+layer:     0 | step:   127 | loss: 5.057 | thresh: 6.125 | tacc: 0.518 | oacc: 0.485
+ 69%|████████████████████████████████████████████████▊                      | 11/16 [00:53<00:24,  4.82s/it]
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 556, in <module>
+    train(args)
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 334, in train
+    outputs = model(**inputs)
+              ^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 79, in causal_forward
+    outputs = self.model(
+              ^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/utils/generic.py", line 1083, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 151, in model_forward
+    hidden_states, ret_scores = decoder_layer(
+                                ^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 290, in layer_forward
+    hidden_states = self.input_layernorm(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 62, in forward
+    hidden_states = hidden_states * torch.rsqrt(variance + self.variance_epsilon)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 556, in <module>
+[rank0]:     train(args)
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 334, in train
+[rank0]:     outputs = model(**inputs)
+[rank0]:               ^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 79, in causal_forward
+[rank0]:     outputs = self.model(
+[rank0]:               ^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/utils/generic.py", line 1083, in wrapper
+[rank0]:     outputs = func(self, *args, **kwargs)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 151, in model_forward
+[rank0]:     hidden_states, ret_scores = decoder_layer(
+[rank0]:                                 ^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/modeling_layers.py", line 94, in __call__
+[rank0]:     return super().__call__(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 290, in layer_forward
+[rank0]:     hidden_states = self.input_layernorm(hidden_states)
+[rank0]:                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 62, in forward
+[rank0]:     hidden_states = hidden_states * torch.rsqrt(variance + self.variance_epsilon)
+[rank0]:                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: KeyboardInterrupt

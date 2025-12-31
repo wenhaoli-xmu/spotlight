@@ -1,10 +1,11 @@
 #!/bin/bash
 
 models=(
-    "/mnt/petrelfs/share_data/liwenhao/Qwen3-4B"
+    "/pfs/rl-train/wenhaoli/gdrive/model/Qwen3-4B"
 )
 
 methods=(
+    "origin"
     "hash-eval"
 )
 

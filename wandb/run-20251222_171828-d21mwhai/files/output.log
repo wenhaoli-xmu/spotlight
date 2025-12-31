@@ -1,0 +1,197 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|██████████████████████████████████████████████| 3/3 [00:12<00:00,  4.10s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|██████████████████████████████████████████████| 3/3 [00:04<00:00,  1.51s/it]
+  0%|                                                                                | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:343: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|███████████████████████████████████████████████████████████████████████| 16/16 [01:17<00:00,  4.82s/it]
+layer:     0 | step:     0 | loss: 8.803 | thresh: 0.000 | tacc: 0.631 | oacc: 0.578
+layer:     0 | step:     1 | loss: 8.819 | thresh: 0.000 | tacc: 0.631 | oacc: 0.579
+layer:     0 | step:     2 | loss: 8.763 | thresh: 0.000 | tacc: 0.635 | oacc: 0.580
+layer:     0 | step:     3 | loss: 8.801 | thresh: 0.000 | tacc: 0.632 | oacc: 0.577
+layer:     0 | step:     4 | loss: 8.709 | thresh: 0.000 | tacc: 0.630 | oacc: 0.575
+layer:     0 | step:     5 | loss: 8.851 | thresh: 0.000 | tacc: 0.630 | oacc: 0.581
+layer:     0 | step:     6 | loss: 8.789 | thresh: 0.000 | tacc: 0.635 | oacc: 0.580
+layer:     0 | step:     7 | loss: 8.726 | thresh: 0.000 | tacc: 0.629 | oacc: 0.575
+layer:     0 | step:     8 | loss: 8.692 | thresh: 0.001 | tacc: 0.627 | oacc: 0.570
+layer:     0 | step:     9 | loss: 8.729 | thresh: 0.016 | tacc: 0.626 | oacc: 0.574
+layer:     0 | step:    10 | loss: 8.697 | thresh: 0.071 | tacc: 0.629 | oacc: 0.576
+layer:     0 | step:    11 | loss: 8.759 | thresh: 0.158 | tacc: 0.635 | oacc: 0.581
+layer:     0 | step:    12 | loss: 8.631 | thresh: 0.281 | tacc: 0.629 | oacc: 0.577
+layer:     0 | step:    13 | loss: 8.620 | thresh: 0.305 | tacc: 0.625 | oacc: 0.571
+layer:     0 | step:    14 | loss: 8.643 | thresh: 0.365 | tacc: 0.632 | oacc: 0.578
+layer:     0 | step:    15 | loss: 8.676 | thresh: 0.398 | tacc: 0.627 | oacc: 0.577
+layer:     0 | step:    16 | loss: 8.571 | thresh: 0.439 | tacc: 0.633 | oacc: 0.576
+layer:     0 | step:    17 | loss: 8.565 | thresh: 0.490 | tacc: 0.627 | oacc: 0.572
+layer:     0 | step:    18 | loss: 8.549 | thresh: 0.539 | tacc: 0.630 | oacc: 0.575
+layer:     0 | step:    19 | loss: 8.467 | thresh: 0.629 | tacc: 0.627 | oacc: 0.573
+layer:     0 | step:    20 | loss: 8.486 | thresh: 0.684 | tacc: 0.627 | oacc: 0.571
+layer:     0 | step:    21 | loss: 8.467 | thresh: 0.730 | tacc: 0.628 | oacc: 0.572
+layer:     0 | step:    22 | loss: 8.429 | thresh: 0.844 | tacc: 0.621 | oacc: 0.570
+layer:     0 | step:    23 | loss: 8.426 | thresh: 0.883 | tacc: 0.624 | oacc: 0.567
+layer:     0 | step:    24 | loss: 8.336 | thresh: 0.992 | tacc: 0.621 | oacc: 0.563
+layer:     0 | step:    25 | loss: 8.298 | thresh: 1.148 | tacc: 0.613 | oacc: 0.557
+layer:     0 | step:    26 | loss: 8.316 | thresh: 1.117 | tacc: 0.613 | oacc: 0.557
+layer:     0 | step:    27 | loss: 8.228 | thresh: 1.250 | tacc: 0.606 | oacc: 0.545
+layer:     0 | step:    28 | loss: 8.300 | thresh: 1.258 | tacc: 0.611 | oacc: 0.553
+layer:     0 | step:    29 | loss: 8.109 | thresh: 1.438 | tacc: 0.601 | oacc: 0.535
+layer:     0 | step:    30 | loss: 8.203 | thresh: 1.430 | tacc: 0.597 | oacc: 0.536
+layer:     0 | step:    31 | loss: 8.057 | thresh: 1.703 | tacc: 0.581 | oacc: 0.516
+layer:     0 | step:    32 | loss: 8.118 | thresh: 1.617 | tacc: 0.591 | oacc: 0.526
+layer:     0 | step:    33 | loss: 8.151 | thresh: 1.695 | tacc: 0.590 | oacc: 0.529
+layer:     0 | step:    34 | loss: 8.086 | thresh: 1.797 | tacc: 0.582 | oacc: 0.519
+layer:     0 | step:    35 | loss: 8.068 | thresh: 1.891 | tacc: 0.580 | oacc: 0.517
+layer:     0 | step:    36 | loss: 7.997 | thresh: 1.977 | tacc: 0.572 | oacc: 0.508
+layer:     0 | step:    37 | loss: 7.982 | thresh: 2.062 | tacc: 0.574 | oacc: 0.507
+layer:     0 | step:    38 | loss: 7.968 | thresh: 2.156 | tacc: 0.563 | oacc: 0.498
+layer:     0 | step:    39 | loss: 7.935 | thresh: 2.234 | tacc: 0.562 | oacc: 0.494
+layer:     0 | step:    40 | loss: 7.826 | thresh: 2.375 | tacc: 0.561 | oacc: 0.489
+layer:     0 | step:    41 | loss: 7.874 | thresh: 2.438 | tacc: 0.556 | oacc: 0.486
+layer:     0 | step:    42 | loss: 7.751 | thresh: 2.609 | tacc: 0.550 | oacc: 0.472
+layer:     0 | step:    43 | loss: 7.805 | thresh: 2.578 | tacc: 0.549 | oacc: 0.477
+layer:     0 | step:    44 | loss: 7.804 | thresh: 2.703 | tacc: 0.549 | oacc: 0.476
+layer:     0 | step:    45 | loss: 7.800 | thresh: 2.734 | tacc: 0.544 | oacc: 0.470
+layer:     0 | step:    46 | loss: 7.705 | thresh: 2.766 | tacc: 0.540 | oacc: 0.461
+layer:     0 | step:    47 | loss: 7.610 | thresh: 3.297 | tacc: 0.516 | oacc: 0.433
+layer:     0 | step:    48 | loss: 7.610 | thresh: 3.234 | tacc: 0.520 | oacc: 0.438
+layer:     0 | step:    49 | loss: 7.644 | thresh: 2.969 | tacc: 0.536 | oacc: 0.456
+layer:     0 | step:    50 | loss: 7.573 | thresh: 3.078 | tacc: 0.530 | oacc: 0.444
+layer:     0 | step:    51 | loss: 7.620 | thresh: 2.969 | tacc: 0.537 | oacc: 0.456
+layer:     0 | step:    52 | loss: 7.576 | thresh: 3.000 | tacc: 0.535 | oacc: 0.453
+layer:     0 | step:    53 | loss: 7.570 | thresh: 3.031 | tacc: 0.530 | oacc: 0.449
+layer:     0 | step:    54 | loss: 7.449 | thresh: 3.594 | tacc: 0.509 | oacc: 0.418
+layer:     0 | step:    55 | loss: 7.454 | thresh: 3.406 | tacc: 0.518 | oacc: 0.425
+layer:     0 | step:    56 | loss: 7.493 | thresh: 3.000 | tacc: 0.536 | oacc: 0.449
+layer:     0 | step:    57 | loss: 7.512 | thresh: 2.984 | tacc: 0.538 | oacc: 0.451
+layer:     0 | step:    58 | loss: 7.432 | thresh: 2.922 | tacc: 0.541 | oacc: 0.451
+layer:     0 | step:    59 | loss: 7.427 | thresh: 3.000 | tacc: 0.540 | oacc: 0.450
+layer:     0 | step:    60 | loss: 7.397 | thresh: 2.828 | tacc: 0.544 | oacc: 0.449
+layer:     0 | step:    61 | loss: 7.303 | thresh: 3.125 | tacc: 0.533 | oacc: 0.433
+layer:     0 | step:    62 | loss: 7.332 | thresh: 2.875 | tacc: 0.546 | oacc: 0.450
+layer:     0 | step:    63 | loss: 7.392 | thresh: 2.859 | tacc: 0.544 | oacc: 0.450
+ 12%|█████████                                                               | 2/16 [00:12<01:30,  6.49s/it]
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 555, in <module>
+    train(args)
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 333, in train
+    outputs = model(**inputs)
+              ^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 79, in causal_forward
+    outputs = self.model(
+              ^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/utils/generic.py", line 1083, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 151, in model_forward
+    hidden_states, ret_scores = decoder_layer(
+                                ^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 314, in layer_forward
+    outputs.append(self.mlp(chunk_states))
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 81, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 434, in forward
+    return F.silu(input, inplace=self.inplace)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/functional.py", line 2375, in silu
+    return torch._C._nn.silu(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 555, in <module>
+[rank0]:     train(args)
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 333, in train
+[rank0]:     outputs = model(**inputs)
+[rank0]:               ^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 79, in causal_forward
+[rank0]:     outputs = self.model(
+[rank0]:               ^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/utils/generic.py", line 1083, in wrapper
+[rank0]:     outputs = func(self, *args, **kwargs)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 151, in model_forward
+[rank0]:     hidden_states, ret_scores = decoder_layer(
+[rank0]:                                 ^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/modeling_layers.py", line 94, in __call__
+[rank0]:     return super().__call__(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/spotlight/spotlight/monkey_patches/hash_train.py", line 314, in layer_forward
+[rank0]:     outputs.append(self.mlp(chunk_states))
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 81, in forward
+[rank0]:     down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+[rank0]:                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/modules/activation.py", line 434, in forward
+[rank0]:     return F.silu(input, inplace=self.inplace)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/nn/functional.py", line 2375, in silu
+[rank0]:     return torch._C._nn.silu(input)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: KeyboardInterrupt

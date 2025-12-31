@@ -1,0 +1,3 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards:  33%|████████████████████████████████████████▋                                                                                 | 1/3 [00:06<00:13,  6.79s/it]

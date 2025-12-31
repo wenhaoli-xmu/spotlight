@@ -1,0 +1,7 @@
+{"time":"2025-12-19T15:57:51.050403274Z","level":"INFO","msg":"stream: starting","core version":"0.22.0"}
+{"time":"2025-12-19T15:57:51.793291745Z","level":"INFO","msg":"stream: created new stream","id":"gdmnr6mt"}
+{"time":"2025-12-19T15:57:51.79333221Z","level":"INFO","msg":"stream: started","id":"gdmnr6mt"}
+{"time":"2025-12-19T15:57:51.793349016Z","level":"INFO","msg":"sender: started","stream_id":"gdmnr6mt"}
+{"time":"2025-12-19T15:57:51.793353153Z","level":"INFO","msg":"handler: started","stream_id":"gdmnr6mt"}
+{"time":"2025-12-19T15:57:51.793376875Z","level":"INFO","msg":"writer: started","stream_id":"gdmnr6mt"}
+{"time":"2025-12-19T15:57:52.105197422Z","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql","body":"{\"errors\":[{\"message\":\"project may already be created, please retry\",\"path\":[\"upsertBucket\"]}],\"data\":{\"upsertBucket\":null}}"}

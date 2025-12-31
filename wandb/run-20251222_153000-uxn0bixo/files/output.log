@@ -1,0 +1,94 @@
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:12<00:00,  4.26s/it]
+RANK-0 training started !
+/pfs/rl-train/wenhaoli/miniconda3/envs/mirorl-v2-copy/lib/python3.12/site-packages/torch/distributed/distributed_c10d.py:4807: UserWarning: No device id is provided via `init_process_group` or `barrier `. Using the current device set by the user.
+  warnings.warn(  # warn only once
+Loading checkpoint shards: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:05<00:00,  1.69s/it]
+  0%|                                                                                                                                           | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:403: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 16/16 [01:16<00:00,  4.79s/it]
+[rank0]:W1222 15:32:10.941000 895829 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break from `Tensor.item()`, consider setting:
+[rank0]:W1222 15:32:10.941000 895829 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     torch._dynamo.config.capture_scalar_outputs = True
+[rank0]:W1222 15:32:10.941000 895829 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] or:
+[rank0]:W1222 15:32:10.941000 895829 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     env TORCHDYNAMO_CAPTURE_SCALAR_OUTPUTS=1
+[rank0]:W1222 15:32:10.941000 895829 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] to include these operations in the captured graph.
+[rank0]:W1222 15:32:10.941000 895829 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1222 15:32:10.941000 895829 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0] Graph break: from user code at:
+[rank0]:W1222 15:32:10.941000 895829 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]   File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 180, in compute_attn_supervise_loss
+[rank0]:W1222 15:32:10.941000 895829 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]     return top_acc.item(), oth_fp.item(), scaled_thresh.mean().item(), loss
+[rank0]:W1222 15:32:10.941000 895829 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+[rank0]:W1222 15:32:10.941000 895829 site-packages/torch/_dynamo/variables/tensor.py:1047] [0/0]
+layer:     0 | step:     0 | loss: 95.584 | thresh: 96.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:     1 | loss: 95.582 | thresh: 96.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:     2 | loss: 95.568 | thresh: 96.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:     3 | loss: 95.109 | thresh: 95.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:     4 | loss: 94.622 | thresh: 95.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:     5 | loss: 94.003 | thresh: 94.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:     6 | loss: 93.158 | thresh: 93.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:     7 | loss: 92.249 | thresh: 93.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:     8 | loss: 90.975 | thresh: 91.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:     9 | loss: 89.594 | thresh: 90.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    10 | loss: 87.989 | thresh: 88.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    11 | loss: 86.004 | thresh: 87.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    12 | loss: 83.899 | thresh: 85.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    13 | loss: 81.523 | thresh: 82.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    14 | loss: 78.928 | thresh: 80.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    15 | loss: 76.322 | thresh: 77.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    16 | loss: 73.610 | thresh: 75.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    17 | loss: 71.076 | thresh: 72.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    18 | loss: 68.833 | thresh: 70.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    19 | loss: 66.806 | thresh: 68.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    20 | loss: 65.116 | thresh: 67.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    21 | loss: 63.878 | thresh: 66.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    22 | loss: 62.998 | thresh: 65.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    23 | loss: 62.317 | thresh: 64.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    24 | loss: 61.881 | thresh: 64.500 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    25 | loss: 61.524 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    26 | loss: 61.247 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    27 | loss: 60.975 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    28 | loss: 60.711 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    29 | loss: 60.439 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    30 | loss: 60.181 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    31 | loss: 59.952 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    32 | loss: 59.638 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    33 | loss: 59.375 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    34 | loss: 59.094 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    35 | loss: 58.820 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    36 | loss: 58.557 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    37 | loss: 58.292 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    38 | loss: 58.039 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    39 | loss: 57.779 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    40 | loss: 57.529 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    41 | loss: 57.285 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    42 | loss: 57.048 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    43 | loss: 56.835 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    44 | loss: 56.643 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    45 | loss: 56.432 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    46 | loss: 56.201 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    47 | loss: 55.997 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    48 | loss: 55.802 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    49 | loss: 55.630 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    50 | loss: 55.438 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    51 | loss: 55.291 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    52 | loss: 55.112 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    53 | loss: 54.941 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    54 | loss: 54.811 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    55 | loss: 54.707 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    56 | loss: 54.531 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    57 | loss: 54.392 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    58 | loss: 54.258 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    59 | loss: 54.155 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    60 | loss: 54.056 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    61 | loss: 53.934 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    62 | loss: 53.856 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+layer:     0 | step:    63 | loss: 53.774 | thresh: 64.000 | tacc: 0.000 | oacc: 0.000
+  0%|                                                                                                                                           | 0/16 [00:00<?, ?it/s]/pfs/rl-train/wenhaoli/spotlight/train.py:403: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  length = torch.tensor(length, dtype=torch.int64, device=local_rank)
+ 62%|█████████████████████████████████████████████████████████████████████████████████▎                                                | 10/16 [00:49<00:29,  4.92s/it]
+Traceback (most recent call last):
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 615, in <module>
+    train(args)
+  File "/pfs/rl-train/wenhaoli/spotlight/train.py", line 393, in train
+    outputs = model(**inputs)
+              ^^^^^^^^^^^^^^^

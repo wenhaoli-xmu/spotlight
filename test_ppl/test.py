@@ -10,9 +10,9 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--model-name-or-path", type=str, default=None)
+    parser.add_argument("--method", type=str, default=None)
     parser.add_argument("--save-results", action='store_true')
     parser.add_argument("--check-results", action='store_true') 
-    parser.add_argument("--method", type=str, default=None)
     args = parser.parse_args()
 
     test_conf = get_env_conf("test_ppl/test.json")

@@ -1,4 +1,3 @@
 {
-    "hash_dims": [128, 512, 512],
-    "hash_dropout": 0.0
+    "hash_dims": [128, 128, 128]
 }
