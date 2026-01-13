@@ -465,37 +465,41 @@ class Spotlight(Modifier):
     
     def disable_benchmark_mode(self):
         return self.model.decoder.disable_benchmark_mode()
-
+        
 
     @torch.no_grad()
     def generate(self, input_ids, max_new_tokens=128, eos_token_id=[2]):
-
         if input_ids.ndim == 3:
-            input_ids = input_ids.flatten(0,1)
+            input_ids = input_ids.flatten(0, 1)
 
-        # put the tensor on to the model's device
-        device = next(iter(self.model.parameters())).device
+        device = next(self.model.parameters()).device
         input_ids = input_ids.to(device)
 
-        # prefilling
         output = self.model(input_ids=input_ids)
-        logits, kv_cache = output.logits, output.past_key_values
-        new_tok = logits.argmax(dim=-1)
-        new_ids = [new_tok]
+        logits = output.logits
+        kv_cache = output.past_key_values 
 
-        # generation
-        new_tok = input_ids[:, -1:]
-        new_ids = []
-
+        next_token_logits = logits[:, -1, :] 
+        next_token = next_token_logits.argmax(dim=-1).unsqueeze(-1) # 保持形状 [Batch, 1]
         
-        while len(new_ids) < max_new_tokens:
-            output = self.model(input_ids=new_tok, kv_cache=kv_cache)
+        new_ids = [next_token]
+
+        for _ in range(max_new_tokens - 1):
+            output = self.model(input_ids=next_token, past_key_values=kv_cache)
             logits, kv_cache = output.logits, output.past_key_values
 
-            new_tok = logits.argmax(dim=-1)
-            if new_tok.ravel().item() in eos_token_id: break
-            new_ids.append(new_tok.ravel().item())
+            next_token_logits = logits[:, -1, :]
+            next_token = next_token_logits.argmax(dim=-1).unsqueeze(-1) # [Batch, 1]
+            
+            if input_ids.shape[0] == 1:
+                if next_token.item() in eos_token_id:
+                    break
+            
+            new_ids.append(next_token)
 
-        self.model.reset()
-        new_ids = torch.tensor(new_ids, dtype=input_ids.dtype, device=input_ids.device)[None, :]
-        return torch.cat([input_ids, new_ids], dim=-1)
+        if hasattr(self.model, 'reset'):
+            self.model.reset()
+
+        generated_sequence = torch.cat(new_ids, dim=1)
+        
+        return torch.cat([input_ids, generated_sequence], dim=1)
