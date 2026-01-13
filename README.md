@@ -1,3 +1,10 @@
+[2026.01.13] 🔥 **Important Notice:** In our long-bench evaluation code, the last token of the prefilling stage was repeated twice. As a result, the scores for all compared methods dropped (though the comparison remained fair).
+
+We have fixed this bug. Please pull the latest code. After the fix, our method still maintains scores almost identical to the baseline.
+
+
+
+
 # Spotlight Attention: Extreme KV Cache Pruning for LLM Generation
 
 ![Spotlight Attention](spotlight.png)
