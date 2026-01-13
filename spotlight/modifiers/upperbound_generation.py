@@ -427,38 +427,27 @@ class UpperBound(Modifier):
     
     @torch.no_grad()
     def generate(self, input_ids, max_new_tokens=128, eos_token_id=[2]):
-        if input_ids.ndim == 3:
-            input_ids = input_ids.flatten(0, 1)
 
-        device = next(self.model.parameters()).device
+        if input_ids.ndim == 3:
+            input_ids = input_ids.flatten(0,1)
+
+        device = next(iter(self.model.parameters())).device
         input_ids = input_ids.to(device)
 
+        # prefilling
         output = self.model(input_ids=input_ids)
-        
-        logits = output.logits
-        kv_cache = output.past_key_values 
+        logits, kv_cache = output.logits, output.past_key_values
+        new_tok = logits[:, -1:].argmax(dim=-1)
+        new_ids = []
 
-        new_tok = logits[:, -1, :].argmax(dim=-1, keepdim=True) # Shape: [Batch, 1]
-        
-        generated_ids = [new_tok]
-
-        for _ in range(max_new_tokens - 1):
-            output = self.model(input_ids=new_tok, past_key_values=kv_cache)
+        while len(new_ids) < max_new_tokens:
+            if new_tok.ravel().item() in eos_token_id: break
+            new_ids.append(new_tok.ravel().item())
             
-            logits = output.logits
-            kv_cache = output.past_key_values
+            output = self.model(input_ids=new_tok, kv_cache=kv_cache)
+            logits, kv_cache = output.logits, output.past_key_values
+            new_tok = logits.argmax(dim=-1)
 
-            new_tok = logits[:, -1, :].argmax(dim=-1, keepdim=True)
-
-            if input_ids.shape[0] == 1:
-                if new_tok.item() in eos_token_id:
-                    break
-            
-            generated_ids.append(new_tok)
-
-        if hasattr(self.model, 'reset'):
-            self.model.reset()
-
-        new_ids_tensor = torch.cat(generated_ids, dim=1)
-        
-        return torch.cat([input_ids, new_ids_tensor], dim=1)
+        self.model.reset()
+        new_ids = torch.tensor(new_ids, dtype=input_ids.dtype, device=input_ids.device)[None, :]
+        return torch.cat([input_ids, new_ids], dim=-1)
