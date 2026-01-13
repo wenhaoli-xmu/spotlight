@@ -30,7 +30,7 @@ class Greedy(Modifier):
         input_ids = input_ids.to(device)
 
         # prefilling
-        output = self.model(input_ids=input_ids)
+        output = self.model(input_ids=input_ids, use_cache=True)
         logits, kv_cache = output.logits, output.past_key_values
         new_tok = logits[:, -1:].argmax(dim=-1)
         new_ids = []
@@ -39,7 +39,7 @@ class Greedy(Modifier):
             if new_tok.ravel().item() in eos_token_id: break
             new_ids.append(new_tok.ravel().item())
             
-            output = self.model(input_ids=new_tok, kv_cache=kv_cache)
+            output = self.model(input_ids=new_tok, past_key_values=kv_cache, use_cache=True)
             logits, kv_cache = output.logits, output.past_key_values
             new_tok = logits.argmax(dim=-1)
 
